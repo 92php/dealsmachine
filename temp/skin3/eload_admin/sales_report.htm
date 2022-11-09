@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php?lang="></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 销售报表</td>
+          <td width="44%" align="right"><span class="navright"><a href="{$action_link.href}">{$action_link.text}</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <form name="timetnterval" style="margin:0px" method="get" class="thisfrm">
+  <tr>
+    <td><table width="100%" border="0" cellpadding="3" cellspacing="0">
+
+         <tr>
+          <td align="right" bgcolor="#FFFFFF">搜索产品标题：</td>
+          <td bgcolor="#FFFFFF"><input name="keywords" value="{$keywords}" /></td>
+        </tr>
+      <tr>
+          <td width="382" align="right" bgcolor="#FFFFFF">卖出时间： </td>
+          <td width="585" bgcolor="#FFFFFF">从 <input name="start_date" value="{$start_date}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />&nbsp;&nbsp;到 &nbsp; <input name="end_date" value="{$end_date}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" /> </td>
+        </tr>
+
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">产品上架时间： </td>
+          <td bgcolor="#FFFFFF">从 <input name="start_date2" value="{$start_date2}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />&nbsp;&nbsp;到 &nbsp; <input name="end_date2" value="{$end_date2}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" /> </td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">产品单价：</td>
+          <td bgcolor="#FFFFFF">从
+            <input name="price1" id="price1" style="width:80px;"  value="{$price1}" />
+            &nbsp;&nbsp;到 &nbsp;
+            <input name="price2" id="price2" style="width:80px;"  value="{$price2}" /></td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">产品售价：</td>
+          <td bgcolor="#FFFFFF">从
+            <input name="price3" id="price3" style="width:80px;"  value="{$price3}" />
+            &nbsp;&nbsp;到 &nbsp;
+            <input name="price4" id="price4" style="width:80px;"  value="{$price4}" /></td>
+        </tr>
+
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">产品编码：</td>
+          <td bgcolor="#FFFFFF"><input name="goods_sn" value="{$goods_sn}" />
+            （多个产品,编码间用逗号分开）</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">客户筛选：</td>
+          <td bgcolor="#FFFFFF">完成付款订单数大于
+            <input name="order_num" value="{$order_num}" size="8" /></td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">分类：</td>
+          <td bgcolor="#FFFFFF">
+		  <select name="cat_id" id="cat_id">
+            <option value="0">所有分类</option>
+        	{$cat_list}
+          </select>
+		  分类配件商品&nbsp;&nbsp;<input type="checkbox" name="cat_ext" id="cat_ext" value="1" {if $filter.cat_ext == 1}checked{/if} >统计拓展产品</td>
+		  </td>
+        </tr>
+
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">产品状态：</td>
+          <td bgcolor="#FFFFFF">
+          <select name="intro_type" id="intro_type">
+            <option value="0">全部</option>
+            <option value="on_sale" {if $smarty.get.intro_type eq 'on_sale'}selected{/if}>上架</option>
+            <option value="is_free_shipping" {if $smarty.get.intro_type eq 'is_free_shipping'}selected{/if}>免邮</option>
+            <option value="not_on_sale" {if $smarty.get.intro_type eq 'not_on_sale'}selected{/if}>下架</option>
+
+
+            <option value="is_hot" {if $smarty.get.intro_type eq 'is_hot'}selected{/if}>热卖</option>
+            <option value="is_promote" {if $smarty.get.intro_type eq 'is_promote'}selected{/if}>促销</option>
+            <option value="all_type" {if $smarty.get.intro_type eq 'all_type'}selected{/if}>全部推荐</option>
+             <option value="with_main_goods_id" {if $smarty.get.intro_type eq 'with_main_goods_id'}selected{/if}>作为组合销售的产品</option>
+ <option value="is_gift" {if $smarty.get.intro_type eq 'is_gift'}selected{/if}>赠品</option>
+  <option value="multi_points" {if $smarty.get.intro_type eq 'multi_points'}selected{/if}>多倍积分</option>
+  <option value="is_super_star" {if $smarty.get.intro_type eq 'is_super_star'}selected{/if}>Super Star</option>
+          </select>
+          </td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">订单状态：</td>
+          <td bgcolor="#FFFFFF">
+          <select name="payment_status" id="payment_status">
+
+                        <option value="yes_payment">已付款</option>
+                  <option value="no_payment" {if $smarty.get.payment_status eq 'no_payment'}selected{/if}>未付款</option>
+<option value="-1"  {if $smarty.get.payment_status eq '-1'}selected{/if}>全部</option>
+          </select>
+          </td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">活动：</td>
+          <td bgcolor="#FFFFFF">
+          <select name="activity" id="activity">
+            <option value="">--请选择活动--</option>
+            <optgroup label="普通">
+            {foreach from=$activity_putong item=activity1}
+            <option value="{$activity1.id}" {if $smarty.get.activity eq $activity1.id}selected{/if}>{$activity1.name}</option>
+            {/foreach}
+            <optgroup label="固定">
+            {foreach from=$activity_guding item=activity2}
+            <option value="{$activity2.id}" {if $smarty.get.activity eq $activity2.id}selected{/if}>{$activity2.name}</option>
+            {/foreach}
+          </select>
+          </td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">开发人员：</td>
+          <td bgcolor="#FFFFFF"><select name="add_user" id="add_user">
+            <option value="">所有人员</option>
+            {foreach from=$users item=list}
+            <option value="{$list.add_user}" {if $list.add_user eq $smarty.get.add_user}selected{/if}>{$list.add_user}</option>
+            {/foreach}
+          </select>
+          </td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">排序方法：</td>
+          <td bgcolor="#FFFFFF">
+          <select name="orderby">
+            <option value="add_time" {if $smarty.get.orderby eq 'add_time'}selected{/if}>上架时间</option>
+            <option value="click_count " {if $smarty.get.orderby eq 'click_count'}selected{/if}>浏览量</option>
+            <option value="adduser" {if $smarty.get.orderby eq 'adduser'}selected{/if}>开发人员</option>
+            <option value="anclassid" {if $smarty.get.orderby eq 'anclassid'}selected{/if}>产品类别</option>
+            <option value="totalqty" {if $smarty.get.orderby eq 'totalqty'}selected{/if}>销售数量</option>
+            <option value="totalmoney" {if $smarty.get.orderby eq 'totalmoney'}selected{/if}>销售金额</option>
+            <option value="conversion_rate" {if $smarty.get.orderby eq 'conversion_rate'}selected{/if}>一个月内转换率</option>
+          </select>
+          <select name="updown">
+            <option value="desc" {if $smarty.get.updown eq 'desc'}selected{/if}>倒序</option>
+            <option value="asc" {if $smarty.get.updown eq 'asc'}selected{/if}>顺序</option>
+          </select>
+          </td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">&nbsp; </td>
+          <td bgcolor="#FFFFFF"><input type="submit" value="开始查询" class="button" /></td>
+        </tr>
+      </table></td>
+  </tr>
+
+  </form>
+</table>
+
+
+
+
+{if $smarty.get}
+<form method="POST" action="" name="listForm">
+  <div class="list-div" id="listDiv">
+
+  <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+     <tr>
+      <th width="2%" height="21">排名</th>
+      <th width="3%">图片</th>
+      <th width="12%">产品名称</th>
+      <th width="5%">产品编号</th>
+      <th width="5%">产品类别</th>
+      <th width="5%">库存</th>
+      <th width="5%"><a href="?sort_by=add_time&sort_order={$filter.sort_order_add_time}{$search_url}">上架时间</a>{$sort_add_time}</th>
+      <th width="5%"><a href="?sort_by=click_count&sort_order={$filter.sort_order_click_count}{$search_url}">浏览量</a>{$sort_click_count}</th>
+      <th width="5%">转换率</th>
+      <th width="5%">实际转换率</th>
+      <th width="5%"><a href="?sort_by=goods_num&sort_order={$filter.sort_order_goods_num}{$search_url}">数量</a>{$sort_goods_num}</th>
+      <th width="5%">均价</th>
+      <th width="5%"><a href="?sort_by=turnover&sort_order={$filter.sort_order_turnover}{$search_url}">产品总额</a>{$sort_turnover}</th>
+     </tr>
+
+<tr bgcolor="#FDE8FF">
+      <td height="37" align="right"><!--这一搜索条件下的产品所在订单金额：{$tj.turnover}--></td>
+      <td height="37" align="right">&nbsp;</td>
+      <td height="37" align="right">&nbsp;</td>
+      <td height="37" colspan="4" align="right">&nbsp;</td>
+      <td height="37" align="right">{$tj.goodshits}</td>
+      <td height="37" colspan="2" align="right">{$tj.top_20_shiji_con_lv}%</td>
+      <td height="37" align="right">{$tj.goods_num}</td>
+      <td align="right">{$tj.wvera_price}</td>
+      <td align="right">{$tj.goods_price}</td>
+      </tr>
+
+
+  {foreach from=$goods_order_data item=list name=val}
+    <tr bgColor="{if $smarty.foreach.val.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.val.iteration is even}#f4f9fd{else}#e8f1fd{/if}'";>
+      <td align="center">{$smarty.foreach.val.iteration}</td>
+      <td><a href="/best_{$list.goods_id}.html" target="_blank"><img src="{$list.goods_thumb}" height="50" width="50" alt="开发员：{$list.add_user}" border="0"/></a></td>
+      <td align="left"><a href="./goods.php?act=edit&goods_id={$list.goods_id}">{$list.goods_name}</a></td>
+      <td align="center">{$list.goods_sn}</td>
+      <td>{$list.cat_id}</td>
+      <td align="center">{if $list.stock}有{else}无{/if}</td>
+      <td align="center">{$list.add_time}</td>
+      <td align="right">{$list.click_count}</td>
+      <td align="right">{$list.con_lv}%</td>
+      <td align="right">{$list.shiji_con_lv}%</td>
+      <td align="right">{$list.goods_num}</td>
+      <td align="right">{$list.wvera_price}</td>
+      <td align="right">{$list.turnover}</td>
+    </tr>
+  {foreachelse}
+    <tr><td colspan="13" align="center" class="no-records">暂无记录</td></tr>
+  {/foreach}
+  </table>
+  <table width="100%" cellspacing="0" id="page-table">
+  <tr>
+    <td width="8">&nbsp;</td>
+    <td width="964" align="right" nowrap="true">
+    {$pagestr}
+    </td>
+  </tr>
+  </table>
+</div>
+</form>
+{/if}
+{include file="copyright.htm"}

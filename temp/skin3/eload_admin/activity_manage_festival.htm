@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>热门搜索关键字设置</title>
+    <link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css" />
+    <script type="text/javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+    <script type="text/javascript" src="{$imgcache_url}eload_admin/js/admin_action.js"></script>
+    <style type="text/css">
+    {literal}
+        #stripe_tb td img { cursor: default; }
+        ul { margin: 0; padding: 0; list-style: none; text-align: left; }
+        li { padding-top: 4px;}
+        .font-red { color: red; }
+        .font-green { color: green; }
+        .text-left { text-align: left; }
+        .float-right { float: right; }
+    {/literal}
+    </style>
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td id="navleft">
+                            <a href="index.php?act=main">管理中心</a>
+                            &gt;&gt; 固定活动列表
+                        </td>
+          				<td width="44%" align="right"><span class="navright"><a href="activity_manage.php">活动管理</a></span></td>						
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <td width="10%" align="right" class="narrow-label">固定活动：</td>
+            <td><textarea rows="10" cols="110" name="activity" id="activity">{$data.activity}</textarea><br>
+            				<span style="color:red;">一行一条记录。数据格式：固定活动名称|链接<br/>不同专题URL链接首单词不能重复。<br/>
+            				例：http://www.dealsmachine.com/m-promotion-active-<span style="color:green">black</span>-friday.html<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://www.dealsmachine.com/m-promotion-active-<span style="color:green">easter</span>-day.html</span></td>
+        </tr>
+        <tr>
+            <td align="right" class="narrow-label">&nbsp;</td>
+            <td><input type="button" value="保 存" id="btn-save" /></td>
+        </tr>
+    </table>
+{literal}	
+<script type="text/javascript">
+$(function() {
+    var msg = $.cookie(L.msg);
+    $.cookie(L.msg, null);
+    msg && Alert(msg, true); //提示信息    
+    hot_search_keywords_action();
+});
+
+function hot_search_keywords_action() {
+    $('#btn-save').click(function() {
+        $.post('?act=festivalSave', {
+            activity: $('#activity').val() 
+        }, function(data){
+            C.callback(data, location.href, L.edit + L.success);
+        });
+    });
+}
+</script>
+{/literal}
+
+{include file="copyright.htm"}

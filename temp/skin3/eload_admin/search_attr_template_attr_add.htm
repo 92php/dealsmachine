@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="{$imgcache_url}temp/skin3/eload_admin/js/admin_add.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 模板属性添加</td>
+          <td width="44%" align="right"><span class="navright"><a href="search_attr_template.php?act=attr_list&template_id={$template_id}">查找模板属性列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<div class="main-div">
+  <form name="regform" method="post" action="{$url}" onSubmit="return Validator.Validate(this,3)">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+	<tr>
+	<th colspan="2">模板属性添加</th>
+	</tr>
+	
+	<tr>
+	<td width="20%" class="label">属性名称：</td>
+	<td width="80%">
+	  <input type='text' name='search_attr_name' value="{$search_attr.search_attr_name}" size='30' dataType="Require" msg="请输入属性名称！" class="input_style"/> *
+	</td>
+	</tr>
+    
+	<tr>
+	<td width="20%" class="label">属性简称：</td>
+	<td width="80%">
+	  <input type='text' name='search_attr_brief' value="{$search_attr.search_attr_brief}" size='30' dataType="Require" msg="请输入属性简称！" class="input_style"/> *
+	   <span style="color:red">注意:属性简称只能是26个字母和数字组成</span></td>
+	</td>
+	</tr>
+      
+	<tr>
+	<td class="label">所属商品类型：</td>
+	<td>
+	  <select name="template_id"  dataType="Require"  msg="请选择......" >
+	  <option value="">请选择...</option>
+	  {foreach from=$template_info_arr item=template key=key}
+	  	  <option value="{$template.template_id}" {if $template.template_id == $template_id}selected{/if}>{$template.template_name}</option>
+	  {/foreach}
+	  </select>
+	</td>
+	</tr>
+	
+	<tr>
+	<td class="label">可选值列表：</td>
+	<td>
+	  <textarea name="search_value" cols="30" rows="5" class="input_type_value">{$search_attr.search_value}</textarea>
+	  <span style="color:red">注意:每个可选查找值之间用竖线（|）分开，例如：Red|Blue|Black</span></td>
+	</tr>
+	
+	<tr>
+	<td class="label">排序：</td>
+	<td><input name="odr" type="text" class="input_style" id="odr"  size="5" datatype="Integer" msg="请填写数字！"  value="{if $search_attr.odr eq ''}0{else}{$search_attr.odr}{/if}"/> 
+	*</td>
+	</tr>
+	
+	<tr>
+	<td>&nbsp;</td>
+	<td><input name="button" type="submit" class="sub_but" id="button" value="{$tag_msg}" /></td>
+	</tr>
+	</table>
+  </form>
+</div>
+{include file="copyright.htm"}
+</body>
+</html>

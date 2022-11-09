@@ -1,0 +1,17 @@
+﻿@charset "utf-8";
+html,body,h1,h2,h3,h4,h5,h6,p,ul,ol,dl,form,th,td{margin:0;padding:0;font-size:12px;}
+body{margin:10px;font:12px/2 Verdana, Arial, Helvetica, Simsun, "Microsoft YaHei";}
+table{border-collapse:collapse;border-spacing:0;}
+li{list-style:none;}
+a{text-decoration:none;cursor:pointer;}
+.copyright{margin-top:50px;font-size:13px;text-align:center;}
+#dymenu{width:100px;line-height:25px;}
+#dymenu .root li{position:relative;border:1px solid #FFF;border-width:1px 1px 0 0;background:#EEE;}
+#dymenu .root li li{border-width:1px 0 0 1px;}
+#dymenu .root a{display:block;zoom:1;padding:0 10px;background:#EEE;color:#000;vertical-align:top;}
+#dymenu .root h4{padding:0 10px;*padding:0;background:#EEE;*background:none;color:#000;font-weight:normal;cursor:pointer;}
+#dymenu .root a:hover{background:#DDD;color:#333;}
+#dymenu .root li:hover>h4{background:#DDD;color:#333;}
+#dymenu .root ul,#dymenu a:hover a ul,#dymenu a:hover a:hover a ul,#dymenu a:hover a:hover a:hover a ul,#dymenu a:hover a:hover a:hover a:hover a ul,#dymenu a:hover a:hover a:hover a:hover a:hover a ul,#dymenu a:hover a:hover a:hover a:hover a:hover a:hover a ul,#dymenu a:hover a:hover a:hover a:hover a:hover a:hover a:hover a ul,#dymenu a:hover a:hover a:hover a:hover a:hover a:hover a:hover a:hover a ul,#dymenu a:hover a:hover a:hover a:hover a:hover a:hover a:hover a:hover a:hover a ul{display:none;margin:-1px 0 0 0;_margin-top:0;background:#EEE;}
+#dymenu a:hover ul,#dymenu a:hover a:hover ul,#dymenu a:hover a:hover a:hover ul,#dymenu a:hover a:hover a:hover a:hover ul,#dymenu a:hover a:hover a:hover a:hover a:hover ul,#dymenu a:hover a:hover a:hover a:hover a:hover a:hover ul,#dymenu a:hover a:hover a:hover a:hover a:hover a:hover a:hover ul,#dymenu a:hover a:hover a:hover a:hover a:hover a:hover a:hover a:hover ul,#dymenu a:hover a:hover a:hover a:hover a:hover a:hover a:hover a:hover a:hover ul,#dymenu a:hover a:hover a:hover a:hover a:hover a:hover a:hover a:hover a:hover a:hover ul{display:block;position:absolute;left:99px;top:0;width:100px;}
+#dymenu .root li:hover>ul{display:block;position:absolute;left:99px;top:0;width:100px;margin-top:-1px;background:#EEE;}

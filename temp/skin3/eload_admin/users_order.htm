@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php?lang="></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/colorselector.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 订单查询</td>
+          <td width="44%" align="right"><span class="navright"><a href="order.php?act=list">订单列表</a> | <a href="{$action_link}">按成交总金额排序</a> | <a href="{$action_link2}">成交单数排序</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<div class="form-div">
+  <form action="users_order.php" method="post" style="margin:0px">
+    {$lang.start_date}&nbsp;
+    <input name="start_date" type="text" id="start_date" size="15" value='{$start_date}' readonly="readonly" /><input name="selbtn1" type="button" id="selbtn1" onclick="return showCalendar('start_date', '%Y-%m-%d', false, false, 'selbtn1');" value="选择" class="button"/>&nbsp;&nbsp;
+    {$lang.end_date}&nbsp;
+    <input name="end_date" type="text" id="end_date" size="15" value='{$end_date}' readonly="readonly" /><input name="selbtn2" type="button" id="selbtn2" onclick="return showCalendar('end_date', '%Y-%m-%d', false, false, 'selbtn2');" value="选择" class="button"/>&nbsp;&nbsp;
+    {$lang.show_num}
+    <input type="text" name="show_num" value="{$show_num}" size="8" />
+    <input type="hidden" name="act" value="{$form_act}"/>
+    <input type="submit" name="submit" value="查询" class="button" />
+  </form>
+</div>
+
+
+<div id="list">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+     <tr>
+      <th width="24%">排名</th>
+      <th width="17%">Email</th>
+      <th width="17%">Fullname</th>
+      <th width="21%">成交单数</th>
+      <th width="21%">成交总金额</th>
+    </tr>
+  {foreach from=$user_orderinfo name=val item=list}
+<tr bgColor="{if $smarty.foreach.val.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.val.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+      <td align="center">{$smarty.foreach.val.iteration}</td>
+      <td align="left">{$list.email}</td>
+      <td align="left">{$list.firstname} {$list.lastname}</td>
+      <td>{$list.order_num}</td>
+      <td>{$list.turnover} USD</td>
+    </tr>
+  {foreachelse}
+    <tr><td class="no-records" colspan="11">{$lang.no_records}</td></tr>
+  {/foreach}
+  </table>
+</div>
+{literal}
+<script type="Text/Javascript" language="JavaScript">
+<!--
+//onload = function()
+//{
+    // 开始检查订单
+   // startCheckOrder();
+//}
+//-->
+</script>
+{/literal}
+{include file="copyright.htm"}

@@ -1,0 +1,109 @@
+[2014-06-22 21:59:09.5004]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：
+错误：[b]Unknown database 'ahappydeal_20140503'[/b]
+轨迹：
+#0  MySql->haltmsg(Can not open database 'ahappydeal_20140503'！) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Can not open database 'ahappydeal_20140503'！) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:114]
+#2  MySql->connect() called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:138]
+#3  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#4  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#5  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#6  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#7  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#8  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#9  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-22 22:34:54.9619]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Table 'ahappydeal_20140503.eload_memcache' doesn't exist[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-22 22:41:05.8732]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Table 'ahappydeal_20140503.eload_memcache' doesn't exist[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-22 22:45:14.8546]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Table 'ahappydeal_20140503.eload_memcache' doesn't exist[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-22 22:45:20.4475]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Table 'ahappydeal_20140503.eload_memcache' doesn't exist[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-22 23:04:51.1868]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Table 'ahappydeal_20140503.eload_memcache' doesn't exist[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#

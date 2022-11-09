@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 配送方式　{$tag_msg}</td>
+          <td width="44%" align="right"><span class="navright"><a href="shipping.php">配送方式列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th colspan="3">配送方式　{$tag_msg}</th>
+  </tr>
+  <form name="regform" method="post" action="?act=update&id={$ship.ship_id}" onSubmit="return Validator.Validate(this,3)"> 
+  <tr>
+    <td colspan="2" >名称：</td>
+    <td ><input name="ship_name" type="text" class="input_style" id="ship_name" value="{$ship.ship_name}" dataType="Require" msg="请填写配送方式名称！" /></td>
+  </tr>
+  <tr>
+    <td colspan="2" >代码：</td>
+    <td ><input name="ship_code" type="text" class="input_style" id="ship_code" value="{$ship.ship_code}" dataType="Require" msg="请填写编号！" />
+      *</td>
+  </tr>
+  <tr>
+    <td colspan="2" >描述：</td>
+    <td ><input name="ship_desc" type="text" size="80"  id="ship_desc" value="{$ship.ship_desc}" dataType="" msg="" />
+      *</td>
+  </tr>  
+  <tr>
+    <td colspan="2" >此方式可节省：</td>
+    <td ><input name="ship_save" type="text" class="input_style" id="ship_save" size="6"  value="{$ship.ship_save}"  dataType="Number" msg="请填写此方式可节省的百分比！" />%
+    *</td>
+  </tr> 
+  <tr>
+    <td colspan="2" >是否可用：</td>
+    <td ><input name="enable" type="radio"    id="enable" value="1" {if $ship.enable != 0 or $tag_msg == '添加' } checked="checked" {/if} />
+    可用
+        <input name="enable" type="radio" msg='请选择'  dataType='Group'  id="enable" value="0" {if $ship.enable eq '0'} checked="checked"{/if}/>
+    禁用</td>
+  </tr>
+  <tr>
+    <td colspan="2" >排序：</td>
+    <td ><input name="ship_order" type="text" size="3" id="ship_order"  value="{$ship.ship_order}"  dataType="Integer" msg="请填写数字！" class="input_style" />
+    *</td>
+  </tr>
+  <tr>
+    <td colspan="2" >&nbsp;</td>
+    <td width="73%" ><input name="button" type="submit" class="sub_but" id="button" value="{$tag_msg}" /></td>
+  </tr>
+  </form>
+</table>
+{include file="copyright.htm"}
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 积分优惠券列表</td>
+          <td width="44%" align="right">&nbsp;</td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="15%">促销码</th>
+
+	<th width="12%">积分数</th>
+
+    <th width="12%">创建时间</th>
+    <th width="12%">到期时间</th>
+    <th width="8%">已使用</th>
+
+    <th width="15%">操作</th>
+    
+  </tr>
+  {foreach from=$pcode_list item=pcodeArr  name=loopname}
+  <form method="post" action="?act=save&pid={$pcodeArr.pid}" name="listForm">
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+    <td height="26" align="center"><span class="forumRowHighlight">
+      <input type="text" name="code_number" value="{$pcodeArr.code_number}" onclick="this.value=this.value.replace(/\W/g,'')" size="20" />
+    </span></td>
+    <td height="26" align="center"><span class="forumRowHighlight">
+      <input type="text" name="points" value="{$pcodeArr.points}"onkeyup="this.value=this.value.replace(/[^\d]/g,'')" size="12" />
+    </span></td>
+    <td height="26" align="center">{$pcodeArr.adddate}</td>
+    <td align="center"><span class="forumRowHighlight">
+      <input type="text" name="deadline" value="{$pcodeArr.deadline}" size="12" />
+    </span></td>
+    <td align="center">{$pcodeArr.use_count}</td>
+
+    
+    <td align="center"><input type="submit" value="保存修改" />&nbsp;<a href="?act=remove&pid={$pcodeArr.pid}" class="del_act"  delmsg="您确定要删除选定的促销码吗？">删除</a>
+    </td>
+  </tr>
+  </form>
+  {foreachelse}
+    <tr><td colspan="5" align="center" class="no-records">{$lang.no_records}</td></tr>
+    {/foreach}
+    <tr>
+      <td align="right" nowrap="true" colspan="6">
+	<div id="pager">{$pagestr}</div>
+      </td>
+    </tr>
+  </table>
+
+<form method="post" action="?act=save">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="15%">促销码</th>
+
+
+	<th width="12%">积分数</th>	
+    <th width="12%">创建时间</th>
+    <th width="12%">到期时间</th>
+    <th width="8%">已使用</th>
+
+    <th width="15%">操作</th>
+    
+  </tr>
+
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+    <td height="26" align="center"><span class="forumRowHighlight">
+      <input type="text" onkeyup="this.value=this.value.replace(/\W/g,'')"  name="code_number" value="" size="20" maxlength="20" />
+    </span></td>
+    <td align="center"><span class="forumRowHighlight">
+      <input type="text" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" name="points" value="" size="12"  />
+    </span></td>
+    <td height="26" align="center">当前时间</td>
+    <td align="center"><span class="forumRowHighlight">
+      <input type="text" name="deadline" value="" size="12" onclick="new Calendar(null, null, 1).show(this);" />
+    </span></td>
+    <td align="center">0</td>
+
+    
+    <td align="center"><input type="submit"  value="添加"/>
+    </td>
+  </tr>
+
+  </table>
+</form>
+{include file="copyright.htm"}
+

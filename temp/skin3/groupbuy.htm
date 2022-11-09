@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta property="og:title" content="I want to get the product at lowest price" /> 
+<meta property="og:description" content="Dear friends,I want to buy the product,please give me a hand.Join togther with me.Your help can reduce the price.Thanks so much!"  name="Description" /> 
+<meta property="og:image" content="http://www.dealsmachine.com/temp/skin3/images/groupdeal.jpg" />
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="0">
+{include file="top.htm"}
+<link rel="stylesheet" href="{$imgcache_url}mincss/groupbuy_min.css?2014061402" />
+
+</head>
+<body>
+{include file="public_top.htm"}
+	<div id="mainWarp" class="clearfix">
+		<div class="banner">
+			<div class="img"><img src="{$imgcache_url}images/deals/banner.jpg"  alt=""></div>
+		</div>
+		<div class="sortbox" id="sort_nav">
+			<ul>
+			<li {if $smarty.get.orderby eq ''}class="active"{/if}><a href="/daily-deals/#sort_nav">Newest<i class="icon_deals icon-sort"></i></a></li>
+			<li {if $smarty.get.orderby eq 'hot'}class="active"{/if}><a href="?orderby=hot#sort_nav">Hottest<i class="icon_deals icon-sort"></i></a></li>
+			<li {if $smarty.get.orderby eq 'expiring'}class="active"{/if}><a href="?orderby=expiring#sort_nav">Expiring<i class="icon_deals icon-sort"></i></a></li>
+			</ul>
+		</div>
+		
+		<div class="productWrap">
+		
+		
+		{foreach from=$deals.deals_list item=deal name=deal}
+		
+		<div class="product clearfix">
+				<div class="img fl">
+					<p><a href="{$deal.img_link_to}"><img src="{$imgcache_url}images/styleimg/grey.gif"  data-original="{$deal.img_url}" class="js_lazyLoad" alt=""></a></p>
+					
+				</div>
+				<div class="deals_info fr">
+				  <h3 class="describe">
+						<a href="{$deal.img_link_to}" name="deals_{$deal.deals_id}">{$deal.title}</a>
+					</h3>
+					<ul class="data">
+						<li><span class="icon_deals dateicon"></span>Ends on {$deal.expried_time}</li>
+						<li><span class="icon_deals timeicon"></span>{$deal.pass_time}</li>
+					
+						<li><a href="javascript:void(0)" class="js_licks" data-deals_id="{$deal.deals_id}"><span class="icon_deals lickicon {if $deal.clicked}clicklickicon{/if}"></span><span class="lickcount">{$deal.ups}</span></a></li>
+					</ul>
+					
+					<ul class="text">
+						<li>{$deal.deals_desc}</li>
+							
+					</ul>
+					 {if $deal.items}
+					<div class="categoryTag">
+						<ul class="categoryList">
+						  {foreach from=$deal.items item=item}
+							<li>
+							  <a href="{$item.img_link_to}"><img src="{$imgcache_url}images/styleimg/grey.gif"  data-original="{$item.img_url}" class="js_lazyLoad" alt=""></a>
+								<p class="price">
+									<span class="costPrice"><span class="bizhong"></span><span orgp="12" class="my_shop_price">{$item.list_price}</span></span>
+									<span class="bizhong"></span><span orgp="12" class="my_shop_price">{$item.price}</span>
+								</p>
+							</li>
+							{/foreach}
+							
+						</ul>
+					  
+					  
+						<div class="seeOperate">
+							<span class="more">Show More +</span>
+							<span class="less none">Show More -</span>
+						</div>
+					</div>
+					 {/if}
+				</div>
+			</div><!--/ .product-->
+			{/foreach}	
+			
+
+		</div>
+		
+		
+		
+		<div class="bottomPageBox mt15">
+				<div class="page fr">
+					<div class="page"><!--<p class="listspan">{$pagestr}</p>--></div>
+			    </div>
+			<!--end .page-->
+			</div>
+		
+		
+	</div><!--end #mainWarp-->
+	<script type="text/javascript" src="{$jscache_url}sysjs/deals.min.js?2014061603"></script>
+	<div id="footer">
+	{include file="foothelp.htm"}
+	{include file="foot.htm"}
+	</div>
+	{literal}
+    <script type="text/javascript">
+	   
+	</script>
+	{/literal}
+
+
+</body>
+</html>

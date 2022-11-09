@@ -1,0 +1,36 @@
+<div class="help_warp m_box mt10 clearfix">
+	{foreach from=$ArticleCatArr item=list name=lotion}
+	<dl>
+		<dt>{$list.cat_name}</dt>
+		{foreach from=$list._childlist item=slist  name=wu}
+			<dd><a rel="nofollow" href="{$slist.site_link}">{$slist.title}</a> 
+				{if not $smarty.foreach.wu.last}<br />{/if}
+			</dd>
+		{/foreach}
+	</dl>
+	{/foreach}
+	<dl class="help_warp_formBox">
+		<dt>{$lang.track_orders}</dt>
+		<dd class="clearfix pb10">
+			<form target="_blank" action="/{$cur_lang_url}m-users-a-queryorder.htm" method="get">
+				<input id="txt-checkOrder" name="n" class="footHelp_input fl js_footHelp_input" type="text" maxlength="90" value="{$lang.order_number}">
+				<input type="submit" value="" class="footHelp_btn fl">
+			</form>
+		</dd>
+		<dt>{$lang.newsletter}</dt>
+		<dd class="clearfix">
+			<p>{$lang.subscribe_to_win}</p>
+			<p>
+				<input class="footHelp_input fl js_footHelp_input js_txt-subscribe" type="text" maxlength="90" value="{$lang.your_email_address}" id="">
+				<input type="submit" value="" class="footHelp_btn fl js_btn-subscribe" id="">
+			</p>
+		</dd>
+	</dl>
+	<div class="clear"></div>
+	<div class="mt10 footer_abc">
+	&nbsp;<a href="/popular-searches/">{$lang.Top_Searches}</a>
+	{if $cur_lang eq 'en' && $page eq 'index'}
+	&nbsp;&nbsp;&nbsp;<a href="{$DOMAIN}/{$cur_lang_url}sitemap-index.html" >{$lang.Sitemap}</a>
+	{/if}
+	</div>
+</div><!--end.help_warp-->

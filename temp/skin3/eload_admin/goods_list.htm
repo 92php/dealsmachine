@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<title></title>
+<script language="javascript" src="/sysjs/eload13pack.js"></script>
+<script language="javascript" src="/sysjs/jlivequery.js"></script>
+<script language="javascript" src="/sysjs/jcookie.js"></script>
+<script language="javascript" src="/sysjs/jjeditable.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_action.js?2013103001"></script>
+<script language="javascript" src="/sysjs/calendar.php?lang="></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 商品列表</td>
+          <td width="44%" align="right">
+		  {if $default_lang eq '1'}
+		  <span class="navright"><a href="goods.php?act=add">商品添加</a></span>
+		  {/if}
+		  <span class="navright" style="display:none"><a href="goods.php?act=update_goods_price">刷新价格</a></span>
+		  </td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<!-- 商品搜索 -->
+{include file="goods_search.htm"}
+
+<form method="post" action="goods.php?act=batch" name="listForm" onsubmit="return confirmSubmit(this)">
+<div id="list">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="4%">
+      <input type="checkbox" onclick="checkAll(this, 'checkboxes[]');">
+      <a href="goods.php?sort_by=g.goods_id&sort_order={$filter.sort_order_goods_id}{$title_url}">编号</a>{$sort_goods_id}
+    </th>
+    <th width="4%">图片</th>
+    <th width="40%"><a href="goods.php?sort_by=goods_title&sort_order={$filter.sort_order_goods_title}{$title_url}">商品标题</a>{$sort_goods_title}</th>
+    <th><a href="goods.php?sort_by=goods_sn&sort_order={$filter.sort_order_goods_sn}{$title_url}">货号</a>{$sort_goods_sn}</th>
+	{if $default_lang eq '1'}
+    <th><a href="goods.php?sort_by=shop_price&sort_order={$filter.sort_order_shop_price}{$title_url}">价格</a>{$sort_shop_price}</th>
+    <th><a href="goods.php?sort_by=is_on_sale&sort_order={$filter.sort_order_is_on_sale}{$title_url}">上架</a>{$sort_is_on_sale}</th>
+    <th><a href="goods.php?sort_by=is_best&sort_order={$filter.sort_order_is_best}{$title_url}">特价</a>{$sort_is_best}</th>
+    <th><a href="goods.php?sort_by=is_new&sort_order={$filter.sort_order_is_new}{$title_url}">新品</a>{$sort_is_new}</th>
+    <th><a href="goods.php?sort_by=is_hot&sort_order={$filter.sort_order_is_hot}{$title_url}">热卖</a>{$sort_is_hot}</th>
+    <th><a href="goods.php?sort_by=is_promote&sort_order={$filter.sort_order_is_promote}{$title_url}">促销</a>{$sort_is_promote}</th>
+    <th><a href="goods.php?sort_by=discount_rate&sort_order={$filter.sort_order_discount_rate}{$title_url}">折扣</a>{$sort_discount_rate}</th>
+    <th><a href="goods.php?sort_by=point_rate&sort_order={$filter.sort_order_point_rate}{$title_url}">积分比率</a>{$sort_point_rate}</th>	
+    <th><a href="goods.php?sort_by=sort_order&sort_order={$filter.sort_order_sort_order}{$title_url}">排序</a>{$sort_sort_order}</th>
+    {if $use_storage}
+    <th><a href="goods.php?sort_by=goods_number&sort_order={$filter.sort_order_goods_number}{$title_url}">库存</a>{$sort_goods_number}</th>
+	<th><a>产品等级</a></th>	    	
+    {/if}
+	{/if}
+    <th style="display:none" >操作</th>
+    </tr>
+{foreach from=$goods_list item=goods name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';" id="eff{$goods.goods_id}">
+    <td><input type="checkbox" name="checkboxes[]" value="{$goods.goods_id}" onclick="checkone('checkboxes[]')"/>{$goods.goods_id}</td>
+    <td><a href="../m-goods-id-{$goods.goods_id}.htm?islan=1" target="_blank" title="浏览"><img width="50" height="50" src="{$goods.goods_thumb}" border="0"/></a></td>
+    <td class="first-cell" style="{if $goods.is_promote}color:red;{/if}{if $goods.updatesign == 1}color:#703A65;{/if}"  title='添 加 人：{$goods.add_user}&#10添加时间：{$goods.add_time}&#10修 改 人：{$goods.update_user}&#10修改时间：{$goods.last_update}
+ {if $smarty.get.intro_type eq 'is_pre_sale'} &#10预售：{$goods.presale_date_from}{/if}
+  '>
+    <a  {if $goods.is_new_modify}style='color: #900'{/if} href="goods.php?act=edit&goods_id={$goods.goods_id}{if $code neq 'real_goods'}&extension_code={$code}{/if}{$search_url}" title="编辑">
+    {$goods.goods_title|escape:html}</a>{if $goods.is_presale_over}<br/><span style="color:red">预售到期时间:{$goods.presale_date_from}</span>{elseif $goods.presale_date_from}<br/><span style="color:black">预售到期时间:{$goods.presale_date_from}{/if}{if $goods.gifts_id > 0}<br><span style="color:red">赠品-满{$goods.gifts_info.need_money}送</span>{/if}</td>
+    <td>{$goods.goods_sn}</td>
+	{if $default_lang eq '1'}
+    <td align="right">{$goods.shop_price}</td>
+    <td align="center">
+    <img src="/temp/skin3/images/admin/{if $goods.is_on_sale}yes{else}no{/if}.gif" onclick="cimage(this,'state.php?act=goods&field=is_on_sale&did={$goods.goods_id}&id_field=goods_id');" state="{$goods.is_on_sale}"/> </td>
+    <td align="center"><img src="/temp/skin3/images/admin/{if $goods.is_best}yes{else}no{/if}.gif"  onclick="cimage(this,'state.php?act=goods&field=is_best&did={$goods.goods_id}&id_field=goods_id');" state="{$goods.is_best}"/></td>
+    <td align="center"><img src="/temp/skin3/images/admin/{if $goods.is_new}yes{else}no{/if}.gif"   onclick="cimage(this,'state.php?act=goods&field=is_new&did={$goods.goods_id}&id_field=goods_id');" state="{$goods.is_new}" /></td>
+    <td align="center"><img src="/temp/skin3/images/admin/{if $goods.is_hot}yes{else}no{/if}.gif" onclick="cimage(this,'state.php?act=goods&field=is_hot&did={$goods.goods_id}&id_field=goods_id');" state="{$goods.is_hot}" /></td>
+    <td align="center" title="{if $goods.is_promote}促销品{else}非促销品{/if}"><img src="/temp/skin3/images/admin/{if $goods.is_promote}yes{else}no{/if}.gif" onclick="javascript:window.location='goods.php?act=edit&goods_id={$goods.goods_id}{if $code neq 'real_goods'}&extension_code={$code}{/if}{$search_url}'" />{if $goods.promote_lv gt  0}&nbsp;<strong>{$goods.promote_lv}</strong>{/if}&nbsp;{if $goods.promote_end_date}<br>{$goods.promote_end_date}{/if}</td>
+	<td align="center" title="双击进行修改"><span {literal}onclick="$(this).editable('goods.php?act=editinplace', {type: 'text',event: 'dblclick',width:'90%',indicator:'Saving...',onblur:'submit',tooltip: ''});"{/literal} id="{$goods.goods_id}||discount_rate">{$goods.discount_rate}</span>%</td>
+	<td align="center" title="双击进行修改">{$goods.point_rate}</td>
+    <td align="center" title="双击进行修改"><span {literal}onclick="$(this).editable('goods.php?act=editinplace', {type: 'text',event: 'dblclick',width:'90%',indicator:'Saving...',onblur:'submit',tooltip: ''});"{/literal} id="{$goods.goods_id}||sort_order">{$goods.sort_order}</span></td>    
+    {if $use_storage}
+    <td align="right" title="双击进行修改"><span {literal}onclick="$(this).editable('goods.php?act=editinplace', {type: 'text',event: 'dblclick',width:'90%',indicator:'Saving...',onblur:'submit',tooltip: ''});"{/literal} id="{$goods.goods_id}||goods_number">{$goods.goods_number}</span></td>
+    {/if}
+	<td align="center">{$goods.goods_grade}</td>
+	{/if}
+    <td align="center" style="display:none" >
+	  {if $default_lang eq '1'}	
+      <a href="../m-goods-id-{$goods.goods_id}.htm?islan=1" target="_blank" title="浏览"><img src="/temp/skin3/eload_admin/images/icon_view.gif" width="16" height="16" border="0" /></a>
+	  {/if}
+      <a href="goods.php?act=edit&goods_id={$goods.goods_id}{if $code neq 'real_goods'}&extension_code={$code}{/if}{$search_url}" title="编辑"><img src="{$jscache_url}temp/skin3/eload_admin/images/icon_edit.gif" width="16" height="16" border="0" /></a>
+	  {if $default_lang eq '1'}
+      <a href="goods.php?act=copy&goods_id={$goods.goods_id}{if $code neq 'real_goods'}&extension_code={$code}{/if}" title="复制"><img src="{$jscache_url}temp/skin3/eload_admin/images/icon_copy.gif" width="16" height="16" border="0" /></a>
+      <a  href="javascript:;" onclick="del_signle('goods.php?act=remove&goods_id={$goods.goods_id}','你确定要把该商品放入回收站吗？','eff{$goods.goods_id}');" title="放入回收站"><img src="{$jscache_url}temp/skin3/eload_admin/images/icon_trash.gif" width="16" height="16" border="0" /></a>
+      {if $add_handler}
+        |
+        {foreach from=$add_handler item=handler}
+        <a href="{$handler.url}&goods_id={$goods.goods_id}" title="{$handler.title}"><img src="/temp/skin3/images/admin/{$handler.img}" width="16" height="16" border="0" /></a>
+        {/foreach}
+      {/if}
+	  {/if}
+    </td>
+  </tr>
+  {foreachelse}
+  <tr><td colspan="13" align="center" >暂无商品
+</td></tr>
+  {/foreach}
+   <tr>
+    <td colspan="3" valign="top" >
+	{if $default_lang eq '1'}
+	<input type="checkbox" onclick="checkAll(this, 'checkboxes[]');"> 全选
+      <select name="type" id="selAction" onchange="changeAction()" disabled="true">
+        <option value="">请选择...</option>
+        <option value="trash">回收站</option>
+        <option value="on_sale">上架</option>
+        <option value="not_on_sale">下架</option>
+        <option value="fenlei_tuijian">分类推荐商品</option>
+        <option value="best">特价</option>
+        <option value="new">新品</option>
+        <option value="hot">热卖</option>
+        <option value="jifen_bilv">积分比率</option>
+        <option value="not_best">取消特价</option>
+        <option value="not_new">取消新品</option>
+        <option value="not_hot">取消热卖</option>
+        <option value="move_to">转移到分类</option>
+        <option value="add_to">添加到新分类</option>
+        <option value="batch_add_attr">批量添加属性</option>
+        <option value="to_free_shipping">批量免邮</option>
+        <option value="to_no_free_shipping">批量不免邮</option>
+        <option value="batch_promote">批量促销</option>
+        <option value="batch_promote_cancel">批量不促销</option>
+		<option value="batch_discount_rate">批量折扣</option>
+      </select>
+	{/if}
+<span id="target_cat" style="display:none">
+{$target_cat_list}
+</span>
+
+<span id="showshuxing" style="display:none">
+  <br />
+<input value="1" type="checkbox" name="is_best" />
+特价
+<input value="1" type="checkbox" name="is_new" />
+最新
+<input value="1" type="checkbox" name="is_hot" />
+热卖
+<input value="1" type="checkbox" name="is_super_star" />
+Super Star
+</span>
+
+    <select name="type_id" id="type_id"  style="display:none">
+    <option value="0">请选择属性</option>
+    {$attr_list}
+    </select>
+
+  <select name="other_cat[]"  multiple="multiple"  style="height:240px;width:320px;display:none;" title="按住“Ctrl”或“Shift”键可以多选，按住“Ctrl”可取消选择">
+  <option value="0">请选择分类</option>{$orher_cat_list}
+  </select>
+<!--begin set point rate-->
+<span id="setpoint_rate" style="display:none">
+    <label>
+    <input type="text" name="point_rate" value="1" />
+</span>
+<!--end set point rate-->
+
+	<!-- 批量促销begin -->
+	<span id="target_promote" style="display:none">
+		<br /><br />
+		<span class="label"> 市&nbsp;场&nbsp;售&nbsp;价&nbsp;：</span><input type="text" id="market_price" name="market_price" value="" size="17" title="市场售价可为空或大于0的数字" />
+		<br /><br />
+		<span class="label"> 促销利润率：</span><input type="text" id="promote_rate" name="promote_rate" value="" size="17" title="促销利润率必须为大于0的数字" /><font color="#FF0000">*<!--备注：免邮商品（促销价 = 出货价格 X 利润率 + 运费） 不免邮商品（促销价 = 出货价格 X 利润率），其中利润率为出货价格的倍数。--></font>
+		<br /><br />
+		<span class="label">促&nbsp;销&nbsp;时&nbsp;间&nbsp;：</span><input name="promote_start_date" type="text" id="promote_start_date" size="12" value='{$goods.promote_start_date}' readonly="readonly" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" title="促销起始时间" /> 到<input name="promote_end_date" type="text" id="promote_end_date" size="12" value='{$goods.promote_end_date}' readonly="readonly" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" title="促销结束时间" /><font color="#FF0000">*</font>
+	</span>
+	<!-- 批量促销end -->
+	<!-- 批量折扣begin -->
+	<span id="target_discount_rate" style="display:none">
+		<br /><br />
+		<span class="label"> 折扣率：</span><input type="text" id="discount_rate" name="discount_rate" value="" size="17"/>%<font color="#FF0000">*</font>
+	</span>
+	<!-- 批量折扣end -->	
+	{if $code neq 'real_goods'}
+	<input type="hidden" name="extension_code" value="{$code}" />
+	{/if}
+	{if $default_lang eq '1'}    
+    <input type="submit" value=" 确定 " id="btnSubmit" name="btnSubmit" class="button" disabled="true" />
+	{/if}
+	</td>
+    <td colspan="12" align="right"><div id="pager">{$pagestr}</div></td>
+    </tr>
+</table>
+</div>
+</form>
+{include file="copyright.htm"}

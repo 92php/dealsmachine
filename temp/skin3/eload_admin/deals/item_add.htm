@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='{$imgcache_url}eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$jscache_url}sysjs/jquery-1.8.0.min.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="{$imgcache_url}eload_admin/js/admin_add.js"></script>
+<script type="text/javascript" src="/sysjs/calendar.php?lang="></script>
+
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> deals item {$tag_msg}</td>
+          <td width="44%" align="right"><span class="navright"><a href="?">deals列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<div class="main-div">
+<form method="post" action="?act=save_item" name="theForm"  onSubmit="return Validator.Validate(this,3)">
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th colspan="2">deals item{$tag_msg}</th>
+  </tr>
+
+  <tr>
+    <td align="right" nowrap="nowrap" class="label">所属deals:</td>
+    <td> {$item.title} <input type="hidden" name="deals_id" value="{$item.deals_id}" />
+      <input type="hidden" name="item_id" value="{$item.item_id}" /></td>
+  </tr>
+
+  <tr>
+    <td align="right" class="label">原价:</td>
+    <td><input name="list_price" type="text" dataType="Require" msg="请填写！"  value="{$item.list_price}" /></td>
+  </tr>
+  <tr>
+    <td align="right" class="label">现价:</td>
+    <td><input name="price" type="text" value="{$item.price}" dataType="Require"  /></td>
+  </tr>  
+  <tr>
+    <td align="right" bgcolor="#FFFFFF"  class="label">图片URL:</td>
+    <td align="left" bgcolor="#FFFFFF"><input name="img_url" dataType="Require" msg="请填写" size="100"   type="text" value="{$item.img_url}"/></td>
+  </tr>
+  <tr>
+                  <td width="33%" align="right" bgcolor="#FFFFFF"  class="label">图片链接:</td>
+                  <td width="67%" align="left" bgcolor="#FFFFFF"><input size="100" name="img_link_to" msg="请填写"  type="text" value="{$item.img_link_to}"/></td>
+      </tr>
+
+  <tr>
+    <td colspan="2" align="center"><input type="submit" value="  保 存  " class="button" />&nbsp;&nbsp;&nbsp;&nbsp;
+      <input  type="button" onclick="history.back()" value="  后 退  " class="button" />
+      <input type="hidden" name="item_id" value="{$item.item_id}" />    </td>
+  </tr>
+</table>
+
+</form>
+</div>
+{include file="./copyright.htm"}

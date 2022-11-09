@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>商品及分类301跳转设置</title>
+    <link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css" />
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft">
+                            <a href="index.php?act=main">管理中心</a>
+                            &gt;&gt; 商品及分类301跳转设置
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <form method="post" action="?act=save" id="form">
+        <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+            <tr>
+                <th colspan="3">商品及分类301跳转设置</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="button" id="btn-submit" class="sub_but" value="提 交" /></td>
+            </tr>
+            <tr>
+                <td valign="top" class="text-right font-bold">类型</td>
+                <td>
+                    <select id="type">
+                        <option value="">请选择</option>
+                        <option value="cat">分类</option>
+                        <option value="goods">商品</option>
+                    </select>
+                </td>
+             </tr>
+            <tr>
+                <td valign="top" class="text-right font-bold">跳转对应关系</td>
+                <td>
+                  <textarea id="data" class="font-12" rows="20" cols="100"></textarea>
+                  <span class="font-gray">
+                    <br />
+                    一行一T条记录，格式：<b>原URL</b> => <span class="font-red">新URL</span>。</span><br>示例：Smart-phones-pda-c-248.html=>smart-phones-pda-c-248.html
+</td>
+             </tr>
+        </table>
+    </form>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+    <script type="text/javascript" src="{$imgcache_url}eload_admin/js/common.js"></script>
+    {literal}
+    <script type="text/javascript">
+        $('#type').change(function() {//获取数据
+            var val = $(this).val();
+
+            if (val) {
+                setLoading();
+
+                $.get('?act=get&type=' + val, function(data) {
+                    setLoading(false);
+                    $('#data').val(data);
+                });
+            }
+        });
+
+        $('#btn-submit').click(function() {//提交
+            var type = $('#type').val();
+
+            if (type) {
+                setLoading();
+                $.post('?act=save&type=' + $('#type').val(), 'data=' + $('#data').val(), function(data) {
+                    setLoading(false);
+
+                    if (!data) {
+                        Alert('操作成功', true);
+                    }
+                    else {
+                        alert(data);
+                    }
+                });
+            }
+        });
+    </script>
+    {/literal}
+{include file="copyright.htm"}

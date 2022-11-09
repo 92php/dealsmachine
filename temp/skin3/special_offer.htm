@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+{include file="top.htm"}
+	<link rel="stylesheet" href="{$imgcache_url}mincss/specials_min.css" />
+</head>
+<body>
+{include file="public_top.htm"}
+	<div class="curPath mt10"><a href="/{$cur_lang_url}" title="{$shop_name} {$lang.home}" class="fl">{$lang.home}</a> <span class="fb fl pl5 pr5">&raquo; {$lang.Special_offer}</span>  <h1 class="fl fb">&raquo; {$nav}</h1></div>
+
+<div id="mainWarp" class="clearfix mt10">
+	<div id="mainbar" class="m_box">
+	<ul class="special_TabNav">
+		<li><a href="/{$cur_lang_url}special_offer.html" class="special_list_dollar_on">{$lang.a_dollar_store}</a></li>	
+	</ul>
+	
+	<div class="special_proListBox dollar_proListBox">
+		<ul class="clearfix">
+		{foreach from=$goods_one_dollar item=goods1 name=list1}
+			<li>
+				<p class="p_mg"><a href="{$goods1.url_title}" ><img src="{$goods1.goods_grid}" alt="P{$goods1.goods_full_title}" width="150" height="150" class="js_lazyLoad"/></a></p>
+				<p class="p_name"><a href="{$goods1.url_title}">{$goods1.goods_title}</a></p>
+				{if $goods.is_free_shipping == 1}<span class="p_free {$cur_lang}_p_free fl">{$lang.Free_Shipping}</span>{/if}
+				<p class="p_price  fb red"><span class="bizhong fl">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price fl pl5" orgp="{$goods1.shop_price}">{$goods1.shop_price}</span></p>
+			</li>
+		{/foreach}	
+		</ul>
+	</div><!--end .special_proListBox-->		
+
+</div><!--end #mainbar-->
+ <div id="sideBar">
+<div class="ad_pic mt10"><a href="/{$cur_lang_url}android-4.4-cell-phones-c-1847.html" ><img src="{$imgcache_url}ximages/indexw/azonghea.jpg" /></a></div>
+<div class="ad_pic mt10"><a href="/{$cur_lang_url}tablet-phone-c_1716/" ><img src="{$imgcache_url}ximages/indexw/azongheb.jpg" /></a></div>
+  <div class="ad_pic mt10"><a href="/{$cur_lang_url}car-gadgets-c_232/" ><img src="{$imgcache_url}ximages/indexw/azonghec.jpg" /></a></div>
+    <div class="ad_pic mt10"><a href="/{$cur_lang_url}memory-cards-c_1746/" ><img src="{$imgcache_url}ximages/indexw/azonghed.jpg" /></a></div>
+      <div class="ad_pic mt10"><a href="/{$cur_lang_url}electronic_gadgets-c_72/" ><img src="{$imgcache_url}ximages/indexw/azonghee.jpg" /></a></div>
+      <div class="ad_pic mt10"><a href="/{$cur_lang_url}led-sports-watches-c_441/" ><img src="{$imgcache_url}ximages/indexw/azonghef.jpg" /></a></div>      
+      <div class="ad_pic mt10"><a href="/{$cur_lang_url}10001-c_1837/" ><img src="{$imgcache_url}ximages/indexw/azongheg.jpg" /></a></div>   
+ <div class="ad_pic mt10"><a href="/{$cur_lang_url}sports-sunglasses-goggles-c_567/" ><img src="{$imgcache_url}ximages/indexw/azongheh.jpg" /></a></div> 
+  <div class="ad_pic mt10"><a href="/{$cur_lang_url}samsung-galaxy-s5-accessories-c_1840/" ><img src="{$imgcache_url}ximages/indexw/azonghei.jpg" /></a></div> 
+  
+	</div><!--end #sideBar-->
+</div>
+<div id="footer">
+{include file="foothelp.htm"}
+{include file="foot.htm"}
+</div>
+{literal}
+    <script>
+		(function(){
+			$("ul .list_p_addToCart").on("click",".js_new_addcart",function(){
+				GLOBAL.CartCheckout.addcart(this);
+				return false;
+			}); 
+		})();
+	</script>
+{/literal}
+{include file="statistics_js.htm"}
+</body>
+</html>

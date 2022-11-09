@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 地区配送方式设置</td>
+          <td width="44%" align="right"></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<div id="list">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+    <tr>
+      <th align="left" class="first-cell">国家</th>
+      <th align="left" class="first-cell">配送方式</th>
+    </tr>
+    {foreach from=$region_arr item=list name=area_name}
+<tr bgColor="{if $smarty.foreach.area_name.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.area_name.iteration is even}#f4f9fd{else}#e8f1fd{/if}'";>
+      <td width="19%" align="left"><b>{$list.region_name|escape:"html"}</b></td>
+      <td align="left">
+        {foreach from=$payArr item=pay}
+          <input id="pay_checkes[]" type="checkbox" atr="area_shipping.php?act=shipping&val={$pay.id}&id={$list.region_id}" {php}
+          if (strpos(','.$this->_tpl_vars['list']['shipping'].',',','.$this->_tpl_vars['pay']['id'].',') !== false){echo 'checked';} {/php}/>{$pay.ship_name}  &nbsp; &nbsp; 
+        {/foreach}
+      </td>
+    </tr>
+    {/foreach}
+
+</table>
+</div>
+{include file="copyright.htm"}

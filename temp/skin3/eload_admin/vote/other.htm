@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>投票管理</title>
+    <link type="text/css" rel="stylesheet" href="/temp/skin3/eload_admin/images/admin_css.css" />
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> &gt;&gt; <a href="vote.php">投票管理</a> &gt;&gt; 其它选项</td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;">
+        <tr>
+            <th>序号</th>
+            <th>所属标题</th>
+            <th>所属题组</th>
+            <th>内容</th>
+            <th>时间</th>
+        </tr>
+        {foreach from=$data item=item name=other}
+        <tr bgColor="{cycle values='#f4f9fd,e8f1fd' name=cycle1}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{cycle values='#f4f9fd,e8f1fd' name=cycle2}'">
+            <td>{$smarty.foreach.other.iteration}</td>
+            <td><a href="vote.php?act=option_list&amp;title_id={$item.title_id}" title="查看该标题下选项">{$item.title|replace:'$br':'<br />'}</a></td>
+            <td><a href="vote.php?act=title_list&amp;subject_id={$item.subject_id}" title="查看该标题下标题">{$subjects[$item.subject_id].subject}</a></td>
+            <td>{$item.content}</td>
+            <td>{smarty_local_date time=$item.vote_time}</td>
+        </tr>
+        {foreachelse}
+        <tr>
+            <td colspan="15" class="no-records">{$no_records}</td>
+        </tr>
+        {/foreach}
+        <tr>
+          <td align="right" nowrap="true" colspan="11"><div id="pager">{$pagestr}</div></td>
+        </tr>
+    </table>
+    <script type="text/javascript">//VOTE.subject.index();</script>
+    {include file="copyright.htm"}

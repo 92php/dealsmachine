@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="/sysjs/validator.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_action.js"></script>
+<script language="javascript" src="/sysjs/jjeditable.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/editinplace.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 分类关键词列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="?act=add">添加分类关键词</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form method="post" action="?act=list">
+<table width="99%" align="center" cellspacing="1" class="borderline">
+  <tr>
+      <td align="right" width="10%">所属分类：</td><td width="23%">{$cat_select}</td>
+      <td width="15%" align="right">&nbsp;</td>
+      <td width="52%"><strong>造词框</strong></td>
+  </tr>
+  <tr>
+      <td align="right">关键词：</td><td><input type="text" name="keywords" value="{$keywords}"/></td>
+      <td align="right">&nbsp;</td>
+      <td><input name="sampkey" type="text" id="sampkey"/>
+      <input type="button" value="去前台看结果" onclick="seach_submit()"/></td>
+  </tr>
+  <tr>
+      <td></td><td><input type="submit" value="搜索"/></td>
+      <td align="right">&nbsp;</td>
+      <td>&nbsp;</td>
+  </tr>
+</table>
+</form>
+<br />
+<form method="post" action="?act=batch" name="listForm">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="10%">ID</th>
+    <th width="15%">关键词</th>
+    <th width="25%">URL</th>
+    <th width="20%">所属分类</th>
+    <th width="10%">是否父类显示</th>
+    <th width="10%">排序</th>
+    <th width="10%">操作</th>
+  </tr>
+  {foreach from=$cat_keywords_list item=cat_keywords_Arr  name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+    <td height="26" align="center"><input type="checkbox" name="checkboxes[]"  value="{$cat_keywords_Arr.id}" onclick="checkone('checkboxes[]')"/>{$cat_keywords_Arr.id}</td>
+    <td height="26" align="center">{$cat_keywords_Arr.keywords}</td>
+    <td height="26" align="center">{$cat_keywords_Arr.url}</td>
+    <td height="26" align="center">{if $cat_keywords_Arr.cat_id==0}全局{else}{$cat_keywords_Arr.cat_name}{/if}</td>
+    <td height="26" align="center">
+        <span class="showspan{$cat_keywords_Arr.id}">
+        {if $cat_keywords_Arr.status==1}
+        <img class="show{$cat_keywords_Arr.id}" onclick="cat_keywords_show({$cat_keywords_Arr.id},0);" src="/temp/skin3/images/admin/yes.gif" style="cursor:pointer;">
+        {else}
+        <img class="show{$cat_keywords_Arr.id}" onclick="cat_keywords_show({$cat_keywords_Arr.id},1);" src="/temp/skin3/images/admin/no.gif" style="cursor:pointer;">
+        {/if}
+        </span>
+    </td>
+    <td height="26" align="center"><span class="cat_keywords_edit" id="{$cat_keywords_Arr.id}||num">{$cat_keywords_Arr.num}</span></td>
+    <td align="center"><a href="?act=add&id={$cat_keywords_Arr.id}&cid={$cat_keywords_Arr.cat_id}" title="{$lang.edit}">修改</a> |
+      <a href="?act=remove&id={$cat_keywords_Arr.id}" class="del_act" delmsg="您确定要删除选定的关键词吗？">删除</a>
+    </td>
+  </tr>
+  {foreachelse}
+    <tr><td colspan="15" align="center" class="no-records">{$lang.no_records}</td></tr>
+    {/foreach}
+    
+    <tr>
+      <td align="left" colspan="3" style="padding-left:23px;">
+       		<input type="checkbox" onclick="checkAll(this, 'checkboxes[]');"> 全选 </input>
+  			 <!-- {$cat_select} -->
+  			<select name="type" id="selAction" onchange="changeAction()" disabled="true" style="text-align:center">
+		        <option value="">请选择</option>
+		        <option value="A">A</option>
+		        <option value="B">B</option>
+		        <option value="C">C</option>
+		        <option value="D">D</option>
+		        <option value="E">E</option>
+		        <option value="F">F</option>
+		        <option value="G">G</option>
+		        <option value="H">H</option>
+		        <option value="I">I</option>
+		        <option value="J">J</option>
+		        <option value="K">K</option>
+		        <option value="L">L</option>
+		        <option value="M">M</option>
+		        <option value="N">N</option>
+		        <option value="O">O</option>
+		        <option value="P">P</option>
+		        <option value="Q">Q</option>
+		        <option value="R">R</option>
+		        <option value="S">S</option>
+		        <option value="T">T</option>
+		        <option value="U">U</option>
+		        <option value="V">V</option>
+		        <option value="W">W</option>
+		        <option value="X">X</option>
+		        <option value="Y">Y</option>
+		        <option value="Z">Z</option>
+		        <option value="0">0</option>
+		        <option value="1">1</option>
+		        <option value="2">2</option>
+		        <option value="3">3</option>
+		        <option value="4">4</option>
+		        <option value="5">5</option>
+		        <option value="6">6</option>
+		        <option value="7">7</option>
+		        <option value="8">8</option>
+		        <option value="9">9</option>
+      	    </select>
+      		<input type="submit" value=" 确定 " id="btnSubmit" name="btnSubmit" class="button" disabled="true" />
+      </td>     
+      
+      <td align="right" nowrap="true" colspan="11">
+	 	<div id="pager">{$pagestr}</div>
+      </td>
+    </tr>
+    
+  </table>
+</form>
+<script type="text/javascript">
+    $(".muli_cat").prepend("<option value='-1'>请选择</option>");
+</script>
+{if $cat_id=='-1'}
+<script type="text/javascript">
+     $(".muli_cat").val('请选择');
+</script>
+{/if}
+
+{literal}
+<script type="text/javascript">
+function seach_submit()
+{
+	var reg = /[^\w\~\.]/g;    
+	//var ss = kw.replace(reg, "");
+	kw = $.trim($("#sampkey").val());
+	kw  = kw.replace('  ', ' ');
+	kw  = encodeURIComponent(kw.replace(reg, "-"));
+	if ((kw == ''))
+	{
+		alert('请输入关键字!');
+		$("#k2").val('');						   
+		$("#k2").focus();
+		return false;
+	}
+	else
+	{
+		kw = kw.replace('%20','-');
+		window.open('/wholesale/'+kw+'.html');
+	}
+};
+
+   //编辑分类关键词排序
+	$(".cat_keywords_edit").livequery("click",function(){
+			$(this).editable('cat_keywords.php?act=editinplace', {
+				 type      : 'text',
+				 event     : 'dblclick',
+				 width     :  '90%',
+				 indicator : 'Saving...',
+				 onblur    : 'submit',
+				 tooltip   : '双击该标题进行修改...'
+			 });
+    });
+    
+    function cat_keywords_show(id,status)
+    {
+        $.ajax({
+             type: "POST",
+             url: "cat_keywords.php?act=cat_keywords_show",
+             data:   "id="+id+"&status="+status,
+             success: function(msg)
+             { 
+                if(msg=="1" && status==1)
+                {
+                   $(".showspan"+id).html('<img class="show'+id+'" onclick="cat_keywords_show('+id+',0);" src="/temp/skin3/images/admin/yes.gif" style="cursor:pointer;">');
+                }
+                else if(msg=="1" && status==0)
+                {
+                   $(".showspan"+id).html('<img class="show'+id+'" onclick="cat_keywords_show('+id+',1);" src="/temp/skin3/images/admin/no.gif" style="cursor:pointer;">');
+                }
+             } 
+            }); 
+    }
+
+</script>
+{/literal}
+
+{include file="copyright.htm"}
+

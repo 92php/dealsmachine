@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href='{$imgcache_url}eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link type="text/css" rel="stylesheet" href="{$jscache_url}sysjs/calendar/calendar.css" />
+<script type="text/javascript" src="{$website_url}sysjs/calendar.php"></script>
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script language="javascript" src="{$imgcache_url}eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->>产品咨询列表</td>
+          <td width="44%" align="right">&nbsp;</td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<!-- 商品搜索 -->
+<form action="">
+<div style="text-align:center">
+    {$cat_list}
+    搜索
+    {html_options options=$column_arr name=column selected=$column|default:'g.goods_sn'}
+    <input type="text" name="keyword" id="keyword" size="30" value="{$keyword}" />
+    {html_options options=$status_arr name=is_pass selected=$status}
+    {html_options options=$type_arr name=type selected=$type}
+    <br />时间从
+    <input name="start_date" value="{$start_date}" autocomplete="off" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);"/>
+    到
+    <input name="end_date" value="{$end_date}" autocomplete="off" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);"/>
+
+    回复人<input type="text" name="pass_admin" size="15" value="{$pass_admin}" />
+    回复时间<input name="start_date2" value="{$start_date2}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />&nbsp;&nbsp;到 &nbsp; <input name="end_date2" value="{$end_date2}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />
+&nbsp;
+    &nbsp;语言
+	  <select name="lang" id="lang">
+		<option value="">请选择...</option>
+		<option value="en">英语</option>
+		{foreach from=$lang_arr item=item key=key}
+		<option value="{$item.title_e}" {if $cur_lang eq $item.title_e}selected="selected"{/if}>{$item.title}</option>
+		{/foreach}
+	  </select>	
+      <input type="submit" value="搜 索" class="sub_but" />
+</div>
+</form>
+<form method="post" action="" name="listForm" onsubmit="return confirmSubmit(this)">
+<div id="list">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th style="width: 30px;">
+      <input type="checkbox" onclick="checkAll(this, 'checkboxes[]');">      {$sort_goods_id}
+    </th>
+    <th style="width: 60px;">图片</th>
+    <th>商品编码</th>
+    <th style="width: 200px;"><a href="goods.php?sort_by=goods_title&sort_order={$filter.sort_order_goods_title}{$title_url}">商品标题</a>{$sort_goods_title}</th>
+
+<th>咨询类型</th>
+
+    <th style="width: 200px">咨询内容</th>
+
+    <th nowrap="nowrap">状态</th>
+    <th>回复人</th>
+<th>回复时间</th>
+     <th>留言时间</th>
+    </tr>
+{foreach from=$inquiry.inquiry_list item=r name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';" id="eff{$goods.goods_id}">
+    <td><input type="checkbox" name="checkboxes[]" value="{$r.iid}" onclick="checkone('checkboxes[]')"/></td>
+    <td><a href="/m-goods-id-{$r.goods_id}.htm?islan=1" target="_blank" title="浏览"><img width="50" height="50" src="{$r.goods_thumb}" border="0"/></a></td>
+    <td>{$r.goods_sn}</td>
+    <td class="first-cell" ><a href="/m-goods-id-{$r.goods_id}.htm?islan=1" target="_blank" title="浏览">{$r.goods_title}</a></td>
+
+
+
+<td>{$type_arr[$r.type]}</td>
+    <td align="center" ><a href="?act=view&iid={$r.iid}&goods_id={$r.goods_id}">{$r.i_content}</a></td>
+
+    <td align="right" nowrap="nowrap">{$r.status}</td>
+    <td>{$r.pass_admin}</td>
+<td>{$r.pass_time}</td>
+    <td align="center">{$r.adddate}<br />{$r.add_time}</td>
+  </tr>
+  {foreachelse}
+  <tr>
+    <td colspan="12" align="center" >暂无评论</td></tr>
+  {/foreach}
+   <tr>
+    <td colspan="3" valign="top" >全选<input type="checkbox" onclick="checkAll(this, 'checkboxes[]');">
+  {literal}
+
+<input disabled="disabled" type="submit" id="btnSubmit"  class=button name="Submit" value="　删除　" onClick="if(confirm('您确定删除选中的评论?')){this.form.action='?act=del';return true}else{return false}">
+
+ {/literal}
+
+
+
+  <option value="0"></option></td>
+    <td colspan="3" align="right" nowrap="nowrap"><div id="pager">{$pagestr}</div></td>
+    </tr>
+</table>
+</div>
+</form>
+<!--<iframe height="0" width="0" src="http://www.everbuying.com/syn/update_sale_number.php?act=cnum"></iframe>-->
+{include file="copyright.htm"}

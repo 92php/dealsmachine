@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='{$imgcache_url}eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="{$imgcache_url}eload_admin/js/admin_add.js"></script>
+<link rel="stylesheet" type="text/css" href="/heditor/comm.css" />
+<script language="javascript" src="/heditor/all.js"></script>
+<script language="javascript" src="/heditor/editor.js"></script>
+<script language="javascript" src="/heditor/editor_toolbar.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 添加自助邮件</td>
+          <td width="44%" align="right"><span class="navright"><a href="?">自助邮件模板列表</a></span></td>
+        </tr>
+      </table></th>
+  </tr>
+</table>
+<form name="regform" method="post" action="?act=save&id={$list.id}">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <td style="font-weight: bold; text-align: right; " width="24%">邮件地址:</td>
+    <td><input type="text" name="name" id="subject" style="width: 300px" value="{$list.name}"  dataType="Require" msg="请填写邮件地址！"  class="input_style" />
+      *</td>
+  </tr>
+  <tr>
+    <td style="font-weight: bold; text-align: right;" width="24%">邮件标题</td>
+    <td><input type="text" name="title" id="title" style="width: 300px" value="{$list.title}" />
+      *</td>
+  </tr>
+  
+  <tr>
+    <td style="font-weight: bold; text-align: right; " width="24%">顶部Banner:</td>
+    <td><textarea name="banner_a" id="banner_a"  cols="90" rols="5">{$list.banner_a}</textarea>*</td>
+  </tr>
+  <tr>
+    <td style="font-weight: bold; text-align: right; " width="24%">底部Banner:</td>
+    <td><textarea name="banner_b" id="banner_b"  cols="90" rols="5">{$list.banner_b}</textarea>*</td>
+  </tr>
+  <tr>
+    <td style="font-weight: bold; text-align: right;" width="24%">底部Banner:</td>
+   <td><textarea name="banner_c" id="banner_c"  cols="90" rols="5">{$list.banner_c}</textarea>*</td>
+  </tr>
+  <tr>
+    <td style="font-weight: bold; text-align: right; " width="24%">分类Banner:</td>
+    <td><textarea name="banner_d" id="banner_d"  cols="90" rols="5">{$list.banner_d}</textarea>*</td>
+  </tr>
+  
+ {if $list.goods_list}
+ {foreach from=$list.goods_list item=goods}
+	 <tr class="tr-sn">
+		<td align="right" class="narrow-label">商品编码:</td>
+		<td width="78%" class="parent_id"><a onclick="if (confirm('你确定要删除？')) dropImage('{$goods.id}')" href="javascript:;" class="minus">[-]</a>
+		  <input type="text" name="goods_sn[]" value="{$goods.goods_sn}">
+		  自定义图片:
+		  <input type="text" size="30" class="goods_sn" name="thumb[]" value="{$goods.thumb}"/>
+		  排序
+		  <input type="text" size="10" class="goods_sn" name="sortby[]" value="{$goods.sortby}" />	  
+		</td>
+	 </tr>
+ {/foreach}
+ {/if}
+ <tr class="tr-sn">
+    <td align="right" class="narrow-label">商品编码:</td>
+    <td width="78%" class="parent_id"><strong style="color: red; cursor: pointer;" class="plus">[+]</strong>
+      <input type="text" name="goods_sn[]" value="{$list.goods_sn}">
+      自定义图片:
+      <input type="text" size="30" class="goods_sn" name="thumb[]" />
+      排序
+      <input type="text" size="10" class="goods_sn" name="sortby[]" /></td>
+  </tr>
+ {if $other_cat_list}
+ {foreach from=$other_cat_list item=cat_id}
+	 <tr class="tr-sn">
+		<td align="right" class="narrow-label">分类:</td>
+		<td width="78%" class="parent_id"><a onclick="if (confirm('你确定要删除？')) dropCat('{$cat_id.id}')" href="javascript:;" class="minus">[-]</a>
+		  <select name="other_cat[]">
+			{$cat_id.list}
+		  </select>
+		  URL:
+		  <input type="text" size="30" class="goods_sn" name="url[]" value="{$cat_id.url}"/>
+		  排序
+		  <input type="text" size="10" class="goods_sn" name="sort_by[]" value="{$cat_id.sort_by}" />
+		 分类名称<input type="text" size="20" name="cat_name[]" value="{$cat_id.cat_name}" />
+		 </td>
+	 </tr>
+ {/foreach}
+ {/if}
+ <tr class="tr-sn">
+    <td align="right" class="narrow-label">分类:</td>
+    <td width="78%" class="parent_id"><strong style="color: red; cursor: pointer;" class="plus">[+]</strong>
+		<select name="other_cat[]">
+		<option value=''>请选择</option>
+		{$orher_cat_list}
+		</select>
+      URL:
+      <input type="text" size="30" class="goods_sn" name="url[]" />
+      排序
+      <input type="text" size="10" class="goods_sn" name="sort_by[]" />
+	  分类名称<input type="text" size="20" name="cat_name[]" />
+	  </td>
+  </tr>
+  <tr id="tr-main" class="display-none">
+    <td></td>
+  </tr>
+  <tr id="tr-peijian" class="display-none">
+    <td></td>
+  </tr>
+  <tr>
+    <td style="font-weight: bold; text-align: right; " width="24%">底部coupon:</td>
+    <td><input type="text" name="coupon" size="30" value="{$list.coupon}"></td>
+  </tr>
+  <tr>
+    <td style="font-weight: bold; text-align: right;" width="24%">coupon结束日期:</td>
+    <td><input type="text" name="enddate" size="30" value="{$list.enddate}"></td>
+  </tr>
+  <tr>
+    <td style="font-weight: bold; text-align: right;" width="24%">coupon折扣:</td>
+    <td><input type="text" name="zhekou" size="30" value="{$list.zhekou}"></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><input type="submit" value=" 确定 " class="button"/></td>
+  </tr>
+
+</table>
+</form>
+<span>Banner是包含链接的如:< a target="_blank" href="http://www.everbuying.com/m-promotion-active-114.html">
+< img width="650" vspace="10" height="196" border="0" alt="find the coupon" src="http://cloud4.faout.com/imagecache/E/mail/E1202/images/bottomadb.jpg">
+< / a></span>
+{literal} 
+<script type="text/javascript">
+	$('.plus').live('click',function() {//点+,添加主（配件）商品
+		
+        var _parent = $(this).parents('tr:first');//所在tr
+        var clone = _parent.clone(true).find('.plus').replaceWith('<strong style="color: red; cursor: pointer;" class="minus">[-]</strong>').text('[-]').end()//复制，+ => -
+        .find('input').val('').end()//清空输入框值
+        .insertBefore($(this).parent().hasClass('parent_id') ? $('#tr-main') : $('#tr-peijian'));//添加
+    })
+	$('.minus').live('click', function() {//点-,删除主（配件）商品
+        $(this).parents('tr:first').remove();//删除所在tr
+    })
+	function dropImage(imgId){
+		$.ajax({
+			type: "GET",
+			url: 'mail_auto_temp.php?act=remove&id='+imgId,
+			cache:false,
+			beforeSend:function(){toploadshow();},
+				success: function(msg){
+					if(msg == '删除成功'){
+						$(this).parents('td:first').remove();//删除所在td
+					}
+					alert(msg);
+				}
+			});
+	}
+		function dropCat(imgId){
+		$.ajax({
+			type: "GET",
+			url: 'mail_auto_temp.php?act=removecat&id='+imgId,
+			cache:false,
+			beforeSend:function(){toploadshow();},
+				success: function(msg){
+					if(msg == '删除成功'){
+						$(this).parents('td:first').remove();//删除所在td
+					}
+					alert(msg);
+				}
+			});
+	}
+</script> 
+{/literal}
+{include file="copyright.htm"}
+</body>
+</html>

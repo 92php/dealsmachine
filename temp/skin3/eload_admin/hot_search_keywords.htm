@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>热门搜索关键字设置</title>
+    <link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css" />
+    <script type="text/javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+    <script type="text/javascript" src="{$imgcache_url}eload_admin/js/admin_action.js"></script>
+    <script type="text/javascript" src="{$imgcache_url}eload_admin/js/hot_search_keywords.js"></script>
+    <style type="text/css">
+    {literal}
+        #stripe_tb td img { cursor: default; }
+        ul { margin: 0; padding: 0; list-style: none; text-align: left; }
+        li { padding-top: 4px;}
+        .font-red { color: red; }
+        .font-green { color: green; }
+        .text-left { text-align: left; }
+        .float-right { float: right; }
+    {/literal}
+    </style>
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td id="navleft">
+                            <a href="index.php?act=main">管理中心</a>
+                            &gt;&gt; 热门搜索关键字设置
+                        </td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <td width="10%" align="right" class="narrow-label">关键字：</td>
+            <td><textarea rows="10" cols="110" name="keywords" id="txt-keywords">{$data.keywords}</textarea><br><span style="color: grey;">一行一个，格式：关键字|链接</span></td>
+        </tr>
+        <tr style="display:none;">
+            <td align="right" class="narrow-label">输入框默认值：</td>
+            <td><input type="text" id="txt-default" value="{$data.default}" size="60" /></td>
+        </tr>
+        <tr>
+            <td align="right" class="narrow-label">&nbsp;</td>
+            <td><input type="button" value="保 存" id="btn-save" /></td>
+        </tr>
+    </table>
+    <script type="text/javascript">//CRONTAB_LOG.list();</script>
+    {include file="copyright.htm"}

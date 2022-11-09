@@ -1,0 +1,71 @@
+ <img src="https://shareasale.com/sale.cfm?amount={$order.order_amount}&tracking={$order.order_sn}&transtype=TYPEOFTRANSACTION&merchantID=31237" width="1" height="1"> 
+
+ <img src="https://www.emjcd.com/u?AMOUNT={$order.order_amount}&DISCOUNT=0&CID=1513535&OID={$order.order_sn}&TYPE=330905&CURRENCY=USD&METHOD=IMG" height="1" width="20">
+
+ <img src="http://track.linksynergy.com/ep?mid=37992&cur=USD&ord={$order.order_sn}&skulist={$linkshare.skulist}|Discount&qlist={$linkshare.qlist}|0&amtlist={$linkshare.amtlist}|-{$order.discount * 100}&namelist=">
+
+ <img src="https://www.shopbot-inc.com/tracking/sale?shopID=eo8vl7w02j&amount={$order.order_amount}&orderID={$order.order_sn}" width="0" height="0"> 
+
+ <img height=0 width=0  src="https://www.myshopping.com.au/sale.asp?mid=25166076&amount={$order.order_amount}&order={$order.order_sn}">
+ 
+ <img src="https://www.shopbot.com.au/tracking/sale?shopID=0p0f9y1436&amount={$order.order_amount}&orderID={$order.order_sn}"  width="0" height="0">
+ 
+ <!-- Getprice.com.au sales tracking system -->
+<img height="1" width="1" border="0" src="https://secure.getprice.com.au/affsale.asp?shopid=3347&price={$order.order_amount}&sid={$order.order_sn}">
+<!-- End Getprice.com.au -->
+ 
+ <script language="Javascript">
+var merchant_account_id='146225';
+var m_order_id='{$order.order_sn}';
+var m_order_value='{$order.order_amount}';
+</script>
+<script language="Javascript" src="https://merchant.pronto.com/js/roi.js">
+</script>
+ 
+ 
+<script language="javascript">
+<!--
+	/* Performance Tracking Data */
+	var mid            = '272167';
+	var cust_type      = '';
+	var order_value    = '{$order.order_amount}';
+	var order_id       = '{$order.order_sn}';
+	var units_ordered  = '1';
+//-->
+</script>
+<script language="javascript" src="https://www.shopzilla.com/css/roi_tracker.js"></script>
+
+{*=====BOF:dealtime========*}
+<script type="text/javascript">
+var _roi = _roi || [];
+
+// Step 1: add base order details
+
+_roi.push(['_setMerchantId', '513121']); // required
+_roi.push(['_setOrderId', '{$order.order_sn}']); // unique customer order ID
+_roi.push(['_setOrderAmount', '{$order.order_amount}']); // order total without tax and shipping
+_roi.push(['_setOrderNotes', '']); // notes on order, up to 50 characters
+
+// Step 2: add every item in the order
+// where your e-commerce engine loops through each item in the cart and prints out _addItem for each
+// please note that the order of the values must be followed to ensure reporting accuracy
+
+{foreach from=$order.goods_list item=goods}
+_roi.push(['_addItem', 
+'{$goods.goods_sn}', // Merchant sku
+'{$goods.goods_name}', // Product name
+'{$goods.cat_id}', // Category id
+'{$goods.cat_name}', // Category name
+'{$goods.goods_price}', // Unit price
+'{$goods.goods_number}' // Item quantity
+]);
+{/foreach}
+// Step 3: submit transaction to SDC ROI tracker
+
+_roi.push(['_trackTrans']);
+</script>
+<script type="text/javascript" src="https://stat.dealtime.com/ROI/ROI2.js"></script>
+{*=====EOF:dealtime========*}
+
+
+

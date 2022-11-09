@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 邮件队列</td>
+          <td width="44%" align="right"><span class="navright"><a href="?">邮件群发查询</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+
+<form method="post" action="?" name="listForm" id="listForm">
+<div  id="list">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+<tr>
+  <th>
+      <input id="all_select[]" type="checkbox" class="cls"/>编号 
+  </th>
+  <th><a href="javascript:" atr="email_batch_send.php?sort_by=template_subject&act=list&sort_order={$filter.sort_order_template_subject}">邮件标题</a>{$sort_template_subject}</th>
+  <th><a href="javascript:" atr="email_batch_send.php?sort_by=email&act=list&sort_order={$filter.sort_order_email}">邮件地址</a>{$sort_email}</th>
+  <th width="8%">邮件类型</th>
+  <th width="8%"><a  href="javascript:" atr="email_batch_send.php?act=list&sort_by=error&sort_order={$filter.sort_order_error}">错误次数</a>{$sort_error}</th>
+  <th width="20%"><a  href="javascript:" atr="email_batch_send.php?act=list&sort_by=last_send&sort_order={$filter.sort_order_last_send}">上次发送时间</a>{$sort_last_send}</th>
+  <th width="5%">操作</th>
+</tr>
+{foreach from=$listdb item=val}
+<tr>
+  <td><input type="checkbox" name="checkboxes[]" value="{$val.id}"  class="cls"  {if $smarty.foreach.loglist.last} dataType="Group"  msg="必须选定一条记录！"{/if}/>{$val.id}</td>
+  <td>{$val.template_subject}</td>
+  <td>{$val.email}</td>
+  <td align="center">{if $val.is_html == '1'}HTML{else}文本{/if}</td>
+  <td align="center">{$val.error}</td>
+  <td align="center">{if $val.last_send != '1969-12-31 17:00:00'} {$val.last_send}{/if}</td>
+  <td align="center"><a href="javascript:;" delatr="?act=del&id={$val.id}"  class="del_acttion" title="删除">删除</a></td>
+</tr>
+{foreachelse}
+  <tr><td colspan="7" align="center" class="no-records">暂无记录</td></tr>
+{/foreach}
+</table>
+<!-- 分页 -->
+<table width="99%" align="center" cellspacing="0" id="page-table">
+  <tr>
+    <td width="65%">
+    <input type="hidden" name="act" class="act" value=""/><input id="all_select[]" type="checkbox" class="cls"/>全选 
+    <input type="button" id="btnSubmit1" value="删除" disabled="true" class="button"  onclick="subFunction('batch_remove')"/>
+    <input type="button" id="btnSubmit2" value="批量发送" disabled="true" class="button" onclick="subFunction('batch_send')"/>
+    <input type="button" value="发送所有的邮件" class="button" onclick="subFunction('all_send')"/>
+    </td>
+    <td width="35%" align="right" nowrap="true">
+   <div id="pager">{$pagestr}</div>
+    </td>
+  </tr>
+</table>
+</div>
+</form>
+{literal}
+<script type="text/javascript" language="JavaScript">
+function subFunction(act)
+{
+  if (act == 'batch_remove'){
+	  if(!confirm('你确实需要删除吗？'))return false;
+  }
+  $('#listForm').attr('action','?act='+act);
+  document.listForm.submit();
+}
+</script>
+{/literal}
+
+{include file="copyright.htm"}

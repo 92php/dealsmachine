@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href='{$imgcache_url}eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link type="text/css" rel="stylesheet" href="{$jscache_url}sysjs/calendar/calendar.css" />
+<script type="text/javascript" src="{$website_url}sysjs/calendar.php"></script>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script type="text/javascript" src="{$imgcache_url}eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> {if 0 == $type}用户产品需求信息收集 {else}用户搜索意见信息收集{/if}</td>
+          <td width="44%" align="right">&nbsp;</td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<!-- 商品搜索 -->
+<form action="">
+<div style="text-align:center">
+    {if 0 == $type}{html_options options=$cat_arr name=cat_id selected=$cat_id}{/if}
+    {html_options options=$status_arr name=status selected=$status}
+    {html_options options=$column_arr name=column selected=$column}
+    关键字<input type="text" name="keyword" id="keyword" size="15" value="{$keyword}" />
+    添加时间
+    <input name="start_date" value="{$start_date}" size="13" autocomplete="off" ondblclick="return showCalendar(this, '%Y-%m-%d', false, false, this);"/>
+    到
+    <input name="end_date" value="{$end_date}" size="13" autocomplete="off" ondblclick="return showCalendar(this, '%Y-%m-%d', false, false, this);"/>
+    处理时间<input name="start_date2" value="{$start_date2}" style="width:80px;" ondblclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />&nbsp;&nbsp;到 &nbsp; <input name="end_date2" value="{$end_date2}" style="width:80px;" ondblclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />
+    <input type="submit" value="搜 索" class="sub_but" />
+</div>
+<input type="hidden" name="record_count" value="0" />
+</form>
+<form method="post" action="" name="listForm" onsubmit="return confirmSubmit(this)">
+<div id="list">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;">
+    <tr>
+        <th style="width: 30px;"><input type="checkbox" onclick="checkAll(this, 'checkboxes[]');"></th>
+        <th>id</th>
+        <th>用户名</th>
+        <th>用户邮箱</th>
+        <th>内容</th>
+        {if 0 == $type}
+        <th>链接</th>
+        <th>价格</th>
+        <th>分类</th>
+        {/if}
+        <th style="width: 150px;">添加时间</th>
+        <th>状态</th>
+        <th style="width: 150px;">处理时间</th>
+    </tr>
+    {foreach from=$data item=r}
+    <tr bgColor="{cycle values='#f4f9fd,e8f1fd' name=cycle1}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{cycle values='#f4f9fd,e8f1fd' name=cycle2}'">
+        <td><input type="checkbox" name="checkboxes[]" class="cb-value" value="{$r.info_id}" onclick="checkone('checkboxes[]')"/></td>
+        <td>{$r.info_id}</td>
+        <td>{$r.username}</td>
+        <td>{$r.email}</td>
+        <td style="text-align: left;">
+            <div style="width: 200px;">
+            {$r.note|nl2br}
+            </div>
+        </td>
+        {if 0 == $type}
+        <td style="text-align: left;">
+            {if $r.url}
+            <a href="{$r.url}" target="_blank">{$r.url}</a>
+            {/if}
+        </td>
+        <td>{if $r.price > 0}{$r.price}{/if}</td>
+        <td style="text-align: left;">
+            {$r.cat_name}
+        </td>
+        {/if}
+        <td>{$r.add_time}</td>
+        <td>
+            <a class="action" href="javascript: void(0);">{$status_arr[$r.status]}{if $r.action_result} <span style="color: red">{$r.action_result|nl2br}</span></span>{/if}</a>
+            <div class="hide">
+                <div class="action">
+                    <label><input type="radio" name="rb-{$r.info_id}" value="1"{if 1 == $r.status} checked="checked"{/if} />{$status_arr[1]}</label><textarea style="width: 180px;height: 50px;" name="sku-1">{if 1 == $r.status}{$r.action_result}{/if}</textarea><br />
+                    <label><input type="radio" name="rb-{$r.info_id}" value="2"{if 2 == $r.status} checked="checked"{/if} />{$status_arr[2]}</label><textarea style="width: 180px;height: 50px;" name="sku-2">{if 2 == $r.status}{$r.action_result}{/if}</textarea><br />
+                    <label><input type="radio" name="rb-{$r.info_id}" value="3"{if 3 == $r.status} checked="checked"{/if} />{$status_arr[3]}</label><br />
+                    <input type="button" value="确定" id="s-{$r.info_id}" class="btn-submit" />
+                    <input type="button" value="取消" class="btn-cancel" />
+                </div>
+            </div>
+        </td>
+        <td>{$r.action_time}</td>
+  </tr>
+  {foreachelse}
+  <tr>
+    <td colspan="12" style="color: red;">暂无内容</td>
+  </tr>
+  {/foreach}
+   <tr>
+    <td colspan="4" align="left">
+        <input type="checkbox" onclick="checkAll(this, 'checkboxes[]');">
+        <input type="button" disabled="disabled" id="btnSubmit" value="删除" />
+        {if 0 == $type}
+        <input type="button" id="btn-move" value="转移到分类" />
+        <span style="display: none" id="span-cat">
+            {html_options options=$cat_arr id=cat_id name=cat_id}
+        </span>
+        {/if}
+ </td>
+    <td colspan="10" style="text-align: right">
+        <div id="pager">{$pagestr}</div>
+    </td>
+    </tr>
+</table>
+</div>
+</form>
+{literal}
+<style>
+    .hide {display: none;position: relative;}
+    div.action {padding: 8px; text-align: left; width: 260px; line-height: 25px; position: absolute; z-index: 2; left: -100px; border: 1px solid #ccc; background: #fff;}
+</style>
+<script>
+    $('a.action').click(function() {
+        $('div.hide').hide();
+        $(this).next().show();
+    });
+    $('.btn-cancel').click(function() {
+        $(this).parent().parent().hide();
+    });
+    $('.btn-submit').click(function() {
+        var div = $(this).parent().parent();
+        var checked = div.find(':checked');
+
+        if (!checked.length) {
+            alert('请选择处理状态');
+            return;
+        }
+
+        var status = checked.val(), result = '';
+
+        if (3 != status) {
+            var el = div.find('textarea[name=sku-' + status + ']'), result = $.trim(el.val());
+
+            if (!result) {
+                alert('请输入处理结果');
+                el.focus();
+                return;
+            }
+        }
+
+        $.post('?act=action_result', {
+            id: $(this).attr('id').substr(2),
+            status: status,
+            result: result
+        }, function () {
+            location.reload();
+        });
+    });
+
+    $('#btnSubmit').click(function() {
+        var values = getChecked();
+
+        if (values && confirm('您确认要删除选中记录?')) {
+            this.disabled = true;
+
+            $.post('?act=delete', {
+                id: values
+            }, function (data) {
+
+                if (data) {
+                    alert(data);
+                }
+                else {
+                    location.reload();
+                }
+            });
+        }
+    });
+
+    $('#btn-move').click(function() {
+        var values = getChecked();
+
+        if (!values) {
+            alert('请至少选择一条记录');
+            return;
+        }
+
+        $('#span-cat').toggle();
+    });
+
+    $('#cat_id').change(function() {
+        var val = $(this).val(), values = getChecked();
+
+        if (-1 != val && confirm('您确定要选中记录转移到 ' + $(this).find(':selected').text())) {
+            $.post('?act=move', {
+                id: values,
+                cat_id: val
+            }, function (data) {
+
+                if (data) {
+                    alert(data);
+                }
+                else {
+                    location.reload();
+                }
+            });
+        }
+    });
+
+    function getChecked() {
+        return $('.cb-value:checked').map(function() {
+            return this.value;
+        }).get().join(',');
+    }
+</script>
+{/literal}
+ {include file="copyright.htm"}

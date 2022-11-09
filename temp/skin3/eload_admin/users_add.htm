@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 会员{$tag_msg}</td>
+          <td width="44%" align="right"><span class="navright"><a href="?">会员列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<div class="main-div">
+<form method="post" action="users.php?act={$form_action}{$edit_url}" name="theForm"  onSubmit="return Validator.Validate(this,3)">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th colspan="2">会员{$tag_msg}</th>
+  </tr>
+  <tr style="display:none;">
+    <td width="33%" class="label">会员名称:</td>
+    <td width="67%">{if $form_action eq "update"}{$user.user_name}<input type="hidden" name="username" value="{$user.user_name}" />{else}<input type="text" name="username" maxlength="60" value="{$user.user_name}"/>      
+      *{/if}</td>
+  </tr>
+
+  
+  <tr>
+    <td class="label">邮件地址:</td>
+    <td><input type="text" name="email" maxlength="60" size="40" value="{$user.email}"  dataType="Require" msg="请输入电子邮箱，注意格式"  class="input_style" />
+      *</td>
+  </tr>
+  {if $form_action eq "insert"}
+  <tr>
+    <td class="label">密码:</td>
+    <td><input type="password" name="password" maxlength="20" size="20"  dataType="Require" msg="请输入密码！"   class="input_style"  />
+      *</td>
+  </tr>
+  <tr>
+    <td class="label">确认密码:</td>
+    <td><input type="password" name="confirm_password" maxlength="20" size="20"  dataType="Repeat" to="password" msg="两次输入的密码不一致"  class="input_style" /></td>
+  </tr>
+  {elseif  $form_action eq "update"}
+  <tr>
+    <td class="label">新密码:</td>
+    <td><input type="password" name="password" maxlength="20" size="20"/></td>
+  </tr>
+  <tr>
+    <td class="label">确认新密码:</td>
+    <td><input type="password" name="confirm_password" maxlength="20" size="20" dataType="Repeat" to="password" msg="两次输入的密码不一致"/></td>
+  </tr>
+  {/if}
+  <tr>
+    <td class="label">会员等级:</td>
+    <td><select name="user_rank"  dataType="Require"  msg="请选择会员等级" >
+      <option value="">请选择...</option>
+      {html_options options=$special_ranks selected=$user.user_rank}
+    </select>
+      *</td>
+  </tr>
+  <tr>
+    <td class="label">广告联盟审核:</td>
+    <td>{html_radios name="user_type" disabled=disabled options=$user_type checked=$user.user_type}</td>
+  </tr>
+  <tr>
+    <td class="label">性别:</td>
+    <td>{html_radios name="sex" options=$lang.sex checked=$user.sex }</td>
+  </tr>
+
+  <tr>
+    <td class="label">MSN:</td>
+    <td><input type="text" name="other[msn]" maxlength="60" size="40" value="{$user.msn}" /></td>
+  </tr>
+  
+   
+  <tr>
+    <td class="label">电话:</td>
+    <td><input name="other[phone]" type="text" id="other[phone]" value="{$user.phone}" size="40" maxlength="60" /></td>
+  </tr>
+  <tr>
+    <td class="label">可用积分数:</td>
+    <td><input type="text" name="avaid_point" maxlength="60" size="40" value="{$user.avaid_point}"  dataType="Double" msg="请输入数字"  class="input_style" />
+      *</td>
+  </tr>  
+  <tr>
+    <td align="right" bgcolor="#FFFFFF"  class="label">送积分备注:</td>
+    <td align="left" bgcolor="#FFFFFF"><textarea name="add_point_desc" cols="80%" rows="3" id="add_point_desc"></textarea></td>
+  </tr>
+  <tr>
+                  <td width="33%" align="right" bgcolor="#FFFFFF"  class="label">Paypal account:</td>
+                  <td width="67%" align="left" bgcolor="#FFFFFF"><input name="paypal_account" type="text" value="{$user.paypal_account}"  /></td>
+      </tr>
+                <tr>
+                  <td align="right" bgcolor="#FFFFFF"  class="label">佣金比例:</td>
+                  <td align="left" bgcolor="#FFFFFF"><input name="com_rate" type="text" value="{$user.com_rate}" size="10"  /></td>
+                </tr>
+                <tr>
+                  <td width="33%" align="right" bgcolor="#FFFFFF"  class="label">会员介绍:</td>
+                  <td width="67%" align="left" bgcolor="#FFFFFF"><textarea name="introduction" cols="80%" rows="5">{$user.introduction}</textarea>
+                  </td>
+                </tr>
+
+  <tr>
+    <td colspan="2" align="center">
+      <input type="submit" value="确定" class="button" />
+      <input type="reset" value="重置" class="button" />
+      <input type="hidden" name="id" value="{$user.user_id}" />    </td>
+  </tr>
+</table>
+
+</form>
+</div>
+{include file="copyright.htm"}

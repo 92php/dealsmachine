@@ -1,0 +1,14 @@
+[2014-06-22 23:05:19.7418]  [127.0.0.1] POST /eload_admin/landing.php?act=signin(http://www.dealsmachine_v.com/eload_admin/landing.php)
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1978963210
+错误：[b]Table 'ahappydeal_20140503.eload_memcache' doesn't exist[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1978963210) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1978963210) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1978963210) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1978963210) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(land, 2) called at [C:\wamp\wamp\www\dealsmachine\eload_admin\landing.php:51]
+
+
+$@!#

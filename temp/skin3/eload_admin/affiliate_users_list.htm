@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link type="text/css" rel="stylesheet" href="{$jscache_url}sysjs/calendar/calendar.css" />
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> Affilate 会员列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="?act=add">会员添加</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <form action="?" name="thisform" method="get"><tr>
+    <th>
+
+    <img src="/temp/skin3/images/admin/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    时间段： 从 <input name="start_date" value="{$start_date}" style="width:130px;" ondblclick="return showCalendar(this, '%Y-%m-%d %H:%M:%S', false, false, this);"/>&nbsp;&nbsp;到 &nbsp;&nbsp; <input name="end_date" value="{$end_date}" style="width:130px;" ondblclick="return showCalendar(this, '%Y-%m-%d %H:%M:%S', false, false, this);"/>
+    &nbsp; 
+    <select name="user_rank"><option value="">所有等级</option>{html_options options=$user_ranks selected=$smarty.get.user_rank}</select>
+    
+     &nbsp; 
+     
+     &nbsp; 
+     <select name="user_type"><option value="">所有状态</option>{html_options options=$user_type selected=$smarty.get.user_type}</select>
+     
+     
+     
+    
+&nbsp;    &nbsp;  关键字 &nbsp;<input type="text" id="keyword" name="keyword"  value="{$smarty.get.keyword}"/> <input type="submit" value=" 搜索 " />
+</td>
+  </tr></form>
+</table>
+
+<form method="POST" action="?act=batch_remove" name="listForm">
+<div id="list">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="8%"> 
+      <input type="checkbox" onclick="checkAll(this, 'checkboxes[]');">
+      <a href="?sort_by=user_id&sort_order={$filter.sort_order_user_id}{$title_url}">编号</a>{$sort_user_id}
+    </th>
+    <th width="11%">姓名</th>
+    <th width="10%"><a href="?sort_by=email&sort_order={$filter.sort_order_email}{$title_url}"> 邮件地址</a>{$sort_email}</th>
+
+    <th width="13%">最后登陆时间</th>
+    <th width="6%"><a href="?sort_by=visit_count&sort_order={$filter.sort_order_visit_count}{$title_url}">登陆</a>{$sort_visit_count}</th>
+     <th width="11%">会员等级</th>
+  <th width="8%"><a href="?sort_by=reg_time&sort_order={$filter.sort_order_reg_time}{$title_url}">注册日期</a>{$sort_reg_time}</th>     
+      <th width="6%" nowrap="nowrap"><a href="?sort_by=affiliates_apply_time&sort_order={$filter.sort_order_affiliates_apply_time}{$title_url}">申请时间</a>{$sort_affiliates_apply_time}</th>
+   
+   
+    
+     <th width="11%"><a href="?sort_by=affiliates_pass_time&sort_order={$filter.sort_order_affiliates_pass_time}{$title_url}">通过时间</a>{$sort_affiliates_pass_time}</th>
+  
+    <th width="11%">备注</th>
+    <th width="10%">操作</th>
+  <tr>
+  {foreach from=$user_list item=user name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+    <td>
+    <input type="checkbox" name="checkboxes[]" value="{$user.user_id}" onclick="checkone('checkboxes[]')"/>{$user.user_id}</td>
+    <td>{$user.firstname} {$user.lastname}</td>
+    <td><a href="affiliate_users.php?act=edit&id={$user.user_id}{$edit_url}" title="编辑该会员">{$user.email}</a></td>
+
+    <td>{$user.last_login}</td>
+    <td>{$user.visit_count}</td>
+     <td>{$user.user_rank}</td>
+         <td align="center">{$user.reg_time}</td>
+
+    <td>{$user.affiliates_apply_time}</td>
+   
+    <td>{$user.affiliates_pass_time}</td>
+    <td>{$user.admin_note}</td>
+    <td align="center" nowrap="nowrap"><a href="affiliate_users.php?act=edit&id={$user.user_id}{$edit_url}" title="编辑该会员"><img src="{$jscache_url}temp/skin3/eload_admin/images/icon_edit.gif" border="0" height="16" width="16" /></a>{if $user.user_type}<br />      
+      {/if}
+       <a href="affiliate_count.php?act=underlayer&user_id={$user.user_id}">查看下家</a>
+    </td>
+  </tr>
+  {foreachelse}
+  <tr><td colspan="10" align="center" class="no-records">暂无记录</td></tr>
+  {/foreach}
+  <tr>
+      <td colspan="3">
+     <input type="checkbox" onclick="checkAll(this, 'checkboxes[]');"> <input type="hidden" name="act" value="batch_remove" /><input type="hidden" id="selAction"/>
+      <input type="submit" id="btnSubmit" value="删除会员" disabled="true" class="button" /></td>
+      <td align="right" nowrap="true" colspan="7">
+     	<div id="pager">{$pagestr}</div></td>
+  </tr>
+</table>
+</div>
+</form>
+{include file="copyright.htm"}

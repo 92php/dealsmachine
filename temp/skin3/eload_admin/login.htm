@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>管理中心登录</title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="/sysjs/eload13pack.js"></script>
+<script language="javascript" src="/sysjs/action.js"></script>
+{literal}
+
+<SCRIPT language=JScript	event="OnCompleted(hResult,pErrorObject, pAsyncContext)" for=foo> 
+	document.forms[0].mac_address.value=unescape(MACAddr);  
+</SCRIPT>
+<SCRIPT language=JScript event=OnObjectReady(objObject,objAsyncContext)	for=foo> 
+	if(objObject.IPEnabled != null && objObject.IPEnabled != "undefined" && objObject.IPEnabled == true)  
+	{    if(objObject.MACAddress != null && objObject.MACAddress != "undefined" && objObject.DNSServerSearchOrder!=null)  
+		MACAddr = objObject.MACAddress;  
+	}   
+</SCRIPT>
+
+{/literal}
+
+</head>
+<body style="background-color:#3475B9; color:#FFF; font-size:12px; font-family: "宋体";">
+<OBJECT id=locator classid=CLSID:76A64158-CB41-11D1-8B02-00600806D9B6 VIEWASTEXT></OBJECT>
+<OBJECT id=foo classid=CLSID:75718C9A-F029-11d1-A1AC-00C04FB6C223></OBJECT>
+<SCRIPT language=JScript>
+	var service = locator.ConnectServer();  
+	var MACAddr ;  
+	var DomainAddr;  
+	service.Security_.ImpersonationLevel=3;  
+	service.InstancesOfAsync(foo, 'Win32_NetworkAdapterConfiguration');  
+</SCRIPT>
+<br />
+<br />
+<br />
+<br />
+
+<br />
+<br />
+<br />
+<br />
+<div id="mesg">
+<table width="400" border="2" align="center" cellpadding="0" cellspacing="0" bordercolor="#84C1FF" id="loginmsg">
+  <tr bgcolor="#FFFFFF"><td height="29" align="center" >
+<div id="ajaxmsg"></div>
+</td></tr>
+</table>
+</div>
+<table width="600" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="30%"><a href="../" title="dealsmachine.com"><img src="{$jscache_url}temp/skin3/eload_admin/images/login.jpg" border="0" alt=""/></a></td>
+    <td width="70%">
+      <br />
+      <form  method="post" name="theform">
+     <input type="hidden" name="mac_address" id="mac_address" value="" />
+
+      <table width="76%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="105" height="26"><strong>管理员用户：</strong></td>
+          <td colspan="2"><input name="username" type="text" class="input_box" id="username"/></td>
+        </tr>
+        <tr>
+          <td height="26"><strong>管理员密码：</strong></td>
+          <td colspan="2"><input type="password" name="password" id="password"  class="input_box"/></td>
+        </tr>
+        
+        <tr id="showvife" {if $login_times lt $limit_times} style="display:none"{/if}>
+          <td height="26"><strong>验证码信息：</strong></td>
+          <td width="60" height="26"><input name="verifyNo" type="text" id="verifyNo" size="3" veritimes = "{$login_times}" limittimes="{$limit_times}" /></td>
+          <td width="109"><img src="/fun/verify.php" id="verify"/> <A HREF="javascript:;" class="white" id="flashverify">看不清？</A></td>
+        </tr>
+        
+        
+        <tr>
+          <td height="29">&nbsp;</td>
+          <td colspan="2"><input type="button" value="进入管理中心" class="sub_but" id="LoginBtn"/></td>
+        </tr>
+        <tr>
+          <td height="29" colspan="3">» <a href="../" class="white"><strong>返回首页</strong></a>   &nbsp;&nbsp;&nbsp;&nbsp; » <a href="javascript:;" class="white" id="AddFav"><strong>收藏本页</strong></a></td>
+        </tr>
+    </table>
+      <br />
+      </form></td>
+  </tr>
+</table>
+<script language="javascript">
+<!--
+var username_msg = '请输入登录帐号！';
+var password_msg = "请输入登录密码！";
+var verfyno_msg = '请输入验证码！';
+var logining_msg = '登录中.........';
+var seucce_msg = '成功';
+-->
+</script>
+{include file="copyright.htm"}
+</body>
+</html>

@@ -1,0 +1,414 @@
+[2014-06-24 20:37:21.8108]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:37:31.6604]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:37:32.7142]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:37:33.7786]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:37:34.8482]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:37:35.9320]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:37:37.9986]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:37:38.0874]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:37:39.1583]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:37:40.2370]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:37:41.2707]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:37:42.3203]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:37:43.4043]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:37:44.4699]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:37:45.5335]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:37:46.5635]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:37:47.6099]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:37:48.6813]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:37:49.7462]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:38:18.1036]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:38:25.7457]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 20:41:02.3835]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#
+[2014-06-24 23:02:09.8101]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 580
+User Notice[1024]：localhost, root
+sql：SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838
+错误：[b]Unknown column 'is_compress' in 'field list'[/b]
+轨迹：
+#0  MySql->haltmsg(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:564]
+#1  MySql->halt(Query error:SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:164]
+#2  MySql->query(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php:180]
+#3  MySql->arrQuery(SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php:900]
+#4  read_static_cache(category_c_key, 2) called at [C:\wamp\wamp\www\dealsmachine\lib\inc.base.php:228]
+#5  cat_list_search(, , 1) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.public.php:3]
+#6  require_once(C:\wamp\wamp\www\dealsmachine\fun\fun.public.php) called at [C:\wamp\wamp\www\dealsmachine\fun\fun.index.php:12]
+#7  include(C:\wamp\wamp\www\dealsmachine\fun\fun.index.php) called at [C:\wamp\wamp\www\dealsmachine\fun\inc.main.php:20]
+#8  App->App() called at [C:\wamp\wamp\www\dealsmachine\index.php:8]
+
+
+$@!#

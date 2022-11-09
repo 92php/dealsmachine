@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 转移商品</td>
+          <td width="44%" align="right"><span class="navright"><a href="category.php">商品分类列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<div class="main-div">
+<form action="category.php?act=move_cat" method="post" name="theForm" enctype="multipart/form-data">
+<table width="99%" align="center" class="borderline">
+  <tr>
+    <td>
+      <div style="font-weight:bold"><img src="/temp/skin3/images/admin/notice.gif" width="16" height="16" border="0" /> 什么是转移商品分类?</div>
+       <ul>
+         <li>在添加商品或者在商品管理中,如果需要对商品的分类进行变更,那么你可以通过此功能,正确管理你的商品分类。<br />
+         注意，此功能只转移选中类的产品，不转移子类产品！</li>
+       </ul>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <strong>从此分类</strong>&nbsp;&nbsp;
+      <select name="cat_id">
+       <option value="0">请选择...</option>
+       {$cat_select}
+      </select>&nbsp;&nbsp;
+      <strong> 转移到</strong>
+      <select name="target_cat_id">
+       <option value="0">请选择...</option>
+       {$cat_select}
+      </select>&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="submit" name="move_cat" value="开始移动" class="button">
+      <input type="reset" value="重置" class="button" />
+    </td>
+  </tr>
+</table>
+</form>
+</div>
+{include file="copyright.htm"}

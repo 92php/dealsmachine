@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 文章列表</td>
+          <td width="44%" align="right">
+		  {if $default_lang eq '1'}
+		  <span class="navright"><a href="?act=add">文章添加</a></span>
+		  {/if}
+		  </td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th>
+    <img src="/temp/skin3/images/admin/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />	
+	选择语言：
+	<select name="lang" id="lang">
+	<option value="">选择语言</option>
+	<option value="0">原始语言</option>
+	{foreach from=$lang_arr item=item key=key}
+	<option value="{$item.title_e}" {if $cur_lang eq $item.title_e}selected="selected"{/if}>{$item.title}</option>
+	{/foreach}
+	</select>	
+    <select id="cat_id" >
+      <option value="0">所有分类...</option>
+        {$cat_select}
+    </select>
+    关键字： <input type="text" name="keyword" id="keyword" />
+    <input type="submit" value="搜索" class="button"  id="article_search"/>
+  </form>
+</th>
+  </tr>
+</table>
+
+<form method="POST" action="article.php?act=batch_remove" name="listForm">
+<div id="list">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="5%">      <input type="checkbox" onclick="checkAll(this, 'checkboxes[]');">
+      <a href="?sort_by=article_id&sort_order={$filter.sort_order_article_id}">编号</a>{$sort_article_id}</th>
+    <th width="31%"><a href="?sort_by=title&sort_order={$filter.sort_order_title}">标题</a>{$sort_title}</th>
+    <th width="15%"><a href="?sort_by=cat_id&sort_order={$filter.sort_order_cat_id}">分类</a>{$sort_cat_id}</th>
+    <th width="12%"><a href="?sort_by=article_type&sort_order={$filter.sort_order_article_type}">置顶</a>{$sort_article_type}</th>
+    <th width="10%"><a href="?sort_by=is_open&sort_order={$filter.sort_order_is_open}">显示</a>{$sort_is_open}</th>
+    <th width="7%"><a href="?sort_by=add_time&sort_order={$filter.sort_order_add_time}">添加时间</a>{$sort_add_time}</th>
+    <th width="7%"><a href="?sort_by=sort_order&sort_order={$filter.sort_order_sort_order}">排序</a>{$sort_sort_order}</th>
+    <th width="7%">操作</th>
+  </tr>
+  {foreach from=$article_list item=list name=area_name}
+<tr bgColor="{if $smarty.foreach.area_name.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.area_name.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+    <td height="65"><span><input type="checkbox" name="checkboxes[]" value="{$list.article_id}" onclick="checkone('checkboxes[]')"/>{$list.article_id}
+    </span></td>
+    <td class="first-cell">
+    {$list.title}</td>
+    <td align="left"><span><!-- {if $list.cat_id > 0} -->
+      {$list.cat_name}
+      <!-- {else} -->{$lang.reserve}<!-- {/if} --></span></td>
+    <td align="center">
+     {if $list.article_type eq 0}普通{else} <span class="red">[置顶]</span>{/if}</td>
+    <td align="center">
+	  {if $default_lang eq '1'}	
+      <img src="/temp/skin3/images/admin/{if $list.is_open eq 1}yes{else}no{/if}.gif"       onclick="cimage(this,'state.php?act=article&field=is_open&did={$list.article_id}&id_field=article_id');" state="{$list.is_open}"    />
+	  {/if}	
+	</td>
+    <td align="center"><span>{$list.date}</span></td>
+    <td align="center"><span {literal}onclick="$(this).editable('article.php?act=editinplace', {type: 'text',event: 'dblclick',width:'90%',indicator:'Saving...',onblur:'submit',tooltip: ''});"{/literal} id="{$list.article_id}||sort_order">{$list.sort_order}</span></td>
+    <td align="center" nowrap="true"><span>
+      <a href="../m-article.htm?id={$list.article_id}" target="_blank" title="{$lang.view}"><img src="{$jscache_url}temp/skin3/eload_admin/images/icon_view.gif" border="0" height="16" width="16" /></a>&nbsp;
+      <a href="article.php?act=edit&id={$list.article_id}" title="{$lang.edit}"><img src="{$jscache_url}temp/skin3/eload_admin/images/icon_edit.gif" border="0" height="16" width="16" /></a>&nbsp;
+	  {if $default_lang eq '1'}
+      <!-- {if $list.cat_id > 0} -->
+      <a  href="javascript:;" delatr="?act=remove&id={$list.article_id}"  onclick="del_acttion(this);" title="删除"><img src="{$jscache_url}temp/skin3/eload_admin/images/icon_drop.gif" border="0" height="16" width="16"></a><!-- {/if} -->
+	  {/if}
+	  </span>
+    </td>
+   </tr>
+   {foreachelse}
+    <tr><td colspan="8" align="center" class="no-records"> 暂无记录 </td></tr>
+  {/foreach}
+  <tr>
+    <td colspan="2">
+	{if $default_lang eq '1'}
+	<input type="checkbox" onclick="checkAll(this, 'checkboxes[]');"><input type="hidden" id="selAction"/>    
+    <input type="submit" class="button" id="btnSubmit" value="删除所选" disabled="true" />
+	{/if}
+	</td>
+    <td align="right" nowrap="true" colspan="6"><div id="pager">{$pagestr}</div></td>
+  </tr>
+</table>
+</div></form>
+{include file="copyright.htm"}

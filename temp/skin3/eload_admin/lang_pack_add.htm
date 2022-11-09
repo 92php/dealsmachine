@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="/sysjs/eload13pack.js"></script>
+<script language="javascript" src="/sysjs/jlivequery.js"></script>
+<script language="javascript" src="/sysjs/jcookie.js"></script>
+<script language="javascript" src="/sysjs/validator.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 语言包管理</td>
+          <td width="44%" align="right"><span class="navright"><a href="?">语言包列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+{if $act eq 'import'}
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <form action="?act=import" method="post" enctype="multipart/form-data" name="regform" onSubmit="return Validator.Validate(this,3)">
+  <tr>
+    <td align="right" style="font-weight: bold; " width="12%">选择文件:</td>
+    <td width="400">
+	<select name="lang_file" id="lang_file">
+		<option selected="selected" value="">选择文件</option>
+		<option value="../languages/en/common.php">../languages/en/common.php</option>
+		<option value="../languages/en/user.php">../languages/en/user.php</option>
+		<option value="../languages/en/shopping_flow.php">../languages/en/shopping_flow.php</option>
+		<option value="../languages/en/payment/CreditCard.php">../languages/en/payment/CreditCard.php</option>
+		<option value="../languages/en/payment/GoogleCheckout.php">../languages/en/payment/GoogleCheckout.php</option>
+		<option value="../languages/en/payment/paypal.php">../languages/en/payment/paypal.php</option>
+		<option value="../languages/en/payment/WesternUnion.php">../languages/en/payment/WesternUnion.php</option>
+		<option value="../languages/en/payment/WiredTransfer.php">../languages/en/payment/WiredTransfer.php</option>
+		<option value="../temp/skin3/minjs/languages/en/var_html_languages.js">../temp/skin3/minjs/languages/en/var_html_languages.js</option>
+		<option value="../temp/skin3/minjs/languages/en/var_languages.js">../temp/skin3/minjs/languages/en/var_languages.js</option>
+	</select>
+	</td>
+	<td align="left">
+	<input type="text" value="1" name="type" id="type"/>
+	<input type="submit" value="导入数据" class="button" onclick="DoProcess();" />
+	</td>
+  </tr>
+  </form>
+</table>
+{/if}
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+  <td>
+	<div id="tabbar-div">
+	  <p>	  	
+		<span class="tab-{if $cur_lang eq 'en'}front{else}back{/if}" id="general-tab" atr = '0'>原始语言</span>
+		{foreach from=$lang_arr name=lang_arr item=c}
+		<span class="tab-{if $cur_lang eq $c.title_e}front{else}back{/if}" id="detail-tab"  atr='{$smarty.foreach.lang_arr.iteration}'>{$c.title}</span>
+		{/foreach}
+		</p>
+	</div>
+</td>
+</tr>
+</table>
+<!-------------------原语言------------------->
+{if $data.id neq ''}
+<form name="regform" method="post" action="?act=update" onSubmit="return checkForm(this)">
+{else}
+<form name="regform" method="post" action="?act=insert" onSubmit="return checkForm(this)">
+{/if}
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline"  id="showtab0" style="display:{if $cur_lang eq 'en'}table{else}none{/if}">
+  <tr>
+    <td width="12%" align="right" style="font-weight: bold; ">变量:</td>
+    <td><input type="text" name="title" id="title" style="width: 300px" value="{$data.title}" class="input_style" maxlength="100"/> 
+    *</td>
+  </tr>
+  <tr>
+    <td align="right" style="font-weight: bold; ">变量值:</td>
+    <td><textarea name="title_value" cols="100" rows="5" class="input_style" id="title_value" >{$data.title_value}</textarea> 
+    *</td>
+  </tr>  
+  <tr>
+    <td align="right" style="font-weight: bold; ">序号:</td>
+    <td><input type="text" name="orders" id="orders" style="width: 100px" value="{$data.orders}"  maxlength="4" class="input_style" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"> *</td>
+  </tr>  
+  {if $data.id eq ''}  
+  <tr>
+    <td align="right" style="font-weight: bold" >类型:</td>
+    <td>
+	<select name="sort" id="sort" onChange="getFile()">
+		<option value="" selected="selected">选择文件类型</option>
+		<option value="1">PHP</option>
+		<option value="2">JS</option>
+	</select>
+	<select name="file" id="file">
+		<option selected="selected" value="">选择文件</option>
+	</select>	
+	</td>
+  </tr>
+  {/if}
+  {if $default_lang eq '1'}
+  <tr>
+    <td colspan="2" align="center">
+	<input type="hidden" value="en" name="cur_lang" id="cur_lang"/>
+	<input type="hidden" value="{$data.id}" name="id" id="id"/>
+	<input type="submit" id="submit" value=" 确定 " class="button" onclick="DoProcess();" />
+	</td>
+  </tr>    
+  {/if}
+</table>
+</form>
+{literal}
+<script type="text/javascript">
+	var file=[
+	["common.php","shopping_flow.php","user.php","CreditCard.php","GoogleCheckout.php","WesternUnion.php","WiredTransfer.php","paypal.php"],
+	["var_html_languages.js","var_languages.js"]
+	];
+	function getFile(){
+	 var sltProvince  = document.forms[0].sort;
+	 var sltCity      = document.forms[0].file;         
+	 var provinceCity = file[sltProvince.selectedIndex - 1];
+	 sltCity.length   = 1;
+	 for(var i=0;i<provinceCity.length;i++){
+		 sltCity[i+1] = new Option(provinceCity[i],provinceCity[i]);
+	 }
+	}
+	$("#submit").click(function(){
+	  var title           = $("#title").val();	  
+	  var title_value     = $("#title_value").val();	
+	  var orders          = $("#orders").val(); 
+	  var sort_type       = $("#sort").val();	
+	  var file            = $("#file").val();
+	  if(title=="" || title_value=="" || orders=="" || sort_type=="" || file=="") {
+		alert("带*号值不能为空!"); return false;	 
+	  }	  	  	  	  
+	});		
+</script>
+{/literal}
+
+<!-------------------多语言------------------->
+{foreach from=$lang_arr name=lang_arr item=c key=key}
+<form name="regform"  enctype="multipart/form-data" method="post" action="">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="showtab{$smarty.foreach.lang_arr.iteration}" {if $cur_lang eq $c.title_e}style="display:table;"{else}style="display:none"{/if}>
+  <tr>
+    <td width="12%" align="right" style="font-weight: bold; ">变量:</td>
+    <td><input type="text" name="title" id="title_{$key}" style="width: 300px" value="{$data.title}" class="input_style" maxlength="100" readonly="readonly"/> 
+    *</td>
+  </tr>
+  <tr>
+    <td align="right" style="font-weight: bold; ">变量值:</td>
+    <td><textarea name="title_value" cols="100" rows="5" class="input_style" id="title_value_{$key}" >{$pack_lang.$key.title_value}</textarea> 
+    *</td>
+  </tr>  
+  <tr>
+    <td colspan="2" align="center" height="40">
+	<input type="hidden" name="lang" id="lang_{$key}" value="{$key}" />
+	<input type="hidden" name="id" id="id" value="{$data.id}" />
+	<input type="hidden" name="orders" id="orders" value="{$data.orders}" />
+	<input type="hidden" name="file_name" id="file_name" value="{$data.file_name}" />
+	<input type="hidden" name="sort" id="sort" value="{$data.sort}" />
+	<span id="submit{$key}" class="goods_submit">确定</span>
+    </td>
+  </tr>   
+  <tr>
+  	<td colspan="2">注：确定按钮只对当前显示页面有效，不会提交所有语言切换页面信息。<br /></td>
+  </tr>
+</table>
+</form>
+{literal}
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#submit{/literal}{$key}{literal}").click(function(){
+	  var id           = $("#id").val();	
+	  var title        = $("#title_{/literal}{$key}{literal}").val();
+	  var title_value  = $("#title_value_{/literal}{$key}{literal}").val();	  
+	  var orders       = $("#orders").val();	  
+	  var sort_type    = $("#sort").val();
+	  var lang         = $("#lang_{/literal}{$key}{literal}").val();	  
+	  var file_name    = $("#file_name").val();	  
+	  if(title_value == "") {
+		alert("请输入变量值!"); return false;	 
+	  }
+	  $.post("lang_pack.php?act=add_save",{
+			id:id, 
+			title:title,
+			title_value:title_value,
+			orders:orders,
+			sort_type:sort_type,
+			lang:lang,		
+			file_name:file_name
+			},function(result){
+		alert(result);
+	  });
+	});
+});
+</script>
+{/literal}
+{/foreach}
+
+{include file="copyright.htm"}
+</body>
+</html>

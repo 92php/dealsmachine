@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 系统信息</td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1" bgcolor="#ffffff" class="borderline" id="stripe_tb">
+  <tr>
+    <th colspan="2">系统信息</th>
+  </tr>
+  <tr>
+    <td width="17%" align="right" bgcolor="#FFFFFF" > <img src="{$jscache_url}temp/skin3/eload_admin/images/information.gif" width="32" height="32" border="0" alt="information" />
+</td>
+    <td bgcolor="#FFFFFF" ><span class="msg" style="line-height:20px;">{$msg}</span>&nbsp;</td>
+  </tr>
+  {if $auto_redirect==true}
+  <tr>
+    <td height="24" bgcolor="#FFFFFF" ></td>
+    <td bgcolor="#FFFFFF" > 如果您不做出选择，将在 <span id="spanSeconds">1</span> 秒后跳转到第一个链接地址。</td>
+  </tr>
+  {/if}
+  <tr>
+    <td height="24" bgcolor="#FFFFFF" >&nbsp;</td>
+    <td width="83%" bgcolor="#FFFFFF" > 
+<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
+{foreach item=list from=$links}
+  <tr style="background-color:#FFF;">
+    <td width="2%" height="18"><img src="{$jscache_url}temp/skin3/eload_admin/images/arrow.gif" width="9" height="9" /></td>
+    <td width="98%"><a href="{$list.url}" > {$list.name}</a></td>
+  </tr>
+ {/foreach}
+</table>
+
+</td>
+  </tr>
+</table>
+{include file="copyright.htm"}
+</body>
+</html>
+<script language="JavaScript"> 
+<!--
+var seconds = 1;
+
+var defaultUrl = "{$links.0.url}";
+{if $auto_redirect==true}
+	var auto_redirect = true;
+{else}
+	var auto_redirect = false;
+{/if}
+{literal}
+ 
+onload = function()
+{
+  if (defaultUrl == 'javascript:history.go(-1)' && window.history.length == 0)
+  {
+    document.getElementById('redirectionMsg').innerHTML = '';
+    return;
+  }
+  if(auto_redirect == true)
+  {
+  	window.setInterval(redirection, 1000);
+  }
+}
+function redirection()
+{
+  if (seconds <= 0)
+  {
+    window.clearInterval();
+    return;
+  }
+ 
+  seconds --;
+  document.getElementById('spanSeconds').innerHTML = seconds;
+ 
+  if (seconds == 0)
+  {
+    window.clearInterval();
+    location.href = defaultUrl;
+  }
+}
+//}
+</script>
+{/literal}

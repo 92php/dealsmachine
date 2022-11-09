@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin2/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="/sysjs/eload13pack.js"></script>
+<script language="javascript" src="/sysjs/jlivequery.js"></script>
+<script language="javascript" src="/sysjs/jcookie.js"></script>
+<script language="javascript" src="/sysjs/validator.js"></script>
+<script language="javascript" src="/temp/skin2/eload_admin/js/admin_add.js"></script>
+<link href="/sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$website_url}sysjs/calendar.php?lang="></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 分享列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="share_winner.php?act=admin_share">分享列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<div class="main-div">
+  <form  method="post" name="theForm"  action="share_winner.php?act=admin_share" >
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+      <tr>
+        <td width="22%" class="label">SKU:</td>
+        <td width="78%"><textarea name="admin_share" cols="50" rows="3">{$data}</textarea>
+        * sku对应排序YM1158501=>2 多个使用,分割YM1158501=>2,YM1158501=>2
+       </td>
+      </tr>	
+     <tr align="center">
+        <td align="center">&nbsp;</td>
+        <td align="left">
+        <input name="button" type="submit" class="sub_but" id="button" value="确定" /></td>
+      </tr>
+    </table>
+  </form>
+</div>
+{include file="copyright.htm"}

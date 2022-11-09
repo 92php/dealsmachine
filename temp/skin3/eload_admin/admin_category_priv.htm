@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+{literal}
+<style type="text/css">
+    ul { margin: 0; padding: 0; }
+    li { width: 200px; float: left; list-style: none; }
+</style>
+<script text="text/javascript">
+$(document).ready(function(){ 
+	var cb_all = $('#category_priv_all').click(function(){ //全选
+		cb.attr('checked', this.checked);
+	});
+    var cb = $('.cb-priv').click(function() {   //分类点击
+        !this.checked && cb_all.attr('checked', false); //如果不选中，则不全选
+    });
+    
+    $('#form-category_priv').submit(function(){ //提交
+            $.post('protect.php?act=save_admin_category_priv', $(this).serialize(), function(data){
+                C.callback(data, 'protect.php?act=adminlist', '修改商品分类权限成功');
+            });
+            return false;
+        });
+});
+
+</script>
+{/literal}
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 系统管理员商品分类权限</td>
+          <td width="44%" align="right"><span class="navright"><a href="protect.php?act=adminlist">系统管理员列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form id="form-category_priv" action="index.php" method="post">
+<table width="99%" align="center" cellspacing="1" class="borderline" id="stripe_tb">
+  <tr>
+    <th colspan="2">系统管理员商品分类权限</th>
+  </tr>
+  <tr>
+    <td style="width: 200px; text-align: right;">系统管理员名称：</td>
+    <td style="color: red; font-weight: bold;">{$admin_info.real_name}</td>
+  </tr>
+    <td style="text-align: right;">商品分类权限：
+      <label><input name="category_priv_all" type="checkbox" id="category_priv_all" value="1" class="cls"{if !$admin_info.category_priv} checked="checked"{/if} />全选</label>
+</td>
+    <td>
+        <ul>
+        {foreach from=$cat_arr item=item}
+        <li><label><input type="checkbox" class="cb-priv" name="category_priv[]" value="{$item.cat_id}"{php}
+      if (empty($this->_tpl_vars['admin_info']['category_priv']) || in_array($this->_tpl_vars['item']['cat_id'], explode(',', $this->_tpl_vars['admin_info']['category_priv']))) echo 'checked="checked"';
+      {/php} />{$item.cat_name}</label></li>
+        {/foreach}
+        </ul>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+        <input type="submit" class="sub_but" value="提 交" />
+        <input type="hidden" name="admin_id" value="{$admin_info.said}" />
+    </td>
+  </tr>
+</table>
+</form>
+<div style="margin: 10px; padding: 5px; line-height: 150%; color: grey; border: 1px solid #ccc;">
+    <strong>说明：</strong>
+    <p>选择后，该管理员在“商品列表”、“商品分类列表”、“销售报表”只能看到所选分类的商品</p>
+</div>
+{include file="copyright.htm"}
+</body>
+</html>

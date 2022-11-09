@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+{include file="top.htm"}
+<link rel="stylesheet" href="{$imgcache_url}mincss/otherpage_min.css" />
+</head>
+<body>
+    {include file="public_top.htm"}
+    <div class="curPath"><a  href="/{$cur_lang_url}" title="web home">{$lang.home}</a> &raquo;  Index <span class="red">{$k}</span></div>
+    <div id="mainWarp" class="clearfix mt10 abcKeyWarp">
+        <div class="mt10 mb10 p10 m_box abcKeyList">
+             {if $keyword_arr}
+            <ul class="clearfix">
+                {foreach from=$keyword_arr item=item}
+                <li><a href="{$item|get_search_url}">{$item}</a></li>
+                {/foreach}   
+            </ul>
+            <div class="abcIndexPage">
+                 {$pagestr}
+            </div>
+             {else}
+            <p class="abcPageTip">No Records</p>
+            {/if}
+        </div>
+       <!-- {include file='abc_link.htm'} -->
+    </div>
+    <div id="footer">
+	{include file="foothelp.htm"}
+    {include file="foot.htm"} 
+    </div>
+    {include file="statistics_js.htm"}
+</body>
+</html>

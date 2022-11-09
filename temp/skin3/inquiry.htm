@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	{include file="top.htm"}
+    <link rel="stylesheet" href="{$imgcache_url}mincss/otherpage_min.css?2013082001" />
+</head>
+<body>
+	{include file="public_top.htm"}
+    <div class="curPath"><a class="fl" href="/{$cur_lang_url}" title="web home">{$lang.home}</a><h1 class="fl"> » {$lang.Wholesale_Inquiry}</h1><h1 class="fl"> » {$goods.goods_title}</h1></div>
+    
+<div id="mainWarp">
+		<div class="Wh_inquiryWarp">
+            <h3 class="fb f12">{$lang.reply_within_36h}</h3>		
+            <form method="post" name="pinglunform" action="?" id="signinform" class="userform"  >
+          		<input id="act" value="save" type="hidden" name="act">
+                <table width="100%" border="0" cellspacing="0" cellpadding="5" class="mt10">
+                  <tr>
+                    <td width="210" align="right">{$lang.Target_Price}:</td>
+                    <td><input type="text"  name="txtPrice" id="txtPrice" class="inputstyle fl"/></td>
+                    <td {if $goods.goods_title eq ''}style="display:none;"{/if} rowspan="8" align="center" width="130">
+					<div class="inquiry_td">
+						<p class="p_mg_inquiry">
+						{if $goods.is_promote_price eq '1'}{if $promote_zhekou > 0}<strong><span>{$promote_zhekou}</span>%<br/>{$lang.off}</strong>{/if}{/if}
+						<a href="/{$cur_lang_url}best_{$goods.goods_id}.html" ><img alt="{$goods.goods_title}" rel="external nofollow" src="{$goods.goods_thumb}" width="100" height="100"/></a>
+						</p>
+                        <p class="p_name"><a href="/{$cur_lang_url}best_{$goods.goods_id}.html">{$goods.goods_title}</a></p>
+						<p class="p_price fb red"><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$goods.shop_price}">{$goods.shop_price}</span></p>
+						<p class="proMain_privilege">{if $goods.is_free_shipping}<span class="p_free {$cur_lang}_p_free">{$lang.Free_Shipping}</span>{/if}{if $goods.is_24h_ship and $goods.goods_number}<span class="p_Ship">{$lang.ship_in_24hrs}</span>{/if}</p>
+						{if $review.avg_rate}
+							<p class="proMain_writeReview"><span class="start_{$review.avg_rate_img}"><i>{$review.avg_rate} {$lang.satrts}</i></span>{$review.avg_rate}(<a href="/m-review-a-view_review-goods_id-{$goods.goods_id}.htm" class="reviewNum">{$review.review_count}</a> {$lang.customer_reviews})   </p>
+						{else}
+							<p class="proMain_writeReview"><a href="/m-review-a-write_review-goods_id-{$goods.goods_id}.html" class="writeReviewBtn" rel="nofollow">{$lang.Write_a_review} (0)</a></p>
+						{/if}						
+					</div>					
+					</td>
+                  </tr>
+                  <tr>
+                    <td align="right">{$lang.rder_Quantity}:</td>
+                    <td><input type="text"  name="txtQuantity" id="txtQuantity" class="inputstyle fl"/></td>
+                  </tr>
+                  <tr>
+                    <td align="right">{$lang.Province_State}:</td>
+                    <td><input  type="text"  name="txtDelDay" id="txtDelDay" class="inputstyle fl"/></td>
+                  </tr>
+                  <tr>
+                    <td align="right">{$lang.Name}:</td>
+                    <td><input   type="text"  name="txtTrueName" id="txtTrueName" class="inputstyle fl"/></td>
+                  </tr>
+                  <tr>
+                    <td align="right">{$lang.Tel}:</td>
+                    <td><input  type="text"  name="txtPhone" size="30" id="txtPhone" class="inputstyle fl"/></td>
+                  </tr>
+                  <tr>
+                    <td align="right">{$lang.EMail}:</td>
+                    <td><input  type="text" name="txtEMail" size="30" id="txtEMail" class="inputstyle fl"/></td>
+                  </tr>
+                  <tr>
+                    <td align="right">{$lang.Company_Name}:</td>
+                    <td><input  type="text" name="txtCorpName" size="30" id="txtCorpName" class="inputstyle fl"/></td>
+                  </tr>
+                  <tr>
+                    <td align="right">{$lang.home} {$lang.detail_enquiry_infomation}:</td>
+                    <td>
+                   	  <textarea  name="txtMessage" cols="40" rows="6" id="txtMessage" class="inputstyle fl"></textarea>
+                    	<p class="cl">* {$lang.inquiry_des_1} </p>
+						<input name="goods_id" type="hidden" id="goods_id" value="{$goods.goods_id}">
+                    </td>
+                  </tr>
+				  <tr>
+                    <td align="right">Access code:</td>
+                    <td>
+						<input class="inputstyle fl" name="verifycode" type="text" id="access_code" value="" maxlength="4"/>&nbsp;
+						<span class="code_img"><img id="img-verifycode" data-src="/fun/?act=verify" src="/fun/?act=verify" style="vertical-align:middle"/></span>
+						<a href="javascript: void(0)" id="refresh-verifycode" class="word_fresh">{$lang.refresh}Refresh</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" align="center"><input type="hidden" name="lang" value="{$cur_lang}"/><input type="submit" class="Wh_submit" value=""/></td>
+                  </tr>
+              </table>
+			</form>
+        </div>
+  </div><!--#mainWarp-->
+	<div id="footer">
+		{include file="foothelp.htm"}
+		{include file="foot.htm"}
+	</div>
+	{if $cur_lang eq $default_lang}
+	<script src="{$imgcache_url}minjs/jquery.validate.min.js"></script>
+	{else}
+	<script src="{$imgcache_url}minjs/{$cur_lang}-jquery.validate.min.js"></script>
+	{/if}	
+	{literal}
+    <script type="text/javascript">
+	$(document).ready(function(){
+		var validator = $("#signinform").validate({
+			rules: {
+				txtPrice: {
+					required: true,
+					maxlength: 20
+				},
+				txtQuantity: {
+					required: true,
+					maxlength: 10
+				},
+				txtDelDay: {
+					required: true,
+					maxlength: 60
+				},
+				txtTrueName: {
+					required: true,
+					maxlength: 50
+				},
+				txtPhone: {
+					required: true,
+					maxlength: 30
+				},
+				txtEMail: {
+					required: true,
+					maxlength: 60,
+					email: true
+				},
+				txtMessage: {
+					required: true,
+					maxlength: 300,
+					minlength: 6
+				},
+				verifycode: {
+					required: true,
+					maxlength: 4
+				}				
+			},
+			messages: {
+				txtPrice: {
+					required: inquiry_signinform_0
+				},
+				txtQuantity: {
+					required: inquiry_signinform_1,
+					rangelength: jQuery.format(cemails_signinform_1)
+				},
+				txtDelDay: {
+					required: inquiry_signinform_2,
+					rangelength: jQuery.format(cemails_signinform_1)
+				},
+				txtTrueName: {
+					required: inquiry_signinform_3,
+					rangelength: jQuery.format(cemails_signinform_1)
+				},
+				txtPhone: {
+					required: inquiry_signinform_4,
+					rangelength: jQuery.format(cemails_signinform_1)
+				},
+				txtEMail: {
+					required: inquiry_signinform_5,
+					rangelength: jQuery.format(cemails_signinform_1)
+				},
+				txtMessage: {
+					required: inquiry_signinform_6,
+					minlength: jQuery.format(cemails_signinform_1)
+				},
+				verifycode: {
+					required:inquiry_signinform_7,
+					minlength: jQuery.format(cemails_signinform_1)
+				}				
+			},
+			success: function(label) {
+				label.html("&nbsp;").addClass("checked");
+			}
+		});
+	});
+	$('#refresh-verifycode').click(function() {
+		var element = $('#img-verifycode');
+		element.attr('src', element.attr('data-src') + '&' + Math.random());
+	});	
+</script>
+{/literal}   
+{include file="statistics_js.htm"}
+</body>
+</html>

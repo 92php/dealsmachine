@@ -1,0 +1,6 @@
+[2014-06-22 23:05:19.7451]  [127.0.0.1] POST /eload_admin/landing.php?act=signin(http://www.dealsmachine_v.com/eload_admin/landing.php)
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000388[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1978963210[b](0.000388)[/b]
+
+$@!#

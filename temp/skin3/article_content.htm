@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	{include file="top.htm"}
+	<link rel="stylesheet" href="{$imgcache_url}mincss/users_inc_min.css" />
+</head>
+<body>
+{include file="public_top.htm"}
+<div class="curPath mt10"><a href="/{$cur_lang_url}" class="fl">{$lang.home}</a> <h1 class="fl fb">» {$lang.Help_Center}</h1></div>
+
+<div id="mainWarp" class="clearfix mt10">
+{if $smarty.get.key}
+    <div class="helpc_mainBox fr"> 
+		<div class="helpc_FAQ m_box p10">
+			<div class="fb f16">{if $smarty.get.key}{$lang.search_result} : {$smarty.get.key}{else}{$cat_arr.0.cat_name}{/if}</div>
+			
+			<div class="help_img mt10 tc">
+			
+				<a href="http://support.dealsmachine.com/?lang={$cur_lang}" ><img src="{$imgcache_url}images/styleimg/{if $cur_lang neq 'en'}{$cur_lang}_{/if}contact_pic.jpg" width="404" height="140"/></a><a href="http://support.dealsmachine.com/?cid=12&lang={$cur_lang}"><img src="{$imgcache_url}images/styleimg/{if $cur_lang neq 'en'}{$cur_lang}_{/if}ma.jpg" width="215" height="140"/></a>
+				
+			</div>   
+			<div class="helpc_FAQ_text seach_list clearfix">
+					<p class="fb">{$lang.return} {$article_list|@count} {$lang.results}</p>
+					<ul>
+					 {foreach from=$article_list item=slist}
+						<li><a href="{if $slist.link ne 'http://'}{$slist.link}{else}/{$cur_lang_url}m-article-id-{$slist.article_id}-pid-{$smarty.get.pid}.html{/if}">{$slist.title}</a> </li>
+					 {/foreach}
+					</ul>
+					<p class="fb">{$lang.return} {$article_list|@count} {$lang.results}</p>
+			   
+			</div>
+	</div><!--end.helpc_FAQ-->
+</div>
+{elseif $smarty.get.id}
+
+    <div class="helpc_mainBox fr">
+		<div class="helpc_FAQ m_box p10">
+			<div class="fb f16">{$article.title}</div>
+			
+			<div class="help_img mt10 tc">
+			
+				<a href="http://support.dealsmachine.com/?lang={$cur_lang}" ><img src="{$imgcache_url}images/styleimg/{if $cur_lang neq 'en'}{$cur_lang}_{/if}contact_pic.jpg" width="404" height="140"/></a><a href="http://support.dealsmachine.com/?cid=12&lang={$cur_lang}"><img src="{$imgcache_url}images/styleimg/{if $cur_lang neq 'en'}{$cur_lang}_{/if}ma.jpg" width="215" height="140"/></a>  
+			</div>
+			   
+			<div class="helpc_FAQ_text clearfix">
+			   
+					{$article.content}
+			   
+			</div>
+	   </div><!--end.helpc_FAQ-->
+  </div><!--end .helpc_mainBox-->
+{/if}
+  <!--左边导航区-->
+  <div class="helpc_sideBar fl">
+    <div class="l_box helpc_list">
+      <h3 class="l_title">{$lang.search}</h3>
+      <form action="m-article.htm" name="myfrm" method="get" id="fcorder" class="pt10 pb10">
+            <p><input name="key" id="orderid" type="text" value="{if $smarty.get.key}{$smarty.get.key}{else}{$lang.Enter_your_question}{/if}" size="24" onFocus="this.value='';"/></p>
+            <p class="pt10"><input type="submit" value=""  class="ordersearchBtn faqSeachBtn"/></p>
+     </form>
+      <ul class="helpc_Nav">
+	  {foreach from=$center_cat_list item=list name=lotion}
+          <li>	
+          		<a title="{$list.cat_name}" href="/{$cur_lang_url}m-article-cid-{$list.cat_id}-pid-{$list.parent_id}.html" class="helpc_menuitem js_helpc_menuitem"><b></b>{$list.cat_name|truncate:"23":"..."}</a>
+                <ul class="helpc_submenu js_helpc_submenu">
+				{foreach from=$list._child item=slist}
+                	<li><a href="{$slist.site_link}"><b></b>{$slist.title}</a></li>
+                 {/foreach}   
+                </ul>
+          </li>
+       {/foreach}  
+      </ul>
+  </div><!--end .helpc_list-->
+ {literal}
+  <script type="text/javascript" >
+  $(document).ready(function(){
+	  $(".js_helpc_menuitem").click(function(){
+			$(".js_helpc_menuitem").removeClass("cur_helpc_menu");
+		  	$(this).toggleClass("cur_helpc_menu");
+			$(this).parent().find("ul.js_helpc_submenu").slideToggle();
+			$(this).parent().siblings().find("ul.js_helpc_submenu").slideUp();
+			return false;
+		});
+	  curHC_nav()
+	  function curHC_nav(){
+		  var pathName = window.location.pathname;
+	 	  var pathNameArr = pathName.split("/");
+		  $("ul.helpc_Nav").find("a.js_helpc_menuitem").each(function(index, element) {
+            if($(this).attr("href")==("/"+pathNameArr[pathNameArr.length - 1])){
+				$(this).addClass("cur_helpc_menu");
+				$(this).parent().find("ul.js_helpc_submenu").show();
+			}else{
+				var $that = $(this);
+				$that.next("ul").find("a").each(function(){
+					 if($(this).attr("href")==("/"+pathNameArr[pathNameArr.length - 1])){
+						$that.addClass("cur_helpc_menu");
+						$that.parent().find("ul.js_helpc_submenu").show();
+					 }
+				})
+			}
+        });
+	  }
+  });
+  </script>
+  {/literal}
+  </div><!--end .helpc_sideBar-->
+</div>
+<!--end #mainWarp-->
+<div id="footer">
+  {include file="foothelp.htm"}
+  {include file="foot.htm"}
+</div>
+{include file="statistics_js.htm"}
+</body>
+</html>

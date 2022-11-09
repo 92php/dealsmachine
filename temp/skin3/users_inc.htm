@@ -1,0 +1,1620 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        {include file="top.htm"}
+        <link rel="stylesheet" href="{$imgcache_url}mincss/users_inc_min.css?2014061001" />
+
+    </head>
+    <body>
+        {include file="public_top.htm"}
+        <div class="curPath mt10"><a href="/{$cur_lang_url}" title="web home" class="fl">{$lang.home}</a> <a href="/{$cur_lang_url}m-users.htm"  class="fl"> &raquo; {$lang.my_account}</a><h1 class="fl fb">{$nav_title}</h1>
+        </div>
+        <div id="mainWarp" class="clearfix mt10">
+            <div class="mainBox fr">
+                
+                <!--***************** 用户中心首页 开始 ******************-->
+				{if $action eq 'index'}
+                <div class="myAccount m_box borderTop3">
+                    <h3>{$lang.my_account}</h3>
+                    <div class="mA_userInfo">
+                        <div class="mA_user_img">
+                            <img id="my_avatar" src="{if $avatar neq ''}{$avatar}{else}{$imgcache_url}images/styleimg/newuser/portrait.gif{/if}" width="100" height="100"/>    
+							<script type="text/javascript">document.domain = 'dealsmachine.com';</script>
+                            <p class=""><a href="javascript:void(0);" data-href="http://photo.dealsmachine.com/avatar.action" class="blue unl"  id="mAupImg">{$lang.post_image}</a></p>
+							<input type="hidden" id="upImgGuidflag" value="/m-users-a-check_guide_pop_up.htm">
+							{if $profile.avatar eq ''}
+                            <p>(<span class="mA_getPoint">{$lang.get_10_dm}</span>)</p>
+							{/if}
+                            <p class="mA_userName">{$profile.firstname}</p>
+                        </div><!--end .mA_user_img-->
+
+                        <h4>{$lang.label_welcome},{$profile.firstname} </h4>
+                        <p>{$lang.id_level}:&nbsp;{$profile.rank_name}</p>
+                        <p class="joinVIP"><a href="{$DOMAIN}/{$cur_lang_url}m-article-id-88-pid-.html" class="orangLinear">{$lang.join_our}</a></p>
+                        <div class="mA_ORinfo">
+                            <dl>
+                                <dt class="mA_myorders">{$lang.my_orders}:</dt>
+                                <dd>{$lang.total_orders}:&nbsp;<a href="{$USER_DOMAIN}m-users-a-order_list.htm" class="red unl">{$total_order_amount}</a></dd>
+                                <dd>{$lang.unpaid_orders}:&nbsp;<a href="{$USER_DOMAIN}m-users-a-order_list.htm" class="red unl">{$total_order_amount-$order_amount}</a></dd>
+                                <dd>{$lang.paid_orders}:&nbsp;<a href="{$USER_DOMAIN}m-users-a-order_list.htm" class="red unl">{$order_amount}</a></dd>
+                            </dl>
+                            <dl>
+                                <dt class="mA_Rewards">{$lang.my_rewards}:</dt>
+                                <dd>{$lang.unused_dm_points}:&nbsp;<a href="{$USER_DOMAIN}m-users-a-points_record.htm" class="red unl">{$profile.avaid_point}</a></dd>
+                                <dd>{$lang.unused_cash}:&nbsp;<a href="{$USER_DOMAIN}m-ucoupon-a-couponlist.htm" class="red unl">{$coupon}</a></dd>
+                            </dl>
+                        </div>
+                    </div><!--end .mA_userInfo-->
+                    
+                    <!--**** 这里只有老用户显示 开始 ***-->
+					<!--{if $user_type eq 2}-->
+                    <div class="mA_proList">
+                        <h4>{$lang.there_re} ({$goods_count}) {$lang.products_you} {$goods_count*10}-{$goods_count*25} {$lang.dm_points}</h4>
+                        <table>
+                            <tr>
+                                <th width="170">{$lang.image}</th>
+                                <th>{$lang.products}</th>
+                                <th width="170">{$lang.operation}</th>
+                            </tr>
+                            <tr><td colspan="3" height="10" class="nullCell"></td></tr>
+							{foreach from = $no_review_goods item = goods}
+                            <tr>
+                                <td><a href="{$goods.url_title}"><img src="{$goods.goods_grid}" width="70" height="70" class="js_lazyLoad"/></a></td>
+                                <td><p class="mA_proTitle"><a href="{$goods.url_title}">{$goods.goods_title}</a></p></td>
+                                <td>
+                                    <p><a href="/m-review-a-write_review-goods_id-{$goods.goods_id}.htm" class="orangLinear ma_writeAreveiw">{$lang.write_a_review}</a></p>
+                                    <p><a href="m-review-a-view_review-goods_id-{$goods.goods_id}.htm" class="mA_seeAll">{$lang.see_all} {$goods.reviews} {$lang.reviews}</a></p>
+                                </td>
+                            </tr>
+                            {/foreach}                           
+                        </table>
+
+                         <div class="mA_page">
+                            <div class="page">
+                                <p class="listspan">{$pagestr}</p>                            </div>
+                        </div><!--end .mA_page-->
+
+                    </div><!--edn .mA_proList-->
+					<!--{/if}-->
+                    <!--*** 这里只有老用户显示 结束 ****-->
+
+                    <!--*** 这里只有新用户显示 开始 ****-->
+                    <!--{if $user_type eq 1}-->
+                    <div class="mA_pointsWarp">
+                        <h4>{$lang.to_get_you}:</h4>
+                        <ul class="n_userPointList clearfix">
+                            <li class="n_userPoint_1">
+                              <div class="n_pointShow">
+                                <p class="n_point_cash"><span>$</span><strong>50</strong></p>
+                                <p class="f18 fb">{$lang.cash_coupon}</p>
+                              </div>
+                              <p class="n_pointBtn"><a href="{$USER_DOMAIN}m-ucoupon-a-appliy.htm" >{$lang.apply_now}</a></p>
+                            </li>
+
+                            <li class="n_userPoint_2">
+                              <div class="n_pointShow">
+                                <p class="n_point_discount"><strong>10</strong><span>% {$lang.off_u}</span></p>
+                                <p class="fb f18 pt10">{$lang.discount_coupon}</p>
+                                <p class="f22 pt10 fb colorGreen">{$lang.code}:{if $promotion_code}{$promotion_code}{else}ifmn6f1m{/if}</p>
+                                <p class="fb pt5">{if $promotion_code}{$lang.expires_on} {$promotion_exp_time}{else}{$lang.the_coupon}{/if}</p>
+                              </div>
+                              <p class="n_pointBtn"><a href="javascript:void(0)" id="copy-botton">{$lang.copy_code}</a></p>
+                            </li>
+                            <input type="hidden" value="{$promotion_code}" id="IndInfo">
+                            <li class="n_userPoint_3">
+                              <div class="n_pointShow">
+                                <p class="n_point_account"><strong>10</strong><span>{$lang.dm}<br/>{$lang.points}</span></p>
+                                <p class="f14 fb borderTop">{$lang.have_been}</p>
+                              </div>
+                              <p class="n_pointBtn"><a href="{$USER_DOMAIN}m-users-a-points_record.htm" >{$lang.check_my}</a></p>
+                            </li>
+                        </ul>
+                    </div><!--edn .mA_pointsWarp-->
+
+                    <div class="mA_ad">
+                        <h4>{$lang.join_our} <strong class="fb red">{$lang.free_gifts}</strong> !</h4>
+                        <a href="/m-share.htm" class="fl"><img  data-original="{$imgcache_url}images/styleimg/newuser/shareAndWin.jpg" class="js_lazyLoad" width="345" height="240"/></a>
+                        <a href="m-gifts.htm"  class="fr"><img  data-original="{$imgcache_url}images/styleimg/newuser/worldcup.jpg" class="js_lazyLoad" width="345" height="240"/></a>
+                    </div>
+
+                    <script type="text/javascript" src="{$imgcache_url}minjs/ZeroClipboard.js"></script>
+                    {literal}
+                    <script type="text/javascript">
+                        var clip = new ZeroClipboard.Client();
+                        clip.setHandCursor( true );
+                        var value = $("#IndInfo").val();
+                        clip.setText(value);
+                        clip.glue("copy-botton");
+                        clip.addEventListener( "complete", function(){
+                            alert('Code Copied! '+value);
+                        });
+                    </script>
+                    {/literal}
+					<!--{/if}-->
+                    <!--*** 这里只有新用户显示 结束 ****-->
+
+                    <div class="n_user_proScroll">
+                        <h4 class="n_userBoxH"><span></span>{$lang.hot_items}</h4>
+
+                        <div class="n_userBox n_user_proScrollWrap">
+                            <a href="javascript:void(0);" id="n_user_pre"></a>
+                            <a href="javascript:void(0);" id="n_user_next"></a>
+
+                            <div id="n_user_scroll">
+                                <ul>
+								    {foreach from =$recommend_product item=list}
+                                    <li>
+                                        <a href="{$list.url_title}" titel="{$list.goods_title}"><img src="{$list.goods_img}" width="150" height="150"/></a>
+                                        <p class="n_proNamge">
+                                        <a href="{$list.url_title}" title="{$list.goods_title}" target="_blank">{$list.goods_title}</a>
+                                        </p>
+                                        <p class="n_price"><span class="bizhong"></span> <span class="my_shop_price" orgp="{$list.shop_price}">{$list.shop_price}</span></p>
+                                    </li>
+									{/foreach}                                    
+                                </ul>
+                            </div>
+                            {literal}
+                            <script type="text/javascript">
+                             $(document).ready(function(){
+                                 //上传头像
+                                 $("#mAupImg").click(function(){
+                                    var pageUrl = $(this).attr("data-href");
+                                    ymPrompt.win({message:pageUrl,width:700,height:460,title:'Post Image',iframe:true,maskAlpha:0.5})
+                                 })
+
+                                 //产品图片滚动
+                                 jQuery(".n_user_proScrollWrap").slide( { mainCell:"#n_user_scroll ul",effect:"leftLoop",scroll:4,autoPlay:true,vis:4,prevCell:"#n_user_pre",nextCell:"#n_user_next"} );
+
+
+                             });
+                            </script>
+                            {/literal}
+                        </div><!--end #n_user_scroll-->
+                    </div><!--end.n_user_proScroll-->
+
+                </div><!--end .myAccount-->
+				{/if}
+                <!--***************** 用户中心首页 结束 ******************-->
+
+                {if $action eq 'order_list'}                
+                <div class="myOrder p7 m_box borderTop3">
+                    <h3>{$lang.label_order}</h3>
+                    <table width="100%" border="0" align="center" cellpadding="5" cellspacing="1" bgcolor="#CCCCCC" style=" font-size:11px;">
+                        <tbody>
+                            <tr align="center">
+                                <th bgcolor="#f7f7f7" >{$lang.order_number}</th>
+                                <th bgcolor="#f7f7f7" >{$lang.order_addtime}</th>
+                                <th bgcolor="#f7f7f7" >{$lang.order_money}</th>
+                                <th bgcolor="#f7f7f7" >{$lang.order_status}</th>
+                                <th bgcolor="#f7f7f7" >{$lang.action}</th>
+                            </tr>
+                            {foreach from=$orders item=item}
+                            <tr>
+                                <td align="center" bgcolor="#ffffff"><a href="/{$cur_lang_url}m-users-a-order_detail-order_id-{$item.order_id}.htm" class="f6">{$item.order_sn}</a></td>
+                                <td align="center" bgcolor="#ffffff">{$item.order_time}</td>
+                                <td align="center" bgcolor="#ffffff"><span>{$order.order_currency}</span> <span>{$item.total_fee}</span></td>
+                                <td align="center" bgcolor="#ffffff">{$item.order_status_str}
+                                    {if $item.order_status gt 2 and $item.order_status lt 9 and $item.order_status !=6}<br>
+                                    <a href="/{$cur_lang_url}m-users-a-order_detail-order_id-{$item.order_id}.htm" class="f6">{$lang.track_your_shipment}</a>
+                                    {/if}
+                                </td>
+                                <td align="center" bgcolor="#ffffff">{if $item.order_status eq '0'}<a href="javascript:void(0);" class="blue js_cancelOrder" data-orderid="{$item.order_id}">{$lang.cancel}</a><!--<span style="" class="a-delete_order" id="s-{$item.order_id}-0"><a href="">{$lang.rma_delete}</a></span>-->{/if}</td>
+                            </tr>
+                            {/foreach}
+                        </tbody>
+                        <script type="javascript">deleteOrder();</script>
+                    </table>
+                    <div class="pageBox mt10">
+                        <div class="pages">{$pagestr}</div>
+                    </div>
+                </div>
+                {/if}
+               
+                {if $action eq order_detail}
+                
+                <div class="orderStatus p7 m_box borderTop3">
+                    <h3>{$lang.order_status}</h3>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td height="40" valign="top" class="red">{$lang.order_detail_note}</td>
+                        </tr>
+                    </table>
+                    
+                    <table width="100%" border="0" cellspacing="1" cellpadding="3" bgcolor="#dddddd" style="">
+                        <tbody>
+                            <tr>
+                                <td width="19%" bgcolor="#FFFFFF">{$lang.order_number} :</td>
+                                <td width="81%" bgcolor="#FFFFFF"><span class="red">{$order.order_sn}</span> <a href="http://support.dealsmachine.com/?order_number={$order.order_sn}" class="f6">{$lang.Send_View_Message}</a> <a href="/{$cur_lang_url}m-users-a-rma_list-keyword-{$order.order_sn}.htm" class="f6">{$lang.rma_application}</a></td>
+                            </tr>
+                            <tr>
+                                <td height="45" bgcolor="#FFFFFF">{$lang.order_status} :</td>
+                                <td bgcolor="#FFFFFF"><span style="font-size:14px; font-weight:bold;">{$order.order_status_str}</span>
+                                {if $ship_info}<br>
+                                    {foreach from=$ship_info item=ship}
+                                        {if $order.shipping_id neq '1' || $ship.ship_url}Tracking Number{else}Reference Number{/if}: <b>{$ship.shipping_no}</b> &nbsp; {if $ship.ship_url}{$lang.by} <a href="{$ship.ship_url}" target="_blank"  class="f6">{$ship.shipping_name}</a>{else}{$ship.shipping_name}{/if}   {$lang.update_date}: {$ship.add_time} {$lang.pst} {$lang.delivery_estimate} {$ship.ship_desc}. {$lang.exact_time_depends}   {if $ship.demo}<br><i style="padding-left:30px;">{$ship.demo}</i>{/if}   <br><br>
+                                    {/foreach}
+                                {/if}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#FFFFFF">{$lang.trade_links} : </td>
+                                <td bgcolor="#FFFFFF"><table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+                                        <tbody>
+                                            <tr>
+                                                <th width="56%" align="center" bgcolor="#ffffff">{$lang.goods_title}</th>
+                                                <th width="20%" align="center" bgcolor="#ffffff">{$lang.goods_price}
+                                                    {if $order.extension_code eq "group_buy"}
+                                                    {$lang.gb_deposit}
+                                                   {/if}
+                                                </th>
+                                                <th width="10%" align="center" bgcolor="#ffffff">{$lang.number}</th>
+                                                <th width="14%" align="center" bgcolor="#ffffff">{$lang.subtotal}</th>
+                                            </tr>
+                                            {foreach from=$goods_list item=goods}
+                                            <tr>
+                                                <td bgcolor="#ffffff">
+                                                    {if $goods.goods_id gt 0 && $goods.extension_code neq 'package_buy'}
+                                                        <a href="{$goods.url_title}" target="_blank" class="f6">{$goods.goods_name}</a>
+                                                    {elseif $goods.goods_id gt 0 && $goods.extension_code eq 'package_buy'} 
+                                                        <a href="javascript:void(0)" onClick="setSuitShow('{$goods.goods_id}')" class="f6">{$goods.goods_name}</a>
+                                                    <div id="suit_{$goods.goods_id}" style="display:none">
+                                                         {foreach from=$goods.package_goods_list item=package_goods_list}
+                                                        <a href="{$goods.url_title}" target="_blank" class="f6">{$package_goods_list.goods_name}</a><br />
+                                                        {/foreach}
+                                                    </div>
+                                                    {/if} 
+                                                </td>
+                                                <td align="right" bgcolor="#ffffff">
+                                                {if $goods.goods_off}
+                                                                        <span class="price_off">
+                                                    {if $goods.goods_off eq '100'}
+                                                        {$lang.free}!
+                                                    {else}
+                                                        {$goods.goods_off}%{$lang.off}
+                                                    {/if}
+                                                    </span>
+                                                {/if}
+                                                    <span>{$order.order_currency}</span>   <span>{$goods.goods_price}</span>
+                                                </td>
+                                                <td align="center" bgcolor="#ffffff">{$goods.goods_number}</td>
+                                                <td align="right" bgcolor="#ffffff"><span>{$order.order_currency}</span> <span>{$goods.subtotal}</span></td>
+                                            </tr>
+                                            {if $goods.custom_size}
+                                                <tr bgcolor="#fff">
+                                                    <td  colspan="5" bgcolor="#FFFFFF" >
+                                                    {include file='custom_size.htm'}
+                                                    </td>
+                                                </tr>
+                                            {/if}
+                                            {/foreach}
+                                            <tr>
+                                                <td colspan="4" bgcolor="#ffffff" align="right">
+                                                    {if $order.promotion_code_youhuilv} 
+                                                            {$lang.promotion_code_offers} : {$order.promotion_code_youhuilv}
+                                                    {/if} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    {$lang.shopping_money}:<span>{$order.order_currency}</span>  <span>{$order.formated_goods_amount}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <h5 class="fb pt5 pb5"><span>{$lang.fee_total}</span></h5>
+                                    <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+                                        <tbody>
+                                            <tr>
+                                                <td align="right" bgcolor="#ffffff"> {$lang.goods_all_price} : <span>{$order.formated_goods_amount}</span>
+                                                    {if $order.point_money > 0}
+                                                        - {$lang.Outgo} {$order.used_point} {$lang.point_name} {$lang.saving}: <span>{$order.point_money}</span>
+                                                    {/if}
+                                                    {if $order.formated_shipping_fee > 0}
+                                                        + {$lang.shipping_fee}: <span>{$order.formated_shipping_fee}</span>
+                                                    {/if}
+                                                    {if $order.insure_fee > 0}
+                                                        + {$lang.insure_fee}: <span>{$order.formated_insure_fee}</span>
+                                                    {/if}
+                                                    {if $order.Need_Traking_number > 0}
+                                                        + {$lang.rma_tracking_number}: <span>{$order.Need_Traking_number}</span>
+                                                   {/if}
+                                                    {if $order.pay_fee > 0}
+                                                        + {$lang.pay_fee}: <span>{$order.formated_pay_fee}</span>
+                                                    {/if}
+                                                    {if $order.free_shipping_fee > 0}
+                                                        + {$lang.fast_freight}: <span>{$order.free_shipping_fee}</span>
+                                                    {/if}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="right" bgcolor="#ffffff">{$lang.order_amount}:<span>{$order.order_currency}</span>  <span>{$order.formated_order_amount}</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table></td>
+                            </tr>
+                            {if $order.Tracking_NO}
+                                <tr>
+                                    <td bgcolor="#FFFFFF">{$lang.consignment} : </td>
+                                    <td bgcolor="#FFFFFF">{$order.shipping_method} :    {$order.Tracking_NO} &nbsp;   {if $order.shipping_time ne 0}{$lang.shipping_time}{$order.shipping_time|date_format:"%m/%d/%Y %H:%M:%S %p"}{/if}</td>
+                                </tr>
+                            {/if}
+                            <tr>
+                                <td bgcolor="#FFFFFF">{$lang.consignee_name} : </td>
+                                <td bgcolor="#FFFFFF">{$order.consignee}</td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#FFFFFF">{$lang.receipt_address} :</td>
+                                <td bgcolor="#FFFFFF">{$order.address}
+                                    {if $order.zipcode}
+                                        [{$lang.postalcode}: {$order.zipcode}] 
+                                    {/if}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#FFFFFF">{$lang.city} :</td>
+                                <td bgcolor="#FFFFFF">{$order.city}</td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#FFFFFF">{$lang.states} :</td>
+                                <td bgcolor="#FFFFFF">{$order.province}</td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#FFFFFF">{$lang.country} :</td>
+                                <td bgcolor="#FFFFFF">{$order.country}</td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#FFFFFF">{$lang.zip} : </td>
+                                <td bgcolor="#FFFFFF">{$order.zipcode}</td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#FFFFFF">{$lang.contact_telephone} : </td>
+                                <td bgcolor="#FFFFFF">{$order.tel} </td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#FFFFFF">{$lang.e_mail}  : </td>
+                                <td bgcolor="#FFFFFF">{$order.email}</td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#FFFFFF">{$lang.deliveries} : </td>
+                                <td bgcolor="#FFFFFF">{$order.shipping_name}</td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#FFFFFF">{$lang.payment} : </td>
+                                <td bgcolor="#FFFFFF">{$order.pay_name}{if $order.pay_time ne 0}{$lang.pay_time} : {$order.pay_time|date_format:"%m/%d/%Y %H:%M:%S %p"}{/if} </td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#FFFFFF">{$lang.Invoice} : </td>
+                                <td bgcolor="#FFFFFF">{if $order.Invoice eq 0}{$lang.no_need_Invoice} {else}{$lang.need_Invoice} {/if} </td>
+                            </tr>
+                            {if $order.postscript}
+                                <tr>
+                                    <td bgcolor="#FFFFFF">{$lang.your_message} : </td>
+                                    <td bgcolor="#FFFFFF">{$order.postscript}</td>
+                                </tr>
+                            {/if}
+                            <tr>
+                                <td bgcolor="#FFFFFF">{$lang.order_date} : </td>
+                                <td bgcolor="#FFFFFF">{$order.formated_add_time}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table width="100%" cellpadding="3" class="mt10">
+                        <tbody>
+                            <tr>
+                                <td style="padding-top:10px;  line-height:16px;">
+								  {if $order.order_amount gt 0 && $order.order_amount neq 11}
+									{if ($order.pay_id=='PayPal' || $order.pay_id=='CreditCard') && $order.order_status==0}
+									  <a href="/m-users-a-payment_order-order_sn-{$order.order_sn}.htm"><img border="0" src="{$imgcache_url}images/x-click-but5.gif" alt="Paypal payment immediately" class="formsubbotton" /></a><br />
+									  <a href="/m-users-a-payment_order-order_sn-{$order.order_sn}.htm">Paypal payment immediately</a>
+									{else}
+									  {$order.pay_online}
+									{/if}
+								  {/if}									
+								</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                {/if}
+
+                {if $action eq 'points_record'}
+                
+                <div class="my-DM-points p7 m_box borderTop3">
+                    <h3>{$lang.label_Point}</h3>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr>
+                                <td align="center" style="padding:0 0 20px;"><table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size:10px;">
+                                        <tbody>
+                                            <tr>
+                                                <td><table width="100%" border="0" cellpadding="4" cellspacing="1" bgcolor="#CCCCCC">
+                                                        <tbody>
+                                                            <tr>
+                                                                <th width="51%" background="{$imgcache_url}images/styleimg/cliejbg2.jpg" bgcolor="#f7f7f7"> <span class="fb" style="font-size: 14px;">{$lang.Available} {$lang.point_name}(<a href="{$DOMAIN}/{$cur_lang_url}m-promotion-active-14.htm" style="color:#FF0000; text-decoration:underline;font-size:14px;font-weight:bold;">?</a>)</span>: </th>
+                                                                <td width="49%" align="left" background="{$imgcache_url}images/styleimg/cliejbg2.jpg" bgcolor="#FFFFFF">{$user.avaid_point}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table></td>
+                                            </tr>
+                                            <tr>
+                                                <td align="left" style="line-height:16px; padding-top:12px;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table width="100%" align="center" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                            <tr>
+                                                <td height="30" align="center"><div class="content_menu"><strong class="fb">{$lang.Available} {$lang.point_name} {$lang.history}</strong> </div></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table width="100%" border="0" cellpadding="5" cellspacing="1" style="">
+                                        <tbody>
+                                            <tr>
+                                                <th height="29"   bgcolor="#f7f7f7" class="fb">{$lang.Date}</th>
+                                                <th bgcolor="#f7f7f7"  class="fb">{$lang.Income}</th>
+                                                <th bgcolor="#f7f7f7" class="fb">{$lang.Outgo}</th>
+                                                <th bgcolor="#f7f7f7" class="fb">{$lang.Balance}</th>
+                                                <th bgcolor="#f7f7f7" class="fb">{$lang.Note}</th>
+                                            </tr>
+                                            {foreach from=$points_record item=r}
+                                            <tr>
+                                                <td height="35" bgcolor="#FFFFFF" style="border-bottom:1px #CCCCCC dashed;">{$r.adddate}</td>
+                                                <td bgcolor="#FFFFFF" style="border-bottom:1px #CCCCCC dashed;">{$r.income}</td>
+                                                <td bgcolor="#FFFFFF" style="border-bottom:1px #CCCCCC dashed;">{$r.outgo}</td>
+                                                <td bgcolor="#FFFFFF" style="border-bottom:1px #CCCCCC dashed;">{$r.balance}</td>
+                                                <td bgcolor="#FFFFFF" style="border-bottom:1px #CCCCCC dashed;">{$r.note}</td>
+                                            </tr>
+                                            {/foreach}
+                                        </tbody>
+                                    </table></td>
+                            </tr>
+                        </tbody>
+                    </table>
+  
+                    <div class="pageBox mt10">
+                        <div class="pages">{$pagestr}</div>
+                    </div>
+                </div>
+              
+                {/if}
+
+
+				{if $action eq 'couponlist'}               
+                <div class="my-cash-coupon p7 m_box borderTop3">                    
+                    <div class="coupList pt20 pb20">
+						<div class="coupon_couponlist">
+						  <ul class="n_eb_titleList">
+							<li {if $type eq 1}class="cur"{/if}><a href="{$USER_DOMAIN}m-ucoupon-a-couponlist.htm">Unused Coupons</a></li>
+							<li {if $type eq 2}class="cur"{/if}><a href="{$USER_DOMAIN}m-ucoupon-a-couponlist.htm?type=2" >Used Coupons</a></li>
+							<li {if $type eq 3}class="cur"{/if}><a href="{$USER_DOMAIN}m-ucoupon-a-couponlist.htm?type=3">Expired Coupons</a></li>
+						  </ul>
+						  {if $not_apply_yet}<a href="/m-ucoupon-a-appliy.htm" class="fr colorBlue unl">Apply for Cash Coupons worth $50 ></a>{/if}
+						</div>
+						  <div class="couponlist_main">
+						  {if $type eq 1}
+						  <table width="100%"  border="0" cellpadding="10" cellspacing="1"  bgcolor="#eeeeee" {if $type neq 1}style="display:none"{/if}>
+							<tr>
+							  <th bgcolor="#eeeeee" >Coupon Code</td>
+							  <th bgcolor="#eeeeee">Coupon Type</td>
+							  <th bgcolor="#eeeeee">Saving</td>
+							  <th bgcolor="#eeeeee" >Conditions of Use</td>
+							  <th bgcolor="#eeeeee">Expiry Date</td>
+							  <th bgcolor="#eeeeee">Source</td>
+							</tr>
+							{foreach from = $couponArr item=item}
+							<tr>
+							  <td bgcolor="#FFFFFF">{$item.code}</td>
+							  <td bgcolor="#FFFFFF">{$item.fangshi}</td>
+							  <td bgcolor="#FFFFFF" class="colorOrange">{$item.youhuilv}</td>
+							  <td bgcolor="#FFFFFF">{if $item.need}{$item.need}{else}--{/if}</td>
+							  <td bgcolor="#FFFFFF">{$item.exp_time}</td>
+							  <td bgcolor="#FFFFFF">{$item.source}</td>
+							</tr>
+							{/foreach}
+						  </table>
+						  {elseif $type eq 2}
+						  <table width="100%" cellspacing="1" cellpadding="10" border="0" bgcolor="#eeeeee" {if $type neq 2}style="display:none"{/if}>
+							<tbody><tr>
+							  <th bgcolor="#eeeeee">Coupon Code</th>
+							  <th bgcolor="#eeeeee">Coupon&nbsp;Type</th>
+							  <th bgcolor="#eeeeee">Saving
+								
+							  </th>
+							  <th bgcolor="#eeeeee">Date Used
+							  </th>
+							</tr>
+							{if $couponArr}
+							{foreach from=$couponArr item=item}
+							<tr>
+							  <td bgcolor="#FFFFFF">{$item.code}</td>
+							  <td bgcolor="#FFFFFF">{$item.fangshi}</td>
+							  <td bgcolor="#FFFFFF" class="colorOrange">{$item.youhuilv}</td>
+							  <td bgcolor="#FFFFFF">{$item.use_time}</td>
+							</tr>
+							{/foreach}
+							{/if}
+						  </tbody></table>
+						  {else}
+						  <table width="100%"  border="0" cellpadding="10" cellspacing="1"  bgcolor="#eeeeee" {if $type neq 3}style="display:none"{/if}>
+							<tr>
+							  <th bgcolor="#eeeeee" >Coupon Code
+								</td>
+							  </th>
+							  <th bgcolor="#eeeeee">Coupon Type
+								</td>
+							  </th>
+							  <th bgcolor="#eeeeee">Saving
+								</td>
+							  </th>
+							  <th bgcolor="#eeeeee">Expiry Date
+								</td>
+							  </th>
+							  <th bgcolor="#eeeeee">Staus
+								</td>
+							  </th>
+							</tr>
+							
+							{foreach from=$couponArr item=item}
+							<tr>
+							  <td bgcolor="#FFFFFF">{$item.code}</td>
+							  <td bgcolor="#FFFFFF">{$item.fangshi}</td>
+							  <td bgcolor="#FFFFFF" class="colorOrange">{$item.youhuilv}</td>
+							  <td bgcolor="#FFFFFF">{$item.exp_time}</td>
+							  <td bgcolor="#FFFFFF">Expired</td>
+							</tr>
+							{/foreach}
+							
+						  </table>
+						  {/if}
+						</div>						
+                    </div>
+                </div>
+              
+                {/if}
+
+            {if $action == 'appliy'}
+
+                      <a href="/{$cur_lang_url}m-ucoupon-a-submit.htm"><img src="{$imgcache_url}images/styleimg/{if $cur_lang neq 'en'}{$cur_lang}_{/if}coup.jpg"></a>
+                      <div class="ucoupon_Appliy" style=" font-size:12px; line-height:20px; padding:20px 0;width:796px">
+                         {$lang.Apply_for_case_coupon}<a href="http://user.dealsmachine.com/{$cur_lang_url}sign-up/" style="color:#0033FF">{$lang.register_first}</a>{$lang.Apply_for_case_coupon_1}
+                      </div>
+                {/if}
+                
+                {if $action == 'rma_apply'}
+               
+                <div class="RMA-Application p7 m_box borderTop3">
+                    <h3>{$lang.rma_application}</h3>
+
+                    <p class="mt10">{$lang.rma_apply_tip_1}</p>
+                    <div class="orderFormBox mt10 p10">
+                        <form action="/{$cur_lang_url}m-users-a-rma_apply.htm" method="get">
+                            <strong class="fb">{$lang.order_number}.</strong>.
+                            <input type="text" id="txt-order_sn" name="order_sn" value="">
+                            {if $error}<span class="font-red">{$error}</span>{/if}
+                            <input type="submit" id="btn-order_sn" value="{$lang.submit}" class="orderBtn RMABtn " >
+                        </form>
+                    </div>
+
+                    <p class="mt10">{$lang.rma_apply_tip_2}</p>
+                    {if $order_info}
+                        {assign value=$order_info.0 var=info}
+                        <div>
+                            <p class="mt10 fb">{$lang.order_information}</p>
+                            <p class="mt10">{$lang.rma_apply_tip_12}</p>
+
+                            <table border="0" cellpadding="5" cellspacing="1" width="100%" bgcolor="#A6D0E6" class="tb-goods_list mt10">
+                                <tbody>
+                                    <tr>
+                                        <th>{$lang.rma_product_name}</th>
+                                        <th align="center" style="width: 50px;">{$lang.rma_sku}</th>
+                                        <th align="center" style="width: 50px;">{$lang.rma_qty}</th>
+                                        <th align="center" style="width: 80px;">{$lang.rma_subtotal}</th>
+                                        <th align="center" style="width: 80px;">{$lang.rma_operation}</th>
+                                    </tr>
+                                    {foreach from=$order_info item=item}
+                                    <tr>
+                                        <td><a href="/{$item.goods_id}.html" target="_blank" class="f6" id="a-title-{$item.rec_id}">{$item.goods_name}</a></td>
+                                        <td class="tc" id="td-sn-{$item.rec_id}">{$item.goods_sn}</td>
+                                        <td class="tc" id="td-num-{$item.rec_id}">{$item.goods_number}</td>
+                                        <td class="tc"><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$item.subtotal}">{$item.subtotal}</span></td>
+                                        <td class="tc"><input type="button" value="{$lang.submit}" class="RMABtn btn-return" id="btn-{$item.rec_id}"></td>
+                                    </tr>
+                                    {/foreach}
+                                    <tr>
+                                        <td colspan="4" align="right">{$lang.rma_subtotal}:</td>
+                                        <td align="center"><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$info.goods_amount}">{$info.goods_amount}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" align="right">{$lang.insure_fee}: </td>
+                                        <td align="center"><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$info.insure_fee}">{$info.insure_fee}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" align="right">{$lang.Shipping_Handling}:</td>
+                                        <td align="center"><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$info.shipping_fee}">{$info.shipping_fee}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" align="right">{$lang.rma_need_tracking_number}:</td>
+                                        <td align="center"><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$info.Need_Traking_number}">{$info.Need_Traking_number}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" align="right"><strong>{$lang.rma_grand_total}:</strong></td>
+                                        <td align="center"><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$info.order_amount}">{$info.order_amount}</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <form action="/{$cur_lang_url}m-users-a-rma_submit.htm" method="post" id="form-rma_apply" enctype="multipart/form-data">
+                                <input type="hidden" name="order_sn" value="{$order_sn}">
+                                <div id="div-operation" class="display-none">
+                                    <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#A6D0E6" id="tb-goods_list" class="mt10">
+                                        <tbody>
+                                            <tr>
+                                                <th align="center" bgcolor="#DDECF4">{$lang.rma_sku}</th>
+                                                <th align="center" bgcolor="#DDECF4">{$lang.rma_qty_return}</th>
+                                                <th align="center" bgcolor="#DDECF4">{$lang.rma_reason}<span class="font-red">*</span></th>
+                                                <th align="center" bgcolor="#DDECF4">{$lang.rma_details_description}<span class="font-red">*</span></th>
+                                                <th align="center" bgcolor="#DDECF4">{$lang.rma_operation}</th>
+                                            </tr>
+                                            <tr id="tr-tpl" class="display-none">
+                                                <td align="center" bgcolor="#FFFFFF">{$lang.sn}</td>
+                                                <td align="center" bgcolor="#FFFFFF"><input type="text" class="txt-return_num" size="4" value="1"></td>
+                                                <td align="center" bgcolor="#FFFFFF">
+                                                    <select style="width: 200px; font-size: 11px; font-family:Arial, Helvetica, sans-serif;">
+                                                        <option value="">{$lang.rma_reason_select}</option>
+                                                        {html_options options=$rma_data.reason}
+                                                    </select>
+                                                    <input type="hidden" class="goods_sn">
+                                                    <input type="hidden" class="goods_title"></td>
+                                                <td align="center" bgcolor="#FFFFFF"><textarea rows="6" cols="40" style="font-size: 11px;"></textarea></td>
+                                                <td align="center" bgcolor="#FFFFFF"><input type="button" value="{$lang.rma_delete}" class="RMABtn btn-return_delete"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#A6D0E6" class="mt10">
+                                        <tbody>
+                                            <tr>
+                                                <td bgcolor="#ECF4F9"><span class="font-red">*</span> <strong>{$lang.rma_request_type} : </strong>
+                                                    <select name="apply_type">
+                                                        <option value="">{$lang.rma_request_type_select}</option>
+                                                            {html_options options=$rma_data.type}
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td bgcolor="#FFFFFF">{$lang.rma_attachment_1}:<input type="file" name="file1" size="50"></td>
+                                            </tr>
+                                            <tr>
+                                                <td bgcolor="#FFFFFF">{$lang.rma_attachment_2}:<input type="file" name="file2" size="50"></td>
+                                            </tr>
+                                            <tr>
+                                                <td bgcolor="#FFFFFF">{$lang.rma_attachment_3}:<input type="file" name="file3" size="50"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <table cellpadding="5" cellspacing="1" bgcolor="#A6D0E6" style="width: 100%; margin-top:10px;">
+                                    <tbody>
+                                        <tr>
+                                            <td bgcolor="#FFFFFF" style="width: 100px; text-align: right;padding-right: 4px;"><span class="font-red">*</span>{$lang.email}: </td>
+                                            <td bgcolor="#FFFFFF"><input type="text" name="email" id="txt-email" size="20" value="{$info.email}" maxlength="60"></td>
+                                        </tr>
+                                        <tr>
+                                            <td bgcolor="#FFFFFF" style="width: 100px; text-align: right;padding-right: 4px;"><span class="font-red">*</span>{$lang.phone}: </td>
+                                            <td bgcolor="#FFFFFF"><input type="text" name="phone" id="txt-phone" size="15" value="{$info.tel}" maxlength="60"></td>
+                                        </tr>
+                                        <tr>
+                                            <td bgcolor="#FFFFFF" style="width: 100px; text-align: right;padding-right: 4px;"><span class="font-red">*</span>{$lang.consignee}: </td>
+                                            <td bgcolor="#FFFFFF"><input type="text" name="consignee" id="txt-consignee" size="15" value="{$info.consignee}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td bgcolor="#FFFFFF" style="width: 100px; text-align: right;padding-right: 4px;"><span class="font-red">*</span>{$lang.addressline1}: </td>
+                                            <td bgcolor="#FFFFFF"><input type="text" name="address1" id="txt-line1" size="50" value="{$info.address1|default:$info.address}" maxlength="50">
+                                                <span style="color: red">{$lang.english_address_tip}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td bgcolor="#FFFFFF" style="width: 100px; text-align: right;padding-right: 4px;"> {$lang.addressline2}: </td>
+                                            <td bgcolor="#FFFFFF"><input type="text" name="address2" id="txt-line2" size="50" value="{$info.address2}" maxlength="35"></td>
+                                        </tr>
+                                        <tr>
+                                            <td bgcolor="#FFFFFF" style="width: 100px; text-align: right;padding-right: 4px;"><span class="font-red">*</span>{$lang.city}: </td>
+                                            <td bgcolor="#FFFFFF"><input type="text" name="city" id="txt-city" size="15" value="{$info.city}" maxlength="35"></td>
+                                        </tr>
+                                        <tr>
+                                            <td bgcolor="#FFFFFF" style="width: 100px; text-align: right;padding-right: 4px;"><span class="font-red">*</span>{$lang.province}: </td>
+                                            <td bgcolor="#FFFFFF"><input type="text" name="province" id="txt-province" size="15" value="{$info.province}" maxlength="35"></td>
+                                        </tr>
+                                        <tr>
+                                            <td bgcolor="#FFFFFF" style="width: 100px; text-align: right;padding-right: 4px;"><span class="font-red">*</span>{$lang.country}: </td>
+                                            <td bgcolor="#FFFFFF">
+                                                <select name="country" id="select-country">
+                                                    {foreach from=$country_list item=country}
+                                                    <option value="{$country.region_id}"{if $country.region_id==$info.country} selected="selected"{/if}>{$country.region_name}</option>
+                                                    {/foreach}
+                                                </select></td>
+                                        </tr>
+                                        <tr>
+                                            <td bgcolor="#FFFFFF" style="width: 100px; text-align: right;padding-right: 4px;"><span class="font-red">*</span>{$lang.postalcode}: </td>
+                                            <td bgcolor="#FFFFFF"><input type="text" name="zipcode" id="txt-postalcode" size="6" value="{$info.zipcode}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" bgcolor="#FFFFFF" style="padding-left: 30px;">
+
+                                                <input type="submit" class="RMABtn" id="btn-submit" disabled="true" value="Submit"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <p class="mt10">{$lang.rma_apply_tip_11|sprintf:$rma_data.reason[3]:$rma_data.reason[5]}</p>
+
+                                </ul>
+                            </form>
+                        </div>
+                    {/if}
+                    <table width="100%" border="0" cellpadding="6" cellspacing="1" bgcolor="#CCCCCC" style="line-height:17px; margin-top:10px" class="RAMtable">
+                        <tr>
+                            <td height="35" colspan="2" align="left" valign="middle" bgcolor="#F9FDFE"><strong class="fb">{$lang.rma_apply_tip_4}</strong></td>
+                        </tr>
+                        <tr>
+                            <td width="14%" align="center" valign="top" bgcolor="#FFFFFF"><b class="rmaTag rmaTag1"></b></td>
+                            <td width="86%" align="left" valign="top" bgcolor="#FFFFFF">{$lang.rma_apply_tip_5}</td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="top" bgcolor="#FFFFFF"><b class="rmaTag rmaTag2"></b></td>
+                            <td align="left" valign="top" bgcolor="#FFFFFF">{$lang.rma_apply_tip_6}<br />
+                                <img src="{$imgcache_url}images/styleimg/ram11.gif" border="0"/></td>
+                        </tr>
+                        <tr>
+                            <td height="35" colspan="2" align="left" valign="middle" bgcolor="#F9FDFE"><strong class="fb">{$lang.rma_apply_tip_7}</strong></td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="top" bgcolor="#FFFFFF"><b class="rmaTag rmaTag3"></b></td>
+                            <td align="left" valign="top" bgcolor="#FFFFFF">{$lang.rma_apply_tip_8}</td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="top" bgcolor="#FFFFFF"><b class="rmaTag rmaTag4"></b></td>
+                            <td align="left" valign="top" bgcolor="#FFFFFF">{$lang.rma_apply_tip_9}</td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="top" bgcolor="#FFFFFF"><b class="rmaTag rmaTag5"></b></td>
+                            <td align="left" valign="top" bgcolor="#FFFFFF">
+                                {$lang.rma_apply_tip_10}
+                            </td>
+                        </tr>
+                    </table>
+                    </div>
+                    <script type="text/javascript">
+                        var rma_confirm_address_msg = "{$lang.rma_comfirm_address_msg}";
+                        var rma_choose_request_type = "{$lang.rma_choose_request_type}";
+                        var rma_enter_tracking_nubmer = "{$lang.rma_enter_tracking_nubmer}";
+                    </script>                   
+                    {/if}
+
+                    {if $action == 'rma_list'}
+                    
+                    <div class="RMA-record p7 m_box borderTop3">
+                        <h3>{$lang.rma_record}</h3>
+                        {if $rma_msg}<p class="msg mt10">{$rma_msg}</p>{/if}
+                        <div class="RMA_record mt10">
+                            <form action="/{$cur_lang_url}m-users-a-rma_list.htm" method="get" id="form-1">
+                                {html_options name=time options=$time_arr selected=$time}
+                                <strong class="FB">{$lang.order_number}</strong>.
+                                <input type="text" id="txt-keyword" name="keyword" value="{$keyword}" />
+                                <input type="submit" value="{$lang.rma_search_my_rma}" class="RMABtn " />
+                            </form>
+                        </div>
+
+                        <p class="fb f14 blue pt10"><a class="f6" href="/{$cur_lang_url}m-users-a-rma_apply.htm">{$lang.rma_add_new_application}</a></p>
+                        {if $rma_record}
+                        <div>
+                            <table border="0" cellpadding="5" cellspacing="1" width="100%" bgcolor="#A6D0E6" class="tb-goods_list mt10">
+                                <tr>
+                                    <th align="center" style="width: 150px;background: #DDECF4;">{$lang.rma_no}(<span class="fb red">{$lang.rma_new_messages}</span>)</th>
+                                    <th align="center" style="width: 100px;background: #DDECF4;">{$lang.order_number}</th>
+                                    <th align="center" style="width: 200px;background: #DDECF4;">{$lang.rma_apply_time}</th>
+                                    <th align="center" style="background: #DDECF4;">{$lang.rma_request_type}</th>
+                                    <th align="center" style="width: 80px;background: #DDECF4;">{$lang.STATUS}</th>
+                                    <th style="text-align: center; width: 120px;background: #DDECF4;">{$lang.rma_proccessing_result}</th>
+                                </tr>
+                                {foreach from=$rma_record item=item}
+                                <tr>
+                                    <td><a href="/{$cur_lang_url}m-users-a-rma_info-id-{$item.id}.htm" class="f6">{$item.rma_number}</a>(<a href="/{$cur_lang_url}m-users-a-rma_msg-id-{$item.id}.htm"><span class="fb red">{$item.msg_count|default:0}</span></a>)</td>
+                                    <td class="text-center"><a href="/{$cur_lang_url}m-users-a-order_detail-order_id-{$item.order_id}.htm" class="f6">{$item.order_sn}</a></td>
+                                    <td class="text-center">{$item.apply_time}</td>
+                                    <td class="text-center">{$item.apply_type}</td>
+                                    <td class="text-center">{$item.status_text}</td>
+                                    <td class="text-center">{$item.results}/<a href="{if $item.status_int > 7}http://support.dealsmachine.com/?order_number={$item.order_sn}" target="_blank{else}/{$cur_lang_url}m-users-a-rma_msg-id-{$item.id}.htm#anchor-msg{/if}" class="f6">{$lang.rma_leave_message}</a></td>
+                                </tr>
+                                {/foreach}
+                            </table>
+                        </div>
+                        {/if}
+
+                        
+                        <div class="pageBox mt10">
+                            <div class="pages">{$pagestr}</div>
+                        </div>
+                    </div>
+                    
+                    
+                    {elseif 'rma_info' == $action}{*  rma��Ϣ by mashanling on 2013-06-21 14:04:33 *}
+                    <style type="text/css">
+    {literal}
+    .tb-goods_list { background: #A6D0E6; }
+    .tb-goods_list th { color: #1C61A6; background: url(http://cloud4.faout.com/imagecache/EV02/images/cliejbg2.jpg); }
+    .tb-goods_list td { background: #fff; }
+    .font-bold { font-weight: bold; font-size:14px; }
+    .font-red { color: red; }
+    .font-gray { color: gray; }
+    .text-center { text-align: center; }
+    .text-right { text-align: right; }
+    .text-left { text-align: left; }
+    .display-none { display: none; }
+    textarea { font-size: 12px; }
+    p.msg { color: green; text-align: center;}
+        .classrightuu {border: 1px solid #fff;float: right;width: 755px;}
+.spr11 {border: 1px solid #ccc;float: left;padding: 5px 15px;width: 725px;}
+.spr1108 {border: 1px solid #ccc;float: left;padding: 10px;width: 735px;}
+    {/literal}
+</style>
+<div class="spr11">
+    <h5>
+        <span>{$lang.rma_details}</span>
+    </h5>
+    <div class="blank"></div>
+    {if $rma_info}
+    {assign var=info value=$rma_info.0}
+    <div>
+    <p style="margin: 8px 0;" class="font-bold">
+       {$lang.rma_details_of} <span style="color:#0066CC">{$info.rma_number}</span>
+        <a href="/{$cur_lang_url}m-users-a-rma_msg-id-{$info.rma_order_id}.htm" class="f6">{$lang.MESSAGE}(<span class="font-red">{$unread}</span>)</a>
+    </p>
+        <div>
+            <table border="0" cellpadding="5" cellspacing="1" width="100%" class="tb-goods_list">
+                <tr>
+                    <th align="center" style="width: 80px;">{$lang.rma_sku}</th>
+                    <th align="center" style="width: 150px;">{$lang.rma_qty_return}</th>
+                    <th align="center" style="width: 200px;">{$lang.rma_info_reason_return}</th>
+                    <th align="center">{$lang.rma_details_description}</th>
+                </tr>
+                {foreach from=$rma_info item=item}
+                <tr>
+                    <td align="center">{$item.goods_sn}</td>
+                    <td align="center" class="text-center">{$item.goods_number}</td>
+                    <td align="center" class="text-center">{$item.reason}</td>
+                    <td class="text-center">{$item.description|escape}</td>
+                </tr>
+                {/foreach}
+          </table>
+        </div>
+    </div>
+    <br />
+    {if $info.is_return || $smarty.session.WebUserInfo}
+    <p class="font-gray">{$lang.rma_return_note}</p>
+    {$lang.rma_tracking_number}:
+    {if $tracking_number}
+    <strong class="font-red">{$tracking_number}</strong>
+    {else}
+    <input type="text" id="txt-tracking_number" value="" maxlength="50" />
+    <input type="button" id="btn-tracking_number" value="{$lang.submit}" class="btn111" />
+    <script type="text/javascript" src="{$jscache_url}sysjs/rma.js"></script>
+    {/if}
+    <a href="/{$cur_lang_url}m-users-a-rma_download_address-id-{$info.rma_order_id}.htm" class="f6">{$lang.rma_download_return_document}</a>
+    {/if}
+    {if $info.status < 8}
+    <p class="font-bold" style="margin: 8px 0;">{$lang.rma_leave_message}</p>
+    <form action="/{$cur_lang_url}m-users-a-rma_msg_submit.htm" method="post">
+        <input type="hidden" name="rma_number" value="{$info.rma_number}" />
+        <input type="hidden" name="rma_order_id" id="hidden-rma_order_id" value="{$info.rma_order_id}" />
+        <textarea class="font-12" rows="5" cols="80" name="content"></textarea>
+        <span class="font-red">*</span>
+        <p><input type="submit" value="{$lang.submit}" class="btn111" /></p>
+    </form>
+    {/if}
+    {/if}
+    <div class="blank5"></div>
+    <div class="blank5"></div>
+</div>
+<div class="clear"></div>
+<script type="text/javascript">
+    var SUBMIT_SECCESSFULLY = "{$lang.SUBMIT_SECCESSFULLY}";
+    var SUBMIT_FAILED = "{$lang.SUBMIT_FAILED}";
+</script>
+                    {/if}
+                    
+                    
+
+                    {if $action == 'rma_msg'}
+                    
+                    <div class="RMA-message p7 m_box borderTop3">
+                        <h3 style="font-weight:bold">{$lang.rma_message}{if $rma_order_id && $rma_number} Of <a class="f6" href="/{$cur_lang_url}m-users-a-rma_info-id-{$rma_order_id}.htm">{$rma_number}</a>{/if}</h3>
+                        {if $rma_msg}<p class="msg mt10">{$rma_msg}</p>{/if}
+                        {if $rma_msg_list}
+                            {foreach from=$rma_msg_list item=item}
+                            <div class="messageList m_box mt10">
+                                <div class="message_from">
+                                By <span class="blue fb f14">{$item.user}</span>&nbsp;{$item.add_time}
+                                {if !$rma_order_id} {$lang.on} <a class="f6" href="/{$cur_lang_url}m-users-a-rma_info-id-{$item.rma_order_id}.htm">{$rma_number}</a>{/if}
+                                </div>
+                                <p>{$item.content|escape|nl2br}</p>
+                            </div>
+                            {/foreach}
+                        {elseif $rma_options}
+                            <select id="rma_list">
+                                <option value="">{$lang.rma_choose_rma}</option>
+                                {html_options options=$rma_options}
+                            </select>
+                            {literal}
+                            <script type="text/javascript">
+                                $('#rma_list').change(function() {
+                                    var val = $(this).val();
+                                    val && (location.href = '/{/literal}{$cur_lang_url}{literal}m-users-a-rma_msg-id-' + val + '.htm');
+                                });
+                            </script>
+                            {/literal}
+                        {else}
+                            <p style="height: 80px; line-height: 80px; color: red; text-align: center;">{$lang.no_records}</p>
+                        {/if}
+                        {if $rma_order_id and $rma_status < 8}
+                            <h4 class="fb f14 mt10">{$lang.rma_leave_message} </h4>
+                            <form action="/{$cur_lang_url}m-users-a-rma_msg_submit.htm" method="post" class="mt10">
+                                <input type="hidden" name="rma_number" value="{$rma_number}">
+                                <input type="hidden" name="rma_order_id" value="{$rma_order_id}">
+                                <textarea class="RMA-megTextarea" rows="5" cols="120" name="content"></textarea>
+                                <span class="fb red">*</span>
+                                <p><input type="submit" value="Submit" class="RMABtn"></p>
+                            </form>
+                        {/if}
+                    </div>
+                    {/if}
+
+                    {if $action eq 'collection_list'}
+                   
+                    <div class="my-favorites p7 m_box borderTop3">
+                        <h3>{$lang.label_collection}</h3>
+                        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#A6D0E6" class="mt10"  id="myFavoritesTable">
+                            <tbody>
+                                <tr align="center">
+                                    <th width="30" style="background: #f7f7f7 url(http://cloud4.faout.com/imagecache/A/images/cliejbg2.jpg)"><input onClick="checkAll(this)" class="checkbox" type="checkbox"></th>
+                                    <th width="60" background="{$imgcache_url}images/styleimg/cliejbg2.jpg">{$lang.image}</th>
+                                    <th width="42%" background="{$imgcache_url}images/styleimg/cliejbg2.jpg" bgcolor="">{$lang.goods_title}</th>
+                                    <th width="33%" bgcolor="#f7f7f7" background="{$imgcache_url}images/styleimg/cliejbg2.jpg"><a href="javascript:location.href='/{$cur_lang_url}m-users-a-collection_list.htm?od={if $od eq '1'}2{else}1{/if}'" class="price{if $od eq '1'}Up{else}Down{/if} selected">{$lang.price}</a></th>
+                                    <th width="25%" bgcolor="#f7f7f7" background="{$imgcache_url}images/styleimg/cliejbg2.jpg">{$lang.operation}</th>
+                                </tr>
+                                 {foreach from=$goods_list item=goods}
+                                <tr>
+                                    <td style="background: #fff"><input type="checkbox" class="checkbox" value="{$goods.rec_id}"></td>
+                                    <td bgcolor="#ffffff"><a href="{$goods.url_title}"><img style="width: 50px; height: 50px;"  src="{$goods.goods_thumb}" alt="{$goods.goods_title}"></a></td>
+                                    <td bgcolor="#ffffff"><a href="{$goods.url_title}" class="f6">{$goods.goods_title}</a></td>
+                                    <td bgcolor="#ffffff">
+                                        {if $goods.promote_price neq ""}
+                                            {$lang.promote_price}<span class="goods-price"><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$goods.promote_price}">{$goods.promote_price}</span> </span>
+                                        {else}
+                                            {$lang.shop_price}<span class="goods-price"><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price"  orgp="{$goods.shop_price}">{$goods.shop_price}</span> </span>
+                                        {/if}
+                                    </td>
+                                    <td bgcolor="#ffffff" align="center"><a href="javascript:void(0);" id="add_cart_msg{$goods.goods_id}" gid="{$goods.goods_id}" ref="1" class="js_add_cart_button add_cart_button">{$lang.add_to_cart}</a><a href="javascript:if (confirm('Favorites Are you sure you want to delete the selected goods in it?')) location.href='/{$cur_lang_url}m-users-a-delete_collection-collection_id-{$goods.rec_id}.htm'" class="removeBtn" title=" Remove">{$lang.dete}</a></td>
+                                </tr>
+                                {/foreach}
+                            </tbody>
+                        </table>
+                        <input type="button" class="mt10" id="btn-delete-wishes" value="{$lang.delete_selected}">
+                        {literal}
+                        <script>
+                            (function(){
+                                $(document).ready(function(){
+                                    $("a.js_add_cart_button").click(function(){
+                                        GLOBAL.CartCheckout.addcart(this);
+                                        return false;
+                                    });
+                                    $('#btn-delete-wishes').click(function() {
+                                        var selected = getCheckedAll();//common.min.js
+                                        if (selected) {location.href = DOMAIN_USER + '/{/literal}{$cur_lang_url}{literal}m-users-a-delete_collection.htm?collection_id=' + selected;}
+                                    });
+                    
+                                });
+                            })()
+                        </script>
+                        {/literal}
+                    </div>
+                    
+                    {/if}
+
+                 {if $action eq 'profile'}
+                   
+                    <div class="prersonalData m_box p7 borderTop3">
+                        <h3>{$lang.profile}</h3>
+                        {if $profile.firstname ==''  && $profile.lastname==''}
+                        <table width="100%" border="0" cellpadding="5" cellspacing="0" bgcolor="#F4FFE6" style="margin:0px 0px  5px 0px; border:1px #CCCC00 solid; border-bottom:1px #999933 solid;border-right:1px #999933 solid;">
+                            <tr>
+                                <td width="4%" align="center" style="font-size:12px"><img src="{$imgcache_url}images/styleimg/zlicon.png" /></td>
+                                <td width="96%" style="font-size:12px; color:#006600; font-weight:bold;">{$lang.your_personal_data_is_not_complete}</td>
+                            </tr>
+                        </table>
+                        {/if}
+                        <form id="form-edit_email" method="post" action="/{$cur_lang_url}m-users.htm">
+                            <table cellspacing="0" cellpadding="5" border="0" width="100%" style="background: #ddd;">
+                                <tbody>
+                                    <tr>
+                                        <td width="28%" style="text-align: right; background: #fff;">{$lang.email}: </td>
+                                        <td width="72%" style="text-align: left; background: #fff;"><input type="text" style="width:150px;" maxlength="60" value="{$profile.email}" id="txt-email" class="inputBg" name="email">
+                                            {$lang.require_field} </td>
+                                    </tr>
+                                    <tr style="display:none;" id="tr-confirm">
+                                        <td width="28%" valign="top" style="text-align: right; background: #fff;">{$lang.confirm_code}: </td>
+                                        <td width="72%" style="text-align: left; background: #fff;"><input type="text" style="width:150px;" maxlength="32" value="" id="txt-confirm_code" class="inputBg" name="confirm_code"><br>
+                                            <span> {$lang.please_input_the_verification_code_sent_to} {$lang.to_check} <input type="submit" class="bnt_blue_1" value="{$lang.click_here}" style="border:0px; background:none;cursor:pointer;width:100px;color:#00F;font-weight:bold;text-decoration:underline; "> {$lang.to_resend}</span><br><strong id="strong-email" style="color: #000;">{$profile.email}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center; background: #fff;" colspan="2"><input type="hidden" value="" id="hidden-confirm_code">
+                                            <input type="submit" class="bnt_blue_1" value="{$lang.confirm_edit}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+
+                        <form class="checkprofile" method="get" action="/{$cur_lang_url}m-users.htm" name="formEdit">
+                            <table cellspacing="0" cellpadding="5" border="0" bgcolor="#dddddd" width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td bgcolor="#ffffff" align="right">{$lang.firstname}:</td>
+                                        <td bgcolor="#ffffff" width="74%"><input type="text" style="width:100px;" id="firstname_{$sn}" value="{$profile.firstname|escape}" class="inputBg" name="firstname">
+                                            {$lang.require_field}</td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#ffffff" align="right">{$lang.lastname}:</td>
+                                        <td bgcolor="#ffffff"><input type="text" style="width:100px;" size="15" id="lastname_{$sn}" value="{$profile.lastname|escape}" class="inputBg" name="lastname">
+                                            {$lang.require_field}</td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#FFFFFF" align="right" width="28%">{$lang.sex}: </td>
+                                        <td bgcolor="#FFFFFF" align="left" width="72%"><input type="radio" {if $profile.sex==0}checked="checked"{/if} value="0" name="sex">
+                                                                                              {$lang.secrecy}&nbsp;&nbsp;
+                                                                                              <input type="radio" name="sex" value="1" {if $profile.sex==1}checked="checked"{/if} />
+                                                                                              {$lang.male}&nbsp;&nbsp;
+                                                                                              <input type="radio" name="sex" value="2" {if $profile.sex==2}checked="checked"{/if} />
+                                                                                              {$lang.female}&nbsp;&nbsp;
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#FFFFFF" align="right" width="28%">{$lang.email}: </td>
+                                        <td bgcolor="#FFFFFF" align="left" width="72%">{$profile.email}</td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#FFFFFF" align="right" width="28%">{$lang.other_msn}:</td>
+                                        <td bgcolor="#FFFFFF" align="left" width="72%"><input type="text" class="inputBg" value="{$profile.msn}" name="other[msn]"></td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#FFFFFF" align="right" width="28%">{$lang.phone}:</td>
+                                        <td bgcolor="#FFFFFF" align="left" width="72%"><input type="text" class="inputBg" value="{$profile.phone}" name="other[phone]">
+                                            {$lang.require_field}</td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#FFFFFF" align="center" colspan="2"><input type="hidden" value="edit_profile" name="a">
+                                            <input type="submit" style="" class="bnt_blue_1" value="{$lang.confirm_edit}" name="submit"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                        <form method="post" class="userform" id="modpassword" action="/{$cur_lang_url}m-users-a-edit_password.htm" name="formPassword">
+                            <table cellspacing="0" cellpadding="5" border="0" bgcolor="#dddddd" width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td bgcolor="#FFFFFF" align="right" width="28%">{$lang.old_password}:</td>
+                                        <td bgcolor="#FFFFFF" align="left" width="76%"><input type="password" class="inputBg" size="25" name="old_password"></td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#FFFFFF" align="right" width="28%">{$lang.new_password}:</td>
+                                        <td bgcolor="#FFFFFF" align="left"><input type="password" class="inputBg" size="25" id="new_password" name="new_password"></td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#FFFFFF" align="right" width="28%">{$lang.confirm_password}:</td>
+                                        <td bgcolor="#FFFFFF" align="left"><input type="password" class="inputBg" id="comfirm_password" size="25" name="comfirm_password"></td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#FFFFFF" align="center" colspan="2"><input type="submit" value="{$lang.confirm_edit}" style="" class="bnt_blue_1" name="submit"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                    
+                    {/if}
+
+                    {if $action eq 'address_list'}
+                    
+                    <div class="consigneeInfo m_box p7 borderTop3">
+                        <h3>{$lang.consignee_info}</h3>
+                        <ul  class="mt10">
+                            {foreach from=$consignee_list item=consignee key=sn}
+                                {if $consignee.firstname !=''}
+                                <li>{$lang.consignee} :<a href="#{$sn}" class="consignee_link">{$consignee.firstname|escape} {$consignee.lastname|escape}</a></li>
+                                {/if}
+                            {/foreach}
+
+                        </ul>
+                        <input type="hidden" value='{$country_json}' id="country_json" />
+                        {foreach from=$consignee_list item=consignee key=sn} 
+                        <a name="{$sn}"></a>
+                        <form action="/{$cur_lang_url}m-users-a-edit_address.htm" method="post" name="theForm" class="theAddressForm  mt10" id="{$sn}" >
+                            <table width="100%" border="0" cellpadding="2" cellspacing="1" bgcolor="#dddddd" class="grid_tb">
+                                <tbody>
+                                    <tr>
+                                        <td width="26%" align="right" bgcolor="#ffffff" style="background-color: rgb(244, 248, 251);">{$lang.firstname}:</td>
+                                        <td width="74%" bgcolor="#ffffff" style="background-color: rgb(244, 248, 251);">
+                                            <input name="firstname" type="text" class="inputBg" id="firstname_{$sn}" value="{$consignee.firstname|escape}" style="width:100px;">
+                                            {$lang.require_field}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" bgcolor="#ffffff" style="background-color: rgb(255, 255, 255);">{$lang.lastname}:</td>
+                                        <td bgcolor="#ffffff" style="background-color: rgb(255, 255, 255);"><input name="lastname" type="text" class="inputBg" id="lastname_{$sn}" value="{$consignee.lastname|escape}" size="15" style="width:100px;">
+                        {$lang.require_field}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" bgcolor="#ffffff" style="background-color: rgb(244, 248, 251);">{$lang.email_address}:</td>
+                                        <td align="left" bgcolor="#ffffff" style="background-color: rgb(244, 248, 251);"><input name="email" type="text" class="inputBg" id="email" value="{$consignee.email|escape}">
+                        {$lang.require_field}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" bgcolor="#ffffff" style="background-color: rgb(255, 255, 255);">{$lang.addressline1}:</td>
+                                        <td bgcolor="#ffffff" style="background-color: rgb(255, 255, 255);"><input name="addressline1" type="text" class="inputBg" id="addressline1_{$sn}" value="{$consignee.addressline1|escape}">
+                        {$lang.require_field}<span style="color: red">{$lang.english_address_tip}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" bgcolor="#ffffff" style="background-color: rgb(244, 248, 251);">{$lang.addressline2}:</td>
+                                        <td bgcolor="#ffffff" style="background-color: rgb(244, 248, 251);"><input name="addressline2" type="text" class="inputBg" id="addressline2_{$sn}" value="{$consignee.addressline2|escape}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" bgcolor="#FFFFFF" style="background-color: rgb(255, 255, 255);">{$lang.country}:</td>
+                                        <td bgcolor="#FFFFFF" style="background-color: rgb(255, 255, 255);">
+                                            <select name="country" id="country" style="border:1px solid #ccc;" onChange='changeselect(this.value,"{$consignee.country}","{$sn}")'>
+                                                <option value="">{$lang.Please_select_country} </option>
+                                                {foreach from=$country_list item=country}
+                                                <option value="{$country.region_id}" {if $consignee.country eq $country.region_id}selected{/if}>{$country.region_name}</option>
+                                                {/foreach}
+                                            </select>
+                        {$lang.require_field}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" bgcolor="#FFFFFF" style="background-color: rgb(244, 248, 251);">{$lang.province}
+                        :</td>
+                                        <td bgcolor="#FFFFFF" style="background-color: rgb(244, 248, 251);">
+                                            <div class="state_{$consignee.country}_{$sn}">
+                                                {if $consignee.states neq ''}
+                                                    <select name="province">
+                                                        {foreach from=$consignee.states item=state}
+                                                        <option value="{$state}" {if $state eq $consignee.province}selected{/if}>{$state}</option>
+                                                        {/foreach}
+                                                    </select>
+                                                    {if $consignee.province_not_in eq 1 }
+                                                    <span style="color: red" id="not_in">{$consignee.province} Not in list please select</span>
+                                                    {/if}
+                                                {else}
+                                                    <input type="text" name="province" value="{$consignee.province}"/>
+                                                {/if}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" bgcolor="#ffffff" style="background-color: rgb(255, 255, 255);">{$lang.city}:</td>
+                                        <td align="left" bgcolor="#ffffff" style="background-color: rgb(255, 255, 255);"><input name="city" type="text" class="inputBg" id="city" value="{$consignee.city|escape}">
+                        {$lang.require_field}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" bgcolor="#FFFFFF" style="background-color: rgb(244, 248, 251);">{$lang.phone} :</td>
+                                        <td bgcolor="#FFFFFF" style="background-color: rgb(244, 248, 251);"><span class="code_{$consignee.country}" name="countryCode">+{$consignee.code}
+                                                <input type="hidden" name="code" value="{$consignee.code}">
+                                            </span>&nbsp;
+                                            <input name="tel" type="text" class="inputBg" id="tel_{$sn}" value="{$consignee.tel|escape}" style="width:200px;">
+                        {$lang.require_field}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" bgcolor="#ffffff" style="background-color: rgb(255, 255, 255);">{$lang.postalcode}:</td>
+                                        <td align="left" bgcolor="#ffffff" style="background-color: rgb(255, 255, 255);"><input name="zipcode" type="text" class="inputBg" id="zipcode" value="{$consignee.zipcode|escape}">
+                        {$lang.require_field}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" align="center" bgcolor="#ffffff" style="background-color: rgb(244, 248, 251);">
+                                             {if $consignee.firstname && $consignee.email} 
+                                            <input type="submit" name="submit" class="bnt_blue_1" value="{$lang.confirm_edit}" />
+                                            <input name="button" type="button" class="bnt_blue"  onclick="if (confirm('{$lang.confirm_drop_address}'))location.href='/{$cur_lang_url}m-users-a-drop_consignee-id-{$consignee.address_id}.htm'" value="{$lang.drop}" />
+                                            {else} 
+                                            <input type="submit" name="submit" class="bnt_blue_2"  value="{$lang.add_address}"/>
+                                             {/if}
+                                            <input name="address_id" type="hidden" value="{$consignee.address_id}">
+                                            <a href="#"> Up </a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    {/foreach}
+                    </div>
+					<script language="javascript">
+						var firstname_msg = users_inc_firstname_msg;
+						var firstname_maxlength_msg = users_inc_prev_maxlength_msg + " 35" + users_inc_next_maxlength_msg;;
+						var lastname_msg = users_inc_lastname_msg;
+						var lastname_maxlength_msg = users_inc_prev_maxlength_msg + " 35" + users_inc_next_maxlength_msg;;
+						var tel_msg = users_inc_tel_msg;
+						var tel_maxlength_msg = users_inc_prev_maxlength_msg + " 15" + users_inc_next_maxlength_msg;;
+						var email_msg = users_inc_email_msg;
+						var email_maxlength_msg = users_inc_prev_maxlength_msg + " 60" + users_inc_next_maxlength_msg;;
+						var addressline1_msg = users_inc_addressline1_msg;
+						var addressline1_maxlength_msg = users_inc_prev_maxlength_msg + " 35" + users_inc_next_maxlength_msg;
+						var addressline2_maxlength_msg = users_inc_prev_maxlength_msg + " 35" + users_inc_next_maxlength_msg;
+						var city_msg = users_inc_city_msg;
+						var city_maxlength_msg = users_inc_prev_maxlength_msg + " 35 " + users_inc_next_maxlength_msg;
+						var province_msg = users_inc_province_msg;
+						var province_maxlength_msg = users_inc_prev_maxlength_msg + " 35 " + users_inc_next_maxlength_msg;
+						var country_msg = users_inc_country_msg;
+						var zipcode_msg = users_inc_zipcode_msg;
+						var zipcode_maxlength_msg = users_inc_prev_maxlength_msg + " 10 " + users_inc_next_maxlength_msg;
+						var not_number = not_number;
+						var enter_least = enter_least;
+                    </script>
+                    {literal}
+                    <script language="javascript">
+                        var country = $("#country_json").val();
+                        var countrys = eval('(' + country + ')');
+                        function changeselect(selected,address_id,country_id){
+                            var address_id = parseInt(address_id);
+                            var country_id = parseInt(country_id);
+                            var selectcountry = countrys[selected];
+                            var state = selectcountry['state'];
+                            var code  = selectcountry['code'];
+                            $(".code_"+address_id).html('');
+                            $(".code_"+address_id).html("+"+code+"<input type='hidden' name='code' value='"+code+"'>");
+                            if(state.length>0){
+                                $('.state_'+address_id+'_'+country_id).html('');
+                                $('.state_'+address_id+'_'+country_id).html("<select id='states_"+address_id+"_"+country_id+"' name='province'></select>")
+                                var province ='';
+                                for(var i=0;i<state.length;i++){
+                                    var len = $('#states_'+address_id+'_'+country_id).length;
+                                    var province = state[i].replace('`',"'");
+                                    document.getElementById('states_'+address_id+'_'+country_id).options[document.getElementById('states_'+address_id+'_'+country_id).length] = new Option(province, province);
+
+                                }
+                            }else{
+                                $('.state_'+address_id+'_'+country_id).html('');
+                                $('.state_'+address_id+'_'+country_id).html("<input type='text' name='province' />");
+                            }
+                            $('#not_in').css('display','none');
+                        }
+                    </script>
+                    {/literal}
+                   
+                    {/if}
+
+                    {if $action eq 'billing_address_list'}
+                   
+                    <div class="billing_address m_box p7 borderTop3">
+                        <h3>{$lang.billing_addr_info}</h3>
+                        <input type="hidden" value='{$country_json}' id="country_json" />
+                        <form action="/{$cur_lang_url}m-users-a-edit_address.htm" method="post" name="theForm" class="theBillAddressForm  mt10" id="{$sn}" >
+                            <table width="100%" border="0" cellpadding="2" cellspacing="1" bgcolor="#dddddd" class="grid_tb">
+                                <tbody>
+                                    <tr>
+                                        <td width="26%" align="right" bgcolor="#ffffff" style="background-color: rgb(244, 248, 251);">{$lang.firstname}:</td>
+                                        <td width="74%" bgcolor="#ffffff" style="background-color: rgb(244, 248, 251);">
+                                            <input name="firstname" type="text" class="inputBg" id="firstname_{$sn}" value="{$consignee.firstname|escape}" style="width:100px;">
+                                            {$lang.require_field}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" bgcolor="#ffffff" style="background-color: rgb(255, 255, 255);">{$lang.lastname}:</td>
+                                        <td bgcolor="#ffffff" style="background-color: rgb(255, 255, 255);"><input name="lastname" type="text" class="inputBg" id="lastname_{$sn}" value="{$consignee.lastname|escape}" size="15" style="width:100px;">
+                        {$lang.require_field}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" bgcolor="#ffffff" style="background-color: rgb(244, 248, 251);">{$lang.email_address}:</td>
+                                        <td align="left" bgcolor="#ffffff" style="background-color: rgb(244, 248, 251);"><input name="email" type="text" class="inputBg" id="email" value="{$consignee.email|escape}">
+                        {$lang.require_field}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" bgcolor="#ffffff" style="background-color: rgb(255, 255, 255);">{$lang.addressline1}:</td>
+                                        <td bgcolor="#ffffff" style="background-color: rgb(255, 255, 255);"><input name="addressline1" type="text" class="inputBg" id="addressline1_{$sn}" value="{$consignee.addressline1|escape}">
+                        {$lang.require_field}<span style="color: red">{$lang.english_address_tip}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" bgcolor="#ffffff" style="background-color: rgb(244, 248, 251);">{$lang.addressline2}:</td>
+                                        <td bgcolor="#ffffff" style="background-color: rgb(244, 248, 251);"><input name="addressline2" type="text" class="inputBg" id="addressline2_{$sn}" value="{$consignee.addressline2|escape}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" bgcolor="#FFFFFF" style="background-color: rgb(255, 255, 255);">{$lang.country}:</td>
+                                        <td bgcolor="#FFFFFF" style="background-color: rgb(255, 255, 255);">
+                                            <select name="country" id="country" style="border:1px solid #ccc;" onChange='changeselect(this.value,"{$consignee.country}","{$sn}")'>
+                                                <option value="">{$lang.Please_select_country} </option>
+                                                {foreach from=$country_list item=country}
+                                                <option value="{$country.region_id}" {if $consignee.country eq $country.region_id}selected{/if}>{$country.region_name}</option>
+                                                {/foreach}
+                                            </select>
+                        {$lang.require_field}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" bgcolor="#FFFFFF" style="background-color: rgb(244, 248, 251);">{$lang.province}
+                        :</td>
+                                        <td bgcolor="#FFFFFF" style="background-color: rgb(244, 248, 251);">
+                                            <div class="state_{$consignee.country}_{$sn}">
+                                                {if $consignee.states neq ''}
+                                                    <select name="province">
+                                                        {foreach from=$consignee.states item=state}
+                                                        <option value="{$state}" {if $state eq $consignee.province}selected{/if}>{$state}</option>
+                                                        {/foreach}
+                                                    </select>
+                                                    {if $consignee.province_not_in eq 1 }
+                                                    <span style="color: red" id="not_in">{$consignee.province} Not in list please select</span>
+                                                    {/if}
+                                                {else}
+                                                    <input type="text" name="province" value="{$consignee.province}"/>
+                                                {/if}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" bgcolor="#ffffff" style="background-color: rgb(255, 255, 255);">{$lang.city}:</td>
+                                        <td align="left" bgcolor="#ffffff" style="background-color: rgb(255, 255, 255);"><input name="city" type="text" class="inputBg" id="city" value="{$consignee.city|escape}">
+                        {$lang.require_field}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" bgcolor="#FFFFFF" style="background-color: rgb(244, 248, 251);">{$lang.phone} :</td>
+                                        <td bgcolor="#FFFFFF" style="background-color: rgb(244, 248, 251);"><span class="code_{$consignee.country}" name="countryCode">+{$consignee.code}
+                                                <input type="hidden" name="code" value="{$consignee.code}">
+                                            </span>&nbsp;
+                                            <input name="tel" type="text" class="inputBg" id="tel_{$sn}" value="{$consignee.tel|escape}" style="width:200px;">
+                        {$lang.require_field}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" bgcolor="#ffffff" style="background-color: rgb(255, 255, 255);">{$lang.postalcode}:</td>
+                                        <td align="left" bgcolor="#ffffff" style="background-color: rgb(255, 255, 255);"><input name="zipcode" type="text" class="inputBg" id="zipcode" value="{$consignee.zipcode|escape}">
+                        {$lang.require_field}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" align="center" bgcolor="#ffffff" style="background-color: rgb(244, 248, 251);">
+                                             {if $consignee.firstname && $consignee.email} 
+                                            <input type="submit" name="submit" class="bnt_blue_1" value="{$lang.confirm_edit}" />
+                                            <input name="button" type="button" class="bnt_blue"  onclick="if (confirm('{$lang.confirm_drop_address}'))location.href='/{$cur_lang_url}m-users-a-drop_consignee-id-{$consignee.address_id}.htm'" value="{$lang.drop}" />
+                                            {else} 
+                                            <input type="submit" name="submit" class="bnt_blue_2"  value="{$lang.add_address}"/>
+                                             {/if}
+                                            <input name="address_id" type="hidden" value="{$consignee.address_id}">
+                                            <a href="#"> Up </a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+
+                        {literal}
+                        <script language="javascript">
+                            var bill_firstname_msg = bill_firstname_msg;
+                            var bill_firstname_maxlength_msg = bill_firstname_maxlength_msg;
+                            var bill_lastname_msg = bill_lastname_msg;
+                            var bill_lastname_maxlength_msg = bill_lastname_maxlength_msg;
+                            var bill_fullname_maxlength_msg = bill_fullname_maxlength_msg;
+                            var bill_tel_msg = bill_tel_msg;
+                            var bill_tel_maxlength_msg = bill_tel_maxlength_msg;
+                            var bill_addressline1_msg = bill_addressline1_msg;
+                            var bill_addressline1_maxlength_msg = bill_addressline1_maxlength_msg;
+                            var bill_city_msg = bill_city_msg;
+                            var bill_city_maxlength_msg = bill_city_maxlength_msg;
+                            var bill_province_msg = bill_province_msg;
+                            var bill_province_maxlength_msg = bill_province_maxlength_msg;
+                            var bill_country_msg = bill_country_msg;
+                            var bill_country_maxlength_msg = bill_country_maxlength_msg;
+                            var bill_zipcode_msg = bill_zipcode_msg;
+                            var bill_zipcode_maxlength_msg = bill_zipcode_maxlength_msg;
+							var not_number = not_number;
+							var enter_least = enter_least;							
+                        </script>
+                        <script language="javascript">
+                            var country = $("#country_json").val();
+                            var countrys = eval('(' + country + ')');
+                            function changeselect(selected,address_id,country_id){
+                                var address_id = parseInt(address_id);
+                                var country_id = parseInt(country_id);
+                                var selectcountry =countrys[selected];
+                                var state = selectcountry['state'];
+                                var code  = selectcountry['code'];
+                                $(".code_"+address_id).html('');
+                                $(".code_"+address_id).html("+"+code+"<input type='hidden' name='code' value='"+code+"'>");
+                                if(state.length>0){
+                                    $('.state_'+address_id+'_'+country_id).html('');
+                                    $('.state_'+address_id+'_'+country_id).html("<select id='states_"+address_id+"_"+country_id+"' name='province'></select>")
+                                    var province ='';
+                                    for(var i=0;i<state.length;i++){
+                                        var len = $('#states_'+address_id+'_'+country_id).length;
+                                        var province = state[i].replace('`',"'");
+                                        document.getElementById('states_'+address_id+'_'+country_id).options[document.getElementById('states_'+address_id+'_'+country_id).length] = new Option(province, province);
+
+                                    }
+                                }else{
+                                    $('.state_'+address_id+'_'+country_id).html('');
+                                    $('.state_'+address_id+'_'+country_id).html("<input type='text' name='province' />");
+                                }
+                                $("#not_in").css('display','none');
+                            }
+                        </script>
+                        {/literal}
+                    </div>
+
+                    
+                    {/if}
+
+                    {if $act eq 'introduce'}
+                     <div class="Affiliates m_box p7 borderTop3 f12">
+                            <div class="tr pt15 affiliateBtnWarp"><a href="/{$cur_lang_url}m-webad-a-apply.htm"  class="affiliateBtn fr">{$lang.continue} >></a></div>
+                            {$lang.Affiliate_desc1}
+                            <div class="tr pt15 affiliateBtnWarp"><a href="/{$cur_lang_url}m-webad-a-apply.htm" class="affiliateBtn fr">{$lang.continue} >></a></div>
+                    </div>
+                    {/if}
+
+                    {if $act eq 'apply'}
+                     <div class="Affiliates m_box p7 borderTop3 f12">
+                         {if $user_type == '1'}
+                                <p class="p20"> You application  is checking. please wait.</p>
+                         {else}
+                            <p class="p5">{$lang.Affiliate_desc2}</p>
+                            <div class="tr pt15 affiliateBtnWarp"><a href="/{$cur_lang_url}m-webad-a-apply_form.htm" class="affiliateBtn_accept">{$lang.i_accept}</a></div>
+                         {/if}  
+                    </div>
+                    {/if}
+                    {if $act eq 'apply_form'}
+                        <div class="Affiliates m_box p7 borderTop3 f12">
+                            <h3>{$lang.profile}</h3>
+                            <form name="formEdit" action="/{$cur_lang_url}m-webad.htm" method="get"  id="checkprofile">
+                            <table width="100%" border="0" cellpadding="5" cellspacing="0" bgcolor="#dddddd">
+                                <tr>
+                                  <td align="right" bgcolor="#ffffff"><font color="#FF0000">*</font>{$lang.firstname}:</td>
+                                  <td width="74%" bgcolor="#ffffff">
+                                        <input name="firstname" type="text" class="inputBg" id="firstname_{$sn}" value="{$profile.firstname|escape}"style="width:100px;" />        
+                                  </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" bgcolor="#ffffff"><font color="#FF0000">*</font>{$lang.lastname}:</td>
+                                    <td bgcolor="#ffffff">
+                                        <input name="lastname" type="text" class="inputBg" id="lastname_{$sn}" value="{$profile.lastname|escape}" size="15"  style="width:100px;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="28%" align="right" bgcolor="#FFFFFF"><font color="#FF0000">*</font>{$lang.sex}: </td>
+                                    <td width="74%" align="left" bgcolor="#FFFFFF"><input type="radio" name="sex" value="0" {if $profile.sex==0}checked="checked"{/if} />
+                                        {$lang.secrecy}&nbsp;&nbsp;
+                                        <input type="radio" name="sex" value="1" {if $profile.sex==1}checked="checked"{/if} />
+                                        {$lang.male}&nbsp;&nbsp;
+                                        <input type="radio" name="sex" value="2" {if $profile.sex==2}checked="checked"{/if} />
+                                        {$lang.female}&nbsp;&nbsp; 
+                                    </td>
+                                </tr>
+                                <tr>
+                                  <td width="28%" align="right" bgcolor="#FFFFFF"><font color="#FF0000">*</font>{$lang.email}: </td>
+                                  <td width="74%" align="left" bgcolor="#FFFFFF">{$profile.email}</td>
+                                </tr>
+                                <tr>
+                                  <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.other_msn}:</td>
+                                  <td width="74%" align="left" bgcolor="#FFFFFF"><input name="other[msn]" type="text" value="{$profile.msn}" class="inputBg" /></td>
+                                </tr>
+                                <tr>
+                                  <td width="28%" align="right" bgcolor="#FFFFFF">{$lang.phone}:</td>
+                                  <td width="74%" align="left" bgcolor="#FFFFFF"><input name="other[phone]" type="text" value="{$profile.phone}" class="inputBg" /></td>
+                                </tr>
+                                <tr>
+                                  <td width="28%" align="right" bgcolor="#FFFFFF"><font color="#FF0000">*</font>{$lang.paypal_account}:</td>
+                                  <td width="74%" align="left" bgcolor="#FFFFFF"><input name="paypal_account" type="text" value="{$profile.paypal_account}" class="inputBg"  /></td>
+                                </tr>
+                                <tr>
+                                  <td align="right" bgcolor="#FFFFFF"><font color="#FF0000">*</font>{$lang.Your_Profile_link}:</td>
+                                  <td align="left" bgcolor="#FFFFFF"><input name="bbs_profile" type="text" value="{$profile.bbs_profile}" class="inputBg"  />
+                                  <br/><span style="color:#999; font-size:10px">{$lang.include_facebook}</span> </td>
+                                </tr>
+                                <tr>
+                                  <td align="right" bgcolor="#FFFFFF">{$lang.Your_ID_Account}:</td>
+                                  <td align="left" bgcolor="#FFFFFF"><input name="bbs_id" type="text" value="{$profile.bbs_id}" class="inputBg"  /></td>
+                                </tr>
+                                <tr>
+                                  <td width="28%" align="right" bgcolor="#FFFFFF"><font color="#FF0000">*</font>{$lang.introduction}:</td>
+                                  <td width="74%" align="left" bgcolor="#FFFFFF"><textarea name="introduction" cols="40" rows="5" class="inputBg">{$profile.introduction}</textarea>
+                                  <div style="color:red"></div></td>
+                                </tr>
+                                <tr>
+                                  <td colspan="2" align="center" bgcolor="#FFFFFF"><input name="a" type="hidden" value="edit_profile" />
+                                    <input name="submit" type="submit" value="{$lang.confirm_edit}" class="bnt_blue_1" /></td>
+                                </tr>
+                            </table>
+                            </form>
+                        </div>
+                    {/if}
+                </div>
+            <div class="sideBar fl">
+                {include file="user_left.htm"}
+            </div> 
+        </div>
+        <div id="footer">
+            {include file="foothelp.htm"}
+            {include file="foot.htm"}
+        </div>
+        {literal}
+        <script language="javascript" type="text/javascript">
+            var js_email_require_msg    = rma_email_msg;
+            var js_email_require_length = rma_email_msg;
+            var js_password             = user_js_modpassword_0;
+            var js_success_msg          = js_success_msg;
+            var js_email_in_user        = flow_sign_js_signupform_0;
+            var Enter_at_least          = user_js_modpassword_1;
+            var Repeat_your_password    = Repeat_your_password;
+            var agree_agreement         = agree_agreement;
+            var Enter_the_same_password_as_above    = user_js_modpassword_3;
+            var Please_enter_verification_code      = flow_sign_js_signupform_1;
+            var Enter_the_characters_on_picture     = flow_sign_js_signupform_2;
+            var Verification_code_you_entered_is_incorrect = flow_sign_js_signupform_3;
+            var  Creating_successful = flow_sign_js_signupform_3;
+        </script>
+        {/literal}
+        {if $action eq 'profile'}
+        {literal}
+        <script type="text/javascript">
+            var firstname_msg = users_inc_firstname_msg;
+            var firstname_maxlength_msg = users_inc_prev_maxlength_msg + " 60" + users_inc_next_maxlength_msg;
+            var lastname_msg = users_inc_lastname_msg;
+            var lastname_maxlength_msg = users_inc_prev_maxlength_msg + " 60" + users_inc_next_maxlength_msg;
+        </script>
+        {/literal}
+        {/if}
+        {if $cur_lang eq $default_lang}
+        <script src="{$imgcache_url}minjs/jquery.validate.min.js"></script>
+        {else}
+        <script src="{$imgcache_url}minjs/{$cur_lang}-jquery.validate.min.js"></script>
+        {/if}       
+        <script src="{$imgcache_url}minjs/tablegrid.min.js"></script>
+        <script src="{$imgcache_url}minjs/user_js.min.js?2014061601"></script>
+        {if $action == 'rma_apply' ||  $action == 'rma_list' || $action == 'rma_msg'}
+        <script type="text/javascript">var cur_lang_url = "{$cur_lang_url}";</script>
+        <script type="text/javascript" src="{$imgcache_url}minjs/rma.min.js?2014051501"></script>
+        {/if}
+        {include file="statistics_js.htm"}
+		{literal}
+		<script type="text/javascript">
+		function update_avatar(avatar){
+			if(!avatar){
+				return;
+			}
+			$("#my_avatar").attr('src',"http://photo.dealsmachine.com/"+avatar);
+			$.ajax({
+			   type: "POST",
+			   url: getActionUrl(null, "m-users-a-update_avatar.htm"),
+			   data: "avatar="+avatar,
+			   dataType: 'json',
+			   success: function(msg){
+				 if(!msg.status){
+					alert("An Error Was Encountered.");
+				 }
+			   }
+			});
+			ymPrompt.close();
+		}	
+		/**
+		 * 获取请求url
+		 * 如http://cart.everbuying.com/shopping-cart/，异步登录，应该请求到cart.everbuying.com域名下防止post跨域
+		 *
+		 * @author      mashanling <msl-138@163.com>
+		 * @date        2013-12-25 11:27:15
+		 *
+		 * @param {string} [domain] 请求域名,默认为 location.protocol + '//' + location.host + '/'
+		 * @param {string} uri 请求uri,如 sign-up/
+		 *
+		 * @return void 无返回值
+		 */
+		function getActionUrl(domain, uri) {
+			domain = domain || (location.protocol + '//' + location.host + '/');
+		
+			return domain + uri;
+		}			
+		</script>
+		{/literal}
+    </body>
+</html>

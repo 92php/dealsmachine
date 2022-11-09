@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>配件管理</title>
+    <link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css?2014052801" />
+    <link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/tree.css?2014052801" />
+    <script type="text/javascript" src="{$jscache_url}sysjs/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/tree.js?2014052801"></script>
+    <script type="text/javascript" src="{$imgcache_url}eload_admin/js/common.js?2014052801"></script>
+    <script type="text/javascript" src="{$imgcache_url}eload_admin/js/peijian.js?2014052901"></script>
+	<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js?2014052801"></script>
+    <script type="text/javascript" src="/temp/skin3/eload_admin/js/all_categories.php"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 分类配件列表</td>
+		  <td align="right"><a href="peijian.php?act=category_add">分类配件添加</td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+ <form action="?" method="get">
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <td>
+
+                <div style="display: inline-block;">
+                     分类：
+                     <input type="text" name="cat_name" readonly="readonly" class="txt-select" id="txt-select-category" title="{$cat_name}" value="{$cat_name}" />
+                     <input type="hidden" name="cat_id" id="hidden-cat_id" value="{$cat_id}" />
+                     <div class="display-none div-category">
+                         <p style="text-align: right; margin: 8px;">
+                             <a href="javascript: void(0)" id="a-confirm" />确定</a>
+                             <a href="javascript: void(0)" id="a-clear" />清除</a>
+                         </p>
+                         <div id="div-category"></div>
+                     </div>
+                </div>
+
+                <input type="submit" class="sub_but" value="搜 索" />
+            </td>
+        </tr>
+    </table>
+    </form>
+<br />
+<form method="post" action="?act=batch" name="listForm">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+	<th width="10%">分类ID</th>
+    <th width="25%">分类名称</th>
+    <th width="65%">配件/价格/排序</th>
+    <th width="10%">操作</th>
+  </tr>
+  {foreach from=$data item=cat_array name=loopname}
+
+			<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+				<td height="26" align="center"><input type="checkbox" name="checkboxes[]"  value="{$cat_array.cat_id}" onclick="checkone('checkboxes[]')"/>{$cat_array.cat_id}</td>
+				<td height="26">{$cat_array.cat_name}<br /></td>
+				<td height="26">
+			   {foreach from=$cat_array.peijian item=myCat}
+					{$myCat.goods_sn}|
+					<span {literal}onclick="$(this).editable('peijian.php?act=edit', {type: 'text',event: 'dblclick',width:'90%',indicator:'Saving...',onblur:'submit',tooltip: ''});"{/literal} id="{$myCat.goods_id}||{$cat_array.cat_id}">{$myCat.price}|{$myCat.sort_order}</span><a href="?act=del_category_peijian&cat_id={$cat_array.cat_id}&goods_id={$myCat.goods_id}" onclick="return confirm('你确定要删除吗？')">删除</a>
+				{/foreach}
+				</td>
+				<td align="center">
+				  <a href="?act=remove&cat_id={$cat_array.cat_id}" class="del_act" delmsg="您确定要删除选定的分类配件吗？">删除</a>
+				</td>
+			 </tr>
+  {/foreach}
+    <tr>
+      <td align="left" colspan="3" style="padding-left:23px;">
+       	<input type="checkbox" onclick="checkAll(this, 'checkboxes[]');"> 全选
+        <input type="submit" value=" 删除 " id="btnSubmit" name="btnSubmit" class="button" onclick="return confirmform();" disabled="true" />
+      </td>
+      <td align="right" nowrap="true" colspan="12">
+	 	<div id="pager">{$pagestr}</div>
+      </td>
+    </tr>
+
+  </table>
+</form>
+
+  <script type="text/javascript">
+        var CATEGORY_PRIV = '{$smarty.session.WebUserInfo.category_priv}'.split(',');
+        PEIJIAN.list.bindEvents().init();
+</script>
+{literal}
+<script type="text/javascript">
+//全选
+function checkAll(e, itemName)
+{
+	//alert(1111);
+	if (e.checked){
+		try{
+	   document.getElementById('btnSubmit').disabled = false;
+	   document.getElementById('selAction').disabled = false;
+		}
+		catch(err){};
+   }else{
+	   try{
+	   document.getElementById('btnSubmit').disabled = true;
+	   document.getElementById('selAction').disabled = true;
+	   }
+		catch(err){};
+   }
+
+	var aa = document.getElementsByName(itemName);
+	for (var i=0; i<aa.length; i++)
+	{
+	   aa[i].checked = e.checked;
+	}
+
+}
+</script>
+{/literal}
+{include file="copyright.htm"}
+

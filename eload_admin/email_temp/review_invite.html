@@ -1,0 +1,104 @@
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="800">
+
+<tr>
+<td colspan="3" width="2400">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="800">
+
+<tr>
+<td rowspan="2" width="185" height="65"><a href="http://www.bestafford.com/"><img alt="Logo bestafford.com" src="http://www.bestafford.com/temp/skin2/images/logo_email.jpg" border="0" width="185" height="65"></a></td>
+<td style="font-size: 12px; color: rgb(0, 0, 0); font-family: Arial,Helvetica,sans-serif;" rowspan="2" align="middle" background="http://www.davismicro.com/images/c_tbge.jpg" width="229">Welcome!<a href="http://www.bestafford.com/m-users-a-sign.htm" target="_blank"> Sign in</a> or <a href="http://www.bestafford.com/m-users-a-join.htm" target="_blank">register</a>.</td>
+<td width="386" height="20">&nbsp;</td></tr>
+<tr>
+<td style="font-weight: bold; font-size: 13px; color: rgb(255, 255, 255); font-family: Arial,Helvetica,sans-serif;" align="middle" background="http://www.davismicro.com/images/r_tbge.jpg" height="45"><a style="color: rgb(255, 255, 255);" href="http://www.bestafford.com/" target="_blank">Home</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a style="color: rgb(255, 255, 255);" href="http://www.bestafford.com/new-products.html" target="_blank">New Products</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a style="color: rgb(255, 255, 255);" href="http://www.bestafford.com/m-users.htm" target="_blank">My Account</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a style="color: rgb(255, 255, 255);" href="http://support.bestafford.com" target="_blank">Support</a> </td></tr></table></td></tr>
+<tr>
+<td style="padding-top: 10px;" colspan="3" align="middle">
+<table border="0" cellpadding="0" cellspacing="0" width="780">
+
+<tr>
+<td style="background: url(&quot;http://www.davismicro.com/images/ccbgbge.jpg&quot;) no-repeat scroll left top transparent;" align="middle" valign="top">
+<table border="0" cellpadding="0" cellspacing="0" width="95%">
+
+<tr>
+<td style="font-size: 12px; color: rgb(0, 0, 0); line-height: 23px; padding-top: 15px; font-family: Arial,Helvetica,sans-serif;" align="left">
+<p><strong style="font-size: 19px;">Hello, {$consignee}</strong></p>
+Thank you for shopping on <a href="http://www.bestafford.com/" target="_blank">bestafford.com </a>. Now we are sincerely inviting you to write reviews for those products you have purchased. Your true and objective reviews are important for us and also help other customers. to make a better choice.
+<br>
+<strong style="font-size:15px;">Please click the &quot; Write a review&quot; button besides the products to write a review and get 5-30 EB points.</strong> <a href="http://www.bestafford.com/m-promotion-active-14.htm" target="_blank">(see EB points details)</a><br>
+<br></td></tr>
+<tr>
+  <td style="font-size: 12px; color: rgb(0, 0, 0); line-height: 20px; padding-bottom: 10px; font-family: Arial,Helvetica,sans-serif; font-size:15px; color:#FF6600" align="left"><strong>The Products You Have Purchased as Follows :</strong></td>
+</tr>
+
+{foreach from=$order item=o}
+<tr>
+  <td style="font-size: 12px; color: rgb(0, 0, 0); line-height: 15px; padding-top: 5px; font-family: Arial,Helvetica,sans-serif;" align="left"><table width="100%" border="0" cellspacing="0" cellpadding="0" style=" margin-bottom:10px;">
+    <tr>
+      <td width="165" rowspan="4"><table width="150" height="150" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td style="border:1px #CCCCCC solid;"><a href="{$o.url_title}" target="_blank"><img width="150" height="150" src="{$o.goods_grid}" alt="Product picture" border="0"></a></td>
+        </tr>
+      </table></td>
+      <td height="20" valign="top" style="font-size:13px; color:#0033CC; font-weight:bold; padding-bottom:10px;"><a href="{$o.url_title}" target="_blank">{$o.goods_name}</a></td>
+    </tr>
+    <tr>
+      <td height="22" valign="top" style="font-size:12px; padding-bottom:10px;">Purchase time: {$o.add_time}</td>
+    </tr>
+    {if $o.review neq ''}
+    <tr>
+      <td height="22" valign="top" style="font-size:12px; padding-bottom:10px;"><img src="{$o.review.avg_rate_img}"> {$o.review.avg_rate}(<a href="{$o.url_title}" target="_blank">{$o.review.review_count} Customer Review{if $o.review.review_count gt 1}s{/if}</a>)</td>
+    </tr>
+    {/if}
+    <tr>
+      <td height="60" style="font-size:25px; font-weight:bold;"><a href="{$o.write_review_url}" target="_blank">Write a review</a></td>
+    </tr>
+  </table></td>
+</tr>
+
+{/foreach}
+
+<tr>
+  <td style="font-size: 12px; color: rgb(0, 0, 0); line-height: 20px; padding-bottom: 10px; padding-top:20px; font-family: Arial,Helvetica,sans-serif; font-size:15px; color:#FF6600" align="left"><strong>Other Hot Selling Products You May Also Like :</strong></td>
+</tr>
+<tr>
+  <td style="font-size: 12px; color: rgb(0, 0, 0); line-height: 20px; padding-top: 5px; font-family: Arial,Helvetica,sans-serif;" align="left"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+    {foreach from=$related_goods item=g}
+      <td align="center" valign="top"><table width="150" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td height="160" valign="top"><table width="150" height="150" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td style="border:1px #CCCCCC solid;"><a href="{$g.url_title}" target="_blank"><img width="150" alt="Product picture" height="150" src="{$g.goods_grid}" border="0"></a></td>
+            </tr>
+          </table></td>
+        </tr>
+        <tr>
+          <td height="55" valign="top" style="line-height:14px; font-size:11px;"><a href="{$g.url_title}" style="color:#666666">{$g.goods_title}</a></td>
+        </tr>
+        <tr>
+          <td height="30"><img alt="Free shipping" src="http://www.bestafford.com/temp/skin2/images/freepic.gif"></td>
+        </tr>
+        <tr>
+          <td height="30" style="font-size:16px; font-weight:bold; color:#CC0000">USD {$g.shop_price}</td>
+        </tr>
+      </table></td>
+
+ 	{/foreach}
+    </tr>
+  </table></td>
+</tr>
+<tr>
+  <td style="font-size: 12px; color: rgb(0, 0, 0); line-height: 20px; padding-top: 5px; font-family: Arial,Helvetica,sans-serif;" align="left">&nbsp;</td>
+</tr>
+</table></td></tr></table></td></tr>
+
+<tr>
+  <td style="font-size: 11px; color: rgb(0, 0, 0); line-height: 15px; font-family: Arial,Helvetica,sans-serif; padding:10px 0px;" colspan="3" align="left">For any after sales questions, please <a href="http://support.bestafford.com" target="_blank">Contact Customer Service</a> and get a response within 24 hours</td>
+</tr>
+<tr>
+<td style="font-size: 11px; color: rgb(0, 0, 0); line-height: 15px; font-family: Arial,Helvetica,sans-serif;" colspan="3" align="left">Please don't reply this email directly, this mailbox is not monitored. Please email to <a href="mailto:support@bestafford.com">support@bestafford.com</a> if you have any questions.<br><span style="padding-top: 10px;">If you prefer not to receive promotional email messages from us <a href="http://www.bestafford.com/m-users-a-unsubmail-e-{$email}.htm" target="_blank">click here</a></span></td></tr>
+<tr>
+<td colspan="3" background="http://www.davismicro.com/images/f_bbge.jpg" height="15">&nbsp;</td></tr>
+<tr>
+<td style="font-size: 11px; color: rgb(153, 153, 153); line-height: 15px; font-family: Arial,Helvetica,sans-serif;" colspan="3" align="middle">Registered Names and Trademarks are the copyright and property of their respective owners.<br>
+  Copyright 2006-2011 <span style="color: rgb(0, 51, 153);">bestafford.com</span> All Rights Reserved</td>
+</tr></table>

@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>专题商品管理</title>
+    <link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css" />
+    <script type="text/javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+    <script type="text/javascript" src="{$imgcache_url}eload_admin/js/admin_action.js?2013122601"></script>
+    <script type="text/javascript" src="{$imgcache_url}eload_admin/js/special.js?2013121801"></script>
+    <script type="text/javascript" src="/temp/skin3/eload_admin/js/special_arr.js?{$smarty.now}"></script>
+	<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+	<script language="javascript" src="/sysjs/calendar.php?lang="></script>
+	<link href="/sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+    {literal}
+        #stripe_tb td img { cursor: default; }
+        ul { margin: 0; padding: 0; list-style: none; text-align: left; }
+        li { padding-top: 4px;}
+        .font-red { color: red; }
+        .font-green { color: green; }
+        .text-left { text-align: left; }
+        .float-right { float: right; }
+    {/literal}
+    </style>
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft">
+                            <a href="index.php?act=main">管理中心</a> &gt;&gt;
+                            <a href="special_mgr.php">专题管理</a> &gt;&gt;
+                            {if $special}<a href="special_mgr.php?act=special_goods&amp;special_id={$special.special_id}">{$special.name}</a> &gt;&gt; {/if}
+                            {if $position}<a href="special_mgr.php?act=special_goods&amp;special_id={$position.special_id}&amp;position_id={$position.position_id}">{$position.name}</a> &gt;&gt; {/if}
+                            专题商品列表
+                        </td>
+                        <td width="44%" align="right">
+                            <span class="navright">
+                                <a href="special_mgr.php?act=special_goods_add&amp;special_id={$special_id}&amp;position_id={$position_id}">添加商品</a>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <form action="?" method="get">
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <td>
+                搜索：
+                {html_options options=$column_arr name=column selected=$column}
+                <input type="text" name="keyword" id="keyword" size="30" value="{$keyword}" />
+                专题：
+                <select name="special_id" id="select-specialId">
+                    <option value="">请选择...</option>
+                    {foreach from=$special_arr item=item}
+                    <option value="{$item.special_id}"{if $item.special_id  == $special_id}  selected="selected"{/if}>{$item.name} </option>
+                    {/foreach}
+                </select>
+                板块：
+                <select name="position_id" id="select-positionId">
+                    <option value="">请选择...</option>
+                </select>
+				<select name="is_on_sale">
+					<option value='2' {if $is_on_sale eq 2}selected="selected"{/if}>请选择</option>
+					<option {if $is_on_sale eq 1}selected="selected"{/if}value="1">上架</option>
+					<option {if $is_on_sale eq 0}selected="selected"{/if}value="0">下架</option>
+				</select>
+				<select name="is_promote">
+					<option value='2' {if $is_promote eq 2}selected="selected"{/if}>是否促销</option>
+					<option {if $is_promote eq 1}selected="selected"{/if}value="1">促销</option>
+					<option {if $is_promote eq 0}selected="selected"{/if}value="0">未促销</option>
+				</select>
+                <input type="submit" value="搜 索" class="sub_but" />
+                <input type="hidden" name="act" value="special_goods" />
+            </td>
+        </tr>
+    </table>
+    </form>
+	<form method="post" action="special_mgr.php?act=batch" name="listForm" onsubmit="return confirmSubmit(this)">
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;" cellpadding="4">
+        <tr>
+            <th style="width: 30px;"><input type="checkbox" onclick="checkAll(this, 'checkboxes[]');" /></th>
+            <th style="width: 55px;">图片</th>
+            <th style="width: 100px;">所属专题</th>
+            <th style="width: 100px;">所属模板</th>
+            <th style="width: 50px;">商品id</th>
+            <th style="width: 100px;">商品编码</th>
+            <th>商品标题</th>
+			<th>上架</th>
+			<th>促销</th>
+			<th>积分比率</th>
+			<th>折扣</th>
+			<th></th>
+            <th style="width: 30px;"><a href="special_mgr.php?act=special_goods&sort_by=b.goods_number&sort_order={$filter.sort_order}{$title_url}">库存</a></th>
+            <th style="width: 30px;">排序</th>
+            <th style="width: 100px;">操作</th>
+        </tr>
+        {foreach from=$data item=item}
+        <tr style="background: #{cycle values='f4f9fd,e8f1fd' name=cycle1}" onmouseover="this.style.background='#FEF3D1'" onmouseout="this.style.background='#{cycle values='f4f9fd,e8f1fd' name=cycle2}'">
+            <td><input type="checkbox" onclick="checkone('checkboxes[]')" value="{$item.auto_id}" name="checkboxes[]" /></td>
+            <td><a href="{$item.goods_url}" title="在前台打开" target="_blank"><img width="50" height="50" src="{$item.goods_thumb}" alt="" /></a></td>
+            <td><a href="special_mgr.php?act=special_goods&amp;special_id={$item.special_id}">{$special_arr[$item.special_id].name}</a></td>
+            <td><a href="special_mgr.php?act=special_goods&amp;special_id={$item.special_id}&amp;position_id={$item.position_id}">{$special_arr[$item.special_id].special_positions[$item.position_id].name}</td>
+            <td>{$item.goods_id}</td>
+            <td><a href="goods.php?act=edit&amp;goods_id={$item.goods_id}" title="编辑该产品">{$item.goods_sn}</a></td>
+            <td style="text-align: left;"><a href="/m-goods-id-{$item.goods_id}.html?islan=1" target="_blank" title="预览该商品">{$item.goods_title}</a></td>
+            <td><img {if $item.is_on_sale eq 1}src="{$imgcache_url}images/yes.gif"{else}src="{$imgcache_url}images/no.gif"{/if}></td>
+			<td><img {if $item.is_promote eq 1}src="{$imgcache_url}images/yes.gif"{else}src="{$imgcache_url}images/no.gif"{/if}>{if $item.promote_lv gt  0}&nbsp;<strong>{$item.promote_lv}</strong>{/if}{if $item.promote_end_date}<br>{$item.promote_end_date}{/if}</td>
+			<td>{$item.point_rate}</td>
+			<td>{$item.discount_rate}%</td>
+			<td>{$item.shop_price}</td>
+			<td>{$item.goods_number}</td>
+            <td><span {literal}onclick="$(this).editable('special_mgr.php?act=save_sort_order', {type: 'text',event: 'dblclick',width:'90%',indicator:'Saving...',onblur:'submit',tooltip: ''});"{/literal} id="{$item.auto_id}">{$item.sort_order}</span></td>
+            <td>
+                <a href="special_mgr.php?act=special_goods_add&amp;position_id={$item.position_id}&amp;special_id={$item.special_id}&amp;auto_id={$item.auto_id}">编辑</a> |
+                <a href="special_mgr.php" class="a-delete" id="s-{$item.auto_id}">删除</a>
+            </td>
+        </tr>
+        {foreachelse}
+        <tr>
+            <td colspan="15" style="color: red;">{$no_records}</td>
+        </tr>
+        {/foreach}
+    </table>
+	<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;" cellpadding="4">
+		<tr>
+            <td>
+                <input type="checkbox" onclick="checkAll(this, 'checkboxes[]');" />
+				<select name="type" id="selAction" onchange="changeAction()" disabled="true">
+					<option value="">请选择...</option>
+					<option value="delete">删 除</option>
+					<option value="jifen_bilv">积分比率</option>
+					<option value="batch_promote">批量促销</option>
+					<option value="batch_discount_rate">批量折扣</option>
+				</select>
+				<!-- 批量促销begin -->
+				<span id="target_promote" style="display:none">
+					<span class="label"> 市&nbsp;场&nbsp;售&nbsp;价&nbsp;：</span><input type="text" id="market_price" name="market_price" value="" size="17" title="市场售价可为空或大于0的数字" />
+					<span class="label"> 促销利润率：</span><input type="text" id="promote_rate" name="promote_rate" value="" size="17" title="促销利润率必须为大于0的数字" /><font color="#FF0000">*<!--备注：免邮商品（促销价 = 出货价格 X 利润率 + 运费） 不免邮商品（促销价 = 出货价格 X 利润率），其中利润率为出货价格的倍数。--></font>
+					<br /><br />
+					<span class="label">促&nbsp;销&nbsp;时&nbsp;间&nbsp;：</span><input name="promote_start_date" type="text" id="promote_start_date" size="12" value='{$goods.promote_start_date}' readonly="readonly" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" title="促销起始时间" /> 到<input name="promote_end_date" type="text" id="promote_end_date" size="12" value='{$goods.promote_end_date}' readonly="readonly" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" title="促销结束时间" /><font color="#FF0000">*</font>
+				</span>
+				<!-- 批量促销end -->
+				<!-- 批量折扣begin -->
+				<span id="target_discount_rate" style="display:none">
+					<span class="label"> 折扣率：</span><input type="text" id="discount_rate" name="discount_rate" value="" size="17"/>%<font color="#FF0000">*</font>
+				</span>
+				<!-- 批量折扣end -->
+				<!--begin set point rate-->
+				<span id="setpoint_rate" style="display:none">
+					<label>
+					  <input type="radio" name="point_rate" value="1" checked="checked" />
+					  1</label>&nbsp;&nbsp;
+					   <label>
+					  <input type="radio" name="point_rate" value="1.5" />
+					  1.5</label>&nbsp;&nbsp;
+					 <label>
+					  <input type="radio" name="point_rate" value="2"  />
+					  2</label>&nbsp;&nbsp;
+						<label>
+					  <input type="radio" name="point_rate" value="2.5" />
+					  2.5</label>&nbsp;&nbsp;
+					<label>
+					  <input type="radio" name="point_rate" value="3" />
+					  3</label>&nbsp;&nbsp;
+				</span>
+				<!--end set point rate-->
+                <input type="submit" value=" 确定 " id="btnSubmit" name="btnSubmit" class="button" disabled="true" /></td>
+          <td style="text-align: right;" colspan="11"><div id="pager">{$pagestr}</div></td>
+        </tr>
+	</table>
+	</form>
+    <script type="text/javascript">
+        SPECIAL.specialGoods.list();
+        var selectSpecialId = $('#select-specialId'), selectPositionId = $('#select-positionId');
+        var specialId = '{$special_id}', positionId = '{$position_id}';
+        SPECIAL.specialGoods.loadPositions();
+        selectSpecialId.change(SPECIAL.specialGoods.loadPositions);
+    </script>
+    {include file="copyright.htm"}

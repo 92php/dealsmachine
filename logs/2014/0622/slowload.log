@@ -1,0 +1,297 @@
+[2014-06-22 21:02:31.7538]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.1006[/b]
+开始内存: [b]477.40 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:15:26.1099]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0321[/b]
+开始内存: [b]477.40 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:20:32.7394]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0416[/b]
+开始内存: [b]477.63 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:22:15.3781]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0348[/b]
+开始内存: [b]477.63 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:26:38.4431]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0384[/b]
+开始内存: [b]477.63 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:36:55.6135]  [127.0.0.1] GET /dealsmachine/(http://localhost/)
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0532[/b]
+开始内存: [b]477.70 KB[/b]
+结束内存: [b]2.56 MB[/b]
+使用内存: [b]2.09 MB[/b]
+内存峰值: [b]2.57 MB[/b]
+
+$@!#
+[2014-06-22 21:37:46.8292]  [127.0.0.1] GET /dealsmachine/(http://localhost/)
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0494[/b]
+开始内存: [b]477.70 KB[/b]
+结束内存: [b]2.56 MB[/b]
+使用内存: [b]2.09 MB[/b]
+内存峰值: [b]2.57 MB[/b]
+
+$@!#
+[2014-06-22 21:47:19.9222]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0326[/b]
+开始内存: [b]477.50 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:50:03.6500]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0306[/b]
+开始内存: [b]477.77 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:50:05.0355]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0367[/b]
+开始内存: [b]477.77 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:50:17.0985]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0338[/b]
+开始内存: [b]477.77 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:50:23.6320]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0332[/b]
+开始内存: [b]477.98 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:50:24.0880]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0359[/b]
+开始内存: [b]477.98 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:50:24.2612]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0440[/b]
+开始内存: [b]477.98 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:50:24.4105]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0282[/b]
+开始内存: [b]477.98 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:50:24.5786]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0367[/b]
+开始内存: [b]477.98 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:50:24.7670]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0364[/b]
+开始内存: [b]477.98 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:50:24.9264]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0350[/b]
+开始内存: [b]477.98 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:50:25.0868]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0341[/b]
+开始内存: [b]477.98 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:50:27.5718]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0407[/b]
+开始内存: [b]477.98 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:50:27.7447]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0303[/b]
+开始内存: [b]477.98 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:50:27.9023]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0306[/b]
+开始内存: [b]477.98 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:50:28.0888]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0358[/b]
+开始内存: [b]477.98 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:50:28.4271]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0308[/b]
+开始内存: [b]477.98 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:50:43.0957]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0331[/b]
+开始内存: [b]477.47 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:53:35.5141]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0474[/b]
+开始内存: [b]478.60 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:54:36.5984]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]61.0789[/b]
+开始内存: [b]478.62 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.63 MB[/b]
+
+$@!#
+[2014-06-22 21:59:09.5035]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]1403445549.5032[/b]
+开始内存: [b]478.20 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.67 MB[/b]
+
+$@!#
+[2014-06-22 22:34:54.9778]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]1403447694.9777[/b]
+开始内存: [b]478.03 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.67 MB[/b]
+
+$@!#
+[2014-06-22 22:41:05.8765]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]1403448065.8763[/b]
+开始内存: [b]477.96 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.67 MB[/b]
+
+$@!#
+[2014-06-22 22:45:14.8577]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]1403448314.8575[/b]
+开始内存: [b]478.19 KB[/b]
+结束内存: [b]2.63 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.67 MB[/b]
+
+$@!#
+[2014-06-22 22:45:20.4511]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]1403448320.4509[/b]
+开始内存: [b]477.95 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.67 MB[/b]
+
+$@!#
+[2014-06-22 23:04:51.1890]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2562
+User Notice[1024]：[b]1403449491.1889[/b]
+开始内存: [b]478.02 KB[/b]
+结束内存: [b]2.62 MB[/b]
+使用内存: [b]2.16 MB[/b]
+内存峰值: [b]2.67 MB[/b]
+
+$@!#

@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>投票管理</title>
+    <link type="text/css" rel="stylesheet" href="/temp/skin3/eload_admin/images/admin_css.css" />
+    <script type="text/javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+    <script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+    <script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/vote.js"></script>
+    <style type="text/css">
+    {literal}
+        #stripe_tb td img { cursor: default; }
+        ul { margin: 0; padding: 0; list-style: none; }
+        li { padding-top: 4px;}
+        .font-red { color: red; }
+        .font-green { color: green; }
+        .text-left { text-align: left; }
+        .float-right { float: right; }
+    {/literal}
+    </style>
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> &gt;&gt; 投票管理</td>
+                        <td width="44%" align="right">
+                            <span class="navright">
+                                <a href="vote.php?act=subject_add">添加题组</a>
+                                <a href="vote.php?act=title_add">添加标题</a>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;">
+        <tr>
+            <th>序号</th>
+            <th>题组</th>
+            <th>标题</th>
+            <th>模板</th>
+            <th>排序</th>
+            <th>投票间隔限制(小时)</th>
+            <th>投票次数</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+        {foreach from=$data item=item name=subject}
+        <tr bgColor="{cycle values='#f4f9fd,e8f1fd' name=cycle1}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{cycle values='#f4f9fd,e8f1fd' name=cycle2}'">
+            <td>{$smarty.foreach.subject.iteration}</td>
+            <td><a href="vote.php?act=title_list&amp;subject_id={$item.subject_id}" title="查看该题组下投票标题">{$item.subject}</a></td>
+            <td style="text-align: left;">
+                <ul>
+                {foreach from=$item.titles item=title name=title}
+                <li>{$smarty.foreach.title.iteration}. <a href="vote.php?act=option_list&amp;subject_id={$item.subject_id}&amp;title_id={$title.title_id}" title="查看该标题下选项">{$title.title|replace:'$br':'<br />'}</a></li>
+                {foreachelse}
+                <li>--</li>
+                {/foreach}
+                </ul>
+            </td>
+            <td>{$item.tpl}</td>
+            <td>{$item.s_order}</td>
+            <td>{$item.s_limit}</td>
+            <td>{$item.vote_counts}</td>
+            <td>{smarty_local_date time=$item.create_time}</td>
+            <td>
+                <a href="/vote-{$item.subject_id}.html?tpl={$item.tpl|default:'default'|regex_replace:'/\.\w+/':''}" target="_blank">预览该投票</a> | 
+                <a href="vote.php?act=option_list&amp;subject_id={$item.subject_id}.html">选项列表</a> | 
+                <a href="vote.php?act=subject_add&amp;subject_id={$item.subject_id}">编辑</a> | 
+                <a class="a-delete" href="javascript://" id="s-{$item.subject_id}">删除</a>
+            </td>
+        </tr>
+        {foreachelse}
+        <tr>
+            <td colspan="15" class="no-records">{$no_records}</td>
+        </tr>
+        {/foreach}
+        <tr>
+          <td align="right" nowrap="true" colspan="11"><div id="pager">{$pagestr}</div></td>
+        </tr>
+    </table>
+    <script type="text/javascript">VOTE.subject.index();</script>
+    {include file="copyright.htm"}

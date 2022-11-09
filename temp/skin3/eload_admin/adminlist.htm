@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 管理员列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="protect.php?act=adminadd">管理员添加</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="3%">编号</th>
+    <th width="11%">用户名</th>
+    <th width="9%">真实姓名</th>
+    <th width="13%">最后一次登录IP</th>
+    <th width="15%">最后一次登录时间</th>
+    <th width="8%">登陆次数</th>
+    <!--<th width="13%">添加时间</th>-->
+    <th width="9%">所属系统组</th>
+    <th width="9%">需要授权</th>
+    <th width="13%" align="center">操作</th>
+  </tr>
+  {foreach from=$adminArr item=list name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+    <td height="20" >{$list.said}</td>
+    <td>{$list.sa_user}</td>
+    <td>{$list.real_name}</td>
+    <td>{$list.last_ip}</td>
+    <td>{$list.last_time}</td>
+    <td>{$list.logins}</td>
+    <!--<td>{$list.add_time|date_format:"%Y-%m-%d %H:%M:%S"}</td>-->
+    <td>{$list.group_name}</td>
+    <td><img src="/temp/skin3/images/admin/{if $list.is_check_hd}yes{else}no{/if}.gif" onclick="cimage(this,'state.php?act=admin&field=is_check_hd&did={$list.said}&id_field=said');" state="{$list.is_check_hd}"/> <a href="?act=admin_hd_clear&id={$list.said}" title="清理原来授权硬件信息。">清理授权</a></td>
+    <td>
+        <a href="?act=adminadd&id={$list.said}">修改</a> | 
+        <a style="display:none" href="?act=admin_category_priv&amp;id={$list.said}">商品分类权限</a> | 
+        <a href="?act=adminlist&id={$list.said}" class="del_act">删除</a>|
+        <a href="?act=admin_cat_priv&id={$list.said}">设置分类权限</a>
+        
+        <input type="hidden" id="{$list.said}" value="{$list.said}" />
+    </td>
+  </tr>
+  {/foreach}
+</table>
+{include file="copyright.htm"}
+</body>
+</html>

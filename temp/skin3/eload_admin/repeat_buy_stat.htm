@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>重复购买统计</title>
+    <link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css" />
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td id="navleft">
+                            <a href="index.php?act=main">管理中心</a>
+                            &gt; &gt; 重复购买统计
+                        </td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <p style="margin: 10px; padding: 6px; color: #666;">
+    统计类型：{html_options options=$type_arr selected=$type id=type name=type}
+    </p>
+
+    {if $type}
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;" cellpadding="4">
+        <tr>
+            <th>日期</th>
+            <th>订单总数</th>
+            <th>新客户注册数</th>
+            <th>下单新注册客户数</th>
+            <th>新客户重复购买率</th>
+            <th>统计时段内的复购率</th>
+            <th>历史重复购买率</th>
+        </tr>
+        {foreach from=$data key=date item=item}
+        <tr style="background: #{cycle values='f4f9fd,e8f1fd' name=cycle1}" onmouseover="this.style.background='#FEF3D1'" onmouseout="this.style.background='#{cycle values='f4f9fd,e8f1fd' name=cycle2}'">
+            <td style="text-align: left">{$date}</td>
+            <td>{$item.total_orders}</td>
+            <td>{$item.new_users}</td>
+            <td>{$item.new_order_users}</td>
+            <td>{$item.new_users_repeat_buys_rate}%</td>
+            <td>{$item.repeat_buy_users_rate}%</td>
+            <td>{$item.history_buy_users_rate}%</td>
+        </tr>
+        {foreachelse}
+        <tr>
+            <td colspan="15" style="color: red;">暂无记录</td>
+        </tr>
+        {/foreach}
+    </table>
+    <p style="color: gray; margin: 10px;">
+        1、订单总数：统计时间段内，新老客户下单的总数量；<br />
+        2、新客户注册数：统计时间段内，注册的新客户总数；<br />
+        3、下单新注册客户数：统计时间段内注册的，并且下单的客户总数量；<br />
+        4、新客户重复购买率：发生重复购买的新注册客户数/统计时间段内下单新注册客户数；<br />
+        5、统计时段内的复购率=统计时间段内重复下单的客户数/统计时间段内所有下单的客户数（包括当天下单多次，并成功付款的）<br />
+        6、历史重复购买率 = 统计时间段内下单的客户历史曾有其他订单（包括统计时间段内的订单）/所有下单客户
+    </p>
+    {/if}
+    {literal}
+    <script>
+        document.getElementById('type').onchange = function() {
+            location.href = 'repeat_buy_stat.php?type=' + this.options[this.selectedIndex].value;
+        };
+    </script>
+    {/literal}
+    {include file="copyright.htm"}

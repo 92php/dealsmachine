@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href='{$imgcache_url}eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script language="javascript" src="{$imgcache_url}eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 产品咨询</td>
+          <td width="44%" align="right"><span class="navright"><a href="inquiries.php"> 产品咨询列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+
+
+<div id="list">
+<table width="99%" align="center" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="160" rowspan="4" align="left" valign="top"><a target="_blank" class="blue_link" href="{$goods.url_title}"><img src="{$goods.goods_grid}" width="150" height="150" style="border:1px #EBEBEB solid;"></a></td>
+    <td colspan="3" valign="top" style="font-size:14px;"><b>Customer inquiries for  <a href="{$goods.url_title}" target="_blank" class="blue_link">{$goods.goods_title}</a></b></td>
+  </tr>
+    <tr>
+
+    <td width="452" valign="middle">SKU:<span style="color:#600">{$goods.goods_sn}</span></td>
+  </tr>
+  <tr>
+
+    <td width="452" valign="middle">({$inquiry.inquiry_count} customer inquiries passed)</td>
+  </tr>
+  <tr>
+    <td colspan="3" valign="middle" style="font-size:16px; color:#CC0000"><b><span class="bizhong">USD</span> <span class="my_shop_price"  orgp="{$goods.shop_price}">{$goods.shop_price}</span> </b></td>
+  </tr>
+
+</table>
+{foreach key=key from=$inquiry.inquiry_list item=r name=r}
+<form method="post" action="?act=save&goods_id={$goods.goods_id}&iid={$r.iid}" name="listForm" onsubmit="return confirmSubmit(this)">
+<table width="99%" border="0" align="center" cellpadding="3" cellspacing="0" style="font-size:13px; margin-top:2px;">
+  <tr>
+    <td width="73%" height="30" align="left" valign="middle" colspan="" > <b>用户名:</b> {$r.email}&nbsp;&nbsp;　<b>呢称:{$r.nickname}</b>&nbsp;&nbsp;留言时间:{$r.adddate} </td>
+    <td width="9%" align="left" valign="middle" ><b>IP:{$r.ips}</b></td>
+    <td width="18%" align="right" valign="middle" >&nbsp;</td>
+    </tr>
+  <tr>
+    <td width="73%" height="30" align="left" valign="middle" colspan="" bgcolor="#F7F7F7"> <b>Consultation:</b> {$r.i_content}</td>
+    <td width="9%" align="left" valign="middle" bgcolor="#F7F7F7"></td>
+    <td width="18%" align="right" valign="middle" bgcolor="#F7F7F7">&nbsp;</td>
+    </tr>
+  <tr>
+    <td colspan="3" valign="top" ><p><b >Reply:</b><br/>
+      <textarea rows="15" style="width:100%; font-size:14px" name="reply">{$r.reply}</textarea><input type="hidden" name="iid" value="{$r.iid}">
+    </p>
+      <p>&nbsp; </p></td>
+  </tr>
+ {if $r.pic}
+  <tr>
+    <td colspan="3" valign="top" ><p><b >图片:</b><br/>
+{foreach from=$r.pic item=p}
+<a href="/{$p.paths}" target="_blank"><img width="100" src="/{$p.thumb_paths}" /></a>
+ {/foreach}</td>
+  </tr>  
+  {/if}
+  <tr>
+    <td width="73%" height="30" align="center" valign="middle" colspan=""> <b>前台显示该咨询
+        <input type="radio" name="is_pass" value="1" {if $r.is_pass eq '1'}checked{/if}> &nbsp;&nbsp;前台不显示该咨询
+<input type="radio" name="is_pass" value="2" {if $r.is_pass eq '2'}checked{/if}></b></td>
+
+    </tr>
+	<tr><td align="center"><input type="submit" value="  提  交 ">
+    
+    <input type="button" onClick="history.back()" value="  后  退  "></td></tr>
+  <tr>
+</table>
+</form>
+{/foreach}
+
+</div>
+
+
+
+{include file="copyright.htm"}

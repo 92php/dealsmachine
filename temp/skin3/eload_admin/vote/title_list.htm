@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>标题列表</title>
+    <link type="text/css" rel="stylesheet" href="/temp/skin3/eload_admin/images/admin_css.css" />
+    <script type="text/javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+    <script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+    <script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/vote.js"></script>
+    <style type="text/css">
+    {literal}
+        #stripe_tb td img { cursor: default; }
+        ul { margin: 0; padding: 0; list-style: none; }
+        li { padding-top: 4px; }
+        .font-red { color: red; }
+        .font-green { color: green; }
+        .text-left { text-align: left; }
+        .float-right { float: right; }
+    {/literal}
+    </style>
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> &gt;&gt; <a href="vote.php">投票管理</a> &gt;&gt; <a href="vote.php?act=title_list&amp;subject_id={$subject_id}" title="查看该题组下标题">{$subjects[$subject_id].subject}</a> &gt;&gt; 标题列表</td>
+                        <td width="44%" align="right"><span class="navright"><a href="vote.php?act=title_add&amp;subject_id={$subject_id}">添加标题</a> <a href="vote.php?act=option_add&amp;subject_id={$subject_id}">添加选项</a></span></td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;">
+        <tr>
+            <th>序号</th>
+            <th>标题</th>
+            <th>所属题组</th>
+            <th>选项</th>
+            <th>排序</th>
+            <th>类型</th>
+            <th>必答</th>
+            <th>状态</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+        {foreach from=$data item=item name=title}
+        <tr bgColor="{cycle values='#f4f9fd,e8f1fd' name=cycle1}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{cycle values='#f4f9fd,e8f1fd' name=cycle2}'">
+            <td>{$smarty.foreach.title.iteration}</td>
+            <td><a href="vote.php?act=option_list&amp;title_id={$item.title_id}&amp;subject_id={$item.subject_id}" title="查看该标题下投票选项">{$item.title|replace:'$br':'<br />'}</a></td>
+            <td><a href="vote.php?act=subject_add&amp;subject_id={$item.subject_id}" title="编辑该题组">{$subjects[$item.subject_id].subject}</a></td>
+            <td class="text-left">
+                <ul>
+                {foreach from=$item.options item=option name=option}
+                <li><span class="float-right">{if $item.total_counts != 0}<img src="/temp/skin3/images/admin/vote.gif" alt="" style="width: {math equation='x / y * 100' format='%.2f' x=$option.vote_counts y=$item.total_counts}px; height: 10px; border: 0;" />{/if} <span class="font-red">{$option.vote_counts}</span>票 (<span class="font-red">{if $item.total_counts != 0}{math equation='x / y * 100' format='%.2f' x=$option.vote_counts y=$item.total_counts}{else}0.00{/if}</span>%)</span>{$smarty.foreach.option.iteration}. <a href="vote.php?act=option_add&amp;subject_id={$item.subject_id}&amp;title_id={$item.title_id}&amp;option_id={$option.option_id}" title="编辑选项">{$option.name}</a></li>
+                {/foreach}
+                {if $item.other}
+                <li><span class="float-right">{if $item.total_counts != 0}<img src="/temp/skin3/images/admin/vote.gif" alt="" style="width: {math equation='x / y * 100' format='%.2f' x=$item.other_counts y=$item.total_counts}px; height: 10px; border: 0;" />{/if} <span class="font-red">{$item.other_counts}</span>票  (<span class="font-red">{if $item.total_counts != 0}{math equation='x / y * 100' format='%.2f' x=$item.other_counts y=$item.total_counts}{else}0.00{/if}</span>%)</span>{math equation='x + y' x=$smarty.foreach.option.iteration y=1}. <a href="vote.php?act=other&amp;title_id={$item.title_id}" title="查看其它选项输入数据">其它</a></li>
+                {/if}
+                {if $item.s_type == 2 || $item.s_type == 3}
+                <a href="vote.php?act=other&amp;title_id={$item.title_id}" title="点击查看">{$item.total_counts}条内容</a>
+                {/if}
+                </ul>
+            </td>
+            <td>{$item.s_order}</td>
+            <td>{$type_arr[$item.s_type]}{if $item.other}(带“其它”选项){/if}</td>
+            <td><a href="javascript://" class="a-needed s-{$item.title_id}">{$needed_arr[$item.needed]}</a></td>
+            <td><a href="javascript://" class="a-enable s-{$item.title_id}">{$enable_arr[$item.enable]}</a></td>
+            <td>{smarty_local_date time=$item.create_time}</td>
+            <td>
+                <a href="vote.php?act=title_add&amp;title_id={$item.title_id}&amp;subject_id={$item.subject_id}">编辑</a> |  
+                <a class="a-delete" href="javascript://" id="s-{$item.title_id}">删除</a>
+            </td>
+        </tr>
+        {foreachelse}
+        <tr>
+            <td colspan="15" class="no-records">{$no_records}</td>
+        </tr>
+        {/foreach}
+    </table>
+    <script type="text/javascript">
+        var subjectId = '{$subject_id}';
+        VOTE.title.list();
+    </script>
+    <p style="color: grey; margin-left: 10px;">
+        <span style="color: red">提示：</span>
+        <br/>
+        点击必答单元格可进行“是/否”操作
+        <br/>
+        点击状态单元格可进行“开启/关闭”操作
+    </p>
+    {include file="copyright.htm"}

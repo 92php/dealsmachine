@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 语言包管理</td>
+          <td width="44%" align="right">
+		  {if $default_lang eq '1'}
+		  <span style="display:none;"><span class="navright"><a href="?act=import">[导入原始语言]</a>&nbsp;
+		  <a href="?act=add&cur_lang=en">[添加]</a></span></span>
+		  {/if}
+		  </td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form action="?act=list" method="post" enctype="multipart/form-data" name="regform">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td id="navleft">语言：
+		  <select name="lang" id="lang">
+		  	<option value="">选择语言</option>
+		    <option value="en" {if $lang eq 'en'}selected="selected"{/if}>原始语言</option>
+		    {foreach from=$lang_arr item=item key=key}
+		  	<option value="{$item.title_e}" {if $lang eq $item.title_e}selected="selected"{/if}>{$item.title}</option>
+			{/foreach}
+		  </select>
+		  &nbsp;&nbsp;语言包文件：
+		<select name="lang_file" id="lang_file">
+			<option selected="selected" value="">选择文件</option>
+			<option value="common" {if $lang_file eq 'common'}selected="selected"{/if}>../languages/en/common.php</option>
+			<option value="user" {if $lang_file eq 'user'}selected="selected"{/if}>../languages/en/user.php</option>
+			<option value="shopping_flow" {if $lang_file eq 'shopping_flow'}selected="selected"{/if}>../languages/en/shopping_flow.php</option>
+			<option value="CreditCard" {if $lang_file eq 'CreditCard'}selected="selected"{/if}>../languages/en/payment/CreditCard.php</option>
+			<option value="GoogleCheckout" {if $lang_file eq 'GoogleCheckout'}selected="selected"{/if}>../languages/en/payment/GoogleCheckout.php</option>
+			<option value="paypal" {if $lang_file eq 'paypal'}selected="selected"{/if}>../languages/en/payment/paypal.php</option>
+			<option value="WesternUnion" {if $lang_file eq 'WesternUnion'}selected="selected"{/if}>../languages/en/payment/WesternUnion.php</option>
+			<option value="WiredTransfer" {if $lang_file eq 'WiredTransfer'}selected="selected"{/if}>../languages/en/payment/WiredTransfer.php</option>
+			<option value="var_html_languages" {if $lang_file eq 'var_html_languages'}selected="selected"{/if}>../temp/skin3/minjs/languages/en/var_html_languages.js</option>
+			<option value="var_languages" {if $lang_file eq 'var_languages'}selected="selected"{/if}>../temp/skin3/minjs/languages/en/var_languages.js</option>
+		</select>
+		<input type="submit" name="" value=" 搜索 " />
+		  </td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+</form>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="30">编号</th>
+    <th width="150">变量</th>
+	<th width="400">变量值</th>
+    <th width="30">排序</th>
+	<th width="40">语言</th>
+	<th width="60">类型</th>    
+    <th width="80" align="center">操作</th>
+  </tr>
+  {foreach from=$data item=list name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';"> 
+    <td height="20" >{$list.id}</td> 
+    <td>{$list.title}</td>
+    <td>{$list.title_value}</td>	
+    <td>{$list.orders}</td>
+	<td style="{if $list.lang eq 'en'}color:red{/if}"">{$list.lang}</td>
+	<td>{if $list.sort eq '1'}PHP{else}JS{/if}</td>
+    <td align="center">
+	{if $default_lang eq '1'}
+  	  <span><a href="?act=add&id={$list.id}&cur_lang={$list.lang}">修改</a></span>
+	  <span style="display:none;"> | <a href="?act=del&id={$list.id}&file_name={$list.file_name}" class="del_act" delmsg="你确定要删除吗？">删除</a></span>
+	{else} 
+		<span><a href="?act=add&id={$list.id}&cur_lang={$list.lang}">修改</a></span>
+	{/if}	
+      <input type="hidden" id="{$list.id}" value="{$list.id}" /></td>
+  </tr>
+  {/foreach}
+</table>
+{include file="copyright.htm"}
+</body>
+</html>

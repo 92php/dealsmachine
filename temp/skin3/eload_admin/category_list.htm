@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link type="text/css" rel="stylesheet" href="{$jscache_url}sysjs/jquery_dialog/jquery_dialog.css" />
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jquery_dialog/jquery_dialog.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/editinplace.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 商品分类</td>
+          <td width="44%" align="right">
+		  {if $default_lang eq '1'}
+		  <span class="navright"> <a href="addattr.php">产品批量添加属性</a>   <a href="?act=add">分类添加</a></span>
+		  {/if}
+		  </td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline"  id="stripe_tb">
+  <tr>
+    <th width="20%" height="26">分类名称</th>
+	{if $default_lang eq '1'}        
+    <th width="10%">已购买显示</th>
+    <th width="5%">状态</th>
+    <th width="11%">个数范围</th>
+    <th width="8%">出货价区间<br />
+    （人民币）</th>
+    <th width="8%">追加<br />
+      （人民币）</th>
+    <th width="10%">比例</th>
+    <th width="5%">排序</th>
+    <th width="5%"  {if $seo_group==1} style="display:none;"{/if}>是否免邮</th>    
+	{/if}
+    <th width="13%">操作</th>
+  </tr>
+  <tbody id="tbody_id">
+  {foreach from=$catArr item=cat name=loopname}
+  <tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';"  id="cat_tab_tr{$cat.cat_id}" class="parentid{$cat.parent_id}">    
+    <td style="padding-left:{$padding}px">
+      {if $cat._child gt 0}
+      <img src="{$jscache_url}temp/skin3/eload_admin/images/tv-expandable.gif" class="ctrl" state="close" id="ctrl{$cat.cat_id}"  padding = "{$padding}" hit="0" cat_id="{$cat.cat_id}"  border="0"/>
+      {else}
+      <img src="{$jscache_url}temp/skin3/eload_admin/images/tv-collapsable.gif" border="0" style="cursor: default;"/>
+      {/if}
+      <span><a href="?cid={$cat.cat_id}" title="{if $cat.cat_pic}有图{else}无图{/if}"> {if $cat.parent_id eq 0}<b>{/if}{$cat.cat_name}</a></span>
+    </td>
+	{if $default_lang eq '1'}
+    <td align="center"><img src="/temp/skin3/images/admin/{if $cat.is_login eq '1'}yes{else}no{/if}.gif"  id="is_login{$cat.cat_id}"  title="{if $cat.is_login eq '1'}供购买过的会员查看{else}无限制{/if}"  onclick="cimage(this,'state.php?act=cat&field=is_login&did={$cat.cat_id}&id_field=cat_id');" state="{$cat.is_login}" 
+    /></td>
+    <td align="center"><img src="/temp/skin3/images/admin/{if $cat.is_show eq '1'}yes{else}no{/if}.gif"  id="is_show{$cat.cat_id}"  title="{if $cat.is_show eq '1'}在前台显示{else}在前台不显示{/if}"  onclick="cimage(this,'state.php?act=cat&field=is_show&did={$cat.cat_id}&id_field=cat_id');" state="{$cat.is_show}" 
+    /></td>
+    <td align="left"><span class="category_edit" id="{$cat.cat_id}||grade">{$cat.grade}</span></td>
+    <td align="left"><span class="zhekou_category_edit" id="{$cat.cat_id}||chuhuo_qujian">{$cat.chuhuo_qujian}</span></td>
+    <td align="left"><span class="zhekou_category_edit" id="{$cat.cat_id}||zhuijia_price">{$cat.zhuijia_price}</span></td>
+    <td align="left"><span class="zhekou_category_edit" id="{$cat.cat_id}||zhekou">{$cat.zhekou}</span></td>
+    <td align="right"><span class="category_edit" id="{$cat.cat_id}||sort_order">{$cat.sort_order}</span></td>
+    <td align="center" {if $seo_group==1} style="display:none;"{/if}><img src="/temp/skin3/images/admin/{if $cat.is_free_shipping_cate eq '1'}yes{else}no{/if}.gif"  id="is_show{$cat.is_free_shipping_cate}"  title="{if $cat.is_free_shipping_cate eq '1'}免邮{else}不免邮{/if}"  onclick="cimage(this,'state.php?act=cat&field=is_free_shipping_cate&did={$cat.cat_id}&id_field=cat_id');" state="{$cat.is_free_shipping_cate}" 
+    /></td> 
+	{/if}   
+    <td align="center">
+	{if $default_lang eq '1'}
+    <a href="javascript:;" title="更新该类及该类下的所有子类下的所有出货价区间产品销售价格" onclick="if (confirm('您确定要更新分类下的所有产品的销售价格吗？'))JqueryDialog.Open('监视更新销售价格进度', 'category.php?act=update_qujian_price&cat_id={$cat.cat_id}', 510, 180);" ><img src="{$jscache_url}temp/skin3/eload_admin/images/arrow_refresh.png" width="16" height="16" border="0" /></a>    
+      <a href="category.php?act=modify_cat_price&cat_id={$cat.cat_id}" title="修改该分类下的所有产品价格"><img src="{$jscache_url}temp/skin3/eload_admin/images/coins_add.png" width="16" height="16" border="0" /></a> 
+      <a href="category.php?act=move&cat_id={$cat.cat_id}" title="转移商品"><img src="/temp/skin3/images/admin/arrow_branch.png" width="16" height="16" border="0" /></a> 
+	  {/if}
+      <a href="category.php?act=add&id={$cat.cat_id}"><img src="{$jscache_url}temp/skin3/eload_admin/images/icon_edit.gif" width="16" height="16" border="0" /></a> 
+	  {if $default_lang eq '1'}
+      <a href="?act=remove&id={$cat.cat_id}" class="del_act" title="删除分类"><img src="{$jscache_url}temp/skin3/eload_admin/images/icon_drop.gif" width="16" height="16" border="0" /></a>
+	  {/if}
+    </td>
+  </tr>
+  {/foreach}
+  </tbody>
+</table>
+{include file="copyright.htm"}
+</body>
+</html>

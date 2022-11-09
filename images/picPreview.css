@@ -1,0 +1,15 @@
+DIV#PreviewBox {
+	DISPLAY: none; PADDING-LEFT: 6px; Z-INDEX: 2009; POSITION: absolute
+}
+DIV#PreviewBox SPAN {
+	BACKGROUND: no-repeat 0px 0px; LEFT: 0px; WIDTH: 7px; POSITION: absolute; TOP: 0px; HEIGHT: 13px
+}
+DIV#PreviewBox DIV.Picture {
+	BORDER-RIGHT: #666 1px solid; BORDER-TOP: #666 1px solid; BACKGROUND: #fff; FLOAT: left; BORDER-LEFT: #666 1px solid; BORDER-BOTTOM: #666 1px solid
+}
+DIV#PreviewBox DIV.Picture DIV {
+	BORDER-RIGHT: #e8e8e8 4px solid; BORDER-TOP: #e8e8e8 4px solid; BORDER-LEFT: #e8e8e8 4px solid; BORDER-BOTTOM: #e8e8e8 4px solid
+}
+DIV#PreviewBox DIV.Picture DIV A IMG {
+	DISPLAY: block; MAX-WIDTH: 250px; MARGIN: 19px; MAX-HEIGHT: 250px
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php?lang="></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/colorselector.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 更新商品</td>
+          <td width="44%" align="right"></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th colspan="2">按分类更新商品</th>
+  </tr>
+  <form action="?act=creat_content" method="post">
+  <tr>
+    <td width="22%" height="20" align="right" ><strong>选择分类</strong><br />
+    可以同时选择多个分类<br /></td>
+    <td width="78%"><select name='catids[]' id='catids'  multiple="multiple"  style="height:200px;width:250px;" title="按住“Ctrl”或“Shift”键可以多选，按住“Ctrl”可取消选择">
+<option value='0'>所有分类</option>
+{$cat_list}
+</select>
+      <br />
+      按住“Ctrl”或“Shift”键可以多
+选，按住“Ctrl”可取消选择。不选则全部生成。</td>
+  </tr>
+  <tr>
+    <td height="20" align="right" >&nbsp;</td>
+    <td>更新所有信息
+      
+      <input type="submit" name="dosubmit" value=" 开始更新 "  class="sub_but" /><input name="creat" type="hidden" value="all" /></td>
+  </tr>
+  </form>
+  <form action="?act=creat_content" method="post">
+  
+  <tr>
+    <td height="20" align="right" >&nbsp;</td>
+    <td>更新最新发布的
+      <input size="5" value="100" name="number"/>
+条信息
+<input type="submit" name="dosubmit" value=" 开始更新 "  class="sub_but" /><input name="creat" type="hidden" value="numcreat" /></td>
+  </tr>
+  </form>
+  <form action="?act=creat_content" method="post">
+  <tr>
+    <td height="20" align="right" >&nbsp;</td>
+    <td>更新发布时间从
+      <input id="fromdate" readonly="readOnly" size="10" value="{$nowtime}" name="fromdate" jquery1244886017156="4" />
+      <input name="selbtn1" type="button" id="selbtn1" onclick="return showCalendar('fromdate', '%Y-%m-%d', false, false, 'selbtn1');" value="选择" class="button"/> 到
+      <input id="todate" readonly="readOnly" size="10" value="{$nowtime}" name="todate" jquery1244886017156="5" />
+           				<input name="selbtn2" type="button" id="selbtn2" onclick="return showCalendar('todate', '%Y-%m-%d', false, false, 'selbtn2');" value="选择" class="button"/>	的信息      
+      <input type="submit" name="dosubmit2" value=" 开始更新 "  class="sub_but" /><input name="creat" type="hidden" value="updatecreat" /></td>
+  </tr>
+  </form>
+  
+  
+  <form action="?act=creat_content" method="post">
+  <tr>
+    <td height="20" align="right" >&nbsp;</td>
+    <td>更新ID从
+      <input size="8" value="0" name="fromid" jquery1244886017156="6" />
+      到
+  <input size="8" name="toid" jquery1244886017156="7" />
+      的信息
+  <input type="submit" name="dosubmit" value=" 开始更新 "  class="sub_but" /><input name="creat" type="hidden" value="goodsidcreat" /></td>
+  </tr>
+  </form>
+</table>
+{include file="copyright.htm"}
+</body>
+</html>

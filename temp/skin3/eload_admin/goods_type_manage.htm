@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/editinplace.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 商品类型列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="goods_type.php?act=add">商品类型添加</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form method="post" action="" name="listForm">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="58%">商品类型</th>
+    <th width="10%">属性个数</th>
+    <th width="10%">状态</th>
+    <th width="22%">操作</th>
+  </tr>
+  {foreach from=$goods_type_arr item=goods_type  name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+    <td height="20"><span class="goods_type_edit" id="{$goods_type.cat_id}">{$goods_type.cat_name}</span></td>
+    <td align="center">{$goods_type.attr_count}</td>
+    <td align="center"><img src="/temp/skin3/images/admin/{if $goods_type.enabled}yes{else}no{/if}.gif"
+     onclick="cimage(this,'state.php?act=goods_type&field=enabled&did={$goods_type.cat_id}&id_field=cat_id');" state="{$goods_type.enabled}"></td>
+    <td align="center">
+      <a href="attribute.php?act=list&goods_type={$goods_type.cat_id}" title="{$lang.attribute}">属性列表</a> |
+      <a href="goods_type.php?act=add&id={$goods_type.cat_id}" title="{$lang.edit}">修改</a> |
+      <a href="goods_type.php?act=remove&id={$goods_type.cat_id}" class="del_act" delmsg="删除商品类型将会清除该类型下的所有属性。您确定要删除选定的商品类型吗？">删除</a>
+    </td>
+  </tr>
+  {foreachelse}
+    <tr><td class="no-records" colspan="9">{$lang.no_records}</td></tr>
+    {/foreach}
+    <tr>
+      <td align="right" nowrap="true" colspan="5">
+	<div id="pager">{$pagestr}</div>
+      </td>
+    </tr>
+  </table>
+</form>
+{include file="copyright.htm"}
+

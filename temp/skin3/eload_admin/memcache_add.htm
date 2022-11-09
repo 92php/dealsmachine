@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='{$imgcache_url}eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/jquery-1.8.0.min.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="{$imgcache_url}eload_admin/js/admin_add.js"></script>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$website_url}sysjs/calendar.php?lang="></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 缓存添加</td>
+          <td width="44%" align="right"><span class="navright"><a href="memcache_manage.php">缓存列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<div class="main-div">
+  <form  method="post" name="theForm"  action="memcache_manage.php?act=submit">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+      <tr>
+        <td class="label">文件目录:</td>
+        <td><input name="filename" value="{$meminfo.filename}" size="50" />
+        * </td>
+      </tr>
+      <tr>
+        <td class="label">缓存值:</td>
+        <td><textarea rows="15" cols="110" name="content">{$meminfo.content}</textarea></td>
+      </tr>
+     <tr align="center">
+        <td align="center">&nbsp;</td>
+        <td align="left">
+		<input type="hidden" name="id" value="{$meminfo.id}">
+        <input name="button" type="submit" class="sub_but" id="button" value="提交" /></td>
+      </tr>
+    </table>
+  </form>
+</div>
+{include file="copyright.htm"}

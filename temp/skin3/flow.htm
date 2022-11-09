@@ -1,0 +1,892 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+{include file="top.htm"}
+<link rel="stylesheet" href="{$imgcache_url}mincss/cart_min.css?2013082602" />
+{if $step eq 'done'}
+{literal}
+<script type="text/javascript">
+var fb_param = {};
+fb_param.pixel_id = '6011413831466';
+fb_param.value = '{/literal}{$order.order_amount}{literal}';
+fb_param.currency = 'USD';
+(function(){
+  var fpw = document.createElement('script');
+  fpw.async = true;
+  fpw.src = '//connect.facebook.net/en_US/fp.js';
+  var ref = document.getElementsByTagName('script')[0];
+  ref.parentNode.insertBefore(fpw, ref);
+})();
+</script>
+{/literal}
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/offsite_event.php?id=6011413831466&amp;value={$order.order_amount}&amp;currency=USD" /></noscript>
+{/if}
+</head>
+<body>
+{include file="public_top.htm"}
+<div class="curPath"><a class="fl" href="/{$cur_lang_url}">{$lang.home}</a><h1 class="fl"> » {$lang.My_Shopping_Cart}</h1></div>
+<div id="cart_mainWarp" class="clearfix mt10 m_box"  {if $step eq 'exp_checkout'} style="display:none;"{/if}>
+{if $step eq 'cart'}
+	
+       
+
+		<!--第一步Begin-->
+	<h3 class="cart_title"><span class="cart_title_1">{$lang.your_shopping_cart}</span></h3>
+	<div id="cart_list">
+		<ul class="cart_Th fb clearfix">
+			<li class="cart_item_1">{$lang.image}</li>
+			<li class="cart_item_2">{$lang.Item}</li>
+			<li class="cart_item_3">{$lang.unit_price}</li>
+			<li class="cart_item_4">{$lang.quantity}</li>
+			<li class="cart_item_5">{$lang.Total_Price}</li>
+			<li class="cart_item_6">{$lang.operation}</li>
+		</ul>
+		<!--*********************有商品时显示Begin*********************-->
+		{foreach from=$goods_list item=goods}
+		<div id="cart{$goods.rec_id}">
+          <ul class="cart_goods_list"  {$goods.style}>
+			
+            <li class="cart_image">
+				<a href="{$goods.url_title}" target="_blank">
+					<img src="{$goods.goods_thumb}" width="50" height="50" border="0" title="{$goods.goods_name|escape:html}">
+				</a>
+			</li>
+            <li class="cart_goodsname" >
+				<a href="{$goods.url_title}" target="_blank" class="f6" {if  $goods.style and $goods.main_goods_id == 0}style="text-decoration:underline"{/if}>{$goods.goods_name}</a>
+				<p>
+				{if $goods.using_coupon}
+					<span class='red discount_used'></span>
+				{/if}				
+				</p>				
+				{if $goods.gifts_name}
+					<p class="fb red">{$goods.gifts_name}</p>				
+				{/if}
+              {if $goods.is_free_shipping==1}<span class="p_free {$cur_lang}_p_free fl">{$lang.Free_Shipping}</span> {/if}
+              {if $goods.goods_sn|truncate:2:"" == "KA"} <span class="red"><b>{$lang.us_only}</b></span> {/if}
+			</li>
+            <li class="cart_unitprice"> 
+				<p class="shanchuxian">{if $goods.market_price > $goods.goods_price} <span class="bizhong">{$lang.cur_list.0.keyd}</span><span class="my_shop_price" orgp="{$goods.market_price}">{$goods.market_price}</span>{/if}<br >
+				{if $goods.goods_off} 
+					<span class="price_off"> 
+					{if $goods.goods_off eq '100'}
+						{$lang.free}!
+					{else}
+						{$goods.goods_off}%{$lang.off}
+					{/if}
+						</span> 
+				{/if}
+				</p>
+                <p><span class="bizhong">{$lang.cur_list.0.keyd}</span><span class="my_shop_price" orgp="{$goods.goods_price}">{$goods.goods_price}</span></P>
+			</li>
+			<li class="cart_quantity"> 
+				{if $goods.goods_off}
+					{$session.guajiang.goods_id}
+					{$session.guajiang.num}
+					{if $goods.lmt_num eq '3'} 
+						<span id="num{$goods.rec_id}"></span> 
+						<a href="javascript:void(0);" class="fl jian_num" atrid="{$goods.rec_id}">-</a>
+						<input type="text" main_goods_id="{$goods.main_goods_id}" class="fl goods_number hidden-{$goods.goods_id} tc" rid="{$goods.rec_id}" value="{$goods.goods_number}" size="2" id="goods_number_{$goods.rec_id}" lmt_num="{$goods.lmt_num}"/>
+						<a href="javascript:void(0);" class="fl jia_num" atrid="{$goods.rec_id}">+</a>
+					{else}
+						{$goods.goods_number}
+					{/if}
+				{elseif $goods.goods_price eq '0.01' or $goods.islock or $goods.gifts_id>0}
+					{$goods.goods_number}
+				{else} 
+						<span id="num{$goods.rec_id}"></span>	
+						<a href="javascript:void(0);" class="fl jian_num" atrid="{$goods.rec_id}">-</a>
+						<input type="text" main_goods_id="{$goods.main_goods_id}" class="fl goods_number hidden-{$goods.goods_id} tc" rid="{$goods.rec_id}" value="{$goods.goods_number}" size="2" id="goods_number_{$goods.rec_id}"/>
+						<a href="javascript:void(0);" class="fl jia_num" atrid="{$goods.rec_id}">+</a>
+				{/if}
+			</li>
+            <li class="cart_subtotal">
+				{if $goods.subtotal_yuan gt $goods.subtotal} 
+					<span id="shanchuxian"> <span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$goods.subtotal_yuan}">{$goods.subtotal_yuan}</span> </span> <br />
+				{/if} 
+				<span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$goods.subtotal}">{$goods.subtotal}</span> 
+			</li>
+            <li class="cart_operation" id="del_ajax_msg{$goods.rec_id}">
+				<a href="javascript:;" delmsg="{$lang.flow_del_good1}{$goods.goods_name}{$lang.flow_del_good2}" delatr="/m-flow-a-drop_goods-id-{$goods.rec_id}.htm" gifts_id="0" id="del_action" gid="{$goods.rec_id}" title="{$lang.delete}">{$lang.delete}</a> 
+			</li>
+			{if $show_goods_attribute eq 1}{*显示商品属性*}
+				Properties
+				{$goods.goods_attr|nl2br}
+            {/if}
+			{if $goods.custom_size}
+				<li class="custom_size"> {include file='custom_size.htm'} </li>
+            {/if}
+          </ul>
+        </div>
+		{/foreach}
+        
+		<!--购物车结果统计-->
+		{if $goods_list}
+		<div class="cart_total_list">
+				{$lang.Your_subtotal}
+				{if $smarty.session.pcode neq ''}
+					after discounts
+				{/if}
+				<span class="bizhong f14 fb red">{$lang.cur_list.0.keyd}</span><span class="my_shop_price f14 fb red" orgp="{$shopping_money}" id="price_color">{$shopping_money}</span> 
+				{if $total.saving gt 0} 
+					{$lang.saved}, <span class="bizhong f14 fb red">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price f14 fb red" id="price_color" orgp="{$total.saving}">{$total.saving}</span>
+				{/if}	
+        </div>
+		
+	    {if $is_battery == 1}
+		<div class="o_box promotionCodeBox clearfix" >You will need to pay for a Tracking number when ordering batteries, they must be sent by registered mail. If you do not wish to pay the additional fee, please remove the battery from the order.</div>
+		{/if}
+		<div class="o_box promotionCodeBox clearfix" id="showapp" data-gifNum = "{$is_include_gifts}"> 
+			<input name="promotion_code" id="choose_coupon" type="radio" class="shipping_method" {if $pcode}checked="checked"{/if}/>
+			<label for="promotion_code">{$lang.Promotion_Code} :</label>
+			<input name="promotion_code" type="text" id="promotion_code" onkeyup="checkcode(this);" value="" size="20" maxlength="40" huance="0" huancode="" isapply="0"/>
+			<input type="button" class="applybtn" onclick="code_apply('promotion_code');" value="" style="cursor:pointer;"/>
+			<span id="showyiwen" class="helpTag fl">{$lang.help}</span>
+			<div id="yiwen" style="display: none;">
+				<p class="whsm"> {$lang.help_des_1}</p>
+			</div>
+			 <span id="apply_msg">{$pcode_msg}</span>
+			{if $pcode neq ''}
+				<div style="width:100%; clear:both;  font-size:11px; color:#FF3300;">&nbsp;&nbsp;&nbsp;&nbsp;{$lang.flow_str9} <a href="/{$cur_lang_url}m-flow-a-clearCoupon.htm" style="color:#003399; text-decoration:underline">{$lang.flow_str10}</a></div>
+            {/if}
+		</div><!--end #showapp-->
+		{/if}
+		
+		{if $goods_list}
+			<script type="text/javascript">
+				is_include_gifts = {$is_include_gifts};
+				pcode = '{$pcode}';
+			</script>
+			<div class="o_box fl freeGifListBox">
+			{if $gift_arr_available}
+				<!--购买物品获得免费礼物-->
+					
+						<h3>
+							<a href="/{$cur_lang_url}m-gifts.htm" class="fr">{$lang.Choose_More} >></a>
+							<input name="promotion_code" id="choose_gift" type="radio" class="shipping_method fl" {if $is_include_gifts}checked="checked"{/if}>
+							<strong class="fb fl">{$lang.You_have_a_Free_Gift}</strong>
+							<span id="showyiwen1" class="helpTag fl">{$lang.help}</span>
+							<div id="gifts_txt" style="display: none;">
+								<p class="whsm"> {$lang.flow_str11} ${$min_gifts_need_money}</p>
+							</div>
+						</h3>
+						
+						<ul class="freeGifList clearfix">
+							{foreach from=$gift_arr_available item =list}
+								<li>
+									<p class="proImg"><a href="{$list.url_title}"><img src="{$list.goods_thumb}" width="80" height="80"  alt="{$list.goods_title}" /></a></p>
+									<p class="proName">{$list.goods_name}</a>
+									<p class="proPriceBox fb red"><span class="bizhong">{$lang.cur_list.0.keyd}</span><span class="my_shop_price" orgp="{$list.shop_price}">{$list.shop_price}</span></p>
+									<p class="proAddToCart" id="add_cart_msg{$list.goods_id}"><a href="javascript:void(0);" class="js_gif_addToCart" gid="{$list.goods_id}">{$lang.add_to_cart}</a></p>
+								</li>
+							{/foreach}
+						</ul>
+						
+					
+			{elseif $gift_arr_recommend}
+				<!--购买物品不够获得免费礼物-->
+			
+					<h3>
+						<a href="/{$cur_lang_url}m-gifts.htm" class="fr">{$lang.Choose_More} >></a>{$lang.flow_str1} ${$gift_lack_of_money} {$lang.flow_str2}
+					</h3>
+					<ul class="freeGifList clearfix">
+						{foreach from=$gift_arr_recommend item =list}
+						<li>
+							<p class="proImg"><a href="{$list.url_title}"><img src="{$list.goods_thumb}" width="80" height="80"  alt="{$list.goods_title}" /></a></p>
+							<p class="proName">{$list.goods_name} </a>
+							<p class="proPriceBox fb red"><span class="bizhong">{$lang.cur_list.0.keyd}</span><span class="my_shop_price" orgp="{$list.shop_price}">{$list.shop_price}</span></p>
+						</li>
+						{/foreach}
+					</ul>
+					
+			{/if}
+					<p class="continueBox"><a href="{$DOMAIN}/{$cur_lang_url}">{$lang.Continue_Shopping}</a></p>
+				</div><!--end .freeGifListBox-->
+			 <div class="checkOut fr clearfix">
+				<a href="/m-flow-a-checkout.htm" class="proceedCheakoutBtn">{$lang.proceed_to_cheakout}</a>
+				<p>-{$lang.OR}-</p>
+				<form  action='/expresscheckout.php?lang={$cur_lang}'  method="post">
+					<input type="submit" name="submit" title="You don't need to register on PayPal!" class="paypalBtn" alt="PayPal"/>
+				</form>
+			</div><!--end .checkOut-->
+		{else}
+			<div style="padding:15px; text-align:center;">{$lang.shopping_cart_is_empty} <A href="/{$cur_lang_url}" class="blue">{$lang.Continue_Shopping}</A>.</div>
+		{/if}
+       
+        
+		<p class="cartText mt10">{$lang.shipping_cost_des}</p>
+        {if $goods_list}
+			<!--Estimate Shipping Cost-->
+			<div class="estimateBox" id="shipajax">
+				<h3><b></b>{$lang.Estimate_Shipping_Costs}</h3>
+				<p>
+					<span>{$lang.total_items}:</span>
+					<strong class="fb mr30">{$item_detail_count}</strong>
+					<span>{$lang.shipping_weight}:</span>
+					<strong>{$total.shipping_weight+$total.free_shipping_weight}</strong>
+					<span class="mr30">KG</span>
+					<span>{$lang.Item_cost}:</span>
+					<span class="bizhong fb red">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price pl5 fb red" id="price_color"   orgp="{$items_total}">{$items_total}</span>
+				</p>
+				<div class="shippTo">
+					<label for="">{$lang.Shipping_To}:</label>
+					<select name="zone_country_id" style="width: 200px;" id="selcountries">
+						{foreach from=$country_list item=country}
+						 <option value="{$country.region_id}" {if $country_post_id eq $country.region_id}selected{/if}>{$country.region_name}</option>
+						{/foreach}
+					</select>
+				</div>
+				<table cellspacing="0" cellpadding="0" border="0" width="100%">
+					<tbody>
+					  <tr class="Estimate_Th">
+						<th height="29" align="center" width="40%"><strong>{$lang.available_shipping_methods}</strong></th>
+						<th align="center" width="30%"><strong>{$lang.shipping_cost}</strong></th>
+						<th align="center" width="30%"><strong>{$lang.total_cost}</strong></th>
+					  </tr>
+					  {foreach from=$shipping_list item=shipping}
+						 <tr>
+						  <td height="25" align="center"> {$shipping.ship_name}<span style="color: rgb(255, 51, 0);"> {$lang.save} {$shipping.ship_save}%</span></td>
+						  <td align="center"><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$shipping.ship_price}">{$shipping.ship_price}</span></td>
+						  <td align="center"><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$items_total+$shipping.ship_price}">{$items_total+$shipping.ship_price}</span></td>
+						</tr>
+					{/foreach}
+				  </tbody></table>
+			</div><!--end .estimateBox-->
+			
+		{/if}
+		<!--*********************有商品时显示End*********************-->
+		{include file="cart/recommend_product.htm"}
+		<div class="clear"></div>
+		<!-- 收藏夹产品-->
+		{if $collection_goods}
+			<div class="estimateBox">
+			  <h3><b></b>{$lang.my_favorites}</h3>
+			  <table width="99%" align="center" border="0" cellpadding="5" cellspacing="1" bgcolor="#A6D0E6">
+				{foreach from=$collection_goods item=goods}
+				<tr>
+				  <td bgcolor="#ffffff"><a href="{$goods.url_title}" class="f6" target="_blank">{$goods.goods_title}</a></td>
+				  <td bgcolor="#ffffff" align="center" width="100" id="add_cart_msg{$goods.goods_id}"><i src="{$lang.cart_add_to_cart}" class="favoritesAddCart" id="new_addcart" onClick="addcart(this);" gid="{$goods.goods_id}" ref="1">{$lang.add_to_cart}</i></td>
+				</tr>
+				{/foreach}
+			  </table>
+			</div>
+        {/if}
+		{if $also_bought_goods}
+			<div class="hotprow15" style="width: 99%;">
+			  <div class="classrtitle1">{$also_bought}</div>
+			  <div class="hotpro15" style="width: 100%;">
+				<div class="lbtn15"><img src="{$imgcache_url}images/15lbtn.gif"  id="detailsleftbar" class="bottnstryle" /></div>
+				<div style="height:166px; overflow:hidden; width: 95%;" class="cbtn15" id="div-also-bought">
+				  <ul>
+					{foreach from=$also_bought_goods item=list name=shop}
+					<li style="width: 102px;">
+					  <p><a href="{$list.url_title}" title="{$list.goods_title}"><img src="/{$list.goods_thumb}" width="100" height="100" alt="{$list.goods_title}"/></a></p>
+					  <p class="ttxt"><a href="{$list.url_title}" title="{$list.goods_title}">{$list.goods_title}</a></p>
+					</li>
+					{/foreach}
+				  </ul>
+				</div>
+				<div class="rbtn15"><img src="{$imgcache_url}images/15rbtn.gif" id="detailsrightbar" class="bottnstryle"/></div>
+			  </div>
+			</div>
+			<script type="text/javascript">setAlsoBuoght();</script>
+        {/if}
+		<!--*********************没有商品时显示end*********************-->
+		<!--第一步End-->
+	</div>
+{/if}
+
+{*开始订单确认界面*}
+	{if $step eq "checkout"}
+		<script type="text/javascript">
+			var inCheckout = true; {* 订单确认 *}
+			min_use_point='{$point.min_use_point}';
+			point_rate='{$point.point_rate}';
+			min_use_point=parseInt(min_use_point);
+			point_rate=parseFloat(point_rate);
+		</script>
+		<!--第二步Begin-->
+		<h3 class="cart_title"><span class="cart_title_3">{$lang.your_shopping_cart}</span></h3>
+		<div class="cartGoodsTableBox" id="cart_list">
+			<h3 class="cartHeader">
+				<a href="shopping-cart/" class="fr"  title="Edit cart" >{$lang.edit}</a><b></b>{$lang.Item List}
+			</h3>
+			{*正在团购的商品提示*}
+			{if $Is_group_alert && !$smarty.get.ajax}
+			  {literal}
+			  <script type="text/javascript">
+				function slideHd(){}
+				ymPrompt.alert({message:flow_func_slideHd_0,width:350,height:170,title:flow_func_slideHd_1,handler:slideHd,btn:[["OK"]]});
+				</script>
+			  {/literal}
+			{/if}
+			{if $Is_Out_Sotck}
+				 <div style=" width:945px; margin:7px auto; padding:5px; border:1px solid #F00; overflow:hidden; color:#F00;"> [{$Is_Out_Sotck}] -> {$lang.flow_str13}</div>
+			{/if}
+			<table width="99%" align="center" border="1" cellpadding="5" cellspacing="0" class="itemListTable" >
+				<tbody>
+					<tr>
+						<th width="60">{$lang.images}</th>
+						<th>{$lang.Item}</th>
+						<th width="85">{$lang.shop_prices}</th>
+						<th width="100">{$lang.quantity}</th>
+						<th width="85">{$lang.Total_Price}</th>
+					</tr>
+					{foreach from=$goods_list item=goods}
+					<tr>
+						<td align="center" >
+							<a href="{$goods.url_title}" target="_blank">
+								<img src="{$goods.goods_thumb}" width="50" height="50" border="0" title="{$goods.goods_name|escape:html}">
+							</a>
+						</td>
+						<td >
+							<a href="{$goods.url_title}" target="_blank" class="no_unl">{$goods.goods_name}</a> 
+							{if $goods.using_coupon}
+								<span style='color:red'><img src="{$imgcache_url}images/discount.gif"></span>
+							{/if}
+							{if $goods.gifts_name}<br/>
+								{$goods.gifts_name}
+							{/if} 
+							{if $goods.is_free_shipping==1}<p class="p_free {$cur_lang}_p_free"><span>{$lang.Free_Shipping}</span></p>{/if}
+							{if $goods.goods_sn|truncate:2:"" == "KA"}<p> <span style="color:red;"><b>{$lang.us_only}</b></span></p> {/if}
+						</td>
+						<td  align="center">
+							{if $goods.market_price > $goods.formated_goods_price}
+								<p class="p_price_cost"> <span class="bizhong">{$lang.cur_list.0.keyd}</span><span class="my_shop_price" orgp="{$goods.market_price}">{$goods.market_price}</span></p>
+							{/if}
+							{if $goods.goods_off}
+								<p>
+									<span class="price_off"> 
+									{if $goods.goods_off eq '100'}
+										{$lang.free}!
+									{else}
+										{$goods.goods_off}%{$lang.off}
+									{/if} 
+									</span>
+								</p>
+							{/if}
+							<p><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$goods.formated_goods_price}">{$goods.formated_goods_price}</span></p>
+							{$session.guajiang.goods_id}
+							{$session.guajiang.num}
+								
+						</td>
+						<td  align="center" class="quantity">
+						{if $goods.goods_off}
+							{if $goods.lmt_num eq '3'} 
+								<span id="num{$goods.rec_id}"></span>	
+								<a href="javascript:void(0);" class="fl jian_num" atrid="{$goods.rec_id}">-</a>
+								<input type="text" main_goods_id="{$goods.main_goods_id}" class="fl goods_number hidden-{$goods.goods_id} tc" rid="{$goods.rec_id}" value="{$goods.goods_number}" size="2" id="goods_number_{$goods.rec_id}"/>
+								<a href="javascript:void(0);" class="fl jia_num" atrid="{$goods.rec_id}">+</a>
+							{else}
+									{$goods.goods_number}
+							{/if}
+						{elseif $goods.goods_price lt '0.01' or $goods.islock}
+								{$goods.goods_number}
+						{else}
+								<span id="num{$goods.rec_id}"></span>	
+								<a href="javascript:void(0);" class="fl jian_num" atrid="{$goods.rec_id}">-</a>
+								<input type="text" main_goods_id="{$goods.main_goods_id}" class="fl goods_number hidden-{$goods.goods_id} tc" rid="{$goods.rec_id}" value="{$goods.goods_number}" size="2" id="goods_number_{$goods.rec_id}"/>
+								<a href="javascript:void(0);" class="fl jia_num" atrid="{$goods.rec_id}">+</a>
+						{/if}
+						</td>
+						<td  align="center">
+							<span class="bizhong">{$lang.cur_list.0.keyd}</span>
+							<span class="my_shop_price" orgp="{$goods.formated_subtotal}">{$goods.formated_subtotal}</span>
+						</td>
+					</tr>
+					{if $goods.custom_size}
+						<tr bgcolor="#fff">
+						  <td  colspan="5" bgcolor="#FFFFFF" > {include file='custom_size.htm'} </td>
+						</tr>
+					{/if}
+					{/foreach}
+					<tr>
+					  <td colspan="7" align="right"  class="spanred">
+						  {$lang.Your_subtotal}{if $smarty.session.pcode neq ''}after discounts{/if}: 
+						 <span class="bizhong fb red">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price fb red" orgp="{$shopping_money}" id="price_color">{$shopping_money}</span>{if $total.saving gt 0} (<span id="price_color">{$lang.saving_of} </span> <span class="bizhong fb red">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price fb red" id="price_color" orgp="{$total.saving}">{$total.saving}</span>){/if}  </td>
+					</tr>
+				</tbody>
+			</table>
+			 <script type="text/javascript">
+        		is_include_gifts = {$is_include_gifts};
+				pcode = '{$pcode}';
+			</script>
+			{if $point.avail_point >= $point.min_use_point and  $point and $total.formated_goods_price > 1 and $point.use_point_max>=20 and $point.is_coupon eq ''}
+				<div class="flowBox ">
+				  <h3 class="cartHeader"><b></b>{$lang.point_name}</h3>
+				  <table width="99%" align="center" border="0" cellpadding="5" cellspacing="0"  >
+					{if $point.avail_point < $point.min_use_point }
+					<tr>
+					  <td>{$lang.point_des_1} <strong>{$point.avail_point}</strong> {$lang.point_des_2} {$lang.point_name} {$lang.point_des_3} {$point.min_use_point}</td>
+					</tr>
+					{else}
+					<tr>
+					  <td colspan="3"> {$lang.flow_str4} <strong>{$point.avail_point}</strong> {$lang.flow_str5} <strong><span id="use_point_max">{$point.use_point_max}</span></strong> {$lang.flow_str6} ({$lang.saving} <span class="my_shop_price"  id="point_money_max" orgp="{$point.point_money_max}">{$point.point_money_max}</span> <span class="bizhong">{$lang.cur_list.0.keyd}</span>) </td>
+					</tr>
+					<tr>
+					  <td colspan="3"> {$lang.I_want_to_use}
+						<input id="point_ipt" type="hidden" name="point"/>
+
+						<!-- <span style="color: red;" id="point_tips"></span> -->
+
+						<select name="point_sel" onChange="point_selected(this.value);">
+						  <option value="0,0">{$lang.please_select}...</option>
+
+
+						{if $point.use_point_max==20 || $point.use_point_max==25 || $point.use_point_max==50 || $point.use_point_max==100 || $point.use_point_max==200 || $point.use_point_max==300 || $point.use_point_max==500 || $point.use_point_max==1000 || $point.use_point_max==1500}
+
+
+						  <option value="1.00,20">{$lang.Use_Points1}</option>
+
+
+						{/if}
+						{if $point.use_point_max==25 || $point.use_point_max==50 || $point.use_point_max==100 || $point.use_point_max==200 || $point.use_point_max==300 || $point.use_point_max==500 || $point.use_point_max==1000 || $point.use_point_max==1500}
+
+
+						  <option value="1.50,25">{$lang.Use_Points2}</option>
+
+
+						{/if}
+						{if $point.use_point_max==50 || $point.use_point_max==100 || $point.use_point_max==200 || $point.use_point_max==300 || $point.use_point_max==500 || $point.use_point_max==1000 || $point.use_point_max==1500}
+
+
+						  <option value="2.5,50">{$lang.Use_Points3}</option>
+
+
+						{/if}
+						{if $point.use_point_max==100 || $point.use_point_max==200 || $point.use_point_max==300 || $point.use_point_max==500 || $point.use_point_max==1000 || $point.use_point_max==1500}
+
+
+						  <option value="4.00,100">{$lang.Use_Points4}</option>
+
+
+						{/if}
+						{if $point.use_point_max==200 || $point.use_point_max==300 || $point.use_point_max==500 || $point.use_point_max==1000 || $point.use_point_max==1500}
+
+
+						  <option value="7.00,200">{$lang.Use_Points5}</option>
+
+
+						{/if}
+						{if $point.use_point_max==300 || $point.use_point_max==500 || $point.use_point_max==1000 || $point.use_point_max==1500}
+
+
+						  <option value="9.00,300">{$lang.Use_Points6}</option>
+
+
+						{/if}
+						{if $point.use_point_max==500 || $point.use_point_max==1000 || $point.use_point_max==1500}
+
+
+						  <option value="15.00,500">{$lang.Use_Points7}</option>
+
+
+						{/if}
+						{if $point.use_point_max==1000 || $point.use_point_max==1500}
+
+
+						  <option value="30.00,1000">{$lang.Use_Points8}</option>
+
+
+						{/if}
+						{if $point.use_point_max==1500}
+
+
+						  <option value="45.00,1500">{$lang.Use_Points9}</option>
+
+
+						{/if}
+
+
+						</select></td>
+					</tr>
+					{/if}
+				  </table>
+				</div>
+			{/if}
+
+        <div class="mt20 customerInfo">
+			<h3 class="cartHeader">
+				<a href="javascript: void(0)" id="a-show-consignee" class="fr" title="Edit consignee" style="color:#0033CC; text-decoration:underline;">{$lang.edit}</a>
+				<b></b>{$lang.Consumer_Information}
+			</h3>
+			
+			
+			<form action="/m-flow-checkout.html" method="post" id="form-consignee">
+					<table id="tb-consignee"{if $is_consignee} style="display: none"{/if} width="100%" border="0" align="center" cellpadding="2" cellspacing="0" bgcolor="#FFFFFF">
+						{include file="cart/consignee.htm" item=$consignee sn=0}	
+					</table>
+					<!--有收货地址循环显示-->
+					<div id="div-consignee" {if !$is_consignee} style="display: none"{/if}>
+						<p>{$consignee.firstname|escape} {$consignee.lastname|escape}</p>
+						<p>{$consignee.addressline1|escape}</p>
+						{if $consignee.addressline2!=''}<p>{$consignee.addressline2|escape}</p>{/if}
+						<p>{$consignee.city|escape}  {$consignee.province|escape}  {$consignee.country_name|escape}</p>
+						{if $consignee.zipcode}<p>{$consignee.zipcode|escape}</p>{/if}
+						{if $consignee.tel!=''} <p>{$lang.addr_phone}:{$consignee.tel}</p>{/if}
+						<p>{$lang.email_address} :{$consignee.email|escape}</p>
+						<input type="hidden" id="country_name" value="{$consignee.country_name|escape}"/>
+					</div>
+			</form>
+		</div>	
+        <form action="m-flow-a-done.htm?PaymentOption={$PaymentOption}" method="post" name="theForm" onSubmit="return checkInfo()">
+          <input type="hidden" id="us_warehouse" value="{$goods_id_str}" />
+          <input type="hidden" id="hidden-point" name="point" />
+          <input type="hidden" id="hidden-point-money"  name="hidden-point-money" value="0.00"/>
+		{if $total.real_goods_count neq 0}
+			<div class="ShippingMethod">
+				<h3 class="cartHeader"><b></b>{$lang.shipping_method}</h3>
+				<dl>
+					<dt class="clearfix"><strong class="fl leftWarp fb">{$lang.available_shipping_methods}</strong><strong class="fl rightWarp fb">{$lang.shipping_cost} ({$lang.weight}:{$cart_total.free_shipping_weight+$cart_total.shipping_weight}kg)</strong></dt>
+				
+              
+		         	{foreach from=$shipping_list item=shipping name=shippinglist}
+						<dd class="clearfix">
+							<p class="fl leftWarp" >
+								<input id="shipping{$shipping.id}" class="fl shipping_method" type="radio" value="{$shipping.id}" name="shipping" 
+								{if $order.shipping_id == $shipping.id && ($shipping.id == 2 || $shipping.id == 3 && !$disabled_dhl || $shipping.id == 1 && !$disabled_free_shipping_method)}
+								checked="checked"
+								{/if}
+								{if $shipping.id == 3 && $disabled_dhl || $shipping.id == 1 && $disabled_free_shipping_method}
+								disabled="disabled"
+								{/if} />
+								<label for="shipping{$shipping.id}" class="fl fb">{$shipping.ship_name}<strong class="pl5 pr5">{$lang.save} {$shipping.ship_save}%</strong></label>
+								
+								
+							</p>
+							
+							<p class="fl rightWarp">
+								<span id="freesm{$shipping.id}" orgp="{$shipping.ship_price}" shipping_id="{$shipping.id}" class="my_shop_price  shiping_option">{$shipping.ship_price}</span> <span class="bizhong">{$lang.cur_list.0.keyd}</span>
+							</p>
+							
+							<p class="cb">{$shipping.ship_desc} </p>
+							{if $shipping.id eq '1'}
+							 {if $is_battery == 1}
+								  <div id="Need_Traking_number_button{$shipping.id}" style="display:{if $order.shipping_id eq '1'}block{else}none{/if};position:relative; height:55px;">
+									<label for="Need_Traking_number{$shipping.id}">
+
+									  <input type="checkbox" name="Need_Traking_number" disabled="disabled" checked="checked" class="Need_Traking_number"  value="{$guahaofei}" id="Need_Traking_number{$shipping.id}" shipid="{$shipping.id}" ship_fee="0"> You will need to pay for a Tracking number when ordering batteries, they must be sent by registered mail. If you do not wish to pay the additional fee, please remove the battery from the order.<br>
+									  <span color="#009933">{$lang.Tracking_number}</span> + <span style="color:#F00"><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$guahaofei}" id="Need_Traking_number_fee{$shipping.id}" >{$guahaofei}</span></span></label>
+									<div id="yiwen" style="display:none; position:absolute; left:86px; top:0px;">
+									  <p class="whsm"> {$lang.shipping_des_1} </p>
+									</div>
+								  </div>
+								  {else}
+								  <div id="Need_Traking_number_button{$shipping.id}" style="display:{if $order.shipping_id eq '1'}block{else}none{/if};position:relative; height:25px;">
+									<label for="Need_Traking_number{$shipping.id}">
+									  <input type="checkbox" name="Need_Traking_number" class="Need_Traking_number"  value="{$guahaofei}" id="Need_Traking_number{$shipping.id}" shipid="{$shipping.id}" ship_fee="0">
+									  <span color="#009933">{$lang.Tracking_number}</span> + <span style="color:#F00"><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$guahaofei}" id="Need_Traking_number_fee{$shipping.id}" >{$guahaofei}</span></span></label>
+									<div id="yiwen" style="display:none; position:absolute; left:86px; top:0px;">
+									  <p class="whsm"> {$lang.shipping_des_1} </p>
+									</div>
+								  </div>
+								  {/if}
+								{if $disabled_free_shipping_method}
+										<p style="color: red;">{$lang.shipping_des_2}</p>
+								{/if}
+							{elseif $shipping.id == 3 && $disabled_dhl}{*地址包含apo,po box,box，干掉dhl by mashanling on 2012-10-04 15:26:05*}
+									<p style="color: red;">{$lang.shipping_des_3}</p>
+							{/if}
+							{if $shipping.id eq '4'}
+								  <div id="china_post_desc" style="display:{if $order.shipping_id eq '4'}block{else}none{/if};position:relative; height:120px;">
+									<p>
+									  <input type="checkbox" checked="checked"/>
+									  <font color="#009933">{$lang.shipping_des_4} (package tracking service)</font> + <span style="color:#F00">{$lang.cur_list.0.keyd} $0.00</span>
+									<ul style="color:#555;font-size:11px;">
+									{$lang.shipping_des_5}
+									</ul>
+									</p>
+								  </div>
+							{/if}
+						</dd>
+					{/foreach}
+					<dd class="clearfix">
+					<p class="fl leftWarp">
+						<input type="checkbox" checked="checked" value="{$total.insure_fee}" id="insurance_checked" class="fl baofei" name="insurance"/>
+						<label for="insurance_checked" class="fl fb"><strong>{$lang.add_Shipping_Insurance}</strong></label>
+						
+					</p>
+					
+					<p class="fl rightWarp">
+                    	<span class="my_shop_price fb" id="baofei" orgp="{$total.insure_fee}">{$total.insure_fee}</span><span class="bizhong fb">{$lang.cur_list.0.keyd}</span>
+					</p>
+					
+					<p class="cb pb10">{$lang.insurance_msg}</p>
+					<p>{$lang.delivery_time_msg}<br/>
+					<strong class="fb">{$lang.delivery_time_exp}</strong>
+					</p>
+				</dd>
+				</dl>
+			</div><!--end .ShippingMethod-->
+        {else}
+          <input name="shipping" type="radio" value = "1" checked="checked"  style="display:none"/>
+        {/if}
+		{if $is_exchange_goods neq 1 || $total.real_goods_count neq 0}
+			{if $payment_list}
+				<div class="paymentMethod">
+					<h3 class="cartHeader"><b></b>{$lang.payment_nethod}</h3>
+					<ul>
+						{foreach from=$payment_list key=key item=payment}
+							{if $key != 'WiredTransfer' || ($key == 'WiredTransfer' && $shopping_money > 100)}
+								<li>
+									<input type="radio" name="payment" value="{$payment.pay_code}" {if $order.pay_id eq $payment.pay_code}checked="checked"{/if} id="paymentlist{$payment.pay_code}" class="paymentselect fl">
+									<h4>{if $payment.logo == ''}{$payment.pay_name}{else} <img src="{$payment.logo}" />{/if}<strong class="fb">{$payment.pay_shuoming}</strong></h4>
+									{if $payment.pay_desc !=''}
+										<div class="paymentMethod_show" id="subpaymentlist{$payment.pay_code}" style="display:none">
+											<p>{$payment.pay_desc}</p>
+											
+										</div>
+									{/if}
+								</li>
+							{/if}
+						{/foreach}
+						
+					</ul>
+				</div><!-- .paymentMethod-->
+			{else}
+				<input name="payment" type="radio" value="PayPal" checked="checked"  style="display:none"/>
+				
+			{/if}
+		{else}
+			<input name="payment" type="radio" value = "1" checked="checked"  style="display:none"/>
+		{/if}
+        <div class="specialIntr pb20">
+        	<h3 class="cartHeader"><b></b>{$lang.other_information}</h3>
+            <p class="p10">{$lang.msg_tips}</p>
+            <textarea name="postscript" cols="80" rows="3" id="postscript" class="ml10 p10" style="border:1px solid #CCC" >{$order.postscript|escape}</textarea>
+        </div><!--.specialIntr-->
+        
+         <div class="orderTotal">
+        	<h3 class="cartHeader"><b></b>{$lang.bill}</h3>
+            <div class="p10">
+            <table width="98%" align="center" border="0" cellpadding="3" cellspacing="1" bgcolor="#A7D1E7" style="font-size:12px; color:#666">
+            	<tbody>
+                    <tr style=" color:#000">
+                        <th align="center" bgcolor="#f7f7f7"> {$lang.items_sub_total} </th>
+						{if $point.avail_point >= $point.min_use_point and $point.avail_point neq 0}
+						<th align="center" bgcolor="#f7f7f7" background="{$jscache_url}images/cliejbg2.jpg"> {$lang.point_name} {$lang.saving} </th>
+						{/if}
+                        <th align="center" bgcolor="#f7f7f7"> {$lang.shipping_sub_total} </th>
+                        <th align="center" bgcolor="#f7f7f7"> {$lang.insurance} </th>
+                        <th align="center" bgcolor="#f7f7f7"> {$lang.grand_total} </th>
+                    </tr>
+                    <tr>
+                        <td height="22" align="center" bgcolor="#ffffff"><span class="my_shop_price" orgp="{$total.formated_goods_price}" id="items_sub_total">{$total.formated_goods_price}</span> <span class="bizhong">{$lang.cur_list.0.keyd}</span></td>
+						{if $point.avail_point >= $point.min_use_point and $point.avail_point neq 0}
+						<td align="center" bgcolor="#ffffff"><span class="my_shop_price" id="point_money" orgp="0">0</span> <span class="bizhong">{$lang.cur_list.0.keyd}</span></td>
+						{/if}
+                        <td align="center" bgcolor="#ffffff"><span class="my_shop_price" id="shipping_sub_total" orgp="{$total.shipping_fee}">{$total.shipping_fee}</span> <span class="bizhong">{$lang.cur_list.0.keyd}</span></td>
+                        <td align="center" bgcolor="#ffffff"><span class="my_shop_price" orgp="{$total.insure_fee}" id="insurance">{$total.insure_fee}</span> <span class="bizhong">{$lang.cur_list.0.keyd}</span></td>
+                        <td align="center" bgcolor="#ffffff" style="color:#990000; font-weight:bold;"><span class="my_shop_price" id="price_total" entry="all_total_price" orgp="{$total.amount_formated}">{$total.amount_formated}</span> <span class="bizhong">{$lang.cur_list.0.keyd}</span></td>
+                    </tr>
+            	</tbody>
+            </table>
+            </div>            
+        </div><!--end .orderTotal-->
+		
+        <div class="PlaceYouOrder">
+        	<input type="submit" class="PlaceYouOrderBtn" value=""/>
+            <p>{$lang.order_tips}</p>
+       </div>
+        </form>
+		</div>
+		<!--第二步End-->
+
+{/if}
+{if $step eq 'done'}
+{*电子商务代码统计,跳转页及快速付款done页共用by mashanling on 2013-10-07 16:28:11*}
+{include file=include_pay_ok_stat_js.htm}
+      {*订单提交成功*}
+      <div class="flowBox" style="margin:30px auto 70px auto;">
+        <h3 class="tc fb pt10 pb10">{$lang.remember_order_number}: <span class="red">{$order.order_sn}</span></h3>
+        <table width="99%" align="center" border="0" cellpadding="15" cellspacing="0" bgcolor="#fff" style="border:1px solid #ddd; margin:20px auto;" class="flowBox_done" >
+          <tr>
+            <td align="center" bgcolor="#FFFFFF">
+            {if $order.order_status eq '1'}{include file='cart/paid_script.htm'}{/if}{*外部affiliate 代码*}
+			{if $order.ship_name}
+			{$lang.select_shipping}: <strong class="fb">{$order.ship_name}</strong>.
+			{/if}			
+			  {if $order.pay_name eq 'Wired Transfer'}
+			  	Your chosen payment method is: <strong class="fb">{$order.pay_name}</strong>. The payment amount is: <strong><span class="my_shop_price"  orgp="{$total.amount_formated}">{$total.amount_formated}</span></strong><br><br>
+				Please note that all payments by Wire Transfer receive a special <strong>5%</strong> off discount. This means you only need to pay <strong><span class="my_shop_price"  orgp="{$total.amount_formated*0.95}">{$total.amount_formated*0.95}</span></strong>.<br><br>				
+				Simply contact us at <a target="_blank" style="color:#0033CC; text-decoration:underline; font-weight:normal; font-size:" href="http://support.dealsmachine.com/?cid=11&lang=en">support.dealsmachine.com</a>. We will apply the special discount and help you to complete the payment process.		
+			  {else}	
+				{$lang.select_payment}: <strong  class="fb">{$order.pay_name}</strong>.{$lang.order_amount}: <strong><span class="my_shop_price"  orgp="{$total.amount_formated}">{$total.amount_formated}</span> <span class="bizhong">{$lang.cur_list.0.keyd}</span></strong>
+			  {/if}	
+			</td>
+          </tr>
+          <tr>
+            <td align="center" bgcolor="#FFFFFF" style=" line-height:14px;">{$order.pay_desc}</td>
+          </tr>
+          {if $pay_online}
+		  {if $order.pay_name neq 'Wired Transfer'}
+          {*如果是线上支付则显示支付按钮*}
+          <tr>
+            <td align="center" bgcolor="#FFFFFF" style=" line-height:14px;">{$pay_online}</td>
+            {literal}
+			<script type='text/javascript'>
+			try{formsub.submit()}catch(e){};
+            </script>
+            {/literal}
+          </tr>
+		  {/if}
+          {/if}
+        </table>
+        <p class="tc pb20">{$order_submit_back}</p>
+      </div>
+ {/if}
+
+{if $step eq "consignee"}
+      {*
+      开始收货人信息填写界面
+      如果有收货地址，循环显示用户的收获地址
+      *}
+    <script language="javascript" src="{$jscache_url}sysjs/tablegrid.js"></script>
+      <div class="flowBox">
+        <h6><span style="font-size: 13px;">{$lang.shipping_address}</span></h6>
+        <table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
+          <tr style="color:#1C61A6"> {foreach from=$consignee_list item=consignee key=sn}
+            {if $consignee.firstname !=''}
+            <td height="30">{$lang.consignee} : <a href="#consignee{$sn}">{$consignee.firstname|escape} {$consignee.lastname|escape}</a></td>
+            {/if}
+            {/foreach} </tr>
+        </table>
+        {foreach from=$consignee_list item=consignee key=sn} <a name="consignee{$sn}"></a>
+        <form action="m-flow-a-consignee.htm" method="post"  name="theForm" class="theAddressForm">
+          <table width="98%" border="0" align="center" cellpadding="2" cellspacing="0" bgcolor="#FFFFFF">
+            {include file="cart/consignee.htm" item=$consignee inConsignee=true}
+          </table>
+        </form>
+        {/foreach} 
+	</div>
+ {/if}
+{*结束收货地址*}
+ </div><!--end #mainWarp-->
+ 
+  {if $step eq 'exp_checkout'}
+	{include file="cart/exp_checkout.htm"}
+ {/if}
+
+ {if $step eq 'paypal_10486'}
+    {include file="cart/paypal_10486.htm"}
+ {/if}
+ 
+    
+    <div id="footer">
+	{if $cur_lang eq $default_lang}
+	<script src="{$imgcache_url}minjs/jquery.validate.min.js"></script>
+	{else}
+	<script src="{$imgcache_url}minjs/{$cur_lang}-jquery.validate.min.js"></script>
+	{/if}
+	{include file="foothelp.htm"}	
+	{include file="foot.htm"}
+	</div>
+	<script type="text/javascript">
+		var firstname_msg = "{$lang.firstname_msg}";
+		var firstname_maxlength_msg = "{$lang.firstname_maxlength_msg}";
+		var lastname_msg = "{$lang.lastname_msg}";
+		var lastname_maxlength_msg = "{$lang.lastname_maxlength_msg}";
+		var tel_msg = "{$lang.tel_msg}";
+		var tel_maxlength_msg = "{$lang.tel_maxlength_msg}";
+		var email_msg = "{$lang.email_msg}";
+		var email_maxlength_msg = "{$lang.email_maxlength_msg}";
+		var addressline1_msg = "{$lang.addressline1_msg}";
+		var addressline1_maxlength_msg = "{$lang.addressline1_maxlength_msg}";
+		var addressline2_maxlength_msg = "{$lang.addressline1_maxlength_msg}";
+		var city_msg = "{$lang.city_msg}";
+		var city_maxlength_msg = "{$lang.city_maxlength_msg}";
+		var province_msg = "{$lang.province_msg}";
+		var province_maxlength_msg = "{$lang.province_maxlength_msg}";
+		var country_msg = "{$lang.country_msg}";
+		var zipcode_msg = "{$lang.zipcode_msg}";
+		var zipcode_maxlength_msg = "{$lang.zipcode_maxlength_msg}";
+		var js_email_require_msg    = "Please enter a valid email address1";
+		var js_email_require_length = "Please enter a valid email address2";
+		var js_password   = "Provide a password";
+		var js_email_in_user        = "{0} is already in use";
+		var Enter_at_least          = user_js_modpassword_1;
+		var Repeat_your_password    = "Re-type Password";
+		var agree_agreement    = "Please make sure you agree to our Terms and Conditions.";
+		var Enter_the_same_password_as_above    = "Enter the same password as above";
+		var Please_enter_verification_code    = "Please enter verification code!";
+		var Enter_the_characters_on_picture    = 'Enter the characters on picture';
+		var Verification_code_you_entered_is_incorrect    = "Verification code you entered is incorrect!";
+		var Creating_successful = 'Creating successful, please wait a moment, the system is turning to the remaining <span id="num">3</span> seconds ...';
+		var not_number = '{$lang.can_not_contain}';
+		var enter_least = '{$lang.enter_at_least}';
+    </script>
+	
+	{if $step == 'checkout' || $step == 'consignee' || $step == 'exp_checkout'}
+     
+      {if $step == 'consignee'}<script  src="{$imgcache_url}minjs/user_js.min.js"></script>{/if}
+      
+ {/if}
+<script src="{$imgcache_url}minjs/cart.min.js?2014061401"></script>
+{literal}
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			checkoutBinds();
+			chooseCheapest();
+			
+			shipid = 1;//$(".Need_Traking_number").attr('shipid');
+			shipping_cost = parseFloat($('#shipping_sub_total').html());
+			tracking_number_cost = parseFloat($("#Need_Traking_number_fee1").attr("orgp"));
+			//alert(shipping_cost);
+			if($(".Need_Traking_number").attr("checked") )
+			{
+				flat_shipping = parseFloat($('#freesm'+shipid).attr("orgp"));
+				flat_shipping = flat_shipping + tracking_number_cost;
+				$('#freesm'+shipid).html(flat_shipping.toFixed(2));
+				$('#freesm'+shipid).attr("orgp",flat_shipping.toFixed(2));
+				//alert($('#shipping'+shipid).attr("checked"));
+				if($('#shipping1').attr("checked")){
+					shipping_cost = flat_shipping;
+					$('#shipping_sub_total').html(shipping_cost);
+					$('#shipping_sub_total').attr('orgp',shipping_cost);
+				}
+			}
+			//添加到购物车
+			$(".js_gif_addToCart").live("click",function(){
+				GLOBAL.CartCheckout.addcart(this);
+				return false;
+			}); 
+		   var el = $("#shipping_sub_total");
+			//alert(shipping_cost);
+		   el.html(shipping_cost);
+		  // el.attr('orgp',shipping_cost);
+		   jisuan_total();
+		   try {show_my_shop_price('');} catch(e) {};
+		})
+	</script>
+{/literal}
+  {if $step eq 'exp_checkout'}
+{literal}
+    <script>
+    var js_email_require_msg    = '';
+	var js_email_require_length = '';
+	var js_password             = '';
+	var js_success_msg          = '';
+	var js_email_in_user        = '';
+	var Enter_at_least          = user_js_modpassword_1;
+	var Repeat_your_password    = '';
+	var agree_agreement    = '';
+	var Enter_the_same_password_as_above    = '';
+	var Please_enter_verification_code    = '';
+	var Enter_the_characters_on_picture    = '';
+	var Verification_code_you_entered_is_incorrect    = '';
+	var  Creating_successful = '';
+    </script>
+	{/literal}
+ {/if}
+{literal}
+    <script type="text/javascript"> if (!window.mstag) mstag = {loadTag : function(){},time : (new Date()).getTime()};</script>
+{/literal}
+	<script id="mstag_tops" type="text/javascript" src="//flex.atdmt.com/mstag/site/c7091261-b4e8-40dc-a6d8-f44a7847699c/mstag.js"></script> 
+		{literal}<script type="text/javascript"> mstag.loadTag("conversion", {cp:"5050",dedup:"1"})</script>{/literal}
+      <noscript>
+      <iframe src="//flex.atdmt.com/mstag/tag/c7091261-b4e8-40dc-a6d8-f44a7847699c/conversion.html?cp=5050&dedup=1" frameborder="0" scrolling="no" width="1" height="1" style="visibility:hidden;display:none"> </iframe>
+      </noscript>
+ {include file="statistics_js.htm"}
+</body>
+</html>

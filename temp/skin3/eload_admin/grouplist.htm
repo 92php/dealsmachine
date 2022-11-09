@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 系统组列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="protect.php?act=groupadd">系统组添加</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="8%">编号</th>
+    <th width="19%">名称</th>
+    <th width="15%">备注</th>
+    <th width="16%" align="center">操作</th>
+  </tr>
+  {foreach from=$groupArr item=list name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+    <td height="20" >{$list.group_id}</td>
+    <td>{$list.group_name}</td>
+    <td>{$list.group_desc}</td>
+    <td>{if $list.parent_id eq 0 }{/if}<a href="?act=groupadd&id={$list.group_id}">修改权限</a> | <a href="?act=grouplist&id={$list.group_id}" class="del_act" delmsg="警告：删除“{$list.group_name}”系统用户组，将会删除该组下的所有管理员，要继续删除吗？">删除</a><input type="hidden" id="{$list.group_id}" value="{$list.group_id}" /></td>
+  </tr>
+  {/foreach}
+</table>
+{include file="copyright.htm"}
+</body>
+</html>

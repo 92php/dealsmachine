@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	{include file="top.htm"}
+    <link rel="stylesheet" href="{$imgcache_url}mincss/otherpage_min.css?2013091201" />
+</head>
+{if $message.type eq 'banktransfer'}
+	{literal}
+	<script>
+	if (window != top)
+	top.location.href = location.href;
+	</script>			
+	{/literal}
+{/if}
+<body>
+{include file="public_top.htm"}
+
+
+	<div id="mainWarp" class="msgWarpBox">
+    		<!--警示-->
+
+			{if $message.type eq 'info'}
+            
+            
+            <div class="MSG_tipsShow">
+            	<img class="MSG_img" src="{$imgcache_url}images/styleimg/sorry_err.gif" width="93" height="86"/>
+				<p class="fb f14">{$message.content}</p>
+                {if $message.url_info} 
+                    {foreach from=$message.url_info key=info item=url}
+                       {if $info}
+							<p class="pt5 f14"><a  href="{$url}" class="MSG_blue">{$info}</a></p>
+						{/if}
+					{/foreach}
+				{/if}
+            </div>
+			{elseif $message.type eq 'success'}
+    		<!--正确-->
+            <div class="MSG_tipsShow">
+            	<img class="MSG_img" src="{$imgcache_url}images/styleimg/right.gif" width="93" height="86"/>
+				<p class="fb f14">{$message.content}</p>
+				{if $message.url_info} 
+                    {foreach from=$message.url_info key=info item=url}
+                       {if $info}
+							<p class="pt5 f14"><a  href="{$url}" class="MSG_blue">{$info}</a></p>
+						{/if}
+					{/foreach}
+				{/if}
+            </div>
+			{elseif $message.type eq 'banktransfer'}
+    		<!--正确-->
+            <div class="MSG_tipsBanktransfer">
+              <h3>Thank you for shopping with us! Your order has been received!</h3>
+              <h4>Please go to any local branch of a national bank and transfer the corresponding funds to the designated account.</h4>
+              <div class="MSG_tipsBanktransfer bd">
+                <p>Please note: </p>
+                <p>1. For this payment method, we can only accept payment in the local currency. This will also avoid potential currency exchange fees for both parties.</p>
+                <p>2. Please make sure to provide the associated order reference number when making the bank transfer payment. Without the correct order information, your payment confirmation may fail or be delayed as we will be unable to trace it. </p>
+                <p>3. Your order status will change to “processing” within 1 working day after we verify your payment. Some orders may require additional time to verify. Please bear with us and be patient.</p> 
+                <p>4. dealsmachine.com do not charge a bank fee for this payment method however we cannot cover any transaction fees added on by your local bank.</p>
+              </div>
+              <p><a href="/{$cur_lang_url}m-users-a-order_detail-order_id-{$order_id}.htm" class="bluelink">Click here</a> to check the status of your order, and you can click "Pay by Bank Transfer" on that page to go back and print your payment reference and details.</p>
+      </div>            
+			{elseif $message.type eq 'warning'}
+            <!--错误-->
+            <div class="MSG_tipsShow">
+            	<img class="MSG_img" src="{$imgcache_url}images/styleimg/wrong.gif" width="93" height="86"/>
+				<p class="fb f14">{$message.content}</p>
+                {if $message.url_info} 
+                    {foreach from=$message.url_info key=info item=url}
+                       {if $info}
+							<p class="pt5 f14"><a  href="{$url}" class="MSG_blue">{$info}</a></p>
+						{/if}
+					{/foreach}
+				{/if}
+            </div>
+			{/if}
+      
+    </div><!--#mainWarp-->
+	<div id="footer">
+{if $order_sn and $order_status gt 0}
+	{include file='cart/paid_script.htm'}
+{/if}
+
+{if $auto_redirect}
+	<script language="JavaScript">
+	<!--
+	var seconds = 3;
+	var defaultUrl = "{$default_url}";
+
+	{literal}
+	onload = function()
+	{
+	  if (defaultUrl == 'javascript:history.go(-1)' && window.history.length == 0)
+	  {
+		document.getElementById('redirectionMsg').innerHTML = '';
+		return;
+	  }
+
+	  window.setInterval(redirection, 1000);
+	}
+	function redirection()
+	{
+	  if (seconds <= 0)
+	  {
+		window.clearInterval();
+		return;
+	  }
+
+	  seconds --;
+	  document.getElementById('spanSeconds').innerHTML = seconds;
+
+	  if (seconds == 0)
+	  {
+		window.clearInterval();
+		location.href = defaultUrl;
+	  }
+	}
+	//-->
+	</script>
+	{/literal}
+{/if}
+	{include file="foothelp.htm"}
+	{include file="foot.htm"}
+	</div>
+{include file="statistics_js.htm"}
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css" />
+<link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/tree.css" />
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> ABC关键字列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="new_abc_index_keyword.php">ABC关键字列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form name="regform"  enctype="multipart/form-data" method="post" action="?act=import">
+  <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+    <tr>
+      <th colspan="4">批量导入关键字</th>
+    </tr>
+    <tr>
+      <td align="right">上传EXCLE文件：</td>
+      <td>
+          <input name="file" type="file" size="35" />
+          <span style="color: red"><span style="color: gray;">上次导入时间: </span>{$data.time}<span style="color: gray;">。成功: </span>{$data.success}<span style="color: gray;">。失败: </span>{$data.failure}<span style="color: gray;">。重复: </span>{$data.duplicate}<span class="font-gray">。无结果: </span>{$data.no_result}</span>
+      </td>
+    </tr>
+    <tr>
+      <td align="right">无条件保留：</td>
+      <td><input type="checkbox" value="1" name="is_preserve" /></td>
+    </tr>
+    <tr>
+      <td width="36%" height="24" align="right">&nbsp;</td>
+      <td width="64%"><input type="submit" value="确定" class="sub_but"/></td>
+    </tr>
+  </table>
+</form>
+<p style="margin: 10px;color: gray;">
+    <strong>提示</strong>
+    <br />
+    1、格式：<span class="font-red">.xls</span>。
+    <br />
+    2、最大不超过<span class="font-red">10M</span>
+    <br />
+    3、文件列对应关系：A=><span class="font-red">关键字</span>、
+    B=><span class="font-red">网站标题</span>、
+    C=><span class="font-red">meta关键字</span>、
+    D=><span class="font-red">meta描述</span>
+</p>
+{include file="copyright.htm"}

@@ -1,0 +1,287 @@
+<form action="m-flow-a-done.htm?PaymentOption={$PaymentOption}" method="post" name="theForm" {if $smarty.get.a neq  'exp_checkout'}id="form-consignee"{/if} onSubmit="return checkInfo()">
+    
+    	<div class="exp_cheakoutTopBtnWarp"><input type="submit" value="" class="PlaceYouOrderBtn fr"/></div>
+        
+        <script type="text/javascript">
+			var inCheckout = true; /* 订单确认 */
+			var min_use_point='{$point.min_use_point}';
+			var point_rate='{$point.point_rate}';
+			var min_use_point=parseInt(min_use_point);
+			var point_rate=parseFloat(point_rate);
+		</script>
+    	<div id="cheatOut_mainWarp" class="clearfix mt10">
+        	<div class="po_mainL fl">
+            
+            	<!--Shipping Address -->	
+            	<div class="SA_box m_box">
+            		<h3 class="cartHeader">
+						<b></b>{$lang.shipping_address}
+						{if !$dropshipping_confirm and $smarty.get.a == 'checkout'}
+							<a href="javascript: void(0)" id="a-show-consignee" title="Edit consignee" style="color:#0033CC; text-decoration:underline;">{$lang.edit}</a>
+						{/if}
+					</h3>
+					{if $is_consignee}
+                    <ul class="SA_boxInfo p10 lh200">
+                    	<li>{$consignee.firstname|escape} {$consignee.lastname|escape}</li>
+                        <li>{$consignee.addressline1|escape}</li>
+                        <li>{if $consignee.addressline2!=''}{$consignee.addressline2|escape}{/if}</li>
+                        <li>{$consignee.city|escape}  {$consignee.province|escape}  {$consignee.country_name|escape}</li>
+                        <li>{if $consignee.zipcode}{$consignee.zipcode|escape}{/if}</li>
+                        <li>
+							{if $consignee.tel!=''} 
+								{$lang.addr_phone}:{$consignee.tel}
+							{else}
+								<a name="tel"></a><strong>{$lang.phone}</strong>:<input type="text" name="tel" id="tel1" value="" />
+							{/if}
+						<li>
+                        <li>{$lang.email_address} :{$consignee.email|escape} </li>
+						<input type="hidden" id="country_name" value="{$consignee.country_name|escape}"/>
+                    </ul>
+					{else}
+						<table id="tb-consignee" width="100%" border="0" align="center" cellpadding="2" cellspacing="0" bgcolor="#FFFFFF">
+						  {include file="consignee.htm" item=$consignee sn=0}
+						</table>
+					{/if}
+            	</div><!--end .SA_box-->
+                
+                <!--Shipping method-->
+                <div class="ShippingMethod SM_box mt10 m_box">
+                	 <input type="hidden" id="us_warehouse" value="{$goods_id_str}" />
+                    <input type="hidden" id="hidden-point" name="point" />
+                    <input type="hidden" id="hidden-point-money"  name="hidden-point-money" value="0.00"/>
+					{if $total.real_goods_count neq 0} 
+							<a name="ship"></a>
+							<h3 class="cartHeader"><b></b>{$lang.shipping_method}</h3>
+							<dl>
+								<dt class="clearfix"><strong class="fl leftWarp fb">{$lang.available_shipping_methods}</strong><strong class="fl rightWarp fb">{$lang.shipping_cost} ({$lang.weight}:{$cart_total.free_shipping_weight+$cart_total.shipping_weight}kg)</strong></dt>
+								{foreach from=$shipping_list item=shipping name=shippinglist}
+									<dd class="clearfix">
+										<p class="fl leftWarp">
+											<input id="shipping{$shipping.id}" class="fl shipping_method" type="radio" value="{$shipping.id}"
+														{if $order.shipping_id == $shipping.id && ($shipping.id == 2 || $shipping.id == 3 && !$disabled_dhl || $shipping.id == 1 && !$disabled_free_shipping_method)}checked="checked"{/if}
+														{if $shipping.id == 3 && $disabled_dhl || $shipping.id == 1 && $disabled_free_shipping_method}
+															disabled="disabled"
+														{/if} name="shipping" 
+											/>
+											<label for="shipping{$shipping.id}" class="fl fb">{$shipping.ship_name}<strong>{$lang.save} {$shipping.ship_save}%</strong></label>
+											 
+										</p>
+										<p class="fl rightWarp">
+											<span id="freesm{$shipping.id}" orgp="{$shipping.ship_price}" shipping_id="{$shipping.id}" class="my_shop_price  shiping_option">{$shipping.ship_price}</span> <span class="bizhong">{$lang.cur_list.0.keyd}</span>
+										</p>
+										<p class="cb">	 {$shipping.ship_desc}</p>
+											 {if $shipping.id eq '1'}
+											 {if $is_battery == 1}
+								  <div id="Need_Traking_number_button{$shipping.id}" style="display:{if $order.shipping_id eq '1'}block{else}none{/if};position:relative; height:65px;">
+									<label for="Need_Traking_number{$shipping.id}">
+
+									  <input type="checkbox" name="Need_Traking_number" disabled="disabled" checked="checked" class="Need_Traking_number"  value="{$guahaofei}" id="Need_Traking_number{$shipping.id}" shipid="{$shipping.id}" ship_fee="0"> You will need to pay for a Tracking number when ordering batteries, they must be sent by registered mail. If you do not wish to pay the additional fee, please remove the battery from the order.<br>
+									  <span color="#009933">{$lang.Tracking_number}</span> + <span style="color:#F00"><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$guahaofei}" id="Need_Traking_number_fee{$shipping.id}" >{$guahaofei}</span></span></label>
+									<div id="yiwen" style="display:none; position:absolute; left:86px; top:0px;">
+									  <p class="whsm"> {$lang.shipping_des_1} </p>
+									</div>
+								  </div>
+								  {else}
+												<div id="Need_Traking_number_button{$shipping.id}" style="display:{if $order.shipping_id eq '1'}block{else}none{/if};position:relative; height:25px;">
+													<label for="Need_Traking_number{$shipping.id}">
+													<input type="checkbox" name="Need_Traking_number" {if $total.goods_price_formated ge 40}checked="checked"{/if}  class="Need_Traking_number"  value="{$guahaofei}" id="Need_Traking_number{$shipping.id}" shipid="{$shipping.id}" ship_fee="0">
+													<font color="#009933">{$lang.Tracking_number}</font> + <span style="color:#F00"><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$guahaofei}" id="Need_Traking_number_fee{$shipping.id}" >{$guahaofei}</span></span></label>
+													<div id="yiwen" style="display:none; position:absolute; left:86px; top:0px;">
+														<p class="whsm"> {$lang.whsm_desc_1} </p>
+													</div>
+												</div>
+												{/if}
+												{if $disabled_free_shipping_method}
+													<p style="color: red;">{$lang.whsm_desc_2}</p>
+												{/if}
+											 {elseif $shipping.id == 3 && $disabled_dhl}{*地址包含apo,po box,box，干掉dhl by mashanling on 2012-10-04 15:26:05*}
+													<p style="color: red;">{$lang.whsm_desc_3}</p>
+											  {/if}
+											  {if $shipping.id eq '4'}
+													<div id="china_post_desc" style="display:{if $order.shipping_id eq '4'}block{else}none{/if};position:relative; height:120px;">
+													  <p>
+															<input type="checkbox" checked="checked"/>
+															<font color="#009933">{$lang.whsm_desc_4}</font> + <span style="color:#F00">{$lang.cur_list.0.keyd} $0.00</span>
+														  <ul style="color:#555;font-size:11px;">
+															{$lang.whsm_desc_5}
+														  </ul>
+													  </p>
+													</div>
+											 {/if} 
+									</dd>
+								 {/foreach}
+								 <dd class="clearfix">
+									<p class="fl leftWarp">
+										<input type="checkbox" checked="checked" value="{$total.insure_fee}" id="insurance_checked" class="fl baofei" name="insurance"/>
+										<label for="insurance_checked" class="fl fb"><strong class="fb">{$lang.add_Shipping_Insurance}</strong></label>
+										
+									</p>
+									<p class="fl rightWarp">
+										<span class="my_shop_price fb" id="baofei" orgp="{$total.insure_fee}">{$total.insure_fee}</span><span class="bizhong fb">{$lang.cur_list.0.keyd}</span>
+									</p>
+									<p class="cb">{$lang.insurance_msg}</p>
+									<p>{$lang.delivery_time_msg}<br/>
+									<strong class="fb">{$lang.delivery_time_exp}</strong>
+									</p>
+								</dd>
+							</dl>
+						{else}
+							<input name="shipping" type="radio" value = "1" checked="checked"  style="display:none"/>
+						{/if}
+                </div><!--ShippingMethod-->
+                
+                <!--SItem List-->
+                <div class="ShippingMethod IL_box mt10 m_box">
+					  <h3 class="cartHeader"><b></b>{$lang.Item_List}{if $smarty.get.a == 'checkout'}<a href="/{$cur_lang_url}shopping-cart/" style="color:#0033CC; text-decoration:underline;">{$lang.edit}</a>{/if}</h3>
+					  {*正在团购的商品提示*}
+					  {if $Is_group_alert && !$smarty.get.ajax}
+						  {literal}
+						  <script type="text/javascript">
+							function slideHd(){}
+							ymPrompt.alert({message:flow_func_slideHd_0,width:350,height:170,title:flow_func_slideHd_1,handler:slideHd,btn:[["OK"]]});
+							</script>
+						  {/literal}
+					  {/if}
+					  {if $Is_Out_Sotck}
+						<div style=" width:945px; margin:7px auto; padding:5px; border:1px solid #F00; overflow:hidden; color:#F00;"> [{$Is_Out_Sotck}] -> {$lang.flow_str13}</div>
+					  {/if}
+                     <table cellspacing="1" cellpadding="5" border="0" bgcolor="#A6D0E6" align="center" width="99%">
+                      <tbody>
+                        <tr style="color:#1C61A6">
+                          <th bgcolor="#ffffff">{$lang.images}</th>
+                          <th bgcolor="#ffffff" width="350">{$lang.Item}</th>
+                          <th bgcolor="#ffffff" width="80" >{$lang.quantity}</th>
+                          <th bgcolor="#ffffff" width="85" >{$lang.Total_Price}</th>
+                        </tr>
+						{foreach from=$goods_list item=goods}
+                        <tr {$goods.style}>
+                          <td bgcolor="#ffffff" align="center"><a target="_blank" href="{$goods.url_title}"><img border="0" width="50" height="50" title="{$goods.goods_name|escape:html}" src="{$goods.goods_thumb}"></a></td>
+                          <td bgcolor="#ffffff" style="font-size:11px;">{$goods.goods_name} <br>
+                            <span style="font-style:italic; color:#777777">{$goods.goods_attr}</span>{if $goods.gifts_name}<br/>
+							{$goods.gifts_name}{/if}
+							{if $goods.is_free_shipping==1}<span class="p_free {$cur_lang}_p_free fl">{$lang.Free_Shipping}</span> {/if}
+							{if $goods.goods_sn|truncate:2:"" == "KA"} <span style="color:red;"><b>{$lang.us_only}</b></span> {/if}
+						  </td>
+                          <td bgcolor="#ffffff" align="center"> {$goods.goods_number}</td>
+                          <td bgcolor="#ffffff" align="center"><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span orgp="{$goods.formated_subtotal}" class="my_shop_price">{$goods.formated_subtotal}</span></td>
+                        </tr>
+						{if $goods.custom_size}
+							<tr bgcolor="#fff">
+								<td  colspan="4" {if $goods.style == ''}bgcolor="#ffffff"{/if} > {include file='custom_size.htm'} </td>
+							</tr>
+						{/if}
+						{/foreach}
+						 <tr>
+                          <td bgcolor="#ffffff" align="right" class="spanred" colspan="6"> {$lang.Your_subtotal}{if $smarty.session.pcode neq ''}{$lang.flow_str14}{/if} <span class="bizhong fb red">{$lang.cur_list.0.keyd}</span> <span orgp="{$shopping_money}" class="my_shop_price fb red">{$shopping_money}</span> {if $total.saving gt 0}, <span class="red fb">{$lang.save}</span> <span class="bizhong fb red">{$lang.cur_list.0.keyd}</span> <span orgp="{$total.saving}"  class="my_shop_price fb red">{$total.saving}</span>{/if}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+             
+                </div><!--ShippingMethod-->
+                
+            </div><!--end .po_mainL-->
+            
+        	<div class="po_saderR fr">
+            	
+				 <!--Order Summary-->
+                <div class="ShippingMethod OS_box m_box" >
+                	<h3 class="cartHeader"><b></b>{$lang.Order_Summary}</h3>
+                    <ul class="p10 f14">
+                    	<li><strong class="fb">{$lang.subtotal}:</strong><span class="bizhong fb orang pr5">{$lang.cur_list.0.keyd}</span><span orgp="{$total.formated_goods_price}" id="items_sub_total" class="my_shop_price fb orang">{$total.formated_goods_price}</span></li>
+                        <li><strong class="fb">{$lang.Shipping_Subtotal}:</strong><span class="bizhong fb orang pr5">{$lang.cur_list.0.keyd}</span> <span orgp="{$total.shipping_fee}" id="shipping_sub_total" class="my_shop_price fb orang">{$total.shipping_fee}</span></li>
+                        <li><strong class="fb">{$lang.insurance}:</strong><span class="bizhong fb orang pr5">{$lang.cur_list.0.keyd}</span> <span orgp="{$total.insure_fee}" id="insurance" class="my_shop_price fb orang">{$total.insure_fee}</span></li>
+                  	</ul>
+                    <p class="p10"><strong class="fb">{$lang.grand_total}:</strong><span class="bizhong fb red pr5">{$lang.cur_list.0.keyd}</span><span orgp="{$total.amount_formated}" id="price_total" class="my_shop_price fb red">{$total.amount_formated}</span></p>
+                </div><!-- end .OS_box-->
+                
+                 <!--Payment Method-->
+				{if $is_exchange_goods neq 1 || $total.real_goods_count neq 0}
+					{if $payment_list}
+						<div class="paymentMethod PM_box mt10 m_box" {if $smarty.get.a == 'exp_checkout'}style="display:none"{/if}>
+							<h3 class="cartHeader"><b></b>{$lang.payment_nethod}</h3>
+							<ul>
+								{foreach from=$payment_list key=key item=payment}
+									{if $key != 'WiredTransfer' || ($key == 'WiredTransfer' && $shopping_money > 100)}
+										<li>
+											<input type="radio" name="payment" value="{$payment.pay_code}" {if $order.pay_id eq $payment.pay_code}checked="checked"{/if} id="paymentlist{$payment.pay_code}" class="paymentselect fl">
+											<h4>{if $payment.logo == ''}{$payment.pay_name}{else} <img src="{$payment.logo}" />{/if}<strong class="fb"> {$payment.pay_shuoming}</strong></h4>
+											{if $payment.pay_desc !=''}
+												<div class="paymentMethod_show" id="subpaymentlist{$payment.pay_code}">{$payment.pay_desc}</div>
+											{/if}
+										</li>
+									{/if}
+								{/foreach}	
+							</ul>
+						</div><!-- end .OS_box-->
+					{else}
+						<input name="payment" type="radio" value="PayPal" checked="checked"  style="display:none"/>
+					{/if}
+				{else}
+					<input name="payment" type="radio" value = "1" checked="checked"  style="display:none"/>
+				{/if}
+				{if $smarty.session.pcode_code == ''}
+{if $point.avail_point >= $point.min_use_point and  $point and $total.formated_goods_price > 1 and $point.use_point_max>=20}
+						<!--DM Points -->
+						<div class="ShippingMethod DMP_box m_box mt10">
+							<h3 class="cartHeader"><b></b>{$lang.point_name}</h3>
+							{if $point.avail_point < $point.min_use_point }
+								<p>{$lang.point_des_1} <strong class="fb">{$point.avail_point}</strong> Points in your account,you can use it when your {$lang.point_name} is more than <strong class="fb">{$point.min_use_point}</strong> </p>
+							{else}
+								<p>{$lang.flow_str4} <strong>{$point.avail_point}</strong> {$lang.flow_str5} <strong><span id="use_point_max">{$point.use_point_max}</span></strong> {$lang.flow_str6}({$lang.saving} <span class="my_shop_price"  id="point_money_max" orgp="{$point.point_money_max}">{$point.point_money_max}</span> <span class="bizhong">{$lang.cur_list.0.keyd}</span>) </p>
+							<div>
+								{$lang.I_want_to_use} 
+								<input type="hidden" name="point" id="point_ipt" value="">
+								<select onchange="point_selected(this.value);" name="point_sel">
+								  <option value="0,0">{$lang.please_select}...</option>
+								  {if $point.use_point_max==20 || $point.use_point_max==25 || $point.use_point_max==50 || $point.use_point_max==100 || $point.use_point_max==200 || $point.use_point_max==300 || $point.use_point_max==500 || $point.use_point_max==1000 || $point.use_point_max==1500}
+
+								  <option value="1.00,20">{$lang.Use_Points1}</option>
+								{/if}
+								{if $point.use_point_max==25 || $point.use_point_max==50 || $point.use_point_max==100 || $point.use_point_max==200 || $point.use_point_max==300 || $point.use_point_max==500 || $point.use_point_max==1000 || $point.use_point_max==1500}
+								  <option value="1.50,25">{$lang.Use_Points2}</option>
+								{/if}
+								{if $point.use_point_max==50 || $point.use_point_max==100 || $point.use_point_max==200 || $point.use_point_max==300 || $point.use_point_max==500 || $point.use_point_max==1000 || $point.use_point_max==1500}
+								  <option value="2.5,50">{$lang.Use_Points3}</option>
+								{/if}
+								{if $point.use_point_max==100 || $point.use_point_max==200 || $point.use_point_max==300 || $point.use_point_max==500 || $point.use_point_max==1000 || $point.use_point_max==1500}
+								  <option value="4.00,100">{$lang.Use_Points4}</option>
+								{/if}
+								{if $point.use_point_max==200 || $point.use_point_max==300 || $point.use_point_max==500 || $point.use_point_max==1000 || $point.use_point_max==1500}
+								  <option value="7.00,200">{$lang.Use_Points5}</option>
+								{/if}
+								{if $point.use_point_max==300 || $point.use_point_max==500 || $point.use_point_max==1000 || $point.use_point_max==1500}
+								  <option value="9.00,300">{$lang.Use_Points6}</option>
+								{/if}
+								{if $point.use_point_max==500 || $point.use_point_max==1000 || $point.use_point_max==1500}
+								  <option value="15.00,500">{$lang.Use_Points7}</option>
+								{/if}
+								{if $point.use_point_max==1000 || $point.use_point_max==1500}
+								  <option value="30.00,1000">{$lang.Use_Points8}</option>
+								{/if}
+								{if $point.use_point_max==1500}
+								  <option value="45.00,1500">{$lang.Use_Points9}</option>
+								{/if}
+
+								</select>
+							</div>
+						{/if}	
+						</div><!-- end .OS_box-->
+                   {/if}
+			{/if}
+            </div><!--end .po_saderR-->
+        </div>
+		{if $smarty.get.a == 'checkout'}
+		<div class="flowBoxex">
+			<h6><span style="font-size:13px;">{$lang.other_information}</span></h6>
+			<table width="99%" align="center" border="0" cellpadding="5" cellspacing="0" bgcolor="#dddddd">
+				<tr>
+					<td valign="top" bgcolor="#ffffff" style="font-size:12px; line-height:25px;">{$lang.msg_tips}<br />
+					<textarea name="postscript" cols="40" rows="3" id="postscript" style="border:1px solid #ccc;">{$order.postscript|escape}</textarea>
+				</td>
+				</tr>
+		  </table>
+        </div>
+       {/if}
+        <!--end #cheatOut_mainWarp-->
+    </form>
+	

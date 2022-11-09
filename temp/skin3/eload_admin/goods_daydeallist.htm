@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 每日特销列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="goods_daydeal.php?act=add">添加每日特销</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<!-- 商品搜索 -->
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+ <form action="?" name="searchform" method="get">
+ <tr>
+    <th align="left"> <input type="hidden" value="{$smarty.get.act}" name="act" />
+ <img src="/temp/skin3/images/admin/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+      <input type="hidden"  value="{$smarty.get.act}" id="act"/>
+     
+        {$cat_list}
+    <select name="intro_type" id="intro_type" style="display:none;">
+        <option value="0">全部</option>
+        <option value="1" {if $smarty.get.intro_type eq '1'}selected{/if}>未发布</option>
+        <option value="2" {if $smarty.get.intro_type eq '2'}selected{/if}>已发布</option>
+    </select>
+      关键字
+      <input type="text" name="keyword" id="keyword" size="45" value="{$smarty.get.keyword}"/>
+      <input type="submit" value="搜 索" class="sub_but" />  
+    </th>
+  </tr>
+  {if $filter.kuozhan_count}
+  <tr>
+     <td style="padding-left:27px;">
+         本分类产品数：{$filter.record_count}个，
+         
+         其中主分类产品数{$filter.zhucat_count}个，扩展类产品数{$filter.kuozhan_count} 个。
+     </td>
+  </tr>
+  {/if}
+  </form>
+</table>
+
+
+<form method="post" action="goods_tuijian.php?act=batch" name="listForm" onsubmit="return confirmSubmit(this)">
+<div id="list">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th><a href="?sort_by=goods_sn&sort_order={$filter.sort_order_goods_sn}">产品编码</a>{$sort_goods_sn}</th>
+    <th width="4%">图片</th>
+    <th width="30%"><a href="?sort_by=goods_title&sort_order={$filter.sort_order_goods_title}">产品标题</a>{$sort_goods_title}</th>
+    <th width="10%">所在类</th>
+    <th>正常价格</th>
+    <th><a href="?sort_by=shop_price&sort_order={$filter.sort_order_shop_price}">促销价格</a>{$sort_shop_price}</th>
+    <th>折扣率</th>
+    <th width="10%"><a href="?sort_by=daydeal_time&sort_order={$filter.sort_order_daydeal_time}">发布日期</a>{$sort_daydeal_time}</th>
+    <th><a href="?sort_by=is_daydeal&sort_order={$filter.sort_order_is_daydeal}">状态</a>{$sort_is_daydeal}</th>
+    
+    
+    <th>操作</th>
+       </tr>
+{foreach from=$goods_list item=goods name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';" id="eff{$goods.goods_id}">  
+    <td>{$goods.goods_sn}</td>
+    <td><a href="../m-goods-id-{$goods.goods_id}.htm?islan=1" target="_blank" title="浏览"><img width="50" height="50" src="http://www.dealsmachine.com/{$goods.goods_thumb}" border="0"/></a></td>
+    <td class="first-cell" style="{if $goods.is_promote}color:red;{/if}{if $goods.updatesign == 1}color:#703A65;{/if}"  title='添 加 人：{$goods.add_user}&#10添加时间：{$goods.add_time}&#10修 改 人：{$goods.update_user}&#10修改时间：{$goods.last_update}'>{$goods.goods_title|escape:html}</td>
+    <td>{$goods.cat_name}</td>
+    <td align="right">{$goods.market_price}</td>
+    <td align="right">{$goods.shop_price}</td>
+    <td align="right">{$goods.zhekoulv}</td>
+    <td align="center">{$goods.daydeal_time}</td>
+    <td align="center">{if $goods.is_daydeal eq '2'}<span style="color:#007F00">正在发布</span>{else}<span style="color:#A0A0A4;">已发布</span>{/if}</td>
+    
+    
+   
+    <td align="center"><a href="?act=add&amp;id={$goods.goods_id}">编辑</a> | <a href="?act=del&id={$goods.goods_id}" onclick="return confirm('你确定要删除吗？');">删除</a></td>
+  </tr>
+  {foreachelse}
+  <tr><td colspan="11" align="center" >暂无商品特销</td></tr>
+  {/foreach}
+   <tr>
+    <td colspan="11" align="center" ><div id="pager">{$pagestr}</div></td>
+    </tr>
+</table>
+</div>
+</form>
+
+{include file="copyright.htm"}

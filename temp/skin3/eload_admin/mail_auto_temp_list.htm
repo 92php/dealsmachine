@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='{$imgcache_url}eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$imgcache_url}eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 自助邮件列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="?act=add">自助邮件添加</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="10%">编号</th>
+    <th width="30%">名称</th>
+	<th width="30%">标题</th>
+    <th width="40%" align="center">操作</th>
+  </tr>
+  {foreach from=$data item=list name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';"> 
+    <td height="20" >{$list.id}</td>
+    <td><a href="{$list.url}">{$list.name}</a></td>
+	<td>{$list.title}</td>
+    <td align="center"><a href="?act=add&id={$list.id}">修改</a> | <a target="_blank" href="/m-mail_auto_temp-id-{$list.id}" >预览</a> | <a href="?act=savehtml&id={$list.id}">保存邮件</a> | <a href="?act=delete&id={$list.id}" class="del_act" delmsg="你确定要删除吗？">删除</a> | <a href="?act=copy&id={$list.id}">复制</a></td>
+  </tr>
+  {foreachelse}
+	 <tr>
+		<td colspan="13" align="center" >暂无记录</td>
+	</tr>
+  {/foreach}
+  <tr><td colspan="10" align="right"><div id="pager">{$pagestr}</div></td></tr>
+</table>
+{include file="copyright.htm"}
+</body>
+</html>

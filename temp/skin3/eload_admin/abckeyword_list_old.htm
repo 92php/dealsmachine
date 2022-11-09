@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> ABC关键字列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="?act=form">导入ABC关键字</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+ <tr>
+    <th>
+ <form action="?" name="myf" method="get">
+    <img src="/temp/skin3/images/admin/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    
+    关键字： 
+    <input name="keyword" type="text" id="keyword" size="40" />
+    <input type="submit" value="搜索" class="button" />
+  </form>
+</th>
+  </tr>
+</table>
+
+<form method="POST" action="?act=batch_drop" name="listForm">
+<div id="list">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="49%">      <input type="checkbox" onclick="checkAll(this, 'checkboxes[]');">      <a href="javascript:" atr="?sort_by=title&sort_order={$filter.sort_order_title}">关键字</a>{$sort_title}</th>
+    <th width="24%"><a href="javascript:" atr="?sort_by=goods_num&sort_order={$filter.sort_order_goods_num}">产品数量</a>{$goods_num}</th>
+    <th width="15%">浏览次数</th>
+    <th width="12%">操作</th>
+  </tr>
+  {foreach from=$abc_list item=list name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">    
+    <td><input name="checkboxes[]" type="checkbox" value="{$list.keyword}"  onclick="checkone('checkboxes[]')"/>
+      <a href="/Wholesale-{$list.keyword|replace:' ':'-'|escape:'url'}.html" target="_blank">{$list.keyword}</a></td>
+    <td align="center"><span>{$list.goods_num}</span></td>
+    <td align="center">{$list.times}</td>
+    <td align="center" nowrap="true"><span>&nbsp;
+      <a href='?act=edit&id={$list.keyword}' title="{$lang.edit}"><img src="{$jscache_url}temp/skin3/eload_admin/images/icon_edit.gif" border="0" height="16" width="16" /></a>&nbsp;
+     </span>
+    </td>
+   </tr>
+   {foreachelse}
+    <tr><td colspan="4" align="center" class="no-records"> 暂无记录 </td></tr>
+  {/foreach}
+  <tr>
+    <td><input type="checkbox" onclick="checkAll(this, 'checkboxes[]');"> 全选 <input type="submit" class="button" id="btnSubmit" value="删除所选" disabled="true" /> <input type="hidden" id="selAction" /> </td>
+    <td align="right" nowrap="true" colspan="3"><div id="pager">{$pagestr}</div></td>
+  </tr>
+</table>
+</div></form>
+{include file="copyright.htm"}

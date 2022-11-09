@@ -1,0 +1,63 @@
+{*电子商务代码统计,跳转页及快速付款done页共用by mashanling on 2013-10-07 16:32:55*}
+<!-- Google Code for new sale Conversion Page -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 984362390;
+var google_conversion_language = "en";
+var google_conversion_format = "2";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "oeJOCPqYjgUQltuw1QM";
+var google_conversion_value = "{$order.order_amount}";
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/984362390/?value=0&amp;label=oeJOCPqYjgUQltuw1QM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-51109690-1']);
+_gaq.push(['_setDomainName', 'dealsmachine.com']);
+_gaq.push(['_trackPageview']);
+_gaq.push(['_addTrans',
+		   '{$order.order_id}',           // order ID - required
+		   'dealsmachine.com',              // affiliation or store name
+		   '{$order.order_amount}',          // total - required
+		   '{$order.tax}',           // tax
+		   '{$order.shipping_fee}',              // shipping
+		   '{$order.city}',       // city
+		   '{$order.province}',     // state or province
+		   '{$order.country}'             // country
+		   ]);
+// add item might be called for every item in the shopping cart
+// where your ecommerce engine loops through each item in the cart and
+// prints out _addItem for each
+{foreach from=$order.goodsListArr item=goods}
+	_gaq.push(['_addItem',
+			   '{$order.order_id}',           // order ID - required
+			   '{$goods.goods_sn}',           // SKU/code - required
+			   '{$goods.goods_name}',        // product name
+			   '{$goods.cat_name}',   // category or variation
+			   '{$goods.goods_price}',          // unit price - required
+			   '{$goods.goods_number}'               // quantity - required
+			   ]);
+{/foreach}
+
+
+{literal}
+_gaq.push(['_trackTrans']); //submits transaction to the Analytics servers
+(function() {
+		  var ga = document.createElement('script');
+		  ga.type = 'text/javascript';
+		  ga.async = true;
+		  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+{/literal}
+</script>

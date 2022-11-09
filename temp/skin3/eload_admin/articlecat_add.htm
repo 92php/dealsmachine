@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 文章分类{$tag_msg}</td>
+          <td width="44%" align="right"><span class="navright"><a href="articlecat.php">文章分类列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+  <td>
+	<div id="tabbar-div">
+	  <p>
+		<span class="tab-front" id="general-tab" atr = '0'>原始语言</span>
+		{foreach from=$lang_arr name=lang_arr item=c}
+		<span class="tab-back" id="detail-tab"  atr = '{$smarty.foreach.lang_arr.iteration}'>{$c.title}</span>
+		{/foreach}
+		</p>
+	</div>
+	</td>
+</tr>
+</table>
+<div class="main-div margin-top-clear">
+<form method="post" action="articlecat.php?act={$form_action}" name="theForm"   onSubmit="return Validator.Validate(this,3)">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="showtab0">
+    <tr>
+    <th colspan="2">文章分类{$tag_msg}</th>
+  </tr>
+<tr>
+    <td class="label">文章分类名称：</td> 
+    <td><input type="text" name="cat_name" maxlength="60" size = "30" value="{$cat.cat_name}"   dataType="Require" msg="请请输入分类名称！" class="input_style" /></td>
+  </tr>
+  <tr>
+    <td class="label">上级分类：</td>
+    <td>
+      <select name="parent_id" >
+        <option value="0">顶级类</option>
+        {$cat_select}
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td class="label">排序：</td>
+    <td>
+      <input type="text" name='sort_order' {if $cat.sort_order}value='{$cat.sort_order}'{else} value="0"{/if} size="15"   class="input_style"   datatype="Integer" msg="请填写数字！" />
+    </td>
+  </tr>
+  <tr>
+    <td class="label">关键字：</td>
+    <td><input type="text" name="keywords" maxlength="60" size="50" value="{$cat.keywords}"   dataType="Require" msg="请请输入分类关键字！" class="input_style" /><br />
+
+关键字为选填项，其目的在于方便外部搜索引擎搜索，以逗号隔开
+    </td>
+  </tr>
+  <tr>
+    <td class="label">描述：</td>
+    <td><textarea  name="cat_desc" cols="60" rows="4">{$cat.cat_desc}</textarea></td>
+  </tr>
+  {if $default_lang eq '1'}
+  <tr>
+    <td colspan="2" align="center"><br />
+      <input type="submit" class="button" value="确定" />
+      <input type="reset" class="button" value="重置" />
+      <input type="hidden" name="id" value="{$cat.cat_id}" />
+      <input type="hidden" name="old_catname" value="{$cat.cat_name}" />
+    </td>
+  </tr>
+  {/if}
+</table>
+</form>
+
+<!-------------------多语言------------------->
+{foreach from=$lang_arr name=lang_arr item=c key=key}
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="showtab{$smarty.foreach.lang_arr.iteration}" style="display:none"  >
+  <tr>
+    <td class="label">文章分类名称：</td> 
+    <td><input type="text" name="cat_name" id="cat_name_{$key}" maxlength="60" size = "30" value="{$cat_lang.$key.cat_name}"   dataType="Require" msg="请请输入分类名称！" class="input_style" /> *</td>
+  </tr>
+  <tr>
+    <td class="label">关键词：</td>
+    <td><input type="text" name="keywords" id="keywords_{$key}" maxlength="60" size="50" value="{$cat_lang.$key.keywords}"   dataType="Require" msg="请请输入分类关键词！" class="input_style" /><br />注：关键词之间以逗号隔开
+    </td>
+  </tr>
+  <tr>
+    <td class="label">描述：</td>
+    <td><textarea  name="cat_desc" id="cat_desc_{$key}" cols="60" rows="4">{$cat_lang.$key.cat_desc}</textarea></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" height="40">
+	<input type="hidden" name="lang" id="lang_{$key}" value="{$c.title_e}" />
+	<input type="hidden" name="cat_id" id="cat_id" value="{$cat.cat_id}" />
+	<span id="submit{$key}" class="goods_submit">确定</span>
+    </td>
+  </tr>
+  <tr>
+  	<td colspan="2">注：确定按钮只对当前显示页面有效，不会提交所有语言切换页面信息。<br /></td>
+  </tr>
+</table>
+</form>
+{literal}
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#submit{/literal}{$key}{literal}").click(function(){
+	  var cat_id       = $("#cat_id").val();	
+	  var cat_name     = $("#cat_name_{/literal}{$key}{literal}").val();
+	  var keywords     = $("#keywords_{/literal}{$key}{literal}").val();
+	  var cat_desc     = $("#cat_desc_{/literal}{$key}{literal}").val();
+	  var lang         = $("#lang_{/literal}{$key}{literal}").val();
+	  if(cat_name == "") {
+		alert("请输入文章分类名称!"); return false;	 
+	  }
+	  $.post("articlecat.php?act=add_save",{
+			cat_id:cat_id, 
+			cat_name:cat_name,
+			keywords:keywords,
+			cat_desc:cat_desc,
+			lang:lang			
+			},function(result){
+		alert(result);
+	  });
+	});
+});
+</script>
+{/literal}
+{/foreach} 
+</div>
+{include file="copyright.htm"}

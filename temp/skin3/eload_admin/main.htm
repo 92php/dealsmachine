@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='{$imgcache_url}eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$imgcache_url}eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<br />
+<!-- end personal message -->
+<!-- start order statistics -->
+<div class="list-div">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="grid_tb">
+  <tr>
+    <th colspan="4" class="group-title">订单统计</th>
+  </tr>
+  {if $order.yes}
+  <tr class="color1">
+    <td>今日订单总数</td>
+    <td>{$order.today_num}</td>
+    <td>今日订单总金额</td>
+    <td>{$order.today_amount}</td>
+  </tr>
+  <tr class="color2">
+    <td>今日订单已付款数</td>
+    <td>{$order.today_pay_num}</td>
+    <td>今日订单已付款金额</td>
+    <td>{$order.today_pay_amount}</td>
+  </tr>
+  <tr class="color1">
+    <td>今日付款数概率</td>
+    <td>{$order.today_pay_gailv}</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr class="color2">
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr class="color1">
+    <td>昨日订单总数</td>
+    <td>{$order.yesday_num}</td>
+    <td>昨日订单总金额</td>
+    <td>{$order.yesday_amount}</td>
+  </tr>
+  <tr class="color2">
+    <td>昨日订单已付款数</td>
+    <td>{$order.yesday_pay_num}</td>
+    <td>昨日订单已付款金额</td>
+    <td>{$order.yesday_pay_amount}</td>
+  </tr>
+  <tr class="color1">
+    <td>昨日付款数概率</td>
+    <td>{$order.yesday_pay_gailv}</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr class="color2">
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr class="color1">
+    <td>近7天订单总数</td>
+    <td>{$order.week_num}</td>
+    <td>近7天订单总金额</td>
+    <td>{$order.week_amount}</td>
+  </tr>
+  <tr class="color2">
+    <td>近7天订单已付款数</td>
+    <td>{$order.week_pay_num}</td>
+    <td>近7天订单已付款金额</td>
+    <td>{$order.week_pay_amount}</td>
+  </tr>
+  <tr class="color1">
+    <td>近7天付款数概率</td>
+    <td>{$order.week_pay_gailv}</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr class="color2">
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  {/if}
+  <tr class="color1">
+    <td width="20%"><a href="order.php?act=list&order_status={$status.await_ship}">等待发货的订单</a></td>
+    <td width="30%"><strong style="color: red">{$order.await_ship}</strong></td>
+    <td width="20%"><a href="order.php?act=list&order_status=4">已完成的订单</a></td>
+    <td width="30%"><strong>{$order.finished}</strong></td>
+  </tr>
+  <tr class="color2">
+    <td><a href="order.php?act=list&order_status=0">等待付款的订单</a></td>
+    <td><strong>{$order.await_pay}</strong></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</div>
+<!-- end order statistics -->
+{if $order.yes}
+    <script language="JavaScript" src="/temp/{$smarty.const.SKIN}eload_admin/images/jsclass/FusionCharts.js"></script>
+
+<table width="98%" border="0" cellspacing="0" cellpadding="3" align="center">
+  <tr> 
+    <td valign="top" class="text" align="center">
+    
+     <div id="chartdiv" align="center"> </div>
+
+     <script type="text/javascript">
+		   var chart = new FusionCharts("/temp/{$smarty.const.SKIN}eload_admin/images/charts/FCF_MSColumn3DLineDY.swf", "ChartId", "600", "200", "0", "0");
+		   chart.setDataURL("/eload_admin/index.php?act=monthmainchart&shu=month&"+Math.random());		   
+		   chart.render("chartdiv");
+		</script>
+        
+        
+     
+    </td>
+    <td valign="top" class="text" align="center"> <div id="chartdivxx" align="center">   </div>
+
+     
+      </td>
+  </tr>
+ 
+</table>
+{/if}
+<!-- start goods statistics -->
+<div class="list-div">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="grid_tb">
+  <tr>
+    <th colspan="4" >商品统计</th>
+  </tr>
+  <tr class="color2">
+    <td width="20%">现有商品：</td>
+    <td width="30%"><strong>{$goods.total}</strong></td>
+    <td width="20%"><a href="goods.php?act=list&stock_warning=1">库存警报商品：</a></td>
+    <td width="30%"><strong style="color: red">{$goods.warn}</strong></td>
+  </tr>
+  <tr class="color1">
+    <td><a href="goods.php?act=list&amp;intro_type=is_new">最新商品：</a></td>
+    <td><strong>{$goods.new}</strong></td>
+    <td><a href="goods.php?act=list&amp;intro_type=is_best">推荐商品：</a></td>
+    <td><strong>{$goods.best}</strong></td>
+  </tr>
+  <tr class="color2">
+    <td><a href="goods.php?act=list&amp;intro_type=is_hot">热卖商品：</a></td>
+    <td><strong>{$goods.hot}</strong></td>
+    <td><a href="goods.php?act=list&amp;intro_type=is_promote">促销商品：</a></td>
+    <td><strong>{$goods.promote}</strong></td>
+  </tr>
+</table>
+</div>
+
+<br />
+<!-- start system information -->
+<div class="list-div"></div>
+{include file="copyright.htm"}
+<script type="text/javascript">
+           var chartx = new FusionCharts("/temp/{$smarty.const.SKIN}eload_admin/images/charts/FCF_MSColumn3DLineDY.swf", "ChartId", "600", "200", "0", "0");
+           chartx.setDataURL("/eload_admin/index.php?act=yearchart&"+Math.random());           
+           chartx.render("chartdivxx");
+        </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+@charset "utf-8";
+/* CSS Document */
+#left_menu {
+	position:absolute;
+	left:0;
+	top:30px;
+	display:none;
+	z-index:2009;
+}
+

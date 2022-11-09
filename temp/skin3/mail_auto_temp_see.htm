@@ -1,0 +1,268 @@
+<html>
+<body>
+<table width="650" border="0" align="center" cellpadding="0" cellspacing="0" style="margin:0px auto; padding:0px; background:#f8f8f8; font-family:Arial, Helvetica, sans-serif;">
+  <tr>
+    <td valign="top"><table align="center" border="0" cellpadding="0" cellspacing="0" width="650">
+        <tr>
+          <td valign="top"><table width="650" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td height="8"><table width="650" border="0" align="center" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td height="30" style=" padding-left:10px; font-family:Arial; font-size:10px; color:#858faa;-webkit-text-size-adjust:none;">No images? - <a href="{$list.file_name}" target="_blank" style="color:#858faa">View as Webpage</a></td>
+                    </tr>
+                    <tr>
+                      <td height="50">
+                          <table width="100%" border="0" cellspacing="0" cellpadding="0" style=" border-bottom:1px solid #638cc1">
+                          <tbody>
+                            <tr>
+                              <td width="31%" valign="bottom" bgcolor="#365D98"><a href="http://www.dealsmachine.com/?1{literal}{{/literal}track_code{literal}}{/literal}" target="_blank"><img src="http://css.dealsmachine.com/imagecache/ba/email/2014/D0526/logo.gif" alt="Dealsmachine" width="252" height="58" border="0" style="vertical-align:top"></a></td>
+                              <td width="69%" align="right" bgcolor="#365D98" ><div style="color:#bedcfe; font-size:13px; line-height:16px; font-weight:bold; overflow:hidden; width:300px; height:35px; margin:0; padding:0px 10px 0px 0px;">{$list.zhekou} OFF&nbsp;/&nbsp;Ends on {$list.enddate}<BR>
+                                <strong style="color:#Fff; font-size:14px;">Coupon code:&nbsp;{$list.coupon}</strong></div></td>
+                            </tr>
+                            </tbody>
+                          </table>
+                      </td>
+                    </tr>
+                  </table></td>
+              </tr>
+              {if $list.banner_a}
+              <tr>
+                <td height="10" valign="top"><table width="650" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td>{$list.banner_a}</td>
+                    </tr>
+                    {/if}
+                  </table></td>
+              </tr>
+              <tr>
+                <td height="10" bgcolor="#FFFFFF"></td>
+              </tr>
+              <tr>
+                <td bgcolor="#FFFFFF"><table width="100%" border="0" cellspacing="0" cellpadding="10">
+                    <tr>
+                      <td height="24" align="center" bgcolor="#365d98"><span style="font-size:24px; line-height:24px; height:24px; overflow:hidden; padding:0; margin:0;">
+                      <a href="{$cat_info.0.url}?1{literal}{{/literal}track_code{literal}}{/literal}" target="_blank" style="font-size:16px; font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold;">{$cat_info.0.cat_name}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <a href="{$cat_info.1.url}?1{literal}{{/literal}track_code{literal}}{/literal}" target="_blank" style="font-size:16px; font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold;">{$cat_info.1.cat_name}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <a href="{$cat_info.2.url}?1{literal}{{/literal}track_code{literal}}{/literal}" target="_blank" style="font-size:16px; font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold;">{$cat_info.2.cat_name}</a></span></td>
+                    </tr>
+                  </table>
+                  <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td width="33%" height="200" align="center"><a href="{$goods_info.0.url_title}" target="_blank"><img src="{if $goods_info.0.thumb}{else}{$goods_info.0.thumb}{$goods_info.0.goods_grid}{/if}" alt="{$goods_info.0.goods_title}" width="150" height="150" border="0"></a></td>
+                      <td width="33%" height="200" align="center"><a href="{$goods_info.1.url_title}" target="_blank"><img src="{if $goods_info.1.thumb}{else}{$goods_info.1.thumb}{$goods_info.1.goods_grid}{/if}" alt="{$goods_info.1.goods_title}" width="150" height="150" border="0"></a></td>
+                      <td width="33%" height="200" align="center"><a href="{$goods_info.2.url_title}" target="_blank"><img src="{if $goods_info.2.thumb}{else}{$goods_info.2.thumb}{$goods_info.2.goods_grid}{/if}" alt="{$goods_info.2.goods_title}" width="150" height="150" border="0"></a></td>
+                    </tr>
+                    <tr>
+                      <td colspan="3" style="border-bottom:1px solid #f5f5f5;"></td>
+                    </tr>
+                    <tr>
+                      <td height="50" align="center" valign="middle" style="color:#666666; font-size:12px; font-family:Arial, Helvetica, sans-serif;"><div style="line-height:18px; height:36px; font-weight:bold; overflow:hidden; padding:0 10px;">{$goods_info.0.shirt_title}</div></td>
+                      <td align="center" valign="middle" style="color:#666666; font-size:12px; font-family:Arial, Helvetica, sans-serif;"><div style="line-height:18px; height:36px; font-weight:bold; overflow:hidden; padding:0 10px;">{$goods_info.1.shirt_title}</div></td>
+                      <td align="center" valign="middle" style="color:#666666; font-size:12px; font-family:Arial, Helvetica, sans-serif;"><div style="line-height:18px; height:36px; font-weight:bold; overflow:hidden; padding:0 10px;">{$goods_info.2.shirt_title}</div></td>
+                    </tr>
+                    <tr>
+                      <td height="30" align="center" valign="top">{if $goods_info.0.market_price gt 0}<span style=" color:#9ea7b3; text-decoration:line-through; font-family:Arial, Helvetica, sans-serif; font-size:12px; padding-right:6px;">USD {$goods_info.0.market_price}</span>{/if}<span style="color:#e61717; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:24px;"><span style="font-size:12px;">USD </span>{$goods_info.0.shop_price}</span></td>
+                      <td align="center">{if $goods_info.1.market_price gt 0}<span style=" color:#9ea7b3; text-decoration:line-through; font-family:Arial, Helvetica, sans-serif; font-size:12px; padding-right:6px;">USD {$goods_info.1.market_price}</span>{/if}<span style="color:#e61717; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:24px;"><span style="font-size:12px;">USD </span>{$goods_info.1.shop_price}</span></td>
+                      <td align="center">{if $goods_info.2.market_price gt 0}<span style=" color:#9ea7b3; text-decoration:line-through; font-family:Arial, Helvetica, sans-serif; font-size:12px; padding-right:6px;">USD {$goods_info.2.market_price}</span>{/if}<span style="color:#e61717; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:24px;"><span style="font-size:12px;">USD </span>{$goods_info.2.shop_price}</span></td>
+                    </tr>
+                  </table></td>
+              </tr>
+              <tr>
+                <td height="16" bgcolor="#FFFFFF"></td>
+              </tr>
+              {if $list.banner_b}
+              <tr>
+                <td>{$list.banner_b}</td>
+              </tr>
+              {/if}
+              <tr>
+                <td height="16" bgcolor="#FFFFFF"></td>
+              </tr>
+              <tr>
+                <td bgcolor="#FFFFFF"><table width="100%" border="0" cellspacing="0" cellpadding="10">
+                    <tr>
+                      <td height="24" align="center" bgcolor="#365d98"><span style="font-size:24px; line-height:24px; height:24px; overflow:hidden; padding:0; margin:0;">
+                      <a href="{$cat_info.3.url}?1{literal}{{/literal}track_code{literal}}{/literal}" target="_blank" style="font-size:16px; font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold;">{$cat_info.3.cat_name}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <a href="{$cat_info.4.url}?1{literal}{{/literal}track_code{literal}}{/literal}" target="_blank" style="font-size:16px; font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold;">{$cat_info.4.cat_name}</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                      <a href="{$cat_info.5.url}?1{literal}{{/literal}track_code{literal}}{/literal}" target="_blank" style="font-size:16px; font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold;">{$cat_info.5.cat_name}</a></span></td>
+                    </tr>
+                  </table>
+                  <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td width="33%" height="200" align="center"><a href="{$goods_info.3.url_title}" target="_blank"><img src="{if $goods_info.3.thumb}{else}{$goods_info.3.thumb}{$goods_info.3.goods_grid}{/if}" alt="{$goods_info.3.goods_title}" width="150" height="150" border="0"></a></td>
+                      <td width="33%" height="200" align="center"><a href="{$goods_info.4.url_title}" target="_blank"><img src="{if $goods_info.4.thumb}{else}{$goods_info.4.thumb}{$goods_info.4.goods_grid}{/if}" alt="{$goods_info.4.goods_title}" width="150" height="150" border="0"></a></td>
+                      <td width="33%" height="200" align="center"><a href="{$goods_info.5.url_title}" target="_blank"><img src="{if $goods_info.5.thumb}{else}{$goods_info.5.thumb}{$goods_info.5.goods_grid}{/if}" alt="{$goods_info.5.goods_title}" width="150" height="150" border="0"></a></td>
+                    </tr>
+                    <tr>
+                      <td colspan="3" style="border-bottom:1px solid #f5f5f5;"></td>
+                    </tr>
+                    <tr>
+                      <td height="50" align="center" valign="middle" style="color:#666666; font-size:12px; font-family:Arial, Helvetica, sans-serif;"><div style="line-height:18px; height:36px; font-weight:bold; overflow:hidden; padding:0 10px;">{$goods_info.3.shirt_title}</div></td>
+                      <td align="center" valign="middle" style="color:#666666; font-size:12px; font-family:Arial, Helvetica, sans-serif;"><div style="line-height:18px; height:36px; font-weight:bold; overflow:hidden; padding:0 10px;">{$goods_info.4.shirt_title}</div></td>
+                      <td align="center" valign="middle" style="color:#666666; font-size:12px; font-family:Arial, Helvetica, sans-serif;"><div style="line-height:18px; height:36px; font-weight:bold; overflow:hidden; padding:0 10px;">{$goods_info.5.shirt_title}</div></td>
+                    </tr>
+                    <tr>
+                      <td height="30" align="center" valign="top">{if $goods_info.3.market_price gt 0}<span style=" color:#9ea7b3; text-decoration:line-through; font-family:Arial, Helvetica, sans-serif; font-size:12px; padding-right:6px;">USD {$goods_info.3.market_price}</span>{/if}<span style="color:#e61717; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:24px;"><span style="font-size:12px;">USD </span>{$goods_info.3.shop_price}</span></td>
+                      <td align="center">{if $goods_info.4.market_price gt 0}<span style=" color:#9ea7b3; text-decoration:line-through; font-family:Arial, Helvetica, sans-serif; font-size:12px; padding-right:6px;">USD {$goods_info.4.market_price}</span>{/if}<span style="color:#e61717; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:24px;"><span style="font-size:12px;">USD </span>{$goods_info.4.shop_price}</span></td>
+                      <td align="center">{if $goods_info.5.market_price gt 0}<span style=" color:#9ea7b3; text-decoration:line-through; font-family:Arial, Helvetica, sans-serif; font-size:12px; padding-right:6px;">USD {$goods_info.5.market_price}</span>{/if}<span style="color:#e61717; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:24px;"><span style="font-size:12px;">USD </span>{$goods_info.5.shop_price}</span></td>
+                    </tr>
+                  </table></td>
+              </tr>
+              <tr>
+                <td height="4" bgcolor="#FFFFFF">&nbsp;</td>
+              </tr>
+              {if $list.banner_c}
+              <tr>
+                <td>{$list.banner_c}</td>
+              </tr>
+              {/if}
+              <tr>
+                <td height="8" bgcolor="#FFFFFF">&nbsp;</td>
+              </tr>
+              <tr>
+                <td bgcolor="#FFFFFF"><table width="100%" border="0" cellspacing="0" cellpadding="10">
+                    <tr>
+                      <td height="24" align="center" bgcolor="#365d98"><span style="font-size:24px; line-height:24px; height:24px; overflow:hidden; padding:0; margin:0;">
+                      <a href="{$cat_info.6.url}?1{literal}{{/literal}track_code{literal}}{/literal}" target="_blank" style="font-size:16px; font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold;">{$cat_info.6.cat_name}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <a href="{$cat_info.7.url}?1{literal}{{/literal}track_code{literal}}{/literal}" target="_blank" style="font-size:16px; font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold;">{$cat_info.7.cat_name}</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                      <a href="{$cat_info.8.url}?1{literal}{{/literal}track_code{literal}}{/literal}" target="_blank" style="font-size:16px; font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold;">{$cat_info.8.cat_name}</a></span></td>
+                    </tr>
+                  </table>
+                  <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td width="33%" height="200" align="center"><a href="{$goods_info.6.url_title}" target="_blank"><img src="{if $goods_info.6.thumb}{else}{$goods_info.6.thumb}{$goods_info.6.goods_grid}{/if}" alt="{$goods_info.6.goods_title}" width="150" height="150" border="0"></a></td>
+                      <td width="33%" height="200" align="center"><a href="{$goods_info.7.url_title}" target="_blank"><img src="{if $goods_info.7.thumb}{else}{$goods_info.7.thumb}{$goods_info.7.goods_grid}{/if}" alt="{$goods_info.7.goods_title}" width="150" height="150" border="0"></a></td>
+                      <td width="33%" height="200" align="center"><a href="{$goods_info.8.url_title}" target="_blank"><img src="{if $goods_info.8.thumb}{else}{$goods_info.8.thumb}{$goods_info.8.goods_grid}{/if}" alt="{$goods_info.8.goods_title}" width="150" height="150" border="0"></a></td>
+                    </tr>
+                    <tr>
+                      <td colspan="3" style="border-bottom:1px solid #f5f5f5;"></td>
+                    </tr>
+                    <tr>
+                      <td height="50" align="center" valign="middle" style="color:#666666; font-size:12px; font-family:Arial, Helvetica, sans-serif;"><div style="line-height:18px; height:36px; font-weight:bold; overflow:hidden; padding:0 10px;">{$goods_info.6.shirt_title}</div></td>
+                      <td align="center" valign="middle" style="color:#666666; font-size:12px; font-family:Arial, Helvetica, sans-serif;"><div style="line-height:18px; height:36px; font-weight:bold; overflow:hidden; padding:0 10px;">{$goods_info.7.shirt_title}</div></td>
+                      <td align="center" valign="middle" style="color:#666666; font-size:12px; font-family:Arial, Helvetica, sans-serif;"><div style="line-height:18px; height:36px; font-weight:bold; overflow:hidden; padding:0 10px;">{$goods_info.8.shirt_title}</div></td>
+                    </tr>
+                    <tr>
+                      <td height="30" align="center" valign="top">{if $goods_info.6.market_price gt 0}<span style=" color:#9ea7b3; text-decoration:line-through; font-family:Arial, Helvetica, sans-serif; font-size:12px; padding-right:6px;">USD {$goods_info.6.market_price}</span>{/if}<span style="color:#e61717; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:24px;"><span style="font-size:12px;">USD </span>{$goods_info.6.shop_price}</span></td>
+                      <td align="center">{if $goods_info.7.market_price gt 0}<span style=" color:#9ea7b3; text-decoration:line-through; font-family:Arial, Helvetica, sans-serif; font-size:12px; padding-right:6px;">USD {$goods_info.7.market_price}</span>{/if}<span style="color:#e61717; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:24px;"><span style="font-size:12px;">USD </span>{$goods_info.7.shop_price}</span></td>
+                      <td align="center">{if $goods_info.8.market_price gt 0}<span style=" color:#9ea7b3; text-decoration:line-through; font-family:Arial, Helvetica, sans-serif; font-size:12px; padding-right:6px;">USD {$goods_info.8.market_price}</span>{/if}<span style="color:#e61717; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:24px;"><span style="font-size:12px;">USD </span>{$goods_info.8.shop_price}</span></td>
+                    </tr>
+                  </table></td>
+              </tr>
+              <tr>
+                <td height="4" bgcolor="#FFFFFF">&nbsp;</td>
+              </tr>
+              {if $list.banner_d}
+              <tr>
+                <td>{$list.banner_d}</td>
+              </tr>
+              {/if}
+              <tr>
+                <td height="8" bgcolor="#FFFFFF">&nbsp;</td>
+              </tr>
+              <tr>
+                <td bgcolor="#FFFFFF"><table width="100%" border="0" cellspacing="0" cellpadding="10">
+                    <tr>
+                      <td height="24" align="center" bgcolor="#365d98"><span style="font-size:24px; line-height:24px; height:24px; overflow:hidden; padding:0; margin:0;">
+                      <a href="{$cat_info.9.url}?1{literal}{{/literal}track_code{literal}}{/literal}" target="_blank" style="font-size:16px; font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold;">{$cat_info.9.cat_name}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <a href="{$cat_info.10.url}?1{literal}{{/literal}track_code{literal}}{/literal}" target="_blank" style="font-size:16px; font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold;">{$cat_info.10.cat_name}</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                      <a href="{$cat_info.11.url}?1{literal}{{/literal}track_code{literal}}{/literal}" target="_blank" style="font-size:16px; font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold;">{$cat_info.11.cat_name}</a></span></td>
+                    </tr>
+                  </table>
+                  <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td width="33%" height="200" align="center"><a href="{$goods_info.9.url_title}" target="_blank"><img src="{if $goods_info.9.thumb}{else}{$goods_info.9.thumb}{$goods_info.9.goods_grid}{/if}" alt="{$goods_info.9.goods_title}" width="150" height="150" border="0"></a></td>
+                      <td width="33%" height="200" align="center"><a href="{$goods_info.10.url_title}" target="_blank"><img src="{if $goods_info.10.thumb}{else}{$goods_info.10.thumb}{$goods_info.10.goods_grid}{/if}" alt="{$goods_info.10.goods_title}" width="150" height="150" border="0"></a></td>
+                      <td width="33%" height="200" align="center"><a href="{$goods_info.11.url_title}" target="_blank"><img src="{if $goods_info.11.thumb}{else}{$goods_info.11.thumb}{$goods_info.11.goods_grid}{/if}" alt="{$goods_info.11.goods_title}" width="150" height="150" border="0"></a></td>
+                    </tr>
+                    <tr>
+                      <td colspan="3" style="border-bottom:1px solid #f5f5f5;"></td>
+                    </tr>
+                    <tr>
+                      <td height="50" align="center" valign="middle" style="color:#666666; font-size:12px; font-family:Arial, Helvetica, sans-serif;"><div style="line-height:18px; height:36px; font-weight:bold; overflow:hidden; padding:0 10px;">{$goods_info.9.shirt_title}</div></td>
+                      <td align="center" valign="middle" style="color:#666666; font-size:12px; font-family:Arial, Helvetica, sans-serif;"><div style="line-height:18px; height:36px; font-weight:bold; overflow:hidden; padding:0 10px;">{$goods_info.10.shirt_title}</div></td>
+                      <td align="center" valign="middle" style="color:#666666; font-size:12px; font-family:Arial, Helvetica, sans-serif;"><div style="line-height:18px; height:36px; font-weight:bold; overflow:hidden; padding:0 10px;">{$goods_info.11.shirt_title}</div></td>
+                    </tr>
+                    <tr>
+                      <td height="30" align="center" valign="top">{if $goods_info.9.market_price gt 0}<span style=" color:#9ea7b3; text-decoration:line-through; font-family:Arial, Helvetica, sans-serif; font-size:12px; padding-right:6px;">USD {$goods_info.9.market_price}</span>{/if}<span style="color:#e61717; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:24px;"><span style="font-size:12px;">USD </span>{$goods_info.9.shop_price}</span></td>
+                      <td align="center">{if $goods_info.10.market_price gt 0}<span style=" color:#9ea7b3; text-decoration:line-through; font-family:Arial, Helvetica, sans-serif; font-size:12px; padding-right:6px;">USD {$goods_info.10.market_price}</span>{/if}<span style="color:#e61717; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:24px;"><span style="font-size:12px;">USD </span>{$goods_info.10.shop_price}</span></td>
+                      <td align="center">{if $goods_info.11.market_price gt 0}<span style=" color:#9ea7b3; text-decoration:line-through; font-family:Arial, Helvetica, sans-serif; font-size:12px; padding-right:6px;">USD {$goods_info.11.market_price}</span>{/if}<span style="color:#e61717; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:24px;"><span style="font-size:12px;">USD </span>{$goods_info.11.shop_price}</span></td>
+                    </tr>
+                  </table></td>
+              </tr>
+              <td bgcolor="#FFFFFF">&nbsp;</td>
+              </tr>
+            </table>
+            <table width="650" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr>
+                <td bgcolor="#FFFFFF"><table width="100%" border="0" cellspacing="0" cellpadding="10">
+                    <tr>
+                      <td height="24" align="center" bgcolor="#365d98"><span style="font-size:24px; line-height:24px; height:24px; overflow:hidden; padding:0; margin:0;">
+                      <a href="{$cat_info.12.url}?1{literal}{{/literal}track_code{literal}}{/literal}" target="_blank" style="font-size:16px; font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold;">{$cat_info.12.cat_name}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <a href="{$cat_info.13.url}?1{literal}{{/literal}track_code{literal}}{/literal}" target="_blank" style="font-size:16px; font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold;">{$cat_info.13.cat_name}</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                      <a href="{$cat_info.14.url}?1{literal}{{/literal}track_code{literal}}{/literal}" target="_blank" style="font-size:16px; font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold;">{$cat_info.14.cat_name}</a></span></td>
+                    </tr>
+                  </table>
+                  <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td width="33%" height="200" align="center"><a href="{$goods_info.12.url_title}" target="_blank"><img src="{if $goods_info.12.thumb}{else}{$goods_info.12.thumb}{$goods_info.12.goods_grid}{/if}" alt="{$goods_info.12.goods_title}" width="150" height="150" border="0"></a></td>
+                      <td width="33%" height="200" align="center"><a href="{$goods_info.13.url_title}" target="_blank"><img src="{if $goods_info.13.thumb}{else}{$goods_info.13.thumb}{$goods_info.13.goods_grid}{/if}" alt="{$goods_info.13.goods_title}" width="150" height="150" border="0"></a></td>
+                      <td width="33%" height="200" align="center"><a href="{$goods_info.14.url_title}" target="_blank"><img src="{if $goods_info.14.thumb}{else}{$goods_info.14.thumb}{$goods_info.14.goods_grid}{/if}" alt="{$goods_info.14.goods_title}" width="150" height="150" border="0"></a></td>
+                    </tr>
+                    <tr>
+                      <td colspan="3" style="border-bottom:1px solid #f5f5f5;"></td>
+                    </tr>
+                    <tr>
+                      <td height="50" align="center" valign="middle" style="color:#666666; font-size:12px; font-family:Arial, Helvetica, sans-serif;"><div style="line-height:18px; height:36px; font-weight:bold; overflow:hidden; padding:0 10px;">{$goods_info.12.shirt_title}</div></td>
+                      <td align="center" valign="middle" style="color:#666666; font-size:12px; font-family:Arial, Helvetica, sans-serif;"><div style="line-height:18px; height:36px; font-weight:bold; overflow:hidden; padding:0 10px;">{$goods_info.13.shirt_title}</div></td>
+                      <td align="center" valign="middle" style="color:#666666; font-size:12px; font-family:Arial, Helvetica, sans-serif;"><div style="line-height:18px; height:36px; font-weight:bold; overflow:hidden; padding:0 10px;">{$goods_info.14.shirt_title}</div></td>
+                    </tr>
+                    <tr>
+                      <td height="30" align="center" valign="top">{if $goods_info.12.market_price gt 0}<span style=" color:#9ea7b3; text-decoration:line-through; font-family:Arial, Helvetica, sans-serif; font-size:12px; padding-right:6px;">USD {$goods_info.12.market_price}</span>{/if}<span style="color:#e61717; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:24px;"><span style="font-size:12px;">USD </span>{$goods_info.12.shop_price}</span></td>
+                      <td align="center">{if $goods_info.13.market_price gt 0}<span style=" color:#9ea7b3; text-decoration:line-through; font-family:Arial, Helvetica, sans-serif; font-size:12px; padding-right:6px;">USD {$goods_info.13.market_price}</span>{/if}<span style="color:#e61717; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:24px;"><span style="font-size:12px;">USD </span>{$goods_info.13.shop_price}</span></td>
+                      <td align="center">{if $goods_info.14.market_price gt 0}<span style=" color:#9ea7b3; text-decoration:line-through; font-family:Arial, Helvetica, sans-serif; font-size:12px; padding-right:6px;">USD {$goods_info.14.market_price}</span>{/if}<span style="color:#e61717; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:24px;"><span style="font-size:12px;">USD </span>{$goods_info.14.shop_price}</span></td>
+                    </tr>
+                  </table></td>
+              </tr>
+            </table>
+        <tr>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+        <tr>
+          <td height="56" colspan="2" align="center"  bgcolor="#f3f8fc" style="border:1px solid #c3dcff"><table width="94%" border="0" align="center" cellpadding="0" cellspacing="0" >
+              <tr>
+                <td width="35"><a href="http://www.facebook.com/ahappydealfans" target="_blank"><img src="http://cloud4.faout.com/imagecache/A/email/A0513/af.jpg" width="35" height="35" border="0" alt="facebook"></a></td>
+                <td width="82"><a href="http://www.facebook.com/ahappydealfans" target="_blank" style="color:#666; font-size:12px; font-weight:bold;"><em>Like us on facebook</em></a></td>
+                <td width="35"><a href="https://twitter.com/a_happy_deal" target="_blank"><img src="http://cloud4.faout.com/imagecache/A/email/A0513/afb.jpg" width="35" height="35" border="0" alt="twitter"></a></td>
+                <td width="109"><a href="https://twitter.com/a_happy_deal" target="_blank" style="color:#666; font-size:12px; font-weight:bold;"><em>Follow us on Twitter</em></a></td>
+                <td width="36"><a href="http://www.youtube.com/dealsmachine" target="_blank"><img src="http://cloud4.faout.com/imagecache/A/email/A0513/afd.jpg" width="35" height="35" border="0" alt="youtube"></a></td>
+                <td width="108"><a href="http://www.youtube.com/dealsmachine" target="_blank" style="color:#666; font-size:12px; font-weight:bold;"><em>Watch us on YouTube</em></a></td>
+                <td width="33"><a href="http://pinterest.com/dealsmachine/" target="_blank"><img src="http://cloud4.faout.com/imagecache/A/email/A0513/afc.jpg" width="35" height="35" border="0" alt="pinterest"></a></td>
+                <td width="102"><a href="http://pinterest.com/dealsmachine/" target="_blank" style="color:#666; font-size:12px;  font-weight:bold;"><em>Pin us on<BR>
+                  Pinterest</em></a></td>
+                <td><a href="http://vk.com/club45705699" target="_blank"><img src="http://cloud4.faout.com/imagecache/A/email/A0513/afe.jpg" width="35" height="35" border="0" alt="vk"></a></td>
+                <td width="74"><a href="http://vk.com/club45705699" target="_blank" style="color:#666; font-size:12px;  font-weight:bold;"><em>Find us on VK</em></a></td>
+              </tr>
+            </table></td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+<table width="650" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td style=" padding:20px; font-size:12px; line-height:16px; color:#707070; font-family:Arial, Verdana, sans-serif;">
+      <p>This e-mail is a dealsmachine advertisement. We will only send products  and relevant services that may be of interest to you. dealsmachine is fully committed  to protecting your security and privacy. We will never ask for personal information in an email newsletter. 
+      For more information, our detailed <a href="http://www.dealsmachine.com/m-article-id-100.html" target="_blank" style="color:#3d3d3d;">Privacy Policy</a>.</p>
+      <p>Promo applies only to selected products. All promotions are time-limited and subject to availability. Prices and information are correct at time of distribution and subject to change without notice. If you have any questions, please contact us at our 
+      <a href="http://support.dealsmachine.com/" target="_blank" style="color:#3d3d3d;"> Support Center</a>.</p>
+      <p>Please do not reply to this email, as we are not able to respond to messages sent to this address. You can contact us at our <a href="http://support.dealsmachine.com/" target="_blank" style="color:#3d3d3d;">Support Center</a>. 
+      For International phone support, USA  Customers Toll Free: 530-419-5986, Non-USA customers: +1-530-419-5986. Our team is in the office during Beijing Time  (GMT +8) 8am - 5pm Monday through Saturday. For more information, our <a href="http://www.dealsmachine.com/m-article-id-20.html" target="_blank" style="color:#3d3d3d;">Contact Us</a> page.</p>
+      <p>We hope you enjoyed receiving this message. However, if you'd rather not receive future e-mails of this sort, you can <a href="http://mx.egocdn.com/syn/mail_s.php?act=subscription&email={literal}{{/literal}$email{literal}}{/literal}&s={literal}{{/literal}$site_id{literal}}{/literal}" style="color:#3d3d3d;">unsubscribe</a> here.</p>
+      <p align="center">Registered Names and  Trademarks are the copyright and property of their respective owners.<br />
+        &copy;2006-2014 <strong>dealsmachine</strong>. All Rights Reserved.<BR />
+        <BR />
+        <a href="http://www.dealsmachine.com/?1{literal}{{/literal}track_code{literal}}{/literal}" target="_blank" style="color:#3d3d3d;">dealsmachine</a> | <a href="http://www.dealsmachine.com/m-article-id-100.html" target="_blank" style="color:#3d3d3d;" >Privacy  Policies</a> | <a href="http://www.dealsmachine.com/m-article-id-107.html" target="_blank" style="color:#3d3d3d;">Terms and  Conditions</a></p></td>
+  </tr>
+</table>
+</body>
+</html>

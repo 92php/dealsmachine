@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>abc列表重点推荐词</title>
+    <link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css" />
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft">
+                            <a href="index.php?act=main">管理中心</a>
+                            &gt;&gt; abc列表重点推荐词
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <form method="post" action="?act=save" id="form">
+        <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+            <tr>
+                <th colspan="3">abc列表重点推荐词</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="button" id="btn-submit" class="sub_but" value="提 交" /></td>
+            </tr>
+            <tr>
+                <td valign="top" class="text-right font-bold">字母</td>
+                <td>{html_options options=$letter_arr selected=$index name=index id=index}</td>
+             </tr>
+            <tr>
+                <td valign="top" class="text-right font-bold">关键词</td>
+                <td>
+                  <textarea id="data" class="font-12" rows="30" cols="50">{$data}</textarea>
+                  <span class="font-gray">一行一个，将字母自动转化成大写</span>
+                </td>
+             </tr>
+        </table>
+    </form>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+    <script type="text/javascript" src="{$imgcache_url}eload_admin/js/common.js"></script>
+    {literal}
+    <script type="text/javascript">
+        $('#index').width(50).change(function() {//获取数据
+            setLoading();
+
+            $.get('?act=get_data&index=' + $(this).val(), function(data) {
+                setLoading(false);
+                $('#data').val(data);
+            });
+        });
+
+        $('#btn-submit').click(function() {//提交
+            setLoading();
+            var index = $('#index').val();
+
+            $.post('?act=save&index=' + index, 'data=' + $('#data').val(), function(data) {
+                C.callback(data, '?index=' + index, '保存成功');
+            });
+        });
+    </script>
+    {/literal}
+{include file="copyright.htm"}

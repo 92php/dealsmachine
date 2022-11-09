@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin2/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="/sysjs/eload13pack.js"></script>
+<script language="javascript" src="/sysjs/jlivequery.js"></script>
+<script language="javascript" src="/sysjs/jcookie.js"></script>
+<script language="javascript" src="/sysjs/validator.js"></script>
+<script language="javascript" src="/temp/skin2/eload_admin/js/admin_add.js"></script>
+<link href="/sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/sysjs/calendar.php?lang="></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 中奖列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="share_winner.php">中奖列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<div class="main-div">
+  <form  method="post" name="theForm"  action="share_winner.php?act=add" >
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+      <tr>
+        <td width="22%" class="label">Email:</td>
+        <td width="78%"><input name="email" type="text" id="code" value="{$winner.email}" size="30" />
+        * 
+       </td>
+      </tr>
+      <tr>
+        <td class="label">FB ID:</td>
+        <td><input name="fb_uid" value="{$winner.fb_uid}" />
+        * </td>
+      </tr>
+      <tr>
+        <td class="label">User ID:</td>
+        <td><input name="user_id" id="times" value="{$winner.user_id}" />*</td>
+      </tr>
+      <tr>
+        <td class="label">中奖SKU</td>
+        <td>
+			<input type="text" name="goods_sn" value="{$winner.goods_sn}">*
+        </td>
+      </tr>
+	  <tr>
+        <td class="label">中奖日期:</td>
+        <td><input name="add_time" value="{$winner.add_time}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);"  datatype="Require" msg="请填写日期！"/>
+        * </td>
+      </tr>		
+     <tr align="center">
+        <td align="center">&nbsp;</td>
+        <td align="left">
+		<input type="hidden" name="id" value="{$winner.id}">
+        <input name="button" type="submit" class="sub_but" id="button" value="{$tag_msg}" /></td>
+      </tr>
+    </table>
+  </form>
+</div>
+{include file="copyright.htm"}

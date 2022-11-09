@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_action.js?416"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/editinplace.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 地区列表</td>
+          <td width="44%" align="right"></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<div  id="list">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+    <tr>
+      <th align="left" class="first-cell">序号</th>
+      <th align="left" class="first-cell">代码</th>
+      <th align="left" class="first-cell">国家</th>
+      <th align="left" class="first-cell">操作</th>
+    </tr>
+    {foreach from=$region_arr item=list name=area_name}
+	<tr bgColor="{if $smarty.foreach.area_name.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.area_name.iteration is even}#f4f9fd{else}#e8f1fd{/if}'";>
+      <td width="16%" align="left">{if $list.state gt 0}
+      <img src="{$jscache_url}temp/skin3/eload_admin/images/tv-expandable.gif" class="ctrl_area" cat_id="{$list.region_id}"/>
+      {else}
+      <img src="{$jscache_url}temp/skin3/eload_admin/images/tv-collapsable.gif" border="0" style="cursor: default;"/>
+      {/if}
+	  {$list.region_id}
+	  </td>
+      <td width="15%" align="left" title="点击进行修改..."><span {literal}onclick="$(this).editable('area_manage.php?act=edit', {type:'text',event:'click',width:'80%',indicator:'Saving...',onblur: 'submit',tooltip: ''});"{/literal} id="{$list.region_id}|region_code">{if $list.region_code}{$list.region_code}{else}点击编辑{/if}</span></td>
+      <td width="56%" align="left" title="点击进行修改..."><span {literal}onclick="$(this).editable('area_manage.php?act=edit', {type:'text',event:'click',width:'80%',indicator:'Saving...',onblur: 'submit',tooltip: ''});"{/literal} id="{$list.region_id}|region_name">{$list.region_name|escape:"html"}</span></td>
+      <td width="13%" align="left"><a href="?act=drop&id={$list.region_id}" class="del_act" title="删除">删除</a></td>
+    </tr>
+	
+		{foreach from = $list.state item=state}
+		<tr style="display:none" class="state_{$list.region_id}">
+		<td width="15%" align="left" title="点击进行修改..." style="padding-left:14px"><span {literal}onclick="$(this).editable('area_manage.php?act=edit_state', {type:'text',event:'click',width:'80%',indicator:'Saving...',onblur: 'submit',tooltip: ''});"{/literal} id="{$state}|country_id">{$list.region_id}</span></td>
+		<td width="50%" align="left" title="点击进行修改..."><span {literal}onclick="$(this).editable('area_manage.php?act=edit_state', {type:'text',event:'click',width:'80%',indicator:'Saving...',onblur: 'submit',tooltip: ''});"{/literal} id="{$state}|state">{if $state}{$state}{else}点击编辑{/if}</span></td>
+		<td width="15%">{$list.region_code}</td>
+		<td width="13%" align="left"><a href="?act=drop_state&name={$state}" class="del_act" title="删除">删除</a></td>
+		{/foreach}
+		</tr>
+
+    {/foreach}
+    <tr>
+      <td colspan="2" align="right" class="first-cell">添加地区：</td>
+      <td align="left" class="first-cell"><form id="form1" name="form1" method="post" action="?act=add">
+        名称：
+            <input type="text" name="region_name" id="region_name" />
+            国家代码：
+            <input name="region_code" type="text" id="region_code" size="6" />
+        <input type="submit" name="button" id="button" value="确定" />
+      </form></td>
+      <td align="left" class="first-cell">&nbsp;</td>
+    </tr>
+	<tr>
+      <td colspan="2" align="right" class="first-cell">添加地区：</td>
+      <td align="left" class="first-cell"><form id="form1" name="form1" method="post" action="?act=add_province">
+        国家：<select name="country" id="country" style="border:1px solid #ccc;" >
+            <option value="">Please select country </option>
+            <!-- {foreach from=$region_arr item=country} -->
+            <option value="{$country.region_id}">{$country.region_name}</option>
+            <!-- {/foreach} -->
+			</select>
+            州：
+            <input name="province" type="text" id="province" size="6" />
+        <input type="submit" name="button" id="button" value="确定" />
+      </form></td>
+      <td align="left" class="first-cell">&nbsp;</td>
+    </tr>
+</table>
+</div>
+{include file="copyright.htm"}

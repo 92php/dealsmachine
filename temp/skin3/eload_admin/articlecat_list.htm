@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 文章分类</td>
+          <td width="44%" align="right">
+		  {if $default_lang eq '1'}
+		  <span class="navright"><a href="?act=add">分类添加</a></span>
+		  {/if}
+		  </td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form method="post" action="" name="listForm">
+<!-- start ad position list -->
+<div class="list-div" id="listDiv">
+
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="28%">分类名称</th>
+    <th width="47%">简介</th>
+    <th>排序</th>
+    <th>操作</th>
+  </tr>
+  {foreach from=$articlecat item=cat name=area_name}
+<tr bgColor="{if $smarty.foreach.area_name.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.area_name.iteration is even}#f4f9fd{else}#e8f1fd{/if}';"  align="center" class="{$cat.level}">
+  
+    <td align="left" class="first-cell nowrap" valign="top" >
+      {if $cat.is_leaf neq 1}
+      <img src="/temp/skin3/images/admin/menu_minus.gif" width="9" height="9" border="0" style="margin-left:{$cat.level}em"/>
+      {else}
+      <img src="/temp/skin3/images/admin/menu_arrow.gif" width="9" height="9" border="0" style="margin-left:{$cat.level}em" />
+      {/if}
+      <span><a href="article.php?act=list&amp;cat_id={$cat.cat_id}">{$cat.cat_name}</a></span>
+    </td>
+    <td align="left" valign="top">
+      {$cat.cat_desc|escape}</td>
+    <td width="11%" align="right" class="nowrap" valign="top"><span onclick="listTable.edit(this, 'edit_sort_order', {$cat.cat_id})">{$cat.sort_order}</span></td>
+    <td width="14%" align="center" class="nowrap" valign="top">
+      <a href="articlecat.php?act=edit&amp;id={$cat.cat_id}" title="编辑"><img src="{$jscache_url}temp/skin3/eload_admin/images/icon_edit.gif" width="16" height="16" border="0" /> </a>      
+      {if $default_lang eq '1'}
+	  <a href="?act=remove&id={$cat.cat_id}" class="del_act" title="删除"> <img src="{$jscache_url}temp/skin3/eload_admin/images/icon_drop.gif" width="16" height="16" border="0" /></a>
+	  {/if}      
+    </td>
+  </tr>
+  {/foreach}
+</table>
+</div>
+</form>
+{include file="copyright.htm"}
+

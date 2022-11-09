@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 回复评论</td>
+          <td width="44%" align="right"><span class="navright"><a href="javascript:;history.go(-1);">返回评论列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<!-- comment content list -->
+<div class="main-div">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="grid_tb">
+    <tr>
+      <td>
+      <a href="mailto:{$msg.email}"><b>{if $msg.nickname}{$msg.nickname} {else}Anonymous{/if}</b></a>&nbsp;于
+      &nbsp;{$msg.add_time}&nbsp;对&nbsp;<b><a href="/m-{if $msg.comment_type eq '0'}goods{else}article{/if}-id-{$msg.id_value}.htm" target="_blank">{$id_value}</a></b>&nbsp;评论  &nbsp;&nbsp;&nbsp;  {$msg.email}
+    </td>
+    </tr>
+    <tr>
+      <td height="1"><hr color="#dadada" size="1"></td>
+    </tr>
+    <tr>
+      <td>
+        <div style="overflow:hidden; word-break:break-all;">{$msg.content}</div>
+        <div align="right"><b>评论星级:</b> {$msg.comment_rank}&nbsp;&nbsp;<b>评论IP</b>: {$msg.ip_address}</div>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        {if $msg.status eq "0"}
+        <input type="button" onclick="location.href='comment_manage.php?act=check&check=allow&id={$msg.comment_id}'" value="允许显示" class="button" />
+        {else}
+        <input type="button" onclick="location.href='comment_manage.php?act=check&check=forbid&id={$msg.comment_id}'" value="禁止显示" class="button" />
+        {/if}
+    </td>
+    </tr>
+  </table>
+</div>
+
+{if $reply_info.content}
+<!-- reply content list -->
+<div class="main-div">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="grid_tb">
+    <tr>
+      <td>
+      Nickname&nbsp;<a href="mailto:{$msg.email}"><b>{$reply_info.nickname}</b></a>&nbsp;于
+      &nbsp;{$reply_info.add_time}&nbsp;回复
+    </td>
+    </tr>
+    <tr>
+      <td height="1"><hr color="#dadada" size="1"></td>
+    </tr>
+    <tr>
+      <td>
+        <div style="overflow:hidden; word-break:break-all;">{$reply_info.content}</div>
+        <div align="right"><b>评论IP</b>: {$reply_info.ip_address}</div>
+      </td>
+    </tr>
+  </table>
+</div>
+{/if}
+
+<div>
+<form method="post" action="comment_manage.php?act=action" name="theForm"  onSubmit="return Validator.Validate(this,3)">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="grid_tb">
+  <tr>
+  <th colspan="2">
+  <strong>回复</strong>
+  </th></tr>
+  <tr>
+    <td width="24%">呢称:</td>
+    <td width="76%"><input name="nickname" type="text" value="{$shop_name}" size="30" dataType="Require" msg="请填写回复人！" class="input_style" /></td>
+  </tr>
+  <tr>
+    <td>Email:</td>
+    <td><input name="email" type="text" value="{$service_email}" size="30" dataType="Email" msg="请填写服务邮箱！" class="input_style"/></td>
+  </tr>
+  <tr>
+    <td>回复:</td>
+    <td><textarea name="content" cols="50" rows="4" wrap="VIRTUAL"  dataType="Require" msg="请填写回复内容！" class="input_style" ></textarea>(必填)</td>
+  </tr>
+  {if $reply_info.content}
+  <tr>
+    <td>&nbsp;</td>
+    <td>提示: 此条评论已有回复, 如果继续回复将更新原来回复的内容!</td>
+  </tr>
+  {/if}
+  <tr>
+    <td>&nbsp;</td>
+    <td>
+      <input name="submit" type="submit" value="确 定" class="button">
+      <input type="reset" value="重 置" class="button">
+      <input type="hidden" name="comment_id" value="{$msg.comment_id}">
+      <input type="hidden" name="comment_type" value="{$msg.comment_type}">
+      <input type="hidden" name="id_value" value="{$msg.id_value}">
+    </td>
+  </tr>
+</table>
+</form>
+</div>
+{literal}
+<script language="JavaScript">
+<!--
+document.forms['theForm'].elements['content'].focus();
+
+//-->
+</script>
+{/literal}
+{include file="copyright.htm"}

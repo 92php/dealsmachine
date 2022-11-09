@@ -1,0 +1,152 @@
+﻿
+
+{if $act =='view_video'}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0071)http://www.{$shop_name}/feedbacks/browseVideos.dx/sku.40470~id.13468 -->
+<HTML xmlns="http://www.w3.org/1999/xhtml"><HEAD id=Head1><TITLE>{$shop_name}: Customer Uploaded Video Gallery - Car Cigarette Powered 1000mA USB Adapter/Charger - Black (DC 12V)</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type></HEAD>
+<BODY>
+{literal}
+<SCRIPT language=javascript type=text/javascript>
+function play(videoCode, caption, username) {
+document.getElementById("divEnlarge").innerHTML = "<object width=\"425\" height=\"355\"><param name=\"movie\" value=\"http://www.youtube.com/v/" + videoCode + "&rel=1&autoplay=1\"></param><param name=\"wmode\" value=\"transparent\"></param><embed src=\"http://www.youtube.com/v/" + videoCode + "&rel=1&autoplay=1\" type=\"application/x-shockwave-flash\" wmode=\"transparent\" width=\"425\" height=\"355\"></embed></object><br /><br /><a target=\"_blank\" href=\"http://www.youtube.com/watch?v=" + videoCode + "\">Open in YouTube</a>";
+if(document.all){
+document.getElementById("lblCaption").innerText = caption;
+document.getElementById("lblUsername").innerText = username;
+} else{
+document.getElementById("lblCaption").textContent = caption;
+document.getElementById("lblUsername").textContent = username;
+}
+}
+    </SCRIPT>
+ {/literal}
+
+<FORM id=form1 method=post name=form1 
+action=browseVideos.aspx?sku=40470&amp;id=13468&amp;&amp;>
+<DIV><INPUT id=__VIEWSTATE 
+value=/wEPDwUINDExNzkwNThkZIqpYnbILf2WJGoHiZ/y/jknVOdx type=hidden 
+name=__VIEWSTATE> </DIV>
+<DIV align=center>
+<TABLE style="FONT-FAMILY: Arial; COLOR: blue; FONT-SIZE: 9pt" border=0 
+cellSpacing=0 cellPadding=0 width="100%" height=720>
+  <TBODY>
+  <TR>
+    <TD vAlign=top width=165 align=middle>
+      <DIV 
+      style="TEXT-ALIGN: center; OVERFLOW-Y: auto; WIDTH: 100%; HEIGHT: 700px">
+      <P><IMG alt="Videos are hosted by YouTube" 
+      src="{$imgcache_url}images/youtubelogo.gif" width=122 height=63><BR><BR><A 
+      href="/m-review-a-write_review-goods_id-{$goods.goods_id}.htm">Post 
+      Your Videos</A></P>
+     {foreach from=$arr_video item=v}
+
+      <a  href="javascript:play('{$v.paths}','{$shop_name} {$v.nickname}',' {$v.nickname}')">
+      <img style="PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 2px; PADDING-TOP: 0px" border=0 alt="uploaded by  {$v.nickname}-&nbsp;{$goods.goods_title}" src="http://img.youtube.com/vi/{$v.paths}/default.jpg" width=130></a><BR><FONT color=#9c9c9c>by 
+      {$v.nickname} 
+      </FONT><BR>
+      
+	{/foreach}
+      </DIV><IMG border=0 src="images/spacer.gif" width=165 height=1> </TD>
+      
+    <TD style="BACKGROUND-COLOR: #c0c0c0" width=1><IMG border=0 src="videa_view_files/spacer.gif" width=1 height=1></TD>
+    <TD vAlign=top width="100%" align=middle><A href="/{$cur_lang_url}best_{$goods.goods_id}.htm">
+    <SPAN style="FONT-SIZE: 11pt; FONT-WEIGHT: bold" id=lblProductName>{$goods.goods_title}</SPAN><BR>
+    (click here for product details)</A> <BR><BR><SPAN 
+      style="FONT-SIZE: 11pt; FONT-WEIGHT: bold" id=lblCaption></SPAN>&nbsp; 
+      <FONT color=#9c9c9c>uploaded by <SPAN 
+      style="FONT-SIZE: 10pt; FONT-WEIGHT: bold" 
+      id=lblUsername>{$c_up_by}</SPAN></FONT><BR>
+      <DIV id=divEnlarge> </DIV><BR>
+      <DIV align=right></DIV></TD></TR></TBODY></TABLE></DIV>
+   
+<SCRIPT type=text/javascript>
+//<![CDATA[
+play('{$c_path}','{$c_caption}','{$c_up_by}');//]]>
+</SCRIPT>
+
+</FORM></BODY></HTML>
+{/if}
+
+{if $act == 'view_image'}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+<HEAD id=Head1>
+<TITLE>{$shop_name}: Customer Uploaded Photo Gallery -{$goods.goods_title}</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+</HEAD>
+<BODY>
+{literal}
+<SCRIPT language=javascript type=text/javascript>
+function enlarge(url, caption, username) {
+document.getElementById("divEnlarge").innerHTML = "<a href='javascript:window.close();'><img src=\"" + url + "\" alt=\"\" border=\"0\" style=\"border: solid 1px #C0C0C0\" /></a>";
+if(document.all){
+document.getElementById("lblCaption").innerText = caption;
+document.getElementById("lblUsername").innerText = username;
+} else{
+document.getElementById("lblCaption").textContent = caption;
+document.getElementById("lblUsername").textContent = username;
+}
+}
+    </SCRIPT>
+ {/literal}
+<FORM id=form1 method=post name=form1 
+action=browseCustomerPhotos.aspx?sku=40470&amp;id=96692&amp;&amp;>
+  <DIV>
+    <INPUT id=__VIEWSTATE 
+value=/wEPDwUJMTM4OTU1ODk5ZGRNnIM5pZKIrAphxoYq4c5s+Pz2ZQ== type=hidden 
+name=__VIEWSTATE>
+  </DIV>
+  <DIV align=center>
+    <TABLE style="FONT-FAMILY: Arial; COLOR: blue; FONT-SIZE: 9pt" border=0 
+cellSpacing=0 cellPadding=0 width="100%" height=720>
+      <TBODY>
+        <TR>
+          <TD vAlign=top width=165 align=middle>
+		  <DIV style="TEXT-ALIGN: center; OVERFLOW-Y: auto; WIDTH: 100%; HEIGHT: 700px">
+              <P><A href="/m-review-a-write_review-goods_id-{$goods.goods_id}.htm">Upload Your Images</A></P>
+              {foreach from=$arr_pic item=pic}
+              <A style="TEXT-DECORATION: none" href="javascript:enlarge('{$domain_img}/{$pic.paths}','','/{$pic.nickname}')"><IMG  width="80"
+      style="PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 2px; PADDING-TOP: 0px"  border=0 alt="" src="{$domain_img}/{$pic.thumb_paths}"><BR>
+              <FONT color=#9c9c9c>by {$pic.nickname} </FONT></A><BR>
+              <BR>
+			  {/foreach}
+              <BR>
+            </DIV>
+            <IMG border=0 
+      src="/images/spacer.gif" width=165 height=1></TD>
+          <TD style="BACKGROUND-COLOR: #c0c0c0" width=1><IMG border=0 
+      src="/images/spacer.gif" width=1 height=1></TD>
+          <TD vAlign=center width="100%" align=middle><A 
+      href="/{$cur_lang_url}best_{$goods.goods_id}.html"><SPAN 
+      style="FONT-SIZE: 11pt; FONT-WEIGHT: bold" id=lblProductName>{$goods.goods_title}</SPAN><BR>
+            (click here 
+            for product details)</A><BR>
+            <BR>
+            <SPAN 
+      style="FONT-SIZE: 11pt; FONT-WEIGHT: bold" id=lblCaption></SPAN>&nbsp; <FONT color=#9c9c9c>uploaded by <SPAN 
+      style="FONT-SIZE: 10pt; FONT-WEIGHT: bold" 
+      id=lblUsername>{$c_up_by}</SPAN></FONT><BR>
+            <DIV id=divEnlarge> </DIV>
+            (click to close) <BR>
+            <DIV align=right></DIV></TD>
+        </TR>
+      </TBODY>
+    </TABLE>
+  </DIV>
+  {literal}
+  <SCRIPT language=javascript type=text/javascript>
+ 
+            setTimeout('preloadimages()', 10000);
+        </SCRIPT>
+        {/literal}
+  <SCRIPT type=text/javascript>
+//<![CDATA[
+
+enlarge('{$domain_img}/{$c_path}','{$c_caption}','{$c_up_by}');//]]>
+</SCRIPT>
+
+</FORM>
+</BODY>
+</HTML>
+{/if}
+

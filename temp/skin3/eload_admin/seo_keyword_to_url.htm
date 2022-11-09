@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>关键词跳转到指定url</title>
+<link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css" />
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 关键词跳转到指定url</td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+    <tr>
+        <td>
+            <form action="seo_keyword_to_url.php?act=save" meghot="post" id="form">
+                关键字<input type="text" name="keyword" id="txt-keyword" /> &nbsp; 
+                分类id或完整url<input type="text" name="url" id="txt-url" size="50" />
+                <input type="hidden" name="id" id="txt-id" value="0" />
+                <input type="submit" id="btn-submit" value="提 交" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<div id="list">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+    <tr>
+        <th style="width: 30px;"><input type="checkbox" onclick="checkAll(this)"/></th>
+        <th style="width: 150px;">关键字</th>
+        <th>url</th>
+        <th>操作</th>
+    </tr>
+    {foreach from=$data key=key item=item}
+    <tr style="background: #{cycle values='f4f9fd,e8f1fd' name=cycle1}" onmouseover="this.style.background='#FEF3D1'" onmouseout="this.style.background='#{cycle values='f4f9fd,e8f1fd' name=cycle2}'">
+        <td class="text-center"><input class="checkbox" type="checkbox" value="{$item.id}" /></td>
+        <td id="keyword-{$item.id}">{$key}</td>
+        <td id="url-{$item.id}">{$item.url}</td>
+        <td>
+            <a id="e-{$item.id}" class="edit" href="#">编辑</a>
+            <a id="d-{$item.id}" class="delete" href="javascript: void(0)">删除</a>
+        </td>
+    </tr>
+    {foreachelse}
+    <tr>
+        <td colspan="15" style="color: red;">{$no_records}</td>
+    </tr>
+    {/foreach}
+    <tr>
+        <td><input type="button" id="btn-delete" value="删 除" /></td>
+        <td></td>
+    </tr>
+</table>
+</div>
+<script type="text/javascript" src="{$jscache_url}sysjs/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script type="text/javascript" src="{$imgcache_url}eload_admin/js/common.js"></script>
+<script type="text/javascript">
+    {literal}
+    var url = 'seo_keyword_to_url.php', btn = $('#btn-submit');
+    var checkArr = [{
+        selector: $('#txt-keyword'),
+        msg: '请输出关键字'
+    }, {
+        selector: $('#txt-url'),
+        msg: '请输出分类id或完整url'
+    }];
+    $('a.delete').on('click', function() {//删除
+        deleteItem(this.id.substr(2));
+    });    
+    $('a.edit').on('click', function() {//编辑
+        beginEdit(this.id.substr(2));
+    })
+    var form = $('#form').submit(function() {//提交
+        
+        if (!checkPost(checkArr)) {
+            return false;
+        }
+        
+        btn.disable(true);
+        setLoading();
+        
+        $.post(form.attr('action'), form.serialize(), function(data) {
+            btn.disable(false);
+            C.callback(data, url, '保存成功');
+        });
+        
+        return false;
+    });
+    $('#btn-delete').click(function() {//删除按钮
+        var ids = getCheckedAll();
+        deleteItem(ids);
+    });
+    
+    function beginEdit(id) {//编辑
+        checkArr[0].selector.val($('#keyword-' + id).text());
+        checkArr[1].selector.val($('#url-' + id).text());
+        $('#txt-id').val(id);
+    }
+
+    function deleteItem(ids, confirmMsg) {//删除        
+        if (ids && confirm('您确定要删除' + (confirmMsg || '选中') + '记录？')) {
+            setLoading();
+
+            $.post(url + '?act=delete', 'ids=' + ids, function(data) {
+                C.callback(data, location.href, L.del + L.success);
+            });
+        }
+    }
+    {/literal}
+</script>
+{include file="copyright.htm"}

@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+
+</head>
+<body>
+<table width="99%" border="0" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 系统日志</td>
+          <td width="44%" align="right">&nbsp;</td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+    <tr>
+      <td width="37%" bgcolor="#EEF7FF">
+      <form name="theForm" method="POST" action="admin_logs.php" >
+      {$lang.view_ip}
+      <select name="ip">
+      <option value='0'>请选择IP地址</option>
+      {html_options options=$ip_list selected=$ip}
+      </select>
+      <input type="submit" value="按IP查看"   class="sub_but"/>
+      </form>
+      </td>
+       <form name="ttform" method="get" action="admin_logs.php" >
+      <td width="27%" bgcolor="#EEF7FF"><input type="text" name="keyword" id="keyword" size="25" value="{$smarty.get.keyword}"/>
+        <input type="submit" value="搜索" id="logsearch"/></td>
+        </form>
+      <td width="36%" bgcolor="#EEF7FF">
+      <form name="Form2" action="admin_logs.php?act=batch_drop" method="POST">
+      {$lang.drop_logs}
+      <select name="log_date">
+        <option value='0'>选择清除的日期...</option>
+        <option value='1'>一周前</option>
+        <option value='2'>一个月前</option>
+        <option value='3'>三个月前</option>
+        <option value='4'>半年前</option>
+        <option value='5'>一年前</option>
+      </select>
+      <input name="drop_type_date" type="submit" value="删除日志" class="sub_but"/>
+      </form>
+      </td>
+    </tr>
+</table>
+
+<form method="POST" action="admin_logs.php?act=batch_drop" name="listForm"  onSubmit="return Validator.Validate(this,1)">
+<div id="list">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th><input type="checkbox" onclick="checkAll(this, 'checkboxes[]');"><a href="admin_logs.php?sort_by=log_id&sort_order={$filter.sort_order_log_id}">编号</a>{$sort_log_id}
+   </th>
+    <th><a href="admin_logs.php?sort_by=said&sort_order={$filter.sort_order_said}">用户</a>{$sort_said}</th>
+    <th><a href="admin_logs.php?sort_by=log_time&sort_order={$filter.sort_order_log_time}">操作时间</a>{$sort_log_time}</th>
+    <th><a href="admin_logs.php?sort_by=ip_address&sort_order={$filter.sort_order_ip_address}">IP地址</a>{$sort_ip_address}</th>
+    <th align="left">操作信息</th>
+  </tr>
+  
+  {foreach from=$log_list item=list name=loglist}
+  <tr bgColor="{if $smarty.foreach.loglist.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loglist.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">  
+
+    <td width="10%"><span>
+    <input type="checkbox" name="checkboxes[]" value="{$list.log_id}" onclick="checkone('checkboxes[]')"/>{$list.log_id}</span></td>
+    <td width="15%" class="first-cell"><span>{$list.real_name|escape:html}</span></td>
+    <td width="20%" align="center"><span>{$list.log_time|date_format:"%Y-%m-%d %H:%M:%S"}</span></td>
+    <td width="16%" align="left"><span>{$list.ip_address}</span></td>
+    <td width="39%" align="left"><span>{$list.log_info}</span></td>
+  </tr>
+  {/foreach}
+  <tr>
+    <td colspan="2"> <input type="checkbox" onclick="checkAll(this, 'checkboxes[]');"> <input type="hidden" id="selAction"/><input name="drop_type_id" type="submit" id="btnSubmit" value="删除所选信息" disabled="true" class="button" /></td>
+    <td align="right" nowrap="true" colspan="3">
+	<div id="pager">{$pagestr}</div>
+</td>
+  </tr>
+</table>
+</div>
+</form>
+
+{include file="copyright.htm"}

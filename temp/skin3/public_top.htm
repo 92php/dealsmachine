@@ -1,0 +1,116 @@
+<div id="top">
+  <div class="top_inner">
+    <div class="top_language fl"><a href="{$DOMAIN}{$request_uri}" {if $cur_lang eq 'en' or $cur_lang eq''}class="top_curLanguage"{/if}  >English</a></div>
+    <div class="top_outLink fl">
+    </div>		
+    <div class="top_liveChat fr topMenu" id="js_live_chat">
+    	<h4 class="js_liveTitle topMenu_title">{$lang.live_chat}</h4>
+        <div class="top_liveChat_Box topMenu_box none" id="js_liveChat_Box">                
+			<p>
+				<span class="top_liveChat_pre"></span>
+				<strong>{$lang.pre_sales}</strong>
+				{$lang.pre_sales_des}
+				<a href="javascript:void(0)" rel="nofollow" onclick="lpButtonCTTUrl='http://server.iad.liveperson.net/hc/88227012/?cmd=file&file=visitorWantsToChat&site=88227012&imageUrl='+location.protocol+'//server.iad.liveperson.net/hcp/Gallery/ChatButton-Gallery/English/General/1a&referrer='+escape(document.location);lpButtonCTTUrl = (typeof(lpAppendVisitorCookies) != 'undefined' ?lpAppendVisitorCookies(lpButtonCTTUrl) : lpButtonCTTUrl);window.open(lpButtonCTTUrl,'chat88227012','width=475,height=400,resizable=yes');return false; ">{$lang.start_online_chat}</a>
+			</p>          
+			<p>
+				<span class="top_liveChat_After"></span>
+				<strong>{$lang.after_sales}</strong>
+				{$lang.after_sales_des} 
+				<a rel="nofollow" target="_blank" href="http://support.dealsmachine.com/" >{$lang.submit_a_request} </a>
+			</p>
+        </div><!--end .top_liveChat_Box-->
+    </div><!--end .top_liveChat-->
+	<span  class="fr">&nbsp;|&nbsp;</span>
+	<!--***货币***-->
+	<div class="top_currencyBox fr topMenu">
+		<h4 class="topMenu_title fl"><span id="js_currency"><label class="flag f_usd"></label>USD</span><em></em></h4>
+		<ul class="top_currencyList topMenu_box none js_bizhongList">
+			<li data-bizhong="USD"><label class="flag f_usd"></label>USD</li>
+			<li data-bizhong="EUR"><label class="flag f_eur"></label>EUR</li>
+			<li data-bizhong="CAD"><label class="flag f_cad"></label>CAD</li>
+			<li data-bizhong="GBP"><label class="flag f_gbp"></label>GBP</li>
+			<li data-bizhong="AUD"><label class="flag f_aud"></label>AUD</li>
+			<li data-bizhong="RUB"><label class="flag f_rub"></label>RUB</li>
+			<li data-bizhong="BRL"><label class="flag f_brl"></label>BRL</li>
+			<li data-bizhong="HUF"><label class="flag f_huf"></label>HUF</li>
+			<li data-bizhong="ARS"><label class="flag f_ars"></label>ARS</li>
+            <li data-bizhong="MXN"><label class="flag f_mxn"></label>MXN</li>			
+            <li data-bizhong="ILS"><label class="flag f_ils"></label>ILS</li>
+            <li data-bizhong="UAH"><label class="flag f_uah"></label>UAH</li>
+            <li data-bizhong="CZK"><label class="flag f_czk"></label>CZK</li>
+            <li data-bizhong="NZD"><label class="flag f_nzd"></label>NZD</li>
+            <li data-bizhong="INR"><label class="flag f_inr"></label>INR</li>
+            <li data-bizhong="BGN"><label class="flag f_bgn"></label>BGN</li>
+            <li data-bizhong="CLP"><label class="flag f_clp"></label>CLP</li>
+            <li data-bizhong="TRY"><label class="flag f_try"></label>TRY</li>
+            <li data-bizhong="NGN"><label class="flag f_ngn"></label>NGN</li>
+            <li data-bizhong="COP"><label class="flag f_cop"></label>COP</li>
+			
+		</ul>
+		
+	</div>
+
+	<div class="top_login fr">
+		<span id="js_islogin"></span>
+		&nbsp;|&nbsp;
+	</div>
+	
+  </div><!--end .top_inner-->
+</div><!--end #top-->
+
+<a target="_blank" href="/m-promotion-active-140.html" style="display:block; width:997px;margin:0 auto;"><img src="{$imgcache_url}images/Cnotice/noticeb.gif" alt="coupon"></a>
+
+<div id="header" class="cb">
+	<div class="header_navBox clearfix">
+		<a id="logo" href="{$DOMAIN}/{$cur_lang_url}" style="margin-top:8px;">
+			<img alt="{$lang.logo_alt}" src="{$imgcache_url}ximages/ganenlogo.jpg" width="460" height="65">
+        </a>
+		<ul id="navBar" style="margin-top:45px">
+              <li class="m1 h"><a href="{$DOMAIN}/{$cur_lang_url}new-arrivals/" class="nav_first">{$lang.new_arrival}</a></li>
+              <li class="m2 h"><a href="{$DOMAIN}/{$cur_lang_url}popular-products/">{$lang.hot_products}</a></li>
+			  {if $cur_lang eq 'en'}
+			  <li class="m2 h"><a href="{$DOMAIN}/{$cur_lang_url}daily-deals/">{$lang.group_deals}<i class="new">new</i></a></li>
+			  <li class="m3 h"><a href="{$DOMAIN}/{$cur_lang_url}dollar-zone/">{$lang.specials}</a></li>
+			  {/if}
+              <li class="m5 h"><a rel="nofollow" href='{$DOMAIN_USER}/{$cur_lang_url}m-users.htm' class="nav_last" >{$lang.my_account}</a></li>
+		</ul>
+	</div><!--end .header_navBox-->
+	
+	<div class="header_seachBox">
+		<div class="header_seachBoxInner">
+			<form name="searchForm" method="post" id="js_topsearchform">				
+				<label for="js_k2">search</label>				
+				<input type="text" name="k" id="js_k2" class="seachBox_inputBox" value="{if $kk == ''}{$lang.input_text}{else}{$kk}{/if}" tips="Products keyword" maxlength="150" x-webkit-speech speech />				
+				<select name="category" class="seachBox_category" id="category">
+					<option value="0">{$lang.all_catalog}</option>
+					{$cat_list}
+				</select>				
+				<input type="submit" value="" class="seachBox_submit"/>
+			</form>			
+		<div class="header_cartBtn">				
+			<a href="{$DOMAIN_CART}/{$cur_lang_url}shopping-cart/" rel="nofollow">{$lang.cart_checkout}<strong id="js_cart_items"></strong>{$lang.items}</a>
+		</div>
+
+	</div>
+	</div><!--end .header_seachBox-->
+	
+	{if $cur_lang eq $default_lang}
+	{if $page eq 'index'}
+		<div class="header_keyBox">
+		  <strong>{$lang.popular_searches} :</strong>	  
+			{foreach from=$top_search_keywords.keywords item=item} <a href="{$item.1}">{$item.0}</a> {/foreach}	  	  	  
+		</div>	
+	{else}
+		<!--category keywords start-->	
+		{category_hot_searches cat_id=$cat_id assign=get_cat_keywords_list}
+		{if $get_cat_keywords_list}	
+		<div class="header_keyBox">
+		  <strong>{$lang.popular_searches} :</strong>	  
+			{$get_cat_keywords_list}	  	  	  
+		</div>
+		{/if}
+		<!--category keywords end-->
+	{/if}
+	{/if}
+	<!--end .header_keyBox-->
+</div><!--end #header-->

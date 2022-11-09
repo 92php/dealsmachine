@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站销售分析</title>
+    <link type="text/css" rel="stylesheet" href="/temp/skin3/eload_admin/images/admin_css.css" />
+    <link type="text/css" rel="stylesheet" href="{$jscache_url}sysjs/calendar/calendar.css" />
+    <script type="text/javascript" src="{$jscache_url}sysjs/calendar.php"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>     
+    {literal}
+    <script type="text/javascript">
+        /*$(function() {
+            $('.tr-list').each(function(index, item) {
+                var td = $(this).find('td:first'), text = td.text();
+                var prevText = $(this).prev().find('td:first').text();
+                if (text != prevText) {
+                    td.attr('style', 'color: red; font-weight: bold;');
+                }
+            });
+        });*/
+    </script>
+    <style type="text/css">
+        .font-red { color: red; }
+        .text-left { text-align: left; }
+        .font-green { color: green; }
+    </style>
+    {/literal}
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> &gt;&gt; 网站销售分析</td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <form action="web_analyze.php" method="get">
+        <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+            <tr>
+                <td>
+                    时间 <input name="start_date" value="{$start_date}" style="width:130px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);"/>
+                     到<input name="end_date" value="{$end_date}" style="width:130px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);"/>
+                     <span style="color: gray">包含，留空只获取开始时间数据</span>
+                    <input type="submit" value="搜 索" />
+                    <input type="hidden" name="act" value="sale" />
+                </td>
+            </tr>
+        </table>
+    </form>	
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;">
+        <tr>
+            <th>时间</th>
+            <th>产品类别</th>
+            <th>销售总额(美元)</th>
+            <th>销售产品数(个)</th>
+            <th>当日新产品数(个)</th>
+            <th>新产品销售数(个)</th>
+            <th>周增长</th>
+            <th>购买转换率</th>
+            <th>新产品购买率</th>
+        </tr>
+        {foreach from=$data item=item name=loop}
+        <tr class="tr-list" bgColor="{cycle values='#f4f9fd,e8f1fd' name=cycle1}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{cycle values='#f4f9fd,e8f1fd' name=cycle2}'">
+            <td>{if $smarty.foreach.loop.first}<span style="color: red; font-weight: bold;">{$item.unixtime|date_format:'%Y-%m-%d'}</span>{/if}</td>
+            <td class="text-left">{$item.cat_name}</td>
+            <td>{$item.amount}</td>
+            <td>{$item.sole_good_nums}</td>
+            <td>{$item.new_nums}</td>
+            <td>{$item.new_sole_good_nums}/{$item.new_good_nums}</td>
+            <td>{$item.week_rate}%</td>
+            <td>{$item.buy_rate}%</td>
+            <td>{$item.new_sole_good_rate}%</td>
+        </tr>
+        {foreachelse}
+        <tr>
+            <td colspan="15" class="no-records">{$no_records}</td>
+        </tr>
+        {/foreach}
+        <tr>
+          <td align="right" nowrap="true" colspan="11"><div id="pager">{$pagestr}</div></td>
+        </tr>
+    </table>
+    <div style="color: grey; margin-left: 10px;">
+        <p style="color: red; font-weight: bold;">说明</p>
+        <ul>
+            <li>销售总额：当日产品销售总金额</li>
+            <li>销售产品数：当日销售产品种类累积/个数累积</li>
+            <li>新产品数：当日登陆新产品个数累积</li>
+            <li>新产品销售数：当日新产品（上架30天内的产品）销售个数累积</li>
+            <li>周增长：当日产品销售总金额相对七天前的增长率</li>
+            <li>新产品销售数：当日新产品（上架30天内的产品）销售个数累积/当日新产品的上架数累积（从当日往前30天内新上的产品数）</li>
+            <li>新产品购买率：当日产品的销售个数/当日产品的点击次数</li>
+        </ul>
+    </div>
+    <script type="text/javascript"></script>
+    {include file="copyright.htm"}

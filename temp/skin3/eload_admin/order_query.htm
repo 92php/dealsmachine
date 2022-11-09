@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='{$imgcache_url}eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script type="text/javascript" src="{$website_url}sysjs/calendar.php?lang="></script>
+<script language="javascript" src="{$imgcache_url}eload_admin/js/admin_add.js"></script>
+<script language="javascript" src="{$imgcache_url}eload_admin/js/colorselector.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 订单查询</td>
+          <td width="44%" align="right"><span class="navright"><a href="order.php?act=list">订单列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<div class="main-div">
+<form action="order.php?act=list" method="get" name="searchForm">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+   <tr>
+    <th colspan="4">订单查询</th>
+  </tr>   <tr>
+      <td width="29%"><div align="right"><strong>{$lang.label_order_sn}</strong></div></td>
+      <td><input name="order_sn" type="text" id="order_sn" size="20"></td>
+      <td style="font-weight: bold; text-align: right;">产品编码：</td>
+      <td><input name="goods_sn" type="text" size="20"></td>
+    </tr>
+    <tr>
+      <td><div align="right"><strong>{$lang.label_email}</strong></div></td>
+      <td colspan="3"><input name="email" type="text" id="email" size="40"></td>
+    </tr>
+    <tr>
+      <td><div align="right">
+       <strong>{$lang.label_consignee}</strong>
+      </div></td>
+      <td width="27%"><input name="consignee" type="text" id="consignee" size="20" /></td>
+      <td width="18%" align="right"><strong>{$lang.label_zipcode}</strong></td>
+      <td width="26%"><input name="zipcode" type="text" id="zipcode" size="20" /></td>
+    </tr>
+    <tr>
+      <td><div align="right"><strong>{$lang.label_address}</strong></div></td>
+      <td><input name="address" type="text" id="address" size="20"></td>
+      <td><div align="right"><strong>{$lang.label_mobile}</strong></div></td>
+      <td><input name="mobile" type="text" id="mobile" size="20" /></td>
+    </tr>
+    <tr>
+      <td><div align="right"><strong>{$lang.label_tel}</strong></div></td>
+      <td><input name="tel" type="text" id="tel" size="20"></td>
+      <td><div align="right"><strong>所在市：</strong></div></td>
+      <td><input name="city" id="selCities" size="20" /></td>
+    </tr>
+    <tr>
+      <td align="right"><strong>所在的洲：</strong></td>
+      <td><input name="province" id="selProvinces" size="20" /></td>
+      <td align="right"><strong>国家：</strong></td>
+      <td><select name="country" id="selCountries" onchange="region.changed(this, 1, 'selProvinces')">
+        <option value="0">请选择...</option>
+        
+          {foreach from=$country_list item=country}
+          
+        <option value="{$country.region_id}">{$country.region_name}</option>
+        
+          {/foreach}
+      
+      </select></td>
+    </tr>
+   
+    <tr>
+      <td><div align="right"><strong>{$lang.label_shipping}</strong></div></td>
+      <td><select name="shipping_id" id="select4">
+        <option value="0">请选择...</option>
+        {foreach from=$shipping_list item=shipping}
+        <option value="{$shipping.id}">{$shipping.ship_name}</option>
+        {/foreach}
+            </select></td>
+      <td><div align="right"><strong>{$lang.label_payment}</strong></div></td>
+      <td><select name="pay_id" id="select5">
+        <option value="0">请选择...</option>
+        {foreach from=$pay_list item=pay}
+        <option value="{$pay.pay_code}">{$pay.pay_name}</option>
+        {/foreach}
+            </select></td>
+    </tr>
+    <tr>
+      <td><div align="right"><strong>{$lang.label_time}</strong></div></td>
+      <td  colspan="3">
+      <input type="text" name="start_time" maxlength="60" size="20" id="start_time_id" />
+      <input name="start_time_btn" type="button" id="start_time_btn" onclick="return showCalendar('start_time_id', '%Y-%m-%d %H:%M', '24', false, 'start_time_btn');" value="选择" class="button"/>
+      ~      
+      <input type="text" name="end_time" maxlength="60" size="20" id="end_time_id" />
+      <input name="end_time_btn" type="button" id="end_time_btn" onclick="return showCalendar('end_time_id', '%Y-%m-%d %H:%M', '24', false, 'end_time_btn');" value="选择" class="button"/>  
+      </td>
+    </tr>
+    <tr>
+      <td><div align="right"><strong>{$lang.label_order_status}</strong></div></td>
+      <td colspan="3">
+        <select name="order_status" id="order_status">
+      <option value="-1" selected>请选择...</option>
+      {foreach from=$lang.os item=list key=key}
+      <option value="{$key}">{$list}</option>
+      {/foreach}
+    </select></td>
+    </tr>
+    <tr>
+      <td colspan="4"><div align="center">
+        <input name="query" type="submit" class="button" id="query" value="搜索" />
+        <input name="reset" type="reset" class='button' value='重置' />
+      </div></td>
+      </tr>
+  </table>
+</form>
+</div>
+{include file="copyright.htm"}

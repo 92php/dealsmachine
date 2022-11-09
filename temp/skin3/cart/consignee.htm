@@ -1,0 +1,110 @@
+<input type="hidden" value='{$item.country_json}' id="country_json">
+<tr>
+	<td align="right" bgcolor="#FFFFFF"><em style="color:#EB340A; margin-right: 5px;">*</em>{$lang.firstname}:</td>
+	<td bgcolor="#FFFFFF"><input name="firstname" type="text" class="inputBg" id="firstname_1" value="{$item.firstname|escape}" style="width:100px;" maxlength="35">{$lang.require_field}</td>
+</tr>
+<tr>
+	<td width="30%" align="right" bgcolor="#FFFFFF"><em style="color:#EB340A; margin-right: 5px;">*</em>{$lang.lastname}:</td>
+	<td width="70%" bgcolor="#FFFFFF"><input name="lastname" type="text" class="inputBg" id="lastname_1" value="{$item.lastname|escape}" size="15" style="width:100px;" maxlength="35">{$lang.require_field}</td>
+</tr>
+<tr>
+	<td align="right" bgcolor="#FFFFFF"><em style="color:#EB340A; margin-right: 5px;">*</em>{$lang.email_address}:</td>
+	<td bgcolor="#FFFFFF"><input name="email" type="text" class="inputBg" id="email_1" value="{$item.email|escape}" style="width:200px;" maxlength="60">{$lang.require_field}</td>
+</tr>
+<tr>
+	<td align="right" bgcolor="#FFFFFF"><em style="color:#EB340A; margin-right: 5px;">*</em>{$lang.addressline1}:</td>
+	<td bgcolor="#FFFFFF"><input name="addressline1" type="text" class="inputBg" id="addressline1_1" value="{$item.addressline1|escape}" maxlength="60">{$lang.require_field}{$lang.english_address_tip}</td>
+</tr>
+<tr>
+	<td align="right" bgcolor="#FFFFFF">{$lang.addressline2}:</td>
+	<td bgcolor="#FFFFFF"><input name="addressline2" type="text" class="inputBg" id="addressline2_12" value="{$item.addressline2|escape}" maxlength="60"></td>
+</tr>
+<tr>
+	<td align="right" bgcolor="#FFFFFF"><em style="color:#EB340A; margin-right: 5px;">*</em>{$lang.country}:</td>
+	<td bgcolor="#FFFFFF">
+		<select re="" name="country" id="country" style="border:1px solid #ccc;" onchange="changeselect(this.value,'{if $item.country}{$item.country}{else}1{/if}','1')">
+			<!-- {foreach from=$country_list item=country} -->
+			<option value="{$country.region_id}" {if $item.country eq $country.region_id}selected{/if}>{$country.region_name}</option>
+			<!-- {/foreach} -->
+		</select>{$lang.require_field}
+	</td>
+</tr>
+<tr>
+	<td align="right" bgcolor="#FFFFFF"><em style="color:#EB340A; margin-right: 5px;">*</em>{$lang.province}:</td>
+	<td bgcolor="#FFFFFF">
+		<div class="state_{if $item.country}{$item.country}{else}1{/if}_1">
+			  {if $item.states neq ''}
+				  <select name="province">
+                      <option value="">{$lang.please_select}</option>
+					  {foreach from=$item.states item=state}
+					  <option value="{$state}" {if $state eq $item.province}selected{/if}>{$state}</option>
+					  {/foreach}
+				   </select>
+				  {if $item.province_not_in eq 1 }<span style="color: red">{$item.province} {$lang.not_in_list_please_select}</span>{/if}
+			  {else}
+				  <input type="text" name="province" value="{$item.province}" maxlength="35"/>
+			  {/if}
+		</div>
+	</td>
+</tr>
+<tr>
+	<td align="right" bgcolor="#FFFFFF"><em style="color:#EB340A; margin-right: 5px;">*</em>{$lang.city}:</td>
+	<td bgcolor="#FFFFFF"><input name="city" type="text" class="inputBg" id="consignee_12" value="{$item.city|escape}" maxlength="35">{$lang.require_field}</td>
+</tr>
+<tr>
+	<td align="right" bgcolor="#FFFFFF"><em style="color:#EB340A; margin-right: 5px;">*</em>{$lang.phone}:</td>
+	<td bgcolor="#FFFFFF"><span class="code_{if $item.country}{$item.country}{else}1{/if}" name="countryCode">+{$item.code}<input type="hidden" name="code" value="{$item.code}" maxlength="10"></span>&nbsp;<input name="tel" type="text" class="inputBg" id="tel_1" value="{$item.tel|escape}" style="width:200px;" maxlength="15">{$lang.require_field}</td>
+</tr>
+<tr>
+	<td align="right" bgcolor="#FFFFFF"><em style="color:#EB340A; margin-right: 5px;">*</em>{$lang.postalcode}:</td>
+	<td bgcolor="#FFFFFF">
+		<input name="address_id" type="hidden" value="{$item.address_id}" maxlength="15">
+		<input name="zipcode" type="text" class="inputBg" id="zipcode_1" value="{$item.zipcode|escape}" style="width:100px;" maxlength="15">{$lang.require_field}
+	</td>
+</tr>	
+
+<tr>
+	<td colspan="3" style="text-align: center; cursor:pointer;">
+		{if $inConsignee eq ''}
+		<a href="javascript:void(0)"  id="btn-save-consignee"></a>
+		{if $smarty.session.user_id gt 0 and $item.address_id gt 0}<a href="javascript:void(0)"  id="btn-cancel-consignee"></a>{/if}
+		{else}
+		<input type="submit" value="" class="consigneeSave" >
+        <input type="submit" value="" class="consigneeCancel" onclick="if (confirm('Are you sure you want to delete the consignee information?')) location.href='/m-flow-a-drop_consignee-id-{$item.address_id}.htm';return false;">      
+		{/if}
+		
+		<input type="hidden" name="act" value="checkout" />
+	</td>
+
+</tr>
+
+{literal}
+	<script language="javascript">
+	  var country = $("#country_json").val();
+	  var countrys = eval('(' + country + ')');
+	  function changeselect(selected,address_id,country_id){
+		  var address_id = parseInt(address_id);
+		  var country_id = parseInt(country_id);
+		  selectcountry =countrys[selected] ;
+		  var state = selectcountry['state'];
+		  var code  = selectcountry['code'];
+		  $(".code_"+address_id).html('');
+		  $(".code_"+address_id).html("+"+code+"<input type='hidden' name='code' value='"+code+"'>");
+		  if(state.length>0){
+			  $('.state_'+address_id+'_'+country_id).html('');
+			  $('.state_'+address_id+'_'+country_id).html("<select id='states_"+address_id+"_"+country_id+"' name='province'></select>");
+              document.getElementById('states_'+address_id+'_'+country_id).options[document.getElementById('states_'+address_id+'_'+country_id).length] = new Option('Please Select', "");
+			  var province ='';
+			  for(var i=0;i<state.length;i++){
+				  var len = $('#states_'+address_id+'_'+country_id).length;
+				  var province = state[i].replace('`',"'");
+				  document.getElementById('states_'+address_id+'_'+country_id).options[document.getElementById('states_'+address_id+'_'+country_id).length] = new Option(province, province);
+
+			  }
+		  }else{
+			  $('.state_'+address_id+'_'+country_id).html('');
+			  $('.state_'+address_id+'_'+country_id).html("<input type='text' name='province' />");
+		  }
+	  }
+  </script>
+  {/literal}

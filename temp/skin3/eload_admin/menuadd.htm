@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 菜单{$tag_msg}</td>
+          <td width="44%" align="right"><span class="navright"><a href="protect.php?act=menulist">菜单列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th colspan="3">菜单{$tag_msg}</th>
+  </tr>
+  <form name="regform" method="post" action="{$url}" onSubmit="return Validator.Validate(this,3)">
+  <tr>
+    <td colspan="2" >所属类：</td>
+    <td ><select name="parent_id" id="parent_id">
+      <option value="0">顶级类</option>
+      { foreach from=$parentArr item=list}
+      <option value="{$list.action_id}" { if (($menuArr.parent_id eq $list.action_id) or ($pid eq $list.action_id))} selected {/if}> {$list.action_name}</option>
+      {/foreach}
+    </select></td>
+  </tr>
+  <tr>
+    <td colspan="2" >菜单编号：</td>
+    <td ><input name="action_code" type="text" class="input_style" id="action_code" value="{$menuArr.action_code}" dataType="Require" msg="请填写菜单编号！" />
+      *</td>
+  </tr>
+  <tr>
+    <td colspan="2" >菜单名称：</td>
+    <td ><input name="action_name" type="text" id="action_name"  value="{$menuArr.action_name}"  dataType="Require" msg="请填写菜单名称！" class="input_style" />
+    *</td>
+  </tr>
+  <tr>
+    <td colspan="2" >菜单链接：</td>
+    <td ><input name="action_url" type="text" class="input_style" id="action_url" size="50"  value="{$menuArr.action_url}"  dataType="Require" msg="请填写菜单链接地址！" />
+    *</td>
+  </tr>
+  <tr>
+    <td colspan="2" >是否在菜单上显示：</td>
+    <td ><input name="enable" type="radio" id="radio" value="1" {if $menuArr.enable eq 1 or $menuArr.enable eq ''} checked="checked" {/if} />
+    显示
+        <input name="enable" type="radio" id="radio" value="0" {if $menuArr.enable eq '0'} checked="checked"{/if}/>
+    不显示</td>
+  </tr>
+  <tr>
+    <td colspan="2" >菜单排序：</td>
+    <td ><input name="action_order" type="text" class="input_style" id="action_order"  size="5" datatype="Integer" msg="请填写数字！"  value="{if $menuArr.action_order eq ''}0{else}{$menuArr.action_order}{/if}"/></td>
+  </tr>
+  <tr>
+    <td colspan="2" >&nbsp;</td>
+    <td width="73%" ><input name="" type="submit" class="sub_but" id="button" value="{$tag_msg}" /></td>
+  </tr>
+  </form>
+</table>
+{include file="copyright.htm"}
+</body>
+</html>

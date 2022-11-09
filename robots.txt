@@ -1,0 +1,14 @@
+User-Agent: *
+Disallow: /fr/
+Disallow: /es/
+Disallow: /ru/
+Disallow: /de/
+Disallow: /*?odr=
+Disallow: /*?page_size=
+Disallow: /*?display=
+Disallow: /Wholesale-*.html
+Disallow: /wholesale-*.html
+Disallow: /product-*.html
+
+
+

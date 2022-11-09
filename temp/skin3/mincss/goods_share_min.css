@@ -1,0 +1,35 @@
+button::-moz-focus-inner{border:0;padding:0;margin:0;}.easyDialog_wrapper{width:320px;color:#444;border:3px solid rgba(0,0,0,0);-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;-webkit-box-shadow:0 0 10px rgba(0,0,0,0.4);-moz-box-shadow:0 0 10px rgba(0,0,0,0.4);box-shadow:0 0 10px rgba(0,0,0,0.4);display:none;font-family:"Microsoft yahei",Arial;}.easyDialog_wrapper .easyDialog_content{-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;background:#fff;border:1px solid #e5e5e5;}.easyDialog_wrapper .easyDialog_title{height:30px;line-height:30px;overflow:hidden;color:#666;padding:0 10px;font-size:14px;border-bottom:1px solid #e5e5e5;background:#f7f7f7;border-radius:4px 4px 0 0;}.easyDialog_wrapper .close_btn{font-family:arial;font-size:18px;_font-size:12px;font-weight:700;color:#999;text-decoration:none;float:right;}.easyDialog_wrapper .close_btn:hover{color:#333;}.easyDialog_wrapper .easyDialog_text{padding:25px 10px;font-size:13px;line-height:22px;}.easyDialog_wrapper .easyDialog_footer{padding:0 10px;*zoom:1;}.easyDialog_wrapper .easyDialog_footer:after{content:'';display:block;height:0;overflow:hidden;visibility:hidden;clear:both;}.easyDialog_wrapper .btn_highlight,.easyDialog_wrapper .btn_normal{border:1px solid;border-radius:2px;cursor:pointer;font-family:"Microsoft yahei",Arial;float:right;font-size:12px;padding:0 12px;height:24px;line-height:24px;margin-bottom:10px;}.easyDialog_wrapper .btn_highlight{background:#4787ed;background:-webkit-gradient(linear,center bottom,center top,from(#4787ed),to(#4d90fe));background:-moz-linear-gradient(90deg,#4787ed,#4d90fe);border-color:#3079ed;color:#fff;}.easyDialog_wrapper .btn_normal{margin-left:10px;border-color:#c3c3c3;background:#ececec;color:#333;background:-webkit-gradient(linear,center bottom,center top,from(#ececec),to(#f4f4f4));background:-moz-linear-gradient(90deg,#ececec,#f4f4f4);}
+
+.popBox{ padding:15px; background:rgba(0,0,0,0.5);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80000000', endColorstr='#80000000',GradientType=0 ); border-radius:10px; overflow:hidden; width:700px;}
+.popBoxInner{ background:#FFF; padding:15px 10px;}
+.popBoxInner h3{ padding-bottom:5px; border-bottom:1px solid #ddd;  font: normal 18px/30px Verdana, Arial, Helvetica, sans-serif;}
+.popBoxInner ul{ overflow:hidden;}
+.popBoxInner li{ padding:30px 0 15px 140px; margin-top:-1px; border-top:1px dashed #ddd;}
+.popbox_stepTag{ display:inline; float:left; background-position:right -248px; margin-left:-120px; width:65px; height:43px; line-height:43px; text-align:center; color:#fff;}
+.popBoxInner p{line-height:30px; font-size:14px;}
+.blueColor{ color:#2191d4;}
+a.popBox_close_btn{ margin:-10px 0 0 0; width:15px; height:15px; border:1px solid #ddd; line-height:15px; text-align:center; text-decoration:none; color:#666; font-size:16px;}
+
+.popbox_step1{ height:150px;}
+.popbox_shareImge{ float:left; display:inline; margin:-50px 0 0 -140px;}
+.fb_likeUsWarp{ height:20px; padding-bottom:10px;}
+.fb_likeUstag{ height:20px; width:150px;}
+.fb_likeUsText{line-height:20px; font-size:16px; color:#365999;}
+.popBox_step1_info p{ color:#F00;}
+
+.popbox_step2_faceBtn{position: relative; width:168px; height:34px; z-index:1}
+.popbox_step2_faceBtn span{ position:absolute; top:0; left:0; opacity:0.1; filter:alpha(opacity=1); display:block; width:168px; height:34px; z-inde:5;}
+.popbox_step2_faceBtn .fb_CommentWart{opacity:1; filter:alpha(opacity=100); z-index:20; text-align:center; background:#000; color:#fff; display:none;}
+.popbox_step2_faceBtn a{ background-position:-100px -247px; display:block; width:168px; height:34px; text-align:center; text-indent:-9999px;}
+.fb_topInfo_inner h3, .fb_topInfo_inner h3 span, .fb_topInfo_bottom, .fb_topInfo_bottom span, .fb_topInfo_left_list dd strong, .freeTrialBox h4,  .freeTrialBox_bottom, .popbox_stepTag, .popbox_step2_faceBtn a {
+    background-image: url("../ximages/fb/fbbg.png");
+    background-repeat: repeat-x;
+}
+.freeTrialBox_status{ position:relative;}
+.freeTrialBox_status p{ display:block; float:left; width:130px; height:20px; line-height:20px;}
+.freeTrialBox_infoBtn a.popShare{ width:95px; height:20px; background-image: url("../ximages/fb/btn_ft.gif"); background-position:0 0; overflow:hidden; text-indent:-10000px; display:block;}
+.freeTrialBox_infoBtn a:hover{ background-position:0px -20px;}
+.clear0{ clear:both; height:0px;}
+.freeTrialBox_details{ display:block; position:absolute; padding:5px; width:320px; z-index:99999; background-color:#f5f5f5; color:#333; border:1px solid #cccccc; left:0; top:30px; box-shadow:2px 2px 2px #cccccc;}
+.freeTrialBox_details a{ text-decoration:underline; color:#000;}
+.freeTrialBox_details a:hover{ color: #F30;}

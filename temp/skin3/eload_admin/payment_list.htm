@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 支付方式列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="payment.php?act=payment_add">添加支付方式</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="5%">编号</th>
+    <th width="12%">名称</th>
+    <th width="12%">代码</th>
+    <th width="12%">LOGO</th>
+    <th width="19%">简述</th>
+    <th width="18%">描述</th>
+
+    <th width="4%" nowrap="nowrap">排序</th>
+    <th width="4%" nowrap="nowrap">状态</th>
+    <th width="6%" nowrap="nowrap" align="center">操作</th>
+  </tr>
+  {foreach from=$payArr item=list}
+  <tr>
+    <td height="20" >{$list.pay_id}</td>
+    <td>{$list.pay_name}</td>
+    <td>{$list.pay_code}</td>  
+    <td>{if ($list.pay_logo != '') }<img src="{$list.pay_logo}"/>{else}&nbsp;{/if}</td>
+    <td>{$list.pay_brief}</td>
+    <td>{$list.pay_desc}</td>
+
+    <td>{$list.pay_order}</td>
+    <td>{if ($list.enable eq 1) }<img src="/temp/skin3/images/admin/yes.gif" id="enable{$list.pay_id}" field="enable" state="1" did="{$list.pay_id}" act="payment" id_field="pay_id">{else}<img src="/temp/skin3/images/admin/no.gif" id="enable{$list.pay_id}" field="enable" state="0" did="{$list.pay_id}"  act="payment" id_field="pay_id">{/if}</td>
+    <td align="right" nowrap="nowrap"><a href="?act=payment_add&id={$list.pay_id}">修改</a> | <a href="?act=payment_list&id={$list.pay_id}" class="del_act">删除</a><input type="hidden" id="{$list.pay_id}" value="{$list.pay_id}" /></td>
+  </tr>
+  {/foreach}
+</table>
+{include file="copyright.htm"}
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 更新商品</td>
+          <td width="44%" align="right"></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th colspan="2">按分类更新商品</th>
+  </tr>
+  <form action="?act=creat_list" method="post">
+  <tr>
+    <td width="22%" height="20" align="right" ><strong>选择分类</strong><br />
+    可以同时选择多个分类<br /></td>
+    <td width="78%"><select name='catids[]' id='catids'  multiple="multiple"  style="height:200px;width:250px;" title="按住“Ctrl”或“Shift”键可以多选，按住“Ctrl”可取消选择">
+<option value='0'>所有分类</option>
+{$cat_list}
+</select>
+      按住“Ctrl”或“Shift”键可以多
+选，按住“Ctrl”可取消选择。不选则全部生成。</td>
+  </tr>
+  <tr>
+    <td height="20" align="right" >列表每一页记录条数</td>
+    <td><input type="text" name="listper" value="20|40|60" size="10" id="listper">
+      当然，还可以增加 20|40|60|80，但为了系统尽可能的少开销，一般分三种。</td>
+  </tr>
+  <tr>
+    <td height="20" align="right" >网格每一页记录条数</td>
+    <td><input type="text" name="gridper" value="24|48|72" size="10" id="gridper" /></td>
+  </tr>
+  <tr>
+    <td height="20" align="right" >&nbsp;</td>
+    <td><input type="submit" name="dosubmit" value=" 开始更新 "  class="sub_but" ></td>
+  </tr>
+  </form>
+</table>
+{include file="copyright.htm"}
+</body>
+</html>

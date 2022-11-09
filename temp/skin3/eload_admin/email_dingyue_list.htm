@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link href="/sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php?lang="></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 邮件订阅列表</td>
+          <td width="44%" align="right">&nbsp;</td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form action="?" name="mfrm" method="get">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th>订阅时间:
+<input type="text" name="start_time" maxlength="60" size="20" value="{$smarty.get.start_time}" id="start_time_id" />
+      <input  name="start_time_btn" type="button" id="start_time_btn" onclick="return showCalendar('start_time_id', '%Y-%m-%d %H:%M', '24', false, 'start_time_btn');" value="选择" class="button"/>
+      ~      
+      <input type="text" name="end_time" value="{$smarty.get.end_time}"  maxlength="60" size="20" id="end_time_id" />
+      <input name="end_time_btn" type="button" id="end_time_btn" onclick="return showCalendar('end_time_id', '%Y-%m-%d %H:%M', '24', false, 'end_time_btn');" value="选择" class="button"/> 
+      
+      入口:{html_options name=source options=$source selected=$source_selected}
+      
+      用户:{html_options name=user_type options=$user_type selected=$user_type_selected}
+    <img src="{$imgcache_url}images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />&nbsp; 关键字 &nbsp;<input type="text" name="keyword" value="{$smarty.get.keyword}" /> <input type="submit" value=" 搜索 "/>
+</td>
+  </tr>
+</table>
+</form>
+
+<form method="POST" action="?act=batch_remove" name="listForm">
+<div id="list">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="10%"> 
+      <input type="checkbox" onclick="checkAll(this, 'checkboxes[]');">
+      <a href="email_dingyue.php?sort_by=id&sort_order={$filter.sort_order_id}">编号</a>{$sort_id}
+    </th>
+    <th width="15%"><a href="email_dingyue.php?sort_by=firstname&sort_order={$filter.sort_order_firstname}"> First name</a>{$sort_firstname}</th>
+    <th width="25%"><a href="email_dingyue.php?sort_by=email&sort_order={$filter.sort_order_email}"> 邮件地址</a>{$sort_email}</th>
+    <th width="10%"><a href="email_dingyue.php?sort_by=stat&sort_order={$filter.sort_order_stat}"> 订阅状态</a>{$sort_stat}</th>
+    <th width="15%"><a href="email_dingyue.php?sort_by=stat&sort_order={$filter.sort_order_stat}"> 订阅时间</a>{$sort_stat}</th>
+	<th width="10%"><a href="email_dingyue.php?sort_by=stat&sort_order={$filter.sort_order_stat}"> 是否注册</a>{$sort_stat}</th> 
+	<th width="15%"><a href="email_dingyue.php?sort_by=stat&sort_order={$filter.sort_order_stat}"> 入口</a>{$sort_stat}</th>      
+   {foreach from=$email_list item=user name=loopname}
+   <tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+    <td>
+    <input type="checkbox" name="checkboxes[]" value="{$user.id}" onclick="checkone('checkboxes[]')"/>{$user.id}</td>
+    <td>{$user.firstname}</td>
+    <td>{$user.email}</td>
+    <td>{if $user.stat eq '8'}<font color="#FF0000">已退订</font>{else}正常{/if}</td>
+    <td>{$user.addTime}</td>
+    <td>{$user_type[$user.isReg]}</td>
+    <td>{$source[$user.source]}</td>	
+    </tr>
+  {foreachelse}
+  <tr><td colspan="8" align="center" class="no-records">暂无记录</td></tr>
+  {/foreach}
+  <tr>
+      <td colspan="2">
+     <input type="checkbox" onclick="checkAll(this, 'checkboxes[]');"> <input type="hidden" name="act" value="batch_remove" /><input type="hidden" id="selAction"/>
+      <input type="submit" id="btnSubmit" value="删除邮件订阅" disabled="true" class="button" /></td>
+      <td align="right" nowrap="true" colspan="6">
+     	<div id="pager">{$pagestr}</div></td>
+  </tr>
+</table>
+</div>
+</form>
+{include file="copyright.htm"}

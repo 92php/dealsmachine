@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+{include file="top.htm"}
+<link rel="stylesheet" href="{$imgcache_url}mincss/sign_min.css?2013072601" />
+</head>
+<body>
+{include file="public_top.htm"}
+	<div class="curPath mt10"><a href="/{$cur_lang_url}" title="{$shop_name} {$lang.home}" class="fl">{$lang.home}</a><h1 class="fl fb">» {$lang.Sign_In_To_Your_Account}</h1></div>
+	<div id="mainWarp" class="clearfix mt10 m_box">
+    	<div class="borderTop3 p10 clearfix">
+
+        	<div class="signBox {if $act == 'join'}fr{else}fl{/if}">
+            	<h3 class="fb p10 f14 borderBottomLine">{$lang.Sign_In_To_Your_Account}</h3>
+                <p class="pt10 pb10">{$lang.Ordering_from_aHappyDeal_is_just_one_click_away}</p>
+                <form method="get"  class="userform" id="signinform">
+                	<div id="ajaxmsg"></div>
+
+                    <div class="item clearfix">
+                    	<label for="email" class="fl fb itemLabel"><strong class="red fb">*</strong>{$lang.email_address}:</label>
+                        <input id="email" name="email" type="text" maxlength="60" class="input_style"/>
+                    </div>
+
+                	<div class="item clearfix">
+                    	<label for="passwordsign" class="fl fb itemLabel"><strong  class="red fb">*</strong>{$lang.Password}:</label>
+                        <input id="passwordsign" name="passwordsign" type="password" maxlength="60" class="input_style"/>
+                    </div>
+                    <th align="left">
+						<input name="flow" type="hidden" id="flow" value="{$smarty.get.flow}">
+						<input name="ref" type="hidden" id="ref" value="{$smarty.get.ref}{if $smarty.get.Anchor}#{$smarty.get.Anchor}{/if}">
+						<input name="jump" type="hidden" id="jump" value="{$smarty.get.jump}">
+					</th>
+                    <div class="itemBtn"><input type="submit" class="usersignbtn" value="" id="subsign" name="textfield"/></div>
+                </form>
+
+                <p class="itemForget">
+                    <a href="/{$cur_lang_url}m-users-a-reset_password.htm"><span id="bondname">{$lang.Forgot_your_account_or_password}</span></a>
+                </p>
+                <p class="loginWithFacebook clearfix"><strong class="fb fl">{$lang.Use_other_account_to_login}:</strong><a class="fl" href="javascript:void(0);" onClick="facebook_signup();">{$lang.login_with_facebook}</a></p>
+				<div id="fb-root"></div>
+			</div><!--.signBox-->
+
+        	<div class="register {if $act == 'join'}fl{else}fr{/if}">
+            	<h3 class="fb f14 borderBottomLine">{$lang.Create_a_new_account}</h3>
+                <p class="pt10 pb10">{$lang.Registration_str1}</p>
+                <form id="register"  class="userform" autocomplete="on"  method="get" onSubmit="signup();">
+                	<div id="ajaxmsg1"  class="red"></div>
+                    <div class="r_item clearfix">
+                        <label for="email1" class="fb r_itemLabel">{$lang.email_address}:<strong class="red fb">*</strong></label>
+                        <input name="email1" type="text" class="input_style1" id="email1" maxlength="60" />
+                    </div>
+                    <div class="r_item clearfix">
+                        <label for="password" class="fb r_itemLabel">{$lang.Password}:<strong class="red fb">*</strong></label>
+                        <input name="password" type="password" class="input_style1" id="password" maxlength="60" />
+                    </div>
+                    <div class="r_item clearfix">
+                        <label for="password" class="fb r_itemLabel">{$lang.Repeat_your_password}:<strong class="red fb">*</strong></label>
+                        <input name="password_confirm" type="password" class="input_style1" id="password_confirm" maxlength="60" />
+                    </div>
+                    <div class="r_item r_item_tips clearfix">{$lang.i_agree_to_ahappydeal} <a href="/{$cur_lang_url}m-article-id-107.html">{$lang.terms_and_conditions}</a><input type="checkbox" name="agreement" value="checkbox" class="fl" checked></div>
+                    <div class="newsletter">
+					<input type="checkbox" name="newsletter_register" id="newsletter_register" value="1" checked="true"/>
+					&nbsp;&nbsp;{$lang.newsletter_sign_up}</div>
+					<div class="r_item_btn">
+                        <input type="submit" value="" class="joinNow"/>
+                    </div>
+                </form>
+                <p class="pb20">{$lang.Registration_GUARANTEE}</p>
+            </div><!--.register-->
+
+        </div>
+    </div>
+	<!--end #mainWarp-->
+	<div id="footer">
+{include file="foothelp.htm"}
+{include file="foot.htm"}
+	</div>
+	{if $cur_lang eq $default_lang}
+	<script src="{$imgcache_url}minjs/jquery.validate.min.js"></script>
+	{else}
+	<script src="{$imgcache_url}minjs/{$cur_lang}-jquery.validate.min.js"></script>
+	{/if}
+	{literal}
+    <script language="javascript" type="text/javascript">
+		var js_email_require_msg    = rma_email_msg;
+		var js_email_require_length = rma_email_msg;
+		var js_password             = user_js_modpassword_0;
+		var js_success_msg          = js_success_msg;
+		var js_email_in_user        = flow_sign_js_signupform_0;
+		var Enter_at_least          = user_js_modpassword_1;
+		var Repeat_your_password    = Repeat_your_password;
+		var agree_agreement         = agree_agreement;
+		var Enter_the_same_password_as_above    = user_js_modpassword_3;
+		var Please_enter_verification_code      = flow_sign_js_signupform_1;
+		var Enter_the_characters_on_picture     = flow_sign_js_signupform_2;
+		var Verification_code_you_entered_is_incorrect    = flow_sign_js_signupform_3;
+		var Creating_successful     = creating_successful;
+	</script>
+	{/literal}
+    <script src="{$imgcache_url}minjs/user_js.min.js?2014061601"></script>
+	<script src="{$imgcache_url}minjs/sign_facebook.min.js?2014052101"></script>
+	{include file="statistics_js.htm"}
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	{include file="top.htm"}
+	<link rel="stylesheet" href="{$imgcache_url}mincss/otherpage_min.css" />
+</head>
+<body>
+	{include file="public_top.htm"}
+	<div class="curPath mt10"><a href="/{$cur_lang_url}" title="web home" class="fl">{$lang.home}</a> <h1 class="fl fb">&raquo; <a href="sitemap-index.html" title="{$lang.Sitemap_Index}">{$lang.Sitemap_Index}</a>{$nav_title}</h1></div>
+	
+	<div id="mainWarp" class="clearfix mt10">
+		<div id="mainbar">
+        	<div  class="sitemap m_box">
+				<h1>{$shop_name} Wholesale {$nav_key}</h1>
+				{if $smarty.get.a ==''}
+					<div id="sitemap" class="sitemap_list clearfix"> {$catArr} </div>
+				{elseif $smarty.get.a =='products'}
+					{if $total_record !=0 }
+						<div id="productslist">
+							<ul>
+							{foreach from=$goods item=goods name=brow}
+								 <li>
+									 <div class="goodsleft">
+										 <a href="{$goods.url_title}" title="{$goods.goods_title}"><img src="{$goods.goods_thumb}" width="80" height="80"   alt="{$goods.goods_title}" /></a>   
+									 </div>
+									 <div class="goodsright">
+										 <a href="{$goods.url_title}" title="{$goods.goods_title}">{$goods.goods_title}</a>
+										 {if $goods.pro}
+											  {foreach from=$goods.pro item=spec key=spec_key}
+											  <p>{$spec.name} :
+												  {foreach from=$spec.values item=value key=key}   
+													<a href="{$value.url}">{$value.label}</a>
+												  {/foreach}
+											  </p> 
+											  {/foreach}
+										  {/if}
+
+									  </div>
+								 </li> 
+							{/foreach}  
+							</ul>
+						</div><!--end .sitemaplist-->
+					{else}
+						<div class="pagenoo">  {$lang.this_page_will_come_soon}</div>
+					{/if}
+			 {elseif $smarty.get.a =='search'}
+			 <!--search list begin-->
+			  {if $total_record !=0 }
+				<div id="searchlist">
+					<ul>
+						 {foreach from=$goodskey item=list name=brow}
+						 <li>
+							  <a href="/{$cur_lang_url}Wholesale-{$list|replace:' ':'-'}.html" title="{$list}">{$list}</a>
+						 </li>
+						{/foreach}  
+					</ul>
+				</div><!--#searchlist-->
+				<div class="pageBox mt10"> <div class="pages">{$pagestr}</div></div><!--.pageBox--> 
+			  {else}
+				<div class="pagenoo">  {$lang.this_page_will_come_soon}</div>
+			  {/if}
+				
+			{elseif $smarty.get.a =='wholesalers'}
+				This page will come soon!
+			{/if}
+			  
+			  
+			</div><!--end.sitemap-->
+		</div><!--end #mainbar-->
+        
+		<div id="sideBar">
+			{include file="left.htm"}
+		</div><!--end #sideBar-->
+	</div><!--end #mainWarp-->
+	<div id="footer">
+	{include file="foothelp.htm"}
+	{include file="foot.htm"}
+	</div>
+	{include file="statistics_js.htm"}
+</body>
+</html>

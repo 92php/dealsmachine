@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$imgcache_url}eload_admin/js/admin_add.js"></script>
+<link href='{$imgcache_url}eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> data feed</td>
+          <td width="44%" align="right"></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+
+
+<form name="regform"  enctype="multipart/form-data" method="post" action="data_feed.php">
+  <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+    <tr>
+      <th colspan="4">data feed</th>
+    </tr>
+	<tr>
+		<td align="right">选择导出类型</td>
+		<td>
+			<label><input type="radio" value="import" name="act" checked="checked">datafeel</label>
+			<label><input type="radio" name="act" value="sharesale">sharesale</label>
+		</td>
+	</tr>
+	<tr> 
+		<td align="right">选择导出方式</td>
+		<td>
+			<label><input type="radio" value="excl" name="type" checked="checked" id="excl">导入excl</label>
+			<label><input type="radio" name="type" value="category" id="category">分类导出</label>
+		</td>
+	</tr>
+    <tr id="tr-excl">
+      <td align="right">上传EXCLE文件(sku)：</td>
+      <td><input name="excelfile" type="file" size="35" /></td>
+    </tr>
+	<tr id="tr-category" style="display:none;">
+		<td colspan="2" width="100%">
+		<table width="99%" border="0" cellpadding="0" cellspacing="0" >
+			<tr>
+			<td style="width:36%; text-align:right;height:35px;" bgcolor="#FFFFFF">选择语言：</td>
+			<td bgcolor="#FFFFFF">
+			<select name="lang" id="lang">
+				<option value="en">原始语言</option>
+				{foreach from=$lang_arr item=item key=key}
+				<option value="{$item.title_e}" {if $cur_lang eq $item.title_e}selected="selected"{/if}>{$item.title}</option>
+				{/foreach}
+			</select>
+			</td>
+			</tr>
+			<tr>
+			<td bgcolor="#FFFFFF" style="width:36%; text-align:right;">选择分类：</td>
+			<td bgcolor="#FFFFFF">
+			<select name="other_cat[]"  multiple="multiple"  style="height:240px;width:320px;" title="按住"Ctrl"或"Shift"键可以多选，按住"Ctrl"可取消选择">
+				<option value="0">请选择分类</option>{$orher_cat_list}
+			 </select>
+			</td>
+			</tr>
+		</table>
+		</td>	
+	</tr>
+	<tr id="tr-number" class="display-none">
+		<td class="label">数量:</td>
+        <td>
+		<input type="text" name="number">
+        </td>
+		
+	</tr> 
+    <tr>
+      <td align="right">币种：</td>
+      <td>
+       <select name="currency">
+            <option value="USD" id="houbi_USD">US Dollar</option>
+            <option value="EUR" id="houbi_EUR">Euro</option>
+            <option value="GBP" id="houbi_GBP">British Pound</option>
+            <option value="AUD" id="houbi_AUD">Australian Dollar</option>
+            <option value="CAD" id="houbi_CAD">Canadian Dollar</option>
+            <option value="CHF" id="houbi_CHF">Swiss Franc</option>
+            <option value="HKD" id="houbi_HKD">Hong Kong Dollar</option>
+            <option value="CNY" id="houbi_CNY">Chinese RMB</option>
+            <option value="NZD" id="houbi_NZD">New Zealand Dollar</option>
+            <option value="RUB" id="houbi_RUB">Russian Ruble</option>
+			<option value="BRL" id="houbi_BRL">Brazil</option>
+			<option value="INR" id="houbi_BRL">印度卢比(INR)</option>
+        </select>
+      </td>
+    </tr> 
+    <tr>
+      <td width="36%" height="24" align="right">&nbsp;</td>
+      <td width="64%"><input type="submit" value="确定" class="sub_but"/></td>
+    </tr>
+  </table>
+</form>
+
+<form  method="post" name="form"  action="data_feed.php" >
+  <input type="hidden" name="act" value="filter_sku" />
+  <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+    <tr>
+      <th colspan="4">data feed过滤SKU</th>
+    </tr>
+	<tr>
+		<td valign="top" class="text-right font-bold">需过滤SKU:</td>
+		<td>
+		  <textarea name="not_search_sku" class="font-12" rows="8" cols="120">{$data}</textarea>
+		  <span class="font-gray">
+			<br />
+			以<b>半角逗号</b>隔开，如UA0023501,UA0023401</span></td>
+	 </tr>
+    <tr>
+      <td width="36%" height="24" align="right">&nbsp;</td>
+      <td width="64%"><input type="submit" value="确定" class="sub_but"/></td>
+    </tr>
+  </table>
+</form>
+
+{literal}
+<script language="javascript">
+	$(function(){
+	 $("#stripe_tb").find(':radio').click(function() {//添加类型
+        var val = $(this).val()
+        
+        if (val == 'excl') {//商品编码
+            $("#tr-excl").show();
+			$("#tr-category").hide();
+			$("#tr-number").hide();
+        }
+        else if(val == 'category') {//分类
+			$("#tr-excl").hide();
+			$("#tr-category").show();
+			$("#tr-number").show();
+        }
+		else if(val == 'sharesale'){
+			$("#tr-excl").hide();
+			$("#tr-category").show();
+			$("#tr-number").show();
+			$('#category').attr('checked','checked');
+			$('#excl').attr('disabled',true);
+		}
+		else if(val == 'import'){
+			$('#excl').attr('disabled',false);
+		}
+    });
+    return this;
+	});
+</script>
+{/literal}
+{include file="copyright.htm"}

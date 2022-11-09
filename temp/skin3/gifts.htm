@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	{include file="top.htm"}
+	{literal}
+    <style>
+    	/*gifpage*/
+
+		.gf_inner{ width:997px; margin:0 auto; }
+		.gif_banner{ margin:0px 0px 15px 0px; padding:0;}
+		.tabWarp{height:45px;}
+		.tabWarp ul{ width:997px; margin:0; padding:0;}
+		.tabWarp li{ display:inline; float:left; width:115px; height:45px; line-height:38px; text-align:center; font-size:18px; background:url(http://cloud4.faout.com/imagecache/A/images/gifts/nav_bg2.jpg) no-repeat 0 0; margin:0 5px;cursor:pointer;}
+		.tabWarp li a{color:#5a5a5a; text-decoration:none; font-family:Arial, Helvetica, sans-serif; }
+		.tabWarp li.cur{ background: url(http://cloud4.faout.com/imagecache/A/images/gifts/gree_bg.jpg) no-repeat 0 0; color:#fff;}
+		.tabWarp li.cur a{color:#fff}
+		.gf_content_top{ height:9px; font-size:0; overflow:hidden; text-align:right;}
+		.gf_content{ border:1px solid #89c258;}
+		.gf_content ul{ margin:20px; overflow:hidden; display:none;}
+		.gf_content ul li{display:inline;  float:left; width:180px; margin:0 5px 15px 5px; padding:0; height:307px;}
+		.gf_content ul li p{ margin:0; padding:0; color:#999; font-size:12px; line-height:18px;}
+		.gf_content ul li p.title{ overflow:hidden; height:36px; padding:5px; text-align:left;}
+		.gf_content ul li p.title a{ text-decoration:none; color:#000; font:bold 12px/14px Arial, Helvetica, sans-serif; line-height:18px;}
+		.gf_content ul li p.margint5px{ margin-top:5px;}
+		.gf_content_bottom{ text-align:right;}
+    </style>
+	{/literal}
+</head>
+<body>
+	{include file="public_top.htm"}
+	<div class="curPath mt10"><a href="/{$cur_lang_url}" title="{$shop_name} {$lang.home}" class="fl">{$lang.home}</a> <h1 class="fl">&raquo;  {$lang.Free_Gifts}</h1></div>
+	
+	<div id="gif_mainWarp" class="clearfix mt10">
+		<div class="gf_inner">
+        	<div class="gif_banner"><img src="{$imgcache_url}images/world/world997a.jpg"/></div>
+            <div class="tabWarp">
+                <ul>
+					{foreach from=$gifts item=g1 name=g1}
+						<li  {if $smarty.foreach.g1.iteration eq 1}class="cur"{/if}><a href="#">Over ${$g1.need_money}</a></li>
+					{/foreach}
+                </ul>
+            </div>
+
+            <div class="gf_content">
+			{foreach from=$gifts item=g1 name=g1}
+            	<ul {if $smarty.foreach.g1.iteration eq 1}style="display:block;"{/if}>
+					{foreach from =$g1.gifts_goods item=g2}
+						<li>
+						  <p><a href="{$g2.url_title}"><img src="{$g2.goods_img}" width="170" height="170" border="0" alt="{$g2.goods_title}"></a></p>
+						  <p class="title"><a href="{$g2.url_title}">{$g2.goods_title}</a></p>
+						  <p>{$lang.Was}:<span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price was" orgp="{$g2.shop_price}" id="price_color">{$g2.shop_price}</span></p>
+						  <p>{$lang.stock_remaining}:<span class="red">{$g2.goods_number} </span></p>
+						  <p id="add_cart_msg{$g2.goods_id}" class="margint5px"><img src="{$imgcache_url}images/gifts/btn.jpg" border="0" gid="{$g2.goods_id}" class="js_addToCart"></p>
+						</li>
+                    {/foreach}
+                </ul>
+            {/foreach}
+                
+            </div><br>
+        	<div class="gf_content_bottom"><img src="{$imgcache_url}images/world/world997b.jpg"></div>
+        </div>
+	</div><!--end #mainWarp-->
+	{literal}
+    <script type="text/javascript">
+    	$(document).ready(function(e) {
+            $(".tabWarp").find("li").each(function(index, element) {
+                var _this = $(this);
+				var _i =index;
+				_this.click(function(){
+					$(this).addClass("cur").siblings().removeClass("cur");	
+					$(".gf_content").find("ul").hide().eq(_i).show();
+					return false;
+				})
+            });
+			$(".gf_content").on("click",".js_addToCart",function(){
+				GLOBAL.CartCheckout.addcart(this);
+				return false;
+			});
+        });
+    </script>
+	{/literal}
+	<div id="footer">
+	{include file="foothelp.htm"}
+	{include file="foot.htm"}
+	</div>
+{include file="statistics_js.htm"}
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站订单分析</title>
+    <link type="text/css" rel="stylesheet" href="/temp/skin3/eload_admin/images/admin_css.css" />
+    {literal}
+    <style type="text/css">
+        .font-red { color: red; }
+        .font-green { color: green; }
+    </style>
+    {/literal}
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> &gt;&gt; 网站订单分析</td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;">
+        <tr>
+            <th>时间</th>
+            <th>订单总数</th>
+            <th>订单总金额</th>
+            <th>新注册客户订单数/金额</th>
+            <th>历史第一次下单个数/金额</th>
+            <th>历史多次下单个数/金额</th>
+            <th>单产品订单数</th>
+            <th>多产品订单数</th>
+            <th>小于15美金订单数</th>
+            <th>大于100美金订单数</th>
+            <th>大于500美金订单数</th>
+            <th>积分的订单数/积分折扣金额</th>
+            <th>折扣券订单数/折扣券金额</th>
+        </tr>
+        {foreach from=$data item=item name=loop}
+        <tr bgColor="{cycle values='#f4f9fd,e8f1fd' name=cycle1}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{cycle values='#f4f9fd,e8f1fd' name=cycle2}'">
+            <td>{$item.unixtime|date_format:'%Y-%m-%d'}</td>
+            <td>{$item.order_payed_nums}/<span class="font-red">{$item.order_nums}</span>=<span class="font-green">{if $item.order_nums > 0}{math equation='x / y * 100' x=$item.order_payed_nums y=$item.order_nums format='%.2f'}{else}0.00{/if}</span>%</td>
+            <td>{$item.order_payed_amount}/<span class="font-red">{$item.order_amount}</span>=<span class="font-green">{if $item.order_amount > 0}{math equation='x / y * 100' x=$item.order_payed_amount y=$item.order_amount format='%.2f'}{else}0.00{/if}</span>%</td>
+            <td>{$item.new_registers_orders}/<span class="font-red">{$item.new_registers_amount}</span></td>
+            <td>{$item.first_buy_nums}/<span class="font-red">{$item.first_buy_amount}</span></td>
+            <td>{$item.multi_buy_nums}/<span class="font-red">{$item.multi_buy_amount}</span></td>
+            <td>{$item.single_good_nums}</td>
+            <td>{$item.multi_good_nums}</td>
+            <td>{$item.lt_15_usd_nums}</td>
+            <td>{$item.gt_100_usd_nums}</td>
+            <td>{$item.gt_500_usd_nums}</td>
+            <td>{$item.point_nums}/<span class="font-red">{$item.point_amount}</span></td>
+            <td>{$item.promotion_nums}/<span class="font-red">{$item.promotion_amount}</span></td>
+        </tr>
+        {foreachelse}
+        <tr>
+            <td colspan="15" class="no-records">{$no_records}</td>
+        </tr>
+        {/foreach}
+        <tr>
+          <td align="right" nowrap="true" colspan="11"><div id="pager">{$pagestr}</div></td>
+        </tr>
+    </table>
+    <div style="color: grey; margin-left: 10px;">
+        <p style="color: red; font-weight: bold;">说明</p>
+        <ul>
+            <li>订单总数：当日已付款订单累积/订单累积，已付款概率统计</li>
+            <li>订单总金额：当日已付款金额累积/订单总金额累积，已付款金额概率统计</li>
+            <li>新注册客户订单数/金额：当日新注册客户订单数累积/订单金额累积</li>
+            <li>历史第一次下单个数/金额：当日历史第一次下单客户下单个数累积/下单金额累积</li>
+            <li>多次购买的客户人数：当日历史第一次下单客户下单个数累积/下单金额累积</li>
+            <li>历史多次下单个数/金额：当日大于一次购买客户下单个数累积/下单金额累积</li>
+            <li>单产品订单数：当日单个产品的订单数累积</li>
+            <li>多产品订单数：当日大于一个产品的订单数累积</li>
+            <li>小于15美金订单数：当日小于15美金的订单个数累积</li>
+            <li>大于100美金订单数：当日大于100美金的订单个数累积</li>
+            <li>大于500美金订单数：当日大于500美金的订单个数累积</li>
+            <li>积分的订单数/积分折扣金额：当日使用了积分的订单个数累积/积分折扣金额累积</li>
+            <li>折扣券订单数/折扣券金额：当日使用了折扣券的订单个数累积/折扣券金额累积</li>
+            <li>多次购买的客户人数：当日历史大于一次购买的客户个数累积</li>
+        </ul>
+    </div>
+    <script type="text/javascript"></script>
+    {include file="copyright.htm"}

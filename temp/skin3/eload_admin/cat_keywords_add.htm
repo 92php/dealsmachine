@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="/sysjs/validator.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 添加分类关键词</td>
+          <td width="44%" align="right"><a href="cat_keywords.php">分类关键词列表</a></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form method="post" action="{$url}">
+<table width="99%" align="center" cellspacing="5" class="borderline">
+    <tr>
+        <td align="right" width="15%">所属分类：</td><td width="85%">{$cat_select}</td>
+    </tr>
+    <tr>
+        <td align="right">关键词：</td><td><input type="text" name="keywords" value="{$cat_keywords.keywords}"/></td>
+    </tr>
+    <tr>
+        <td align="right">URL：</td><td><input type="text" name="url" value="{$cat_keywords.url}" style="width:300px;"/></td>
+    </tr>
+    <tr>
+        <td align="right">排序：</td><td><input type="text" name="order" value="{$cat_keywords.num}" style="width:50px;"/></td>
+    </tr>
+    <tr>
+        <td align="right">是否显示在父类：</td><td><input type="checkbox" name="status" value="1" {if $cat_keywords.status==1}checked{/if}/></td>
+    </tr>
+	
+    <!--
+    <tr>
+    	<td align="right">是否推荐：</td>
+    	<td><input type="checkbox" name="recommend" value="1" {if $cat_keywords.recommend==1}checked{/if}/></td>
+    </tr>
+    
+    <tr>
+    	<td align="right">索引关键词分类：</td>
+    	<td>
+    		<select name="type" id="selAction"  style="text-align:center">
+		        <option value="">请选择</option>
+		        <option value="A">A</option>
+		        <option value="B">B</option>
+		        <option value="C">C</option>
+		        <option value="D">D</option>
+		        <option value="E">E</option>
+		        <option value="F">F</option>
+		        <option value="G">G</option>
+		        <option value="H">H</option>
+		        <option value="I">I</option>
+		        <option value="J">J</option>
+		        <option value="K">K</option>
+		        <option value="L">L</option>
+		        <option value="M">M</option>
+		        <option value="N">N</option>
+		        <option value="O">O</option>
+		        <option value="P">P</option>
+		        <option value="Q">Q</option>
+		        <option value="R">R</option>
+		        <option value="S">S</option>
+		        <option value="T">T</option>
+		        <option value="U">U</option>
+		        <option value="V">V</option>
+		        <option value="W">W</option>
+		        <option value="X">X</option>
+		        <option value="Y">Y</option>
+		        <option value="Z">Z</option>
+		        <option value="0">0</option>
+		        <option value="1">1</option>
+		        <option value="2">2</option>
+		        <option value="3">3</option>
+		        <option value="4">4</option>
+		        <option value="5">5</option>
+		        <option value="6">6</option>
+		        <option value="7">7</option>
+		        <option value="8">8</option>
+		        <option value="9">9</option>
+      	    </select>
+    	</td>
+    </tr>-->
+    
+    <tr>
+        <td></td><td><input type="submit" value="{$tag_msg}"/></td>
+    </tr>
+</table>
+</form>
+{include file="copyright.htm"}

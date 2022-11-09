@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css" />
+<link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/tree.css" />
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> <a href="new_abc_index_keyword.php">ABC关键字列表</a> ->> 绑定abc关键字信息</td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form id="form" method="get" action="{$smarty.const.WEBSITE|default:'/'}eload_admin/crontab/set_abc_keywords_info.php">
+  <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+    <tr>
+      <th colspan="4">绑定abc关键字信息</th>
+    </tr>
+    <tr>
+      <td align="right">绑定分类：</td>
+      <td>
+          <input type="text" readonly="readonly" class="txt-select" id="txt-select-category" title="{$data.cat_name}" value="{$data.cat_name}" />
+            <input type="hidden" name="cat_id" id="hidden-cat_id" value="{$data.cat_id}" />
+            <div class="display-none div-category">
+                <div id="div-category"></div>
+            </div>
+       </td>
+       </tr>
+       <tr>
+           <td></td>
+           <td>
+            <label style="color: gray"><input checked="checked" type="checkbox" name="onlySetted" />勾选后，只绑定该类及其所有子类还没有绑定的关键字。否则，全部重新绑定</label>
+            <br />
+            <label style="color: gray"><input checked="checked" type="checkbox" name="cat_table" checked="checked" />勾选后，关键字相关词只筛选新上传的关键字。否则，在所有同类词中筛选</label>
+      </td>
+    </tr>
+    <tr>
+      <td width="29%" height="24" align="right">&nbsp;</td>
+      <td width="71%">
+          <input type="button" value="确定" class="sub_but" id="btn-submit" />
+      </td>
+    </tr>
+  </table>
+</form>
+<script type="text/javascript" src="{$jscache_url}sysjs/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/tree.js"></script>
+<script type="text/javascript" src="{$imgcache_url}eload_admin/js/common.js"></script>
+<script type="text/javascript" src="/eload_admin/all_categories_js.php"></script>
+<script type="text/javascript">
+    {literal}
+    (function() {
+        var me = this;
+        var cat_id = $('#hidden-cat_id');//分类id元素
+        var txt = cat_id.prev();//分类框
+        var element = $('#div-category');//分类树div
+        var div = element.parent();
+
+        txt.attr('title', txt.val()).click(function() {//选择
+            !element.html() && element.tree({//tree.js
+                data: ALL_CATEGORIES,
+                theme: 'x-tree-lines',
+                checked: false,
+                imgPath: C.IMGCACHE_URL + 'eload_admin/images/tree/',
+                onNodeClick: function(node) {
+                    cat_id.val(node.id);
+                    var text = node.id == 10000 ? '' :  node.text;
+                    txt.val(text).attr('title', text);
+                    div.hide();
+                }
+            });
+
+            div.show().mouseleave(function() {//鼠标离开，隐藏分类树
+                $(this).hide();
+            });
+
+            var selected = cat_id.val();
+
+            selected != 0 && element.treeExpandNode(selected);
+        });//end 选择
+
+
+        $('#btn-submit').click(function() {
+            var val = cat_id.val();
+
+            if (!val) {
+                alert('请选择您要绑定的分类');
+                return;
+            }
+
+            setLoading();
+            $.get($('#form').attr('action') + '?' + $('#form').serialize(), function(data) {
+                setLoading(false);
+                alert(data);
+            });
+        });
+    })();
+    {/literal}
+</script>
+{include file="copyright.htm"}

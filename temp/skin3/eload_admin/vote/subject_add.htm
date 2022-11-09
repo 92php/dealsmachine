@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{$nav}</title>
+    <link type="text/css" rel="stylesheet" href="/heditor/comm.css" />
+    <link type="text/css" rel="stylesheet" href="/temp/skin3/eload_admin/images/admin_css.css" />
+    <script type="text/javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+    <script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+    <script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/vote.js"></script>
+    <script type="text/javascript" src="/heditor/all.js"></script>
+    <script type="text/javascript" src="/heditor/editor.js"></script>
+    <script type="text/javascript" src="/heditor/editor_toolbar.js"></script>
+    {literal}
+    <style type="text/css">
+        .font-red { color: red; }
+        .font-green { color: green; }
+        .font-grey { color: grey; }
+        .font-bold { font-weight: bold; }
+    {/literal}
+    </style>
+</head>
+<body>{assign var=data value=$data[0]}
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> &gt;&gt; <a href="vote.php">投票管理</a> &gt;&gt; {$nav}</td>
+                        <!--<td width="44%" align="right"><span class="navright"><a href="vote.php?act=subject_add">添加题组</a></span></td>-->
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <form method="post" action="vote.php?act=subject_update" id="form-subject">
+        <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+            <tr>
+                <th colspan="3">{$nav}</th>
+            </tr>
+            <tr>
+                <td width="22%" class="label">题组：</td>
+                <td width="78%">
+                    <input type="text" name="subject" value="{$data.subject}" id="txt-subject" />
+                    <span class="font-red">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">排序：</td>
+                <td>
+                    <input type="text" name="order" size="4" value="{$data.s_order|default:0}" />
+                    <span class="font-grey">值越小越靠前</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">投票间隔限制：</td>
+                <td>
+                    <input type="text" name="limit" size="4" value="{$data.s_limit|default:1}" />
+                    <span class="font-grey">同一IP投票间隔，整数，0表示不限制。单位：小时</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">题组模板：</td>
+                <td>
+                    <input type="text" name="tpl" id="txt-tpl" value="{$data.tpl|default:'default.htm'}" />
+                    <a href="javascript: void(0)" id="a-tpl">选择</a>
+                    <span class="font-grey">路径：/temp/skin3/</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">描述：</td>
+                <td>
+                    <textarea  id="txt-description" name="description" style="display:none">{$data.description}</textarea>
+                    <div style="width: 500px; height: 200px">
+                        <iframe id="HtmlEditor" class="editor_frame" frameborder="0" marginheight="0" marginwidth="0" hideFocus style="width: 100%; height: 80%;"></iframe>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;<input type="hidden" name="subject_id" value="{$data.subject_id}" /></td>
+                <td align="left"><input type="submit" class="sub_but" id="btn-submit" value="提 交" /></td>
+            </tr>
+        </table>
+    </form>
+    <script type="text/javascript">
+        gFrame = 1;//在框架中使用编辑器
+        gContentId = 'txt-description';//要载入内容的content ID
+        OutputEditorLoading();//载入编辑器
+        
+        var subjectId = '{$data.subject_id}';
+        VOTE.subject.add();
+    </script>
+    {include file="copyright.htm"}

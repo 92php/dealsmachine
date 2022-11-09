@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$imgcache_url}eload_admin/js/admin_add.js"></script>
+<link href='{$imgcache_url}eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> ABC关键字导出</td>
+          <td width="44%" align="right"><span class="navright"><a href="new_abc_index_keyword.php">ABC关键字列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form name="regform" method="post" action="?act=export">
+  <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+    <tr>
+      <th colspan="4">批量导出关键字</th>
+    </tr>
+    <tr>
+      <td align="right">关键字id：</td>
+      <td>
+          <input name="start_id" type="text" size="8" value="{$data.value_start_id}" /> 至
+          <input name="end_id" type="text" size="8" value="{$data.value_end_id}" />
+          <span style="color: gray;">每次最大只能导<span style="color: red">5000</span>个。上次导出日期：<span style="color: red;">{$data.time}<span style="color: gray;">。id: </span>{$data.start_id}<span style="color: gray;">至</span>{$data.end_id}<span style="color: gray;">。个数: </span>{$data.num}</span></span>
+       </td>
+    </tr>
+    <tr>
+      <td width="36%" height="24" align="right">&nbsp;</td>
+      <td width="64%"><input type="submit" value="确定" class="sub_but"/></td>
+    </tr>
+  </table>
+</form>
+{include file="copyright.htm"}

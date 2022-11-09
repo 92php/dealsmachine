@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 管理员{$tag_msg}</td>
+          <td width="44%" align="right"><span class="navright"><a href="protect.php?act=menulist">管理员列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th colspan="2">管理员{$tag_msg}</th>
+  </tr>
+  <form name="regform" method="post" action="{$url}" onSubmit="return Validator.Validate(this,3)">
+  <tr>
+    <td >所属系统组：</td>
+    <td ><select name="group_id" id="group_id">
+      { foreach from=$groupArr item=list}
+      <option value="{$list.group_id}" { if (($adminArr.group_id eq $list.group_id) or ($pid eq $list.group_id))} selected {/if}> {$list.group_name}</option>
+      {/foreach}
+    </select>
+*</td>
+  </tr>
+  <tr>
+    <td >帐号：</td>
+    <td ><input name="sa_user" type="text" class="input_style" id="sa_user" value="{$adminArr.sa_user}" dataType="Require" msg="请填写管理员帐号！"  style="width:160px;"/>
+      *</td>
+  </tr>
+  <tr>
+    <td >密码：</td>
+    <td >
+    {if $adminArr.sa_pswd != '' }
+    <input name="sa_pswd" type="password"  id="sa_pswd"  value="" style="width:160px;"/> 不修改请保持为空！
+    {else}
+    <input name="sa_pswd" type="password"id="sa_pswd"  value=""   style="width:160px;"  class="input_style" dataType="Require" msg="请输入管理员密码！"/> *{/if}
+    <span style="color: red">长度不能小于6，且不能全为数字</span></td>
+  </tr>
+  <tr>
+    <td >姓名：</td>
+    <td ><input name="real_name" type="text" class="input_style" id="real_name"  value="{$adminArr.real_name}"  datatype="Require" msg="请填写管理员真实姓名！"  style="width:160px;"/>
+*</td>
+  </tr>
+  <tr>
+    <td >&nbsp;</td>
+    <td width="73%" ><input name="" type="submit" class="sub_but" id="button" value="{$tag_msg}" /></td>
+  </tr>
+  </form>
+</table>
+{include file="copyright.htm"}
+</body>
+</html>

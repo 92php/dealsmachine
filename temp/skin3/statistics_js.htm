@@ -1,0 +1,92 @@
+<script type="text/javascript">
+var cur_lang = '{$cur_lang}';
+var default_lang = '{$default_lang}';
+{literal}
+var query_url = window.location.href;   //当前页面URL地址
+var currency = _GET('currency', query_url);     //获取URL地址中是否有货币切换变量
+if(currency !== ''){
+	change_houbi_curr(currency);
+	$.cookie("setbizhong",1,{expires:7,path:"/",domain:COOKIESDIAMON})
+}
+else if((null==$.cookie("setbizhong") || $.cookie("setbizhong") == 2) && cur_lang == default_lang){	
+	var url_lang='/fun/index.php?act=getbizhong';
+	$.ajax({
+		type: "GET",
+		cache:false,
+		url: url_lang,
+		success: function(msg){
+			msg = $.trim(msg);
+			if(msg == null)	msg = 'USD';
+			change_houbi_curr(msg);
+			$.cookie('setbizhong', 3, {expires: 7, path: '/', domain: COOKIESDIAMON});
+		}
+	});
+} 
+else if((null==$.cookie("setbizhong") || $.cookie("setbizhong") == 3 || $.cookie("setbizhong") == 2) && cur_lang != default_lang)
+{
+	if(typeof(lang_currency_array[cur_lang]) != "undefined" && lang_currency_array[cur_lang])
+ 	{
+ 		var a = lang_currency_array[cur_lang];
+ 	}
+ 	else
+ 	{
+ 		var a = "USD";
+ 	}
+ 	change_houbi_curr(a);
+ 	$.cookie("setbizhong",2,{expires:7,path:"/",domain:COOKIESDIAMON});
+}
+{/literal}
+</script>
+{literal}
+<!--com js-->
+<script type="text/javascript">
+  var _gaq = _gaq || [];_gaq.push(['_setAccount', 'UA-51109690-1']);_gaq.push(['_setDomainName', 'dealsmachine.com']); _gaq.push(['_trackPageview']);  (function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);})();
+</script>
+<!--davismicro tracking-->
+<script type="text/javascript">try {show_my_shop_price('');} catch(e) {}</script>
+{/literal}
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="{if $is_ssl}https{else}http{/if}://www.googleadservices.com/pagead/conversion/1012739324/?label=qQxxCPzExwIQ_Nn04gM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+<div style="display:none">
+<!--end com js-->
+
+{if $cmodel eq 'index'}
+{elseif $cact eq 'cart'}
+{elseif ($cmodel eq 'category' and $smarty.get.id eq '1') or $top_cat_id eq '1' }
+{elseif ($cmodel eq 'category' and $smarty.get.id eq '63') or $top_cat_id eq '63' }
+{elseif ($cmodel eq 'category' and $smarty.get.id eq '86') or $top_cat_id eq '86' }
+{elseif ($cmodel eq 'category' and $smarty.get.id eq '34') or $top_cat_id eq '34' }
+{elseif ($cmodel eq 'category' and $smarty.get.id eq '59') or $top_cat_id eq '59' }
+{elseif ($cmodel eq 'category' and $smarty.get.id eq '95') or $top_cat_id eq '95' }
+{elseif ($cmodel eq 'category' and $smarty.get.id eq '96') or $top_cat_id eq '96' }{*watch*}
+{/if}
+<script src="http://css.dealsmachine.com/imagecache/common/js/email_stats.js"></script>
+<!-- Google 再营销代码 -->
+{literal}
+<script type="text/javascript">
+var google_tag_params = {
+	ecomm_prodid: {/literal}{$google_tag_params.prodid}{literal},
+	ecomm_pagetype: {/literal}{$google_tag_params.pagetype}{literal},
+	ecomm_totalvalue: {/literal}{$google_tag_params.totalvalue}{literal},
+	ecomm_currency: {/literal}{$google_tag_params.currency}{literal},
+	ecomm_pcat: {/literal}{$google_tag_params.pcat}{literal}
+};
+</script>
+{/literal}
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 984362390;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/984362390/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>

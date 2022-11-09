@@ -1,0 +1,148 @@
+.ddsmoothmenu{ font-size:11px; font-weight:bold;
+background:url(../ximages/15xxcatebg.jpg) no-repeat top left; /*background of menu bar (default state)*/
+width:190px; float:left; height:32px;
+}
+
+.ddsmoothmenu ul{
+z-index:100;
+margin: 0;
+padding: 0;
+list-style-type: none;
+}
+
+/*Top level list items*/
+.ddsmoothmenu ul li{
+position: relative;
+display: inline;
+float: left;
+}
+
+/*Top level menu link items style*/
+.ddsmoothmenu ul li a{
+display: block;
+ /*background of menu items (default state)*/
+color: #000;
+padding: 0px 0px;
+height:26px; width:150px;
+border-right: 0px solid #778;
+text-decoration: none;
+}
+
+* html .ddsmoothmenu ul li a{ /*IE6 hack to get sub menu links to behave correctly*/
+display: inline-block; 
+}
+
+.ddsmoothmenu ul li a:link, .ddsmoothmenu ul li a:visited{
+color: #000; 
+}
+/*
+.ddsmoothmenu ul li a.selected{ 
+background:url(http://cloud4.faout.com/imagecache/A/images/15xxcatebg.jpg) no-repeat top left;
+color: #000;
+}
+
+.ddsmoothmenu ul li a:hover{
+width:150px; height:26px;
+background:url(http://cloud4.faout.com/imagecache/A/images/15xxcatebg.jpg) no-repeat top left;
+color: #000;
+}*/
+	
+/*1st sub level menu*/
+.ddsmoothmenu ul li ul{
+width:186px; border:1px #1190DD solid; border-top:0px; background:#fff; 
+position: absolute;
+left: 0;
+display: none; /*collapse all sub menus to begin with*/
+visibility: hidden;
+}
+.ddsmoothmenu ul li ul li ul{border:1px #1190DD solid; background:#fff; border-left:0px; }
+/*Sub level menu list items (undo style from Top level List Items)*/
+.ddsmoothmenu ul li ul li{ border-left:1px #1190DD solid;
+display: list-item;
+float: none;
+}
+
+.ddsmoothmenu ul li ul li a{ width:172px;  background:#fff;font-size:11px!important; font-weight:bold; }
+.ddsmoothmenu ul li ul li a:hover{ width:180px;height:24px; background:#fff; color:#CC0000!important;border: none; background:#fff; border-right:0px;}
+.ddsmoothmenu ul li ul li a.selected{ width:180px; background:none; color:#CC0000!important;border:1px #1190DD solid; border-right:0px; font-weight:bold;}
+.ddsmoothmenu ul li ul li ul li a:hover,.ddsmoothmenu ul li ul li ul li a{  background:none; border:none; font-weight:normal;}
+.ddsmoothmenu ul li ul li ul li{ border-left:1px #1190DD solid;
+display: list-item;
+float: none;
+}
+.ddsmoothmenu ul li ul li ul .first_li{ border-left:none;}
+
+
+
+/*All subsequent sub menu levels vertical offset after 1st level sub menu */
+.ddsmoothmenu ul li ul li ul{
+top: 0;
+}
+
+/* Sub level menu links style */
+.ddsmoothmenu ul li ul li a{ line-height:24px; height:24px;
+width: 180px; /*width of sub menus*/ padding-left:5px;
+overflow:hidden;
+margin: 0;
+border-top-width: 0;
+border-bottom: 0px solid gray;
+}
+
+/* Holly Hack for IE \*/
+* html .ddsmoothmenu{height: 1%;} /*Holly Hack for IE7 and below*/
+
+
+/* ######### CSS classes applied to down and right arrow images  ######### */
+
+.downarrowclass{
+position: absolute;
+top: 15px;
+right: -5px;
+}
+
+.rightarrowclass{
+position: absolute;
+top: 6px;
+right: 5px;
+}
+
+/* ######### CSS for shadow added to sub menus  ######### */
+
+.ddshadow{
+position: absolute;
+left: 0;
+top: 0;
+width: 0;
+height: 0;
+background: silver;
+}
+
+.toplevelshadow{ /*shadow opacity. Doesn't work in IE*/
+opacity: 0.8;
+}
+
+
+
+.ddsmoothmenu ul li ul li #chcss a.selected{
+
+	color: #990000;
+	height:24px;
+	line-height:24px;
+	border:1px solid #1190DD;
+	border-right: none;
+	z-index:1000;
+}
+
+.ddsmoothmenu ul li ul li #chcss a:hover,.ddsmoothmenu ul li ul li #chcss #chcss a:hover{
+	height:24px;
+	line-height:24px; font-weight:bold;
+	border:1px solid #1190DD;
+	border-right: none;
+}
+
+.ddsmoothmenu ul li ul li ul li ul li a:hover,.ddsmoothmenu ul li ul li ul li ul li a:hover{
+
+	border:none!important
+
+}
+

@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php?lang="></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->>affiliate {if $smarty.get.act eq 'underlayer'}下家统计>>{$user_info.email}{else}酬金报表{/if}</td>
+          <td width="44%" align="right"></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+{if !$act}
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <form name="timetnterval" style="margin:0px" method="get" class="thisfrm">
+  <tr>
+    <td><table width="100%" border="0" cellpadding="3" cellspacing="0">
+      <tr>
+          <td align="right" bgcolor="#FFFFFF">下单时间： </td>
+          <td width="585" bgcolor="#FFFFFF">从 <input name="start_date" value="{$start_date}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />&nbsp;&nbsp;到 &nbsp; <input name="end_date" value="{$end_date}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" /> </td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">付款时间： </td>
+          <td bgcolor="#FFFFFF">从 <input name="start_date2" value="{$start_date2}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />&nbsp;&nbsp;到 &nbsp; <input name="end_date2" value="{$end_date2}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" /> </td>
+        </tr>
+    
+         <tr>
+          <td align="right" bgcolor="#FFFFFF">用户：</td>
+          <td bgcolor="#FFFFFF"><input name="add_user" value="{$smarty.get.add_user}" /> 
+            （查单个用户）</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">&nbsp; </td>
+          <td bgcolor="#FFFFFF"><input type="submit" name="submit" value="开始查询" class="button" /></td>
+        </tr>
+      </table></td>
+  </tr>
+ 
+  </form>
+</table>
+
+
+
+
+
+<form method="POST" action="" name="listForm">
+  <div class="list-div" id="listDiv">
+  <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+     <tr>
+      <th width="9%" height="21">排名</th>
+      <th width="30%">Email</th>
+      <th width="25%"><a href="?sort_by=price_total&sort_order={$filter.sort_order_price_total}{$search_url}">产品金额</a>{$sort_price_total}</th>
+      <th width="24%"><a href="?sort_by=choujin&sort_order={$filter.sort_order_choujin}{$search_url}">佣金</a>{$sort_choujin}</th>
+      <th width="12%">操作</th>
+      </tr>
+     
+<tr bgcolor="#FDE8FF">
+      <td height="37" colspan="3" align="right">总金额： {$tj.turnover}</td>
+      <td height="37" align="right">总佣金： {$tj.com_money}</td>
+      <td height="37" align="right">&nbsp;</td>
+      </tr>
+     
+     
+  {foreach from=$goods_order_data item=list name=val}
+<tr bgColor="{if $smarty.foreach.val.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.val.iteration is even}#f4f9fd{else}#e8f1fd{/if}'";>
+      <td align="center">{$list.taxis}</td>
+      <td><a href="affiliate_users.php?act=edit&id={$list.user_id}" >{$list.email}</a></td>
+      <td align="right"> {$list.price_total}</td>
+      <td align="right"><a href="affiliate_order.php?add_user={$list.email}"> {$list.choujin}</a></td>
+      <td align="center"><a href="?act=underlayer&user_id={$list.user_id}">查看下家</a></td>
+      </tr>
+  {foreachelse}
+    <tr><td colspan="5" align="center" class="no-records">暂无记录</td></tr>
+  {/foreach}
+  </table>
+  <table width="100%" cellspacing="0" id="page-table">
+  <tr>
+    <td width="8">&nbsp;</td>
+    <td width="964" align="right" nowrap="true">
+    {$pagestr}
+    </td>
+  </tr>
+  </table>
+</div>
+</form>
+  {elseif $act eq 'underlayer'}
+  
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+    <tr>
+      <th bgcolor="white" width="25%"  style="text-align:center" >用户email</th>
+
+
+
+      <th bgcolor="white"   style="text-align:center" width="21%" nowrap="nowrap">独立IP</th>
+      <th  bgcolor="white"  style="text-align:center" width="18%">注册人数 </th>
+      
+      
+      <th width="17%" align="center" bgcolor="white"  >下单数量</th>
+      <th width="19%" align="center" bgcolor="#ffffff"><strong>订单总金额</strong></th>
+    </tr>
+
+<tr>
+      <th bgcolor="white" width="25%"  style="text-align:center" ></th>
+
+
+
+      <th bgcolor="white"   style="text-align:center" width="21%" nowrap="nowrap">{$all_stat.ip_count}</th>
+      <th  bgcolor="white"  style="text-align:center" width="18%"><strong>{$all_stat.reg_count}</strong></th>
+      
+      
+      <th width="17%" align="center" bgcolor="white"  ><strong>{$all_stat.order_count}</strong></th>
+      <th width="19%" align="center" bgcolor="#ffffff"><strong>{$all_stat.order_sum}</strong></th>
+  </tr>
+
+  
+   
+    <!--{foreach from=$users item=user  name=val}-->
+    <tr  bgColor="{if $smarty.foreach.val.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.val.iteration is even}#f4f9fd{else}#e8f1fd{/if}'";>
+    <td align="center" bgcolor="#FFFFFF">{$user.email}<br>     
+    </td>
+    <td align="center" bgcolor="#FFFFFF">{$user.ip_count}</td>
+    <td align="center" bgcolor="#FFFFFF">{$user.reg_count}</td>
+    <td align="center" bgcolor="#FFFFFF">{$user.order_count}</td>
+    <td align="center" bgcolor="#FFFFFF">{$user.order_sum}</td>
+
+  </tr>
+   <!--{/foreach}-->
+    </table>
+       
+<table width="99%" border="0" align="center">
+  <tr>
+    <td width="33%" style="padding:10px" > 注册人数 
+      :<span class="price"><strong>{$all_stat.reg_count}</strong></span>
+  <br/>  
+  已付款 
+      :<span class="price"><strong>{$all_stat.order_count}</strong></span>
+  <br/>
+  订单金额:.<span class="price"><strong>{$all_stat.order_sum}</strong></span></td>
+    <td width="67%" align="right" valign="top">{$pagestr}</td>
+  </tr>
+</table>
+  {/if}
+  {if $smarty.get.act eq 'underlayer'}
+  <form id="add_underlayer" action="?act=add_underlayer">
+ <tr><td>email:<input type="text" name="email" value="" />&nbsp;<input type="submit" value="增加下家" />
+<input type="hidden" name="user_id" value="{$smarty.get.user_id}" />
+<input type="hidden" name="act" value="save_add_underlayer" />
+ </td></tr> 
+ </form>
+ {/if}
+ {literal}
+ <script type="text/javascript">
+ 
+     $(document).ready(function() {
+        $("#add_underlayer").submit(function() {
+            
+            $.ajax({
+              url:"affiliate_count.php",
+              type: "get",
+              data: ($(this).serialize()),
+              success: function(data){
+                if(data == 'ok'){
+					window.location.reload();
+					return false;
+				}else{
+					alert(data);
+					return false;
+						
+				};
+			
+              }
+			  
+            });
+        return false;});
+    });
+ </script>
+ {/literal}
+{include file="copyright.htm"}

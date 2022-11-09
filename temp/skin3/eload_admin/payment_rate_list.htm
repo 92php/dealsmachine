@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>付款率统计</title>
+    <link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css" />
+    <link type="text/css" rel="stylesheet" href="{$jscache_url}sysjs/calendar/calendar.css" />
+    <script type="text/javascript" src="{$jscache_url}sysjs/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+    <script type="text/javascript" src="{$imgcache_url}eload_admin/js/common.js"></script>
+    <script type="text/javascript" src="{$website_url|default:'/'}sysjs/calendar.php"></script>
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft">
+                            <a href="index.php?act=main">管理中心</a> &gt;&gt; 付款率统计</td>
+                        <td width="44%" align="right"></td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <form action="?" method="get">
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <td>
+                时间段：从
+                <input autocomplete="off" name="start_date" value="{$start_date}" style="width:130px;" ondblclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />&nbsp;&nbsp;
+                (包括)
+                到 &nbsp;&nbsp;
+                <input autocomplete="off" name="end_date" value="{$end_date}" style="width:130px;" ondblclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />
+               (不包括)
+                 &nbsp;
+                <select name="country_id" style="width: 200px;">
+                    <option value="">国家</option>
+                    {foreach from=$country_list item=item}
+                    <option value="{$item.region_id}"{if $country_id == $item.region_id} selected="selected"{/if}>{$item.region_name}</option>
+                    {/foreach}
+                </select>
+                <input type="submit" value=" 搜索 " />
+                {if $latest_date}数据缓存三小时，最新数据：<span style="color: blue">{$latest_date}</span>{/if}
+                <br />
+                <span style="color: blue">60天内的数据可实时查询,60天前的数据按月份保存,数据不包括取消的数据</span>
+                {if $month}<span style="color: #666;">以下数据为<strong>{$month}</strong>数据</span>{/if}
+            </td>
+        </tr>
+    </table>
+    </form>
+    {if $query}
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;" cellpadding="4">
+        <tr>
+            <th style="width: 150px;">运输方式<br /><span style="color: blue">已付款总额占比</th>
+            <th style="width: 150px;">付款方式</span></th>
+            <th>付款订单数/订单数</th>
+            <th>付款订单总金额/订单总金额</th>
+        </tr>
+        {foreach from=$shipping_data item=item key=key name=loop}
+        {if $smarty.foreach.loop.iteration is even}
+        {assign var=color value=#f4f9fd}
+        {else}
+        {assign var=color value=#e8f1fd}
+        {/if}
+        <tr style="background: {$color}" onmouseover="this.style.background='#FEF3D1'" onmouseout="this.style.background='{$color}'">
+            <td rowspan="{$item.count}">
+                {$item.name}<br />
+                {if 'all' != $key}<span style="color: blue">{$item.payed_amount_rate}%</span>{/if}
+            </td>
+            {foreach from=$item.item item=v name=loop2}
+            <td>{$v.payment}</td>
+            <td>{$v.payed_count}/<span style="color: blue">{$v.total_count}</span>=<span class="font-green">{$v.payed_count_rate}</span>%</td>
+            <td>{$v.payed_amount}/<span style="color: blue">{$v.total_amount}</span>=<span class="font-green">{$v.payed_amount_rate}</span>%</td>
+            </tr>
+            <tr style="background: {$color}" onmouseover="this.style.background='#FEF3D1'" onmouseout="this.style.background='{$color}'">
+            {/foreach}
+        </tr>
+        {foreachelse}
+        <tr>
+            <td colspan="15" style="color: red;">{$no_records}</td>
+        </tr>
+        {/foreach}
+    </table>
+    {if $country_data}
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;" cellpadding="4">
+        <tr>
+            <th style="width: 150px;">国家地区<br /><span style="color: blue">订单总额占比</span></th>
+            <th style="width: 150px;">付款方式</th>
+            <th>付款订单数/订单数</th>
+            <th>付款订单总金额/订单总金额</th>
+        </tr>
+        {foreach from=$country_data item=item key=key name=loop}
+        {if $smarty.foreach.loop.iteration is even}
+        {assign var=color value=#f4f9fd}
+        {else}
+        {assign var=color value=#e8f1fd}
+        {/if}
+        <tr style="background: {$color}" onmouseover="this.style.background='#FEF3D1'" onmouseout="this.style.background='{$color}'">
+            <td rowspan="{$item.count}">
+                {$item.name}<br />
+                {if 'all' != $key}<span style="color: blue">{$item.total_amount_rate}%</span>{/if}
+            </td>
+            {foreach from=$item.item item=v name=loop2}
+            <td>{$v.payment}</td>
+            <td>{$v.payed_count}/<span style="color: blue">{$v.total_count}</span>=<span class="font-green">{$v.payed_count_rate}</span>%</td>
+            <td>{$v.payed_amount}/<span style="color: blue">{$v.total_amount}</span>=<span class="font-green">{$v.payed_amount_rate}</span>%</td>
+            </tr>
+            <tr style="background: {$color}" onmouseover="this.style.background='#FEF3D1'" onmouseout="this.style.background='{$color}'">
+            {/foreach}
+        </tr>
+        {foreachelse}
+        <tr>
+            <td colspan="15" style="color: red;">{$no_records}</td>
+        </tr>
+        {/foreach}
+    </table>
+    {/if}
+    {/if}
+    {include file="copyright.htm"}

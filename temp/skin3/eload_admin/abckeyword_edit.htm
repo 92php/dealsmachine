@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css" />
+<link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/tree.css" />
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> ABC关键字列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="new_abc_index_keyword.php">ABC关键字列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form name="regform" method="post" action="?act=save">
+  <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+    <tr>
+      <th colspan="4">{$msg}关键字</th>
+    </tr>
+    <tr>
+      <td align="right"><span class="font-red">*</span>关键字：</td>
+      <td>
+          <input name="keyword" value="{$data.keyword}" size="30" />
+          <span class="font-gray">100个字符以内</span>
+      </td>
+    </tr>
+    <tr>
+      <td align="right">绑定分类：</td>
+      <td>
+          <input type="text" readonly="readonly" class="txt-select" id="txt-select-category" title="{$data.cat_name}" value="{$data.cat_name}" />
+            <input type="hidden" name="cat_id" id="hidden-cat_id" value="{$data.cat_id|default:-1}" />
+            <div class="display-none div-category">
+                <div id="div-category"></div>
+            </div>
+      </td>
+    </tr>
+    <tr>
+      <td align="right">无条件保留：</td>
+      <td><input type="checkbox" value="1" name="is_preserve"{if $data.is_preserve} checked="checked"{/if} /></td>
+    </tr>
+    <tr>
+        <td class="text-right">网站标题:</td>
+        <td>
+          <textarea name="web_title" id="web_title" class="font-12" rows="3" cols="120">{$data.web_title}</textarea>
+          <br />
+          <span class="font-gray"><span class="font-red">#####</span>将被替换成搜索关键。100个字符以内。</span>
+        </td>
+     </tr>
+    <tr>
+        <td class="text-right">meta关键字:</td>
+        <td>
+          <textarea name="meta_keyword" class="font-12" rows="3" cols="120">{$data.meta_keyword}</textarea>
+          <br />
+          <span class="font-gray"><span class="font-red">#####</span>将被替换成搜索关键字。500个字符以内。</span>
+        </td>
+     </tr>
+    <tr>
+        <td class="text-right">meta描述:</td>
+        <td>
+          <textarea name="meta_description" class="font-12" rows="8" cols="120">{$data.meta_description}</textarea>
+          <br />
+          <span class="font-gray"><span class="font-red">#####</span>将被替换成搜索关键字。500个字符以内。</span>
+        </td>
+     </tr>
+    <tr>
+        <td class="text-right">底部关键字描述:</td>
+        <td>
+          <textarea name="description" class="font-12" rows="8" cols="120">{$data.description}</textarea>
+          <br />
+          <span class="font-gray"><span class="font-red">#####</span>将被替换成搜索关键字</span>
+        </td>
+     </tr>
+    <tr>
+        <td class="text-right">Related Tags:</td>
+        <td>
+          <textarea name="related_cat_keywords" class="font-12" rows="20" cols="120">{$data.related_cat_keywords}</textarea>
+          <br />
+          <span class="font-gray">一行一个，请正确填写。</span>
+        </td>
+     </tr>
+    <tr>
+      <td width="29%" height="24" align="right">&nbsp;</td>
+      <td width="71%">
+          <input type="hidden" name="keyword_id" value="{$data.keyword_id}" />
+          <input type="submit" value="确定" class="sub_but"/>
+      </td>
+    </tr>
+  </table>
+</form>
+<script type="text/javascript" src="{$jscache_url}sysjs/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/tree.js"></script>
+<script type="text/javascript" src="{$imgcache_url}eload_admin/js/common.js"></script>
+<script type="text/javascript" src="/eload_admin/all_categories_js.php"></script>
+<script type="text/javascript">
+    {literal}
+    ALL_CATEGORIES.unshift({id: 10000, leaf: true, text: '不绑定分类'});
+    (function() {
+        var me = this;
+        var cat_id = $('#hidden-cat_id');//分类id元素
+        var txt = cat_id.prev();//分类框
+        var element = $('#div-category');//分类树div
+        var div = element.parent();
+
+        txt.attr('title', txt.val()).click(function() {//选择
+            !element.html() && element.tree({//tree.js
+                data: ALL_CATEGORIES,
+                theme: 'x-tree-lines',
+                checked: false,
+                imgPath: C.IMGCACHE_URL + 'eload_admin/images/tree/',
+                onNodeClick: function(node) {
+                    cat_id.val(node.id);
+                    var text = node.text;
+                    txt.val(text).attr('title', text);
+                    div.hide();
+                }
+            });
+
+            div.show().mouseleave(function() {//鼠标离开，隐藏分类树
+                $(this).hide();
+            });
+
+            var selected = cat_id.val();
+
+            selected != 0 && element.treeExpandNode(selected);
+        });//end 选择
+    })();
+    {/literal}
+</script>
+{include file="copyright.htm"}

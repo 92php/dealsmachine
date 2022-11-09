@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 促销码列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="?act=add">促销码添加</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form action="?" method="get" style="margin: 8px;">
+    关键字：
+    <select name="column">
+        <option value="code"{if $filter.column == 'code'} selected="selected"{/if}>促销码名称</option>
+        <option value="users"{if $filter.column == 'users'} selected="selected"{/if}>使用用户</option>
+        <option value="goods"{if $filter.column == 'goods'} selected="selected"{/if}>使用商品</option>
+    </select>
+    <input type="text" name="keyword" size="10" value="{$filter.keyword}" />
+    方式：
+    <select name="fangshi">
+        <option value="">请选择</option>
+        {html_options options=$method_arr selected=$filter.fangshi}
+    </select>
+    类型：
+    <select name="is_applay">
+        <option value="">请选择</option>
+        <option value="0"{if $filter.is_applay == '0'} selected="selected"{/if}>促销码</option>
+        <option value="1"{if $filter.is_applay == '1'} selected="selected"{/if}>代金券</option>
+    </select>
+    使用情况：
+    <select name="use_status">
+        <option value="">请选择</option>
+        <option value="1"{if $filter.use_status == 1} selected="selected"{/if}>从未使用</option>
+        <option value="2"{if $filter.use_status == 2} selected="selected"{/if}>已使用完</option>
+    </select>
+	产品限制：
+    <select name="cat_id">
+        <option value="">请选择</option>
+        <option value="1" {if $filter.cat_id == 1} selected="selected"{/if}>限制</option>
+        <option value="2" {if $filter.cat_id == 2} selected="selected"{/if}>无限制</option>
+    </select>
+	 生成形式:
+    <select name="s_type">
+        <option value="3">请选择</option>
+        <option value="0"{if $filter.s_type == 0} selected="selected"{/if}>系统生成</option>
+        <option value="1"{if $filter.s_type == 1} selected="selected"{/if}>人工设置</option>
+    </select>
+   <label><input type="checkbox" value="1" name="expired"{if $filter.expired == 1} checked="checked"{/if} />过期</label>
+    <input type="submit" value="查 询" />
+</form>
+<form method="post" action="?act=remove" name="listForm" id="form">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th style="width: 30px;"><input type="checkbox" onclick="checkAll(this, 'checkboxes[]')" /></th>
+    <th style="width: 100px;">促销码</th>
+	<th style="width: 100px;">订单金额</th>
+    <th style="width: 100px;">优惠</th>
+    <th style="width: 150px;">类型</th>
+    <th style="width: 150px;">方式</th>
+    <th style="width: 100px;">使用用户</th>
+    <th style="width: 100px;">使用产品</th>
+    <th style="width: 130px;">创建时间</th>
+    <th style="width: 130px;">到期时间</th>
+    <th style="width: 50px;">已使用</th>
+    <th style="width: 50px;">次数限制</th>
+    <th style="width: 80px;">操作</th>
+  </tr>
+  {foreach from=$pcode_list item=pcodeArr  name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+    <td><input type="checkbox" class="cb-value" name="checkboxes[]" value="{$pcodeArr.id}" onclick="checkone('checkboxes[]')" /></td>
+    <td height="26">{$pcodeArr.code}</td>
+	<td height="26" class="t_account" pcode="{$pcodeArr.code}"></td>
+    <td height="26" align="center">{if $pcodeArr.youhuilv}{$pcodeArr.youhuilv}{/if}</td>
+    <td height="26" align="center">{$type_arr[$pcodeArr.is_applay]}</td>
+    <td height="26" align="center">{$method_arr[$pcodeArr.fangshi]}</td>
+    <td height="26" align="center">{if $pcodeArr.users} {$pcodeArr.users}{else}无限制{/if}</td>
+    <td height="26" align="center" style="width:300px; word-break:break-all">{if $pcodeArr.goods}{$pcodeArr.goods}{elseif $pcodeArr.cat_id}分类: {$pcodeArr.cat_id}{elseif $pcodeArr.goods eq ''}无限制{/if}</td>
+    <td align="center">{$pcodeArr.create_time}</td>
+    <td align="center">{$pcodeArr.exp_time}</td>
+    <td align="center">{$pcodeArr.cishu}次</td>
+    <td align="center">{if $pcodeArr.times} {$pcodeArr.times}次{else}不限{/if}</td>
+    <td align="center"><a href="?act=add&id={$pcodeArr.id}" title="{$lang.edit}">修改</a> |
+      <a href="?act=remove&id={$pcodeArr.id}" class="del_act" delmsg="您确定要删除选定的促销码吗？">删除</a>
+    </td>
+  </tr>
+  {foreachelse}
+    <tr><td colspan="15" align="center" class="no-records">{$lang.no_records}</td></tr>
+    {/foreach}
+    <tr>
+        <td><input type="checkbox" onclick="checkAll(this, 'checkboxes[]')" /></td>
+        <td>
+            <input type="button" id="btnSubmit" value="删 除" disabled="true" />
+            <input type="hidden" id="selAction" />
+            <script type="text/javascript">{literal}
+            $('#btnSubmit').click(function() {
+                if (confirm('您确定要删除选中促销码？')) {
+                    $('#form').submit();
+                }
+            });
+            {/literal}
+            </script>
+        </td>
+      <td align="right" nowrap="true" colspan="11">
+	<div id="pager">{$pagestr}</div>
+      </td>
+    </tr>
+  </table>
+</form>
+<script type="text/javascript">
+{literal} 
+$(function(){
+ $('.t_account').each(function(){
+	 var pcode = $(this).attr('pcode');
+	 var account = $(this);
+	 var url   = '/eload_admin/promotion_manage.php?act=get_pro_order';
+	 $.getJSON(url,{'pcode':pcode},function(data){
+		 if('fail' == data.res){
+			 alert('Promotion code cannot be empty');
+		 }else{
+			 account.html('$'+data.res);
+			// alert('The total amount of all orders:$'+data.res);
+		 }
+	 });
+ });
+});
+{/literal}
+</script> 
+{include file="copyright.htm"}
+

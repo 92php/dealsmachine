@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php?lang="></script>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td id="navleft"><a href="index.php?act=main">管理中心</a> ->> 详细页滚动产品点击统计</td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr><td>
+  <form action="?" method="post" id="selectForm">
+       日期从&nbsp;&nbsp;
+       <input name="start_date" value="{$start_date}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />
+       到&nbsp;&nbsp;
+       <input name="end_date" value="{$end_date}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" /> 
+       
+        <input type="submit" name="submit" value="查 询" class="button" />
+  </form>
+  
+</td>
+  </tr>
+</table>
+ <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="11%"> 产品</th>
+    <th width="8%">总浏览量</th>
+    <th width="81%">地区</th>
+   </tr>
+  {foreach from=$his_list item=list name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">    
+    <td><a href="/-p-{$list.access_url}.html" target="_blank">{$list.access_url}</a></td>
+    <td align="center"><span>{$list.times}</span></td>
+    <td align="left" style="padding-left:10px;">
+  {foreach from=$list.arealist item=slist}
+       {$slist.area}({$slist.times})   &nbsp;
+  {/foreach}
+    
+    </td>
+   </tr>
+   {foreachelse}
+    <tr><td colspan="3" align="center" class="no-records"> 暂无记录 </td></tr>
+  {/foreach}
+
+</table>{include file="copyright.htm"}

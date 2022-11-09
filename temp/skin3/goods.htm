@@ -1,0 +1,944 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+{include file="top.htm"}
+<link rel="stylesheet" href="{$imgcache_url}mincss/goods_min.css?2014050901" />
+<link rel="stylesheet" href="{$imgcache_url}mincss/goods_share_min.css?20130903" />
+</head>
+<body>
+{include file="public_top.htm"}
+	<div class="nav_path mt10">
+		<div class="fl sideBarMenuBox"  id="js_sideBarMenuHide">
+			<h3 class="sidebar_menuTitle"><b></b>{$_LANG.browse_by_category}</h3>
+			<div id="goods_category">
+
+			</div>
+		</div>
+		<div class="fl curPath"><a href="/{$cur_lang_url}" title="{$shop_name} {$lang.home}">{$lang.home}</a> {$nav_title}</div>
+	</div><!--end .nav_path-->
+	{if $is_out_of_stock && $out_hot_sale}
+	<div class="cc"></div>
+		<div class="superw mt10">Hot Sale</div>
+		<div class="superw1">
+		  <ul>
+			{foreach from=$out_hot_sale item=item key=key}
+			<li style="position: relative;"> {if $item.zekou}<span class="fn5">{$item.zekou}%</span>{/if}
+			  <p class="rp150"> <a target="_blank" title="{$item.goods_title}" href="/best_{$key}.html"> <img border="0" src="{$item.goods_grid}" alt="buy cheap {$item.goods_name},free shipping" /> </a> </p>
+			  <p class="rtxt"><a target="_blank" title="{$item.goods_title}" href="/best_{$key}.html">{$item.goods_title}</a> </p>
+			  <p class="rpri none"><span class="bizhong">{$_LANG.cur_list.0.keyd}</span><span orgp="{$item.market_price}" class="my_shop_price">{$item.market_price}</span></p>
+			 <p class="rpri2"><span class="bizhong">{$_LANG.cur_list.0.keyd}</span> <span orgp="{$item.shop_price}" class="my_shop_price">{$item.shop_price}</span> </p>
+			</li>
+			{/foreach}
+		  </ul>
+		</div>
+
+	{/if}
+	<div id="mainWarp" class="clearfix mt10">        
+		<div class="m_box proMain clearfix pb10">
+			<div class="proMain_info clearfix">
+				<h1>{$goods.goods_style_name}{if $sale_num}{if $cur_lang eq 'en'}<span  class="red ml10">Has sold: {$sale_num}PCS</span>{/if}{/if}</h1><em id="title_goodSN">{$goods.goods_sn}</em>
+				
+				<div class="proMain_img mt10 fl">
+				
+					<div class="myImagesSlideBox">
+						<span class="jqzoom" id="js_jqzoom">
+                        	{if $sale_num}{if $cur_lang eq 'en'}<strong class="starPro"></strong>{/if}{/if}
+							<img src="{$goods.goods_img}" width="250" height="250" alt="{$goods.goods_title}" rel="external nofollow" jqimg="{$goods.original_img}"/>
+						</span> 
+					</div>
+					
+					<div id="js_scrollable" class="scrollable fl" {if not $pictures} style="display:none;"{/if}>
+						<a class="xiang_prev" href="#" title="{$lang.prev}">{$lang.prev}</a>
+						<div class="items" >
+							<ul class="scrollableDiv" >
+								<li><a><img rel="external nofollow" src="{$goods.goods_thumb}" alt="{$goods.goods_title}" imgb="{$goods.goods_img}" width="42" height="42"  bigimg="{$goods.original_img}"/> </a></li>
+								{foreach from=$pictures item=picture}
+								<li><a><img rel="external nofollow" src="{if $picture.thumb_url}{$picture.thumb_url}{else}{$picture.img_url}{/if}" alt="{$goods.goods_title}" imgb="{$picture.img_url}" width="42" height="42"  bigimg="{$picture.img_original}"/> </a></li>
+								{/foreach}
+							</ul>
+						</div>
+						<a class="xiang_next" href="#" title="{$lang.next}">{$lang.next}</a>
+					</div>
+                    <div class="clear"></div>
+					<!--
+                    <ul class="proMain_shareList">
+						<li class="proMain_faceBook">
+
+							<div id="fb-root"></div>
+							<div class="fb-like" data-href="{$goods.url_title}?utm_medium=fblike" data-send="true" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+	
+						</li>						
+						<li>
+
+							<a rel="nofollow" target="_blank" href="https://twitter.com/share" class="twitter-share-button" data-url="{$goods.url_title}?utm_medium=twitter" data-text="{$goods.goods_title}">{$lang.tweet}</a>
+
+						</li>
+                        <li class="proMain_pinit"> 
+
+							<a data-pin-config="beside" href="//pinterest.com/pin/create/button/?url={$goods.url_title}&media={$goods.goods_img}&description=${$goods.shop_price} {$goods.goods_title}" data-pin-do="buttonPin" ><img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" /></a>
+
+						</li>
+						<li>
+
+							<div class="g-plusone" data-size="medium" data-href="{$goods.url_title}?utm_medium=googleplus"></div>
+	
+						</li>                        
+					</ul>
+					-->
+				</div>
+				
+				<div class="proMain_quantity fr mt10">
+				{if $volume_price_list }
+					<table width="100%" border="0" cellpadding="3" cellspacing="0" bgcolor="#CCCCCC" style="font-size:11px;">
+						<tbody>
+							<tr>
+								<td width="51%" height="20" align="center" bgcolor="#f3f3f3"><span>{$lang.Quantity_Range}</span></td>
+								<td width="49%" align="center" bgcolor="#f3f3f3"><span>{$lang.price}</span></td>
+							</tr>
+							{foreach from=$volume_price_list item=price_list key=price_key name=vp}
+							<tr>
+								<td height="16" align="left" bgcolor="#FFFFFF" atrp="{$price_key}" class="plnum">{$price_list.number} </td>
+								<td align="center" bgcolor="#FFFFFF">{if  $price_key == 0 and  $goods.market_price > $price_list.format_price}<span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price"   style=" text-decoration:line-through" orgp="{$goods.market_price}">{$goods.market_price}</span>{/if} <span class="spanred1"> <span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" id="pk{$price_key}" orgp="{$price_list.format_price}">{$price_list.format_price}</span></span> </td>
+							</tr>
+							{/foreach}
+						</tbody>
+					</table>
+					{/if}    
+					
+					<!-- 微数据(评论)开始 -->
+					<span itemprop="aggregateRating" itemscope="itemscope" itemtype="http://schema.org/AggregateRating">
+					   <span itemprop="ratingValue" content="{$review.avg_rate}"></span>
+					   <span itemprop="reviewCount" content="{$review.review_count}"></span>
+					</span>
+					<!-- 微数据(评论)结束 -->
+										
+					<!-- 微数据（商品价格信息）开始 -->
+					<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+					<meta itemprop="priceCurrency" content="USD" />
+					<span itemprop="price" content="{$goods.shop_price}"></span>
+					<span itemprop="availability" content="{if $goods.goods_number}In Stock{else}Out of stock {/if}"></span>
+					</span>
+					<!-- 微数据（商品价格信息）结束 -->					
+					                
+					{if $specification|@count neq 0 || $have_same_goods eq 1}
+					<div id="js_proMain_accessory" class="proMain_accessory mt10">
+						<ul>
+							{if $have_same_goods eq 1}
+							{foreach from=$same_goods_list item=goods_type key=key}
+							<li>
+								<strong class="fb">{$goods_type.name}:</strong>
+								<select name="select_same_goods_{$key}" class="js_select_same_goods">
+							       <option  value="">{$lang.please_select}...</option>
+								  {foreach from=$goods_type.list item=value key=key}
+								  <option value="{$key}" {if $goods.goods_id eq $key}selected{/if}> {$value.attr_value}{if $value.attr_price != 0}{if $value.attr_price gt 0}+{elseif $value.attr_price lt 0}-{/if}<B> {$lang.cur_list.0.keyd} {$value.spe_format_price}</B>{/if} </option>
+                  
+								  {/foreach}
+								</select>
+							</li>
+							{/foreach}
+							{/if}
+							{if $specification}
+								 <li style="display:none">
+									  {foreach from=$specification item=spec key=spec_key} 
+											<strong class="fb" {if $spec.is_public eq 1}style="display:none" {/if}>{$spec.name}:</strong> 
+	
+										
+											{if $spec.attr_type eq 1}
+										
+												{if $cfg.goodsattr_style eq 1}
+										
+													{foreach from=$spec.values item=value key=key}
+														<label for="spec_value_{$value.id}">
+															<input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" {if  $smarty.get.atrid eq $value.id }checked{/if}  class="spec_{$spec_key}"  lab_name="{$spec.name}"/>{$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}] 
+														</label>
+														<br />
+													{/foreach}
+													<input type="hidden" name="spec_list" value="{$key}" />
+												{else}
+													<select id="accessory_select" name="spec_{$spec_key}"  class="spec_{$spec_key}" onChange="show_custom({$spec_key},{$goods.goods_id});" lab_name="{$spec.name}" style="height:19px; font-size:11px; width:110px;" isnes="{$spec.isnes}" type="select-one">
+														<option  value="0" subprice="0">--{$lang.please_select}--</option>
+														{foreach from=$spec.values item=value key=key}
+													  
+															<option value="{$value.id}" subprice="{if $value.price}{$value.price}{else}{0.00}{/if}" {if $smarty.get.atrid eq $value.id or $spec.values|@count eq 1}selected{/if}>{$value.label}{if $value.price gt 0}+{elseif $value.price lt 0}-{/if}{if $value.price neq 0}<B><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$value.format_price}">{$value.format_price}</span></B>{/if}
+															</option>
+														{/foreach}
+													</select>
+											  <input type="hidden" name="spec_list" value="{$key}" />
+											  <input type="hidden" id="select_prev" value="0" />
+											  <br/>
+											  {/if}
+										{else}
+											{foreach from=$spec.values item=value key=key} <br/>
+												<label for="{if $value.id eq 'custom made'}customxx{$spec_key}{else}spec_value_{$value.id}{/if}">
+												<input type="checkbox" name="spec_{$spec_key}" value="{$value.id}"  class="spec_{$spec_key}"  {if $smarty.get.atrid eq $value.id }checked{/if} {if $value.id eq 'custom made'} id="customxx{$spec_key}"  onClick="show_check_custom({$spec_key})" {else} id="spec_value_{$value.id}" {/if}  lab_name="{$spec.name}" val="{$value.format_price}"/>
+												 {$value.label} {if $value.price gt 0}+{elseif $value.price lt 0}-{/if}<B><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$value.format_price}">{$value.format_price}</span></B> </label>
+											{/foreach}
+											<input type="hidden" name="spec_list" value="{$key}" />
+											<br/>
+										{/if} 
+										</span> 
+									{/foreach}
+								</li>
+							{/if}
+						</ul>
+					</div>
+					{/if}
+					{if $goods.gifts_name}
+        				<div class="proMain_giftIco mt10">{$lang.it_is} {$goods.gifts_name}</div>
+					{else}
+            			<div class="proMain_giftIco mt10">{$lang.gift}</div>
+					{/if}
+                    
+					<!--{if $cur_lang eq $default_lang}
+                    <p class="freeTrialBox_infoBtn pr pt10">
+						<a class="popShare" href="javascript:void(0);" data-goodsId="{$goods.goods_id}">Share and win</a>
+						<span class="freeTrialBox_details" style="display:none;">Please share the item and get free trial, and <a href="/m-share.htm">click here</a> to get details.</span>
+					</p>             
+                    {/if} -->
+					
+					<div class="proMain_status">
+						<strong>{$lang.Status}:</strong><span class="mr15">{if $goods.goods_number}{$lang.In_Stock}{else}{$lang.Out_of_stock}{/if}</span>
+						{if $warranty eq '1'}
+                        <strong>{$lang.warranty}:</strong><span class="mr15">{$lang.one_year}</span>
+						{/if}
+					</div>                 
+					<p class="proMain_privilege">{if $goods.is_free_shipping}<span class="p_free {$cur_lang}_p_free fl">{$lang.Free_Shipping}</span>{/if}{if $goods.is_24h_ship and $goods.goods_number}<span class="p_Ship fl">{$lang.ship_in_24hrs}</span>{/if}<a href="javascript:void(0);" rel="nofollow" class="fl" id="js_liveChatBtn"><img src="{$imgcache_url}images/styleimg/lc2.gif"/> </a>                    
+                    </p>
+                                 
+					{if $review.avg_rate}
+						<p class="proMain_writeReview"><span class="start_{$review.avg_rate_img}"><i>{$review.avg_rate} {$lang.satrts}</i></span>{$review.avg_rate}(<a href="/m-review-a-view_review-goods_id-{$goods.goods_id}.htm" class="reviewNum">{$review.review_count}</a> {$lang.customer_reviews})   </p>
+					{else}
+						<p class="proMain_writeReview"><a href="#customer_review" class="writeReviewBtn" rel="nofollow">{$lang.Write_a_review} (0)</a></p>
+					{/if}
+					<p class="proMain_favoic"><a rel="nofollow" href="/{$cur_lang_url}m-inquiry.htm?{$goods.goods_id}">{$lang.wholesale_inquiry}</a></p>
+			{if $smarty.cookies.usertype eq '2'}
+				{literal} 
+				<script type="text/javascript" > 
+					function add_wj_link(id){
+						if(id !=""){
+							$("#aff"+id).html(category_func_add_wj_link_0);		
+							URL = DOMAIN_USER+"/{/literal}{$cur_lang_url}{literal}m-webad-a-add_link_auto-pid-"+id+".htm?jsoncallback=?";
+							$.getJSON(URL, function(data) {
+								$("#aff"+id).html(data.ms)
+							});
+						}
+					}
+				</script>
+			   {/literal}
+
+				<p id="aff{$goods.goods_id}" class="mt10"><img src="{$imgcache_url}images/styleimg/recomm.gif" border="0" onClick="add_wj_link({$goods.goods_id})" /></p>
+		   {/if}
+				</div>
+			</div>
+			<div class="proMain_cart">
+                    {if $goods.presale_date_from}{*预售*}
+					<div class="clear"></div>
+					<div class="psbgbg">
+						<div class="psbgbg1 fb">Presell Product</div>
+						<div class="psbgbg2">
+					      <table width="85%" border="0" cellspacing="0" cellpadding="0">
+						    <tr>
+							  <td width="25" align="left" valign="middle"><img src="{$imgcache_url}images/bz.gif" width="16" height="16" vspace="3" /></td>
+							  <td align="left" valign="middle"><strong>Available:</strong> {$goods.presale_date_from}</td>
+							</tr>
+						  </table>
+						</div>
+					</div>
+                    {literal}<style type="text/css">.proMain_addCartBox{ margin-top:10px;}</style>{/literal}
+					{/if}{*end 预售*}
+					<input type="hidden" name="spec_list" value="29485" />
+					<input type="hidden" id="select_prev" value="0" />
+					<input type="hidden" name="id" value="29485" />
+					<input type="hidden" name="action" value="add" />
+				<div class="proMain_addCartBox pr">
+					{if $goods.point_rate eq 2}<div class="cart_doublePoints">{$lang.double_points}</div>{/if}
+					<div class="p_price add_price">
+						<div class="goods_hobi">
+							<strong class="goods_hobiT"><span class="bizhong fb">{$lang.cur_list.0.keyd}</span><i class=""></i></strong>
+							<ul class="none js_bizhongList">
+								<li data-bizhong="USD"><label class="flag f_usd"></label>USD</li>
+								<li data-bizhong="EUR"><label class="flag f_eur"></label>EUR</li>
+								<li data-bizhong="CAD"><label class="flag f_cad"></label>CAD</li>
+								<li data-bizhong="GBP"><label class="flag f_gbp"></label>GBP</li>
+								<li data-bizhong="AUD"><label class="flag f_aud"></label>AUD</li>
+								<li data-bizhong="RUB"><label class="flag f_rub"></label>RUB</li>
+								<li data-bizhong="BRL"><label class="flag f_brl"></label>BRL</li>
+								<li data-bizhong="HUF"><label class="flag f_huf"></label>HUF</li>
+								<li data-bizhong="ARS"><label class="flag f_ars"></label>ARS</li>
+					            <li data-bizhong="MXN"><label class="flag f_mxn"></label>MXN</li>			
+					            <li data-bizhong="ILS"><label class="flag f_ils"></label>ILS</li>
+					            <li data-bizhong="UAH"><label class="flag f_uah"></label>UAH</li>
+					            <li data-bizhong="CZK"><label class="flag f_czk"></label>CZK</li>
+					            <li data-bizhong="NZD"><label class="flag f_nzd"></label>NZD</li>
+					            <li data-bizhong="INR"><label class="flag f_inr"></label>INR</li>
+					            <li data-bizhong="BGN"><label class="flag f_bgn"></label>BGN</li>
+					            <li data-bizhong="CLP"><label class="flag f_clp"></label>CLP</li>
+					            <li data-bizhong="TRY"><label class="flag f_try"></label>TRY</li>
+					            <li data-bizhong="NGN"><label class="flag f_ngn"></label>NGN</li>
+					            <li data-bizhong="COP"><label class="flag f_cop"></label>COP</li>
+							</ul>
+						</div>
+						<span id="unit_price" class="my_shop_price fb" orgp="{$goods.shop_price}">{$goods.shop_price}</span>
+					</div>
+					<p class="cart_quantity">{$lang.number}:</p>
+					<p class="cart_smout">
+						<a href="javascript:void(0);" class="minus_op" id="js_minus_op" {if $goods.shop_price !='0.01'}onClick="jian();"{/if}/>-</a>
+						<input type="text" name="textfield" id="input_quantity" value="{$qty}" {if $goods.shop_price !='0.01'}onKeyUp="input_quantity(this);" {else}disabled{/if} maxlength="4" size="4" />
+						<a href="javascript:void(0);" class="plus_op" id="js_plus_op" {if $goods.shop_price !='0.01'}onClick="jia();"{/if}>+</a>
+					</p>
+					<P class="cart_result"  id="items_total"><span class="bizhong">{$lang.cur_list.0.keyd}</span><span class="my_shop_price" orgp="{$goods.shop_price}">{$goods.shop_price}</span>x<i>1</i>=<span class="bizhong">{$lang.cur_list.0.keyd}</span><span class="my_shop_price" orgp="{$goods.shop_price}">{$goods.shop_price}</span></p>
+					{if $goods.goods_number}
+					<p class="cart_btn" id="add_cart_msg{$goods.goods_id}"><a rel="nofollow" href="javascript:void(0)" id="new_addcart" class="js_add_cart_button add_cart_button" gid="{$goods.goods_id}" num = "{$qty}" attrchage="{$attrkey}" {if $goods.is_groupbuy == 1}act_sign="groupbuy"{/if}>{$lang.add_to_cart}</a></p>
+					{else}<p class="cart_btn_null" ><span>{$lang.Out_of_stock}</span></p> {/if}
+				</div>
+				
+				<ul class="proMain_cartBtns mt10">
+					<li><a rel="nofollow" href="/{$cur_lang_url}m-article-id-28-pid-.html" class="shippingCost">{$lang.shipping_cost}</a></li>
+					<li><a rel="nofollow" href="/{$cur_lang_url}m-flow-a-drop_to_collect-id-{$goods.goods_id}.htm" class="addToFav">{$lang.collect}</a></li>
+					<li><a rel="nofollow" href="/{$cur_lang_url}m-article-id-23-pid-.html" class="shippingMeth">{$lang.Shipping_Methods}</a></li>
+					<li><a rel="nofollow" href="/{$cur_lang_url}m-article-id-38-pid-.html" class="payment">{$lang.Payment_Methods}</a></li>
+					<li><a rel="nofollow" href="/{$cur_lang_url}m-article-id-20.htm" class="contactUs">{$lang.contact_us}</a></li>
+				</ul>				
+			</div>
+		</div>
+        
+   {if $fittings}
+		<div class="favorable_suit m_box mt10" id="buytogether">
+			<h3 class="suitTitle">{$lang.Frequently_Bought_Together}:</h3>
+			<div class="suitBox">
+				<div class="suit_master">
+					<a href="javascript: void(0)">
+						<img class="js_lazyLoad" src="{$goods.goods_img}"  alt="{$goods.title}" width ="120" height="120">
+					</a>
+				</div>
+				<div class="suit_pusTag">{$lang.plus}</div>
+				<div class="suit-list">
+					<ul  id="ul-peijian">
+						{foreach from=$fittings item=groups}
+						<li {if $groups.fittings_price eq 0} class="choose" {/if}>
+							<p class="p_mg"><a href="{$groups.url_title}" target="_blank" ><img src="{$groups.goods_thumb}" alt="{$groups.goods_title}" width="89" height="89" class="js_lazyLoad"/></a></p>
+							<p class="p_name"><a href="{$groups.url_title}">{$groups.goods_title}</a></p>
+							{if $groups.shop_price >= $groups.fittings_price}
+							<p class="p_price p_price_cost pt5"><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$groups.shop_price}">{$groups.shop_price}</span></p>
+							{/if}
+							<p class="p_price bdjia"><input type="checkbox" class="suit_check" value="{$groups.goods_id}" {if $groups.fittings_price eq 0 || $fittings_checked} checked="checked" {/if}/><span class="bizhong red">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price red" orgp="{$groups.fittings_price}">{$groups.fittings_price}</span></p>
+							
+						</li>
+						{/foreach}
+					</ul>
+				</div>
+				<div class="suit_result">
+					<p class="fb"> {$lang.Total_price}: <span class="bizhong red">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price total_price red pl5" orgp="{$goods.shop_price}">{$goods.shop_price}</span></p>
+					<p class="fb"> {$lang.You_Save}: <span class="bizhong red">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price red pl5 total_saving" orgp="0">0</span></p>
+					<p><a href="#" class="suit_addCart add_cart_button js_add_cart_button" gid="{$goods.goods_id}"  num="1" attrchage="{$attrkey}" is_combo="1" msg_id="add_cart_msg_combo" {if $goods.is_groupbuy == 1}act_sign="groupbuy"{/if}>{$lang.add_to_cart}</a></p>
+					<p id="add_cart_msg_combo"></p>
+				</div>
+			</div>
+		</div>
+		{/if}
+        
+		{if $goods.is_superstar eq '1'}
+		{if $cur_lang eq 'en'}
+        <div class="ad mt10">
+        	<img src="{$imgcache_url}images/superstar/super_pic1.jpg" width="997" height="180"/>
+        </div>
+		{/if}
+		{/if}
+        
+        
+		<div class="goodsMainInfo cleafix">
+			<div class="m_boxLeft fl">
+				<!--===================明星产品详情开始==================================-->			
+				{if $goods.is_superstar eq '1'}
+				<div class="goodsMainInfo_show">
+					<div class="super_nav mt10 mb10" style="margin:10px auto;">
+						<ul id="super_navList">
+							<li><a class="hover">Highlights Display</a></li>
+							<li><a {if $goods.is_superstar eq '0'}class="hover"{/if}>{$lang.Product_Details}</a></li>
+							<li><a class="js_payMentImg" data-showImg="/temp/skin3/ximages/xxp.gif?2014052301">{$lang.Shipping_and_Payment}</a></li>
+							<li><a>{$lang.Customer_Inquiries}</a></li>
+						</ul>
+					</div>  
+					{$goods.goods_desc}					
+					<div class="superStar_shipping js_goodsShow none" id="test_2">							
+					</div>                        
+					<div class="superStar_inquiry js_goodsShow none" id="test_3">                          
+					  <div class="goodsBox mt10" >
+							<h3 class="pl5 pr5 fb f16">{$lang.Inquiries_1}</h3>
+							<div class="goodsShow clearfix">
+								<p class="red">
+									{if $inquiry.inquiry_count > 0}
+										{$lang.Inquiries_2}
+									{else}
+										{$lang.Inquiries_3} 
+									{/if}
+								</p>
+								<p class="submitInquireBtnBox"><a href="/{$cur_lang_url}m-review-a-write_inquiry-goods_id-{$goods.goods_id}.htm" class="fb" rel="nofollow">submit inquires</a></p>
+							</div>
+						</div>
+						{if $inquiry.inquiry_count > 0}
+						{if $cur_lang eq $default_lang}
+						<h3 class="commentsList_title f12 fb mt10 pb5">{$lang.Inquiries_for} {$goods.goods_title}</h3>
+						<ul class="InquiriesList">
+							{foreach key=key from=$inquiry.inquiry_list item=item name=item}
+							<li>
+								<p class="byWho">{$lang.by} <strong>{$item.nickname}</strong> {$item.adddate}</p>
+								<p class="inquiries_content p10"><strong>Inquiry : </strong> {$item.i_content}</p>
+								<div class="inquiries_reply_info">
+									<p class="inquiries_reply pb15">
+										<strong>{$lang.replay} :</strong>
+									</p>
+									<p class="pb15">{$item.reply} </p>
+								</div>
+							</li>
+							{/foreach}
+						</ul>
+						{/if}
+						{/if}	
+						<div class="clearfix seeAllInqiries"><a href="/m-review-a-view_inquiry-goods_id-{$goods.goods_id}.htm" class="blue_link fl mr30" rel="nofollow">{$lang.see_all}  <strong class="fb">{$inquiry.inquiry_count}</strong> {$lang.Inquiries}</a><p class="submitInquireBtnBox fl"><a href="/{$cur_lang_url}m-review-a-write_inquiry-goods_id-{$goods.goods_id}.htm" class="fb">submit inquires</a></p></div>
+						<p class="goods_contact pb10 cl">{$lang.Inquiries_4}<a rel="nofollow" href="http://support.dealsmachine.com" class="blue_link"> {$lang.Contact_Customer_Service} </a>{$lang.Inquiries_5}</p>                                                    
+					</div><!--end #test_3-->
+					{literal}
+					<script type="text/javascript">
+						(function(){
+							var $superNavList = $("a","#super_navList");
+							$("div.js_goodsShow:first").show();
+							$superNavList.each(function(i,v){
+								$(this).data("index",i);
+								$(this).click(function(){
+									$superNavList.removeClass("hover");
+									$(this).addClass("hover");
+									var $paymentMethWarp = $(".js_goodsShow").eq($(this).data("index"));
+									$paymentMethWarp.show().siblings("div.js_goodsShow").hide();
+									if($(this).hasClass("js_payMentImg") && $paymentMethWarp.find("img.paymentMeth").length==0){
+
+										$paymentMethWarp.append("<img class=\"paymentMeth\" src="+$(this).attr('data-showImg')+">");
+									}
+								})
+							});
+							
+						})()	
+					</script>{/literal}                                  												
+				</div>   
+				{else}
+				<!--===================明星产品详情结束==================================-->			
+			
+				<ul class="tab mt10">
+					<li class="on"><a href="javascript:void(0);">{$lang.Product_Details}</a></li>
+					<li><a href="javascript:void(0);">{$lang.Shipping_and_Payment}</a></li>
+                    <li><a href="javascript:void(0);">{$lang.Customer_Inquiries}</a></li>
+				</ul>			
+				<div class="goodsMainInfo_show">
+					<div class="MainInfo_showBox clearfix">
+						{if $goods.youtube}
+						<iframe width="750" height="400" src="//www.youtube.com/embed/{$goods.youtube}" frameborder="0" allowfullscreen=""></iframe>
+						{/if}
+						{$goods.goods_desc}
+					</div>
+					<div class="MainInfo_showBox" style="display:none">
+					</div>                                        
+					<div class="MainInfo_showBox" style="display:none">
+                        <div class="goodsBox mt10" >
+                                <h3 class="pl5 pr5 fb f16">{$lang.Inquiries_1}</h3>
+                                <div class="goodsShow clearfix">
+                                    <p class="red">
+                                        {if $inquiry.inquiry_count > 0}
+                                            {$lang.Inquiries_2}
+                                        {else}
+                                            {$lang.Inquiries_3} 
+                                        {/if}
+                                    </p>
+                                    <p class="submitInquireBtnBox"><a href="/{$cur_lang_url}m-review-a-write_inquiry-goods_id-{$goods.goods_id}.htm" class="fb" rel="nofollow">submit inquires</a></p>
+                                </div>
+                            </div>
+                            {if $inquiry.inquiry_count > 0}
+							{if $cur_lang eq $default_lang}
+                            <h3 class="commentsList_title f12 fb mt10 pb5">{$lang.Inquiries_for} {$goods.goods_title}</h3>
+                            <ul class="InquiriesList">
+                                {foreach key=key from=$inquiry.inquiry_list item=item name=item}
+                                <li>
+                                    <p class="byWho">{$lang.by} <strong>{$item.nickname}</strong> {$item.adddate}</p>
+                                    <p class="inquiries_content p10"><strong>Inquiry : </strong> {$item.i_content}</p>
+                                    <div class="inquiries_reply_info">
+                                        <p class="inquiries_reply pb15">
+                                            <strong>{$lang.reply}:</strong>
+                                        </p>
+                                        <p class="pb15">{$item.reply} </p>
+                                    </div>
+                                </li>
+                                {/foreach}
+                            </ul>
+							{/if}
+                            {/if}	
+                            <div class="clearfix seeAllInqiries"><a href="/m-review-a-view_inquiry-goods_id-{$goods.goods_id}.htm" class="blue_link fl mr30" rel="nofollow">{$lang.see_all}  <strong class="fb">{$inquiry.inquiry_count}</strong> {$lang.Inquiries}</a><p class="submitInquireBtnBox fl"><a href="/{$cur_lang_url}m-review-a-write_inquiry-goods_id-{$goods.goods_id}.htm" class="fb">submit inquires</a></p></div>
+                            <p class="goods_contact pb10 cl">{$lang.Inquiries_4}<a rel="nofollow" href="http://support.dealsmachine.com" class="blue_link"> {$lang.Contact_Customer_Service} </a>{$lang.Inquiries_5}</p>                        
+                        </div>
+					</div>	
+					{/if}
+															                 
+					{if $cur_lang eq $default_lang}			
+					<div class="section mainBarAd mt10">
+						<a href="/{$cur_lang_url}m-promotion-t-1-active-240.html"><img src="{$imgcache_url}images/demoimg/500p.gif" border="0"></a>
+					</div>
+					{/if}					
+					<div class="m_box p10 mainInfo_tips mt10" >
+						{$lang.Reviews_1} <a rel="nofollow" href="/{$cur_lang_url}m-review-a-write_review-goods_id-{$goods.goods_id}.htm">{$lang.Reviews_2}</a> {$lang.Reviews_3}  {$lang.point_name}. <br/>{$lang.Reviews_4} <a rel="nofollow" href="/{$cur_lang_url}m-review-a-write_inquiry-goods_id-{$goods.goods_id}.htm">{$lang.Reviews_2}</a> {$lang.Reviews_5}
+					</div>
+					
+					<div class="mt10 askQuestion" id="customer_review">{$lang.Reviews_6} <a rel="nofollow" href="http://support.{$shop_name}.com" target="_blank">{$lang.Contact_Customer_Service}</a>  {$lang.Reviews_8}</div>
+
+				
+                	<div class="goodsBox mt10 m_box" id="read_review">
+						<h3 class="pl5 pr5 fb f16">
+							{$lang.Reviews_9}
+						</h3>
+						{if $review.review_count == 0}
+						<div class="goodsShow clearfix">
+							<div class="fl">
+								<p>{$lang.Reviews_10}<span class="pl5"><a rel="nofollow" href="/{$cur_lang_url}m-promotion-active-14.htm">{$lang.Reviews_11}</a></span>
+								<p class="writeReviewBtnBox"><a href="/{$cur_lang_url}m-review-a-write_review-goods_id-{$goods.goods_id}.htm" class="fb" rel="nofollow">{$lang.Write_a_review}</a></p>
+							</div>
+						</div>
+						{/if}
+						{if $review.review_count >= 1}
+						<div class="goodsShow clearfix">
+							<div class="fl">
+								<p>{$lang.Reviews_Average_Rating}:<span class="start_{$review.avg_rate_img}"><i>{$review.avg_rate}</i></span>{$review.avg_rate}<span class="pl5">({$lang.see_all} <a href="/m-review-a-view_review-goods_id-{$goods.goods_id}.htm" >{$review.review_count}</a> {$lang.customer_reviews})</span>
+								<p class="writeReviewBtnBox"><a href="/{$cur_lang_url}m-review-a-write_review-goods_id-{$goods.goods_id}.htm" class="fb" rel="nofollow">{$lang.Write_a_review}</a></p>
+							</div>
+							<div class="fr">
+								<p class="red">{$lang.Reviews_12} </p>
+								<p><a href="/{$cur_lang_url}m-promotion-active-14.htm" rel="nofollow">{$lang.Reviews_11}</a></p>
+							</div>
+						</div>
+						{/if}
+					</div>
+					{if $goods.seller_note}
+					<div class="seo_text" style="margin:10px 0 0 0;padding:10px 0px;border-top:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;">{$goods.seller_note}</div>
+					{/if}
+					
+					{if $review.review_count >= 1}
+					{if $cur_lang eq $default_lang}
+					<h3 class="commentsList_title f12 fb mt10 pb5">{$lang.Reviews_for} {$goods.goods_title}</h3>
+					<div class="commentsListWarp m_box">
+						<dl class="commentsList mb10">
+						{if $review.review_list}
+							<dt class="comments_title fb">{$lang.most_helpful_reviews}</dt>
+							{foreach key=key from=$review.review_list item=r name=r}
+							<dd class="comments_box clearfix">
+
+								<div class="comments_userInfo fl">
+									<p class="userImg"><img src="{$imgcache_url}images/demoimg/goldmedal.gif"/></p>
+									<p class="userName pt10 pb10 fb">{$r.nickname}</p>
+									<p class="userStatus"><span class="status_vb">{$lang.verified_buyer}</span></p>
+									<p class="userTime">{$r.adddate}</p>
+								</div>
+
+								<div class="comments_info fr">
+									<p><span class="start_{$r.rate_overall}"><i>{$r.rate_overall} {$lang.satrts}</i></span><strong class="fb">{$r.subject}</strong></p>
+									{if $r.get_point gt 0}<p class="dottedLine"><strong class="fb orang pr5">{$r.get_point} {$lang.point_name}</strong>{$lang.gained_for_this_post}</p>{/if}
+									
+									<div class="comment_text clearfix p10">
+										<div class="comment_text_left fl">										
+											<div class="pb10">
+												<strong>{$lang.Pros}:</strong>
+												<p>{$r.pros}</p>
+											</div>
+											
+											<div class="pb10">
+												<strong>{$lang.Cons}:</strong>
+												<p>{$r.cons}</p>
+											</div>
+											{if $r.other_thoughts != ''}
+												<div class="pb10">
+													<strong>{$lang.Review_Other_Thoughts}:</strong>
+													<p >{$r.other_thoughts}</p>
+												</div>
+											{/if}
+											{if $r.pic != ''}
+												<div class="pb10">
+												    <strong>{$lang.Review_Photos_related}:</strong>
+													<p class="rewpimg">
+													{foreach from=$r.pic item=pic} 
+														<a target="_blank" href="/{$cur_lang_url}m-review_media-a-view_image-goods_id-{$goods.goods_id}-mid-{$pic.id}.htm" rel="nofollow"> 
+														<img src="{$domain_img}/{$pic.thumb_paths}" width="80"  border="0" />
+														</a> 
+													{/foreach}
+												     </p>
+												  </div>	
+											{/if}
+											{if $r.video != ''}
+												<div class="pb10">
+													<strong>{$lang.Review_Videos_related}:</strong>
+													<p class="rewpvideo">
+														{foreach from=$r.video item=video} 
+															<a rel="nofollow" target="_blank" href="/{$cur_lang_url}m-review_media-a-view_video-goods_id-{$goods.goods_id}-mid-{$video.id}.htm" rel="nofollow"><img src="http://www.{$shop_name}/m-review-a-show_video_pic-code-{$video.paths}.htm"  width="80" height="80" border="0" /></a> 
+														{/foreach}
+													</p>
+												</div>
+											{/if} 
+										</div>
+
+										<dl class="comment_stars fr tr">
+											<dt>{$lang.Review_Price}:</dt>
+											<dd><span class="start_{$r.rate_price}"><i>{$r.rate_price} {$lang.satrts}</i></span></dd>
+											<dt>{$lang.Review_Ease_of_Use}:</dt>
+											<dd><span class="start_{$r.rate_easyuse}"><i>{$r.rate_easyuse} {$lang.satrts}</i></span></dd>
+											<dt>{$lang.Review_Build_Quality}:</dt>
+											<dd><span class="start_{$r.rate_quality}"><i>{$r.rate_quality} {$lang.satrts}</i></span></dd>
+											<dt>{$lang.Review_Usefulness}:</dt>
+											<dd><span class="start_{$r.rate_quality}"><i>{$r.rate_quality} {$lang.satrts}</i></span></dd>
+											<dt>{$lang.Review_Overall_Rating}:</dt>
+											<dd><span class="start_{$r.rate_usefulness}"><i>{$r.rate_usefulness} {$lang.satrts}</i></span></dd>
+										</dl>
+
+										{if $r.reply != ''}
+											{foreach from=$r.reply item=reply}
+												<div class="pb10 pt10">
+													<strong class='fb'>{$reply.re_nickname}</strong>{$lang.reply}:
+													<p >{$reply.re_content} </p>
+												</div>
+											{/foreach}
+										{/if}
+										<div class="commentReplyBox">
+											<p>
+												<a href="javascript:void(0)" class="replyBtn td_reply fr" rid={$r.rid}>{$lang.reply}</a>
+												<strong class="fl">{$lang.Review_helpful}? </strong>
+												<a href="javascript:void(0)" class="yesBtn fl" onClick="review_helpful_num({$r.rid},0);">{$lang.yes}<span id="review_helpful_yes_{$r.rid}">({$r.helpful_yes})</span></a>
+												<a href="javascript:void(0)" class="noBtn fl" onClick="review_helpful_num({$r.rid},1);">{$lang.no}<span id="review_helpful_no_{$r.rid}">({$r.helpful_no})</span></a>
+												<a fbdesc="{$r.pros|escape:'html'}" fbname="{$goods.goods_title|escape:'html'}" fbpicture="{$goods.goods_thumb}" fblink2="http://www.dealsmachine.com/m-review-a-view_review-goods_id-{$goods.goods_id}.htm" fblink="{$goods.url_title}" fbuser="{$r.nickname|escape:'html'}"class="commentFaceBook fb fl share fbComment" href="javascript:void(0)">{$lang.share_to_facebook}</a>
+											</p>
+										</div>
+										
+									</div>
+								</div>
+
+							</dd>
+							{/foreach}							
+						{/if}
+
+						
+						<dt class="comments_title fb mt10">{$lang.recent_reviews}</dt>
+							{foreach key=key from=$recent_review.review_list item=r name=r}
+							<dd class="comments_box clearfix">
+
+								<div class="comments_userInfo fl">
+									<p class="userImg"><img src="{$imgcache_url}images/demoimg/goldmedal.gif"/></p>
+									<p class="userName pt10 pb10 fb">{$r.nickname}</p>
+									<p class="userStatus"><span class="status_vb">{$lang.verified_buyer}</span></p>
+									<p class="userTime">{$r.adddate}</p>
+								</div>
+
+								<div class="comments_info fr">
+									<p><span class="start_{$r.rate_overall}"><i>{$r.rate_overall} {$lang.satrts}</i></span><strong class="fb">{$r.subject}</strong></p>
+									{if $r.get_point gt 0}<p class="dottedLine"><strong class="fb orang pr5">{$r.get_point} {$lang.point_name}</strong>{$lang.gained_for_this_post}</p>{/if}
+									
+									<div class="comment_text clearfix p10">
+										<div class="comment_text_left fl">										
+											<div class="pb10">
+												<strong>{$lang.Pros}:</strong>
+												<p>{$r.pros}</p>
+											</div>
+											
+											<div class="pb10">
+												<strong>{$lang.Cons}:</strong>
+												<p>{$r.cons}</p>
+											</div>
+											{if $r.other_thoughts != ''}
+												<div class="pb10">
+													<strong>{$lang.Review_Other_Thoughts}:</strong>
+													<p >{$r.other_thoughts}</p>
+												</div>
+											{/if}
+											{if $r.pic != ''}
+												<div class="pb10">
+												    <strong>{$lang.Review_Photos_related}:</strong>
+													<p class="rewpimg">
+													{foreach from=$r.pic item=pic} 
+														<a target="_blank" href="/{$cur_lang_url}m-review_media-a-view_image-goods_id-{$goods.goods_id}-mid-{$pic.id}.htm" rel="nofollow"> 
+														<img src="{$domain_img}/{$pic.thumb_paths}" width="80"  border="0" />
+														</a> 
+													{/foreach}
+												     </p>
+												  </div>	
+											{/if}
+											{if $r.video != ''}
+												<div class="pb10">
+													<strong>{$lang.Review_Videos_related}:</strong>
+													<p class="rewpvideo">
+														{foreach from=$r.video item=video} 
+															<a rel="nofollow" target="_blank" href="/{$cur_lang_url}m-review_media-a-view_video-goods_id-{$goods.goods_id}-mid-{$video.id}.htm" rel="nofollow"><img src="http://www.{$shop_name}/m-review-a-show_video_pic-code-{$video.paths}.htm"  width="80" height="80" border="0" /></a> 
+														{/foreach}
+													</p>
+												</div>
+											{/if} 
+										</div>
+
+										<dl class="comment_stars fr tr">
+											<dt>{$lang.Review_Price}:</dt>
+											<dd><span class="start_{$r.rate_price}"><i>{$r.rate_price} {$lang.satrts}</i></span></dd>
+											<dt>{$lang.Review_Ease_of_Use}:</dt>
+											<dd><span class="start_{$r.rate_easyuse}"><i>{$r.rate_easyuse} {$lang.satrts}</i></span></dd>
+											<dt>{$lang.Review_Build_Quality}:</dt>
+											<dd><span class="start_{$r.rate_quality}"><i>{$r.rate_quality} {$lang.satrts}</i></span></dd>
+											<dt>{$lang.Review_Usefulness}:</dt>
+											<dd><span class="start_{$r.rate_quality}"><i>{$r.rate_quality} {$lang.satrts}</i></span></dd>
+											<dt>{$lang.Review_Overall_Rating}:</dt>
+											<dd><span class="start_{$r.rate_usefulness}"><i>{$r.rate_usefulness} {$lang.satrts}</i></span></dd>
+										</dl>
+
+										{if $r.reply != ''}
+											{foreach from=$r.reply item=reply}
+												<div class="pb10 pt10">
+													<strong class='fb'>{$reply.re_nickname}</strong>{$lang.reply}:
+													<p >{$reply.re_content} </p>
+												</div>
+											{/foreach}
+										{/if}
+										<div class="commentReplyBox">
+											<p>
+												<a href="javascript:void(0)" class="replyBtn td_reply fr" rid={$r.rid}>{$lang.reply}</a>
+												<strong class="fl">{$lang.Review_helpful}? </strong>
+												<a href="javascript:void(0)" class="yesBtn fl" onClick="review_helpful_num({$r.rid},0);">{$lang.yes}<span id="review_helpful_yes_{$r.rid}">({$r.helpful_yes})</span></a>
+												<a href="javascript:void(0)" class="noBtn fl" onClick="review_helpful_num({$r.rid},1);">{$lang.no}<span id="review_helpful_no_{$r.rid}">({$r.helpful_no})</span></a>
+												<a fbdesc="{$r.pros|escape:'html'}" fbname="{$goods.goods_title|escape:'html'}" fbpicture="{$goods.goods_thumb}" fblink2="http://www.dealsmachine.com/m-review-a-view_review-goods_id-{$goods.goods_id}.htm" fblink="{$goods.url_title}" fbuser="{$r.nickname|escape:'html'}"class="commentFaceBook fb fl share fbComment" href="javascript:void(0)">{$lang.share_to_facebook}</a>
+											</p>
+										</div>
+										
+									</div>
+								</div>
+
+							</dd>
+							{/foreach}
+						
+						</dl>
+					</div>
+					{/if}
+					
+					{if $review.review_count > 0}
+					   <div class="clearfix seeAllreview mt10"><a class="blue_link fl mr30" href="/m-review-a-view_review-goods_id-{$goods.goods_id}.htm" >{$lang.see_all}  <strong class="fb">{$review.review_count}</strong>  {$lang.customer_reviews}</a><p class="seeAllreviewBtnBox fl"><a class="fb" href="/{$cur_lang_url}m-review-a-write_review-goods_id-{$goods.goods_id}.htm" rel="nofollow">{$lang.Write_a_review}</a></p>
+					   </div>
+					{/if}
+				{/if}
+           <!--Customer Inquiries begin-->
+	<!--				<div class="goodsBox mt10 m_box">
+						<h3 class="pl5 pr5 fb f16">{$lang.Inquiries_1}</h3>
+						<div class="goodsShow clearfix">
+							<p class="red">
+								{if $inquiry.inquiry_count > 0}
+									{$lang.Inquiries_2}
+								{else}
+									{$lang.Inquiries_3} 
+								{/if}
+							</p>
+							<p class="submitInquireBtnBox"><a href="/m-review-a-write_inquiry-goods_id-{$goods.goods_id}.htm" class="fb" rel="nofollow">{$lang.submit_inquires}</a></p>
+						</div>
+					</div>
+					{if $inquiry.inquiry_count > 0}
+					<h3 class="commentsList_title f12 fb mt10 pb5">{$lang.Inquiries_for} {$goods.goods_title}</h3>
+					<ul class="m_box InquiriesList">
+						{foreach key=key from=$inquiry.inquiry_list item=item name=item}
+						<li>
+							<p class="byWho">By <strong>{$item.nickname}</strong> {$item.adddate}</p>
+							<p class="inquiries_content p10"><strong>Inquiry : </strong> {$item.i_content}</p>
+							<div class="inquiries_reply_info">
+								<p class="inquiries_reply pb15">
+									<strong>{$lang.reply} :</strong>
+								</p>
+								<p class="pb15">{$item.reply} </p>
+							</div>
+						</li>
+						{/foreach}
+					</ul>
+					{/if}	
+					<div class="clearfix seeAllInqiries"><a href="/{$cur_lang_url}m-review-a-view_inquiry-goods_id-{$goods.goods_id}.htm" class="blue_link fl mr30" rel="nofollow">{$lang.see_all}  <strong class="fb">{$inquiry.inquiry_count}</strong> {$lang.Inquiries}</a><p class="submitInquireBtnBox fl"><a href="#" class="fb">submit inquires</a></p></div>
+					<p class="goods_contact pb10 cl">{$lang.Inquiries_4}<a rel="nofollow" href="http://support.dealsmachine.com" class="blue_link"> {$lang.Contact_Customer_Service} </a>{$lang.Inquiries_5}</p>
+				
+				</div>-->
+             <!--Customer Inquiries end-->   
+                
+			</div>
+			
+			<div class="m_boxRight fr" id="div-history">
+				{if $cur_lang eq $default_lang}
+
+				<div class="l_box mt10">
+					<h3 class="l_title">{$lang.Hot_goods}</h3>
+					<div class="l_box_display goodsRightProList">
+						<ul>
+							{foreach from=$relate_list item=relate_goods}
+							<li>
+								<a href="{$relate_goods.url_title}" class="RePro_proImg fl" {if $cur_lang neq $default_lang}rel="nofollow"{/if}><img alt="{$relate_goods.goods_title}" src="{$relate_goods.goods_thumb}" width="80" height="80"/></a>
+								<p class="RePro_proName fz11"><a href="{$relate_goods.url_title}" title="{$relate_goods.short_name}" {if $cur_lang neq $default_lang}rel="nofollow"{/if}>{$relate_goods.short_name}</a></p>
+								<p><span class="bizhong fb pr5 red">{$lang.cur_list.0.keyd}</span><strong class="my_shop_price fb red" orgp="{$relate_goods.shop_price}">{$relate_goods.shop_price}</strong></p>
+							</li>
+							{/foreach}
+						</ul>
+					</div>
+				</div>
+
+				<div class="l_box mt10">
+					<h3 class="l_title">{$lang.Related_goods}</h3>
+					<div class="l_box_display goodsRightProList">
+						<ul>
+							{foreach from=$hot_list item=hot_goods}
+							<li>
+								<a href="{$hot_goods.url_title}" class="RePro_proImg fl" {if $cur_lang neq $default_lang}rel="nofollow"{/if}><img alt="{$hot_goods.goods_title}" src="{$hot_goods.goods_thumb}" width="80" height="80"/  rel="external nofollow"></a>
+								<p class="RePro_proName fz11"><a href="{$hot_goods.url_title}" title="{$hot_goods.goods_title}" {if $cur_lang neq $default_lang}rel="nofollow"{/if}>{$hot_goods.short_name}</a></p>
+								<p><span class="bizhong fb pr5 red">{$lang.cur_list.0.keyd}</span><strong class="my_shop_price fb red" orgp="{$hot_goods.shop_price}">{$hot_goods.shop_price}</strong></p>
+							</li>
+							{/foreach}
+						</ul>
+					</div>
+				</div>
+				
+				
+				{/if}
+			</div>
+			<div class="cb"></div>
+		</div>
+	</div>
+	<!--facebook 分享弹出框相关html -->
+	<div id="popBox{$goods.goods_id}" class="none popBox" style="display:none">
+		<div class="popBoxInner">
+			<h3><a href="javascript:void(0)" class="fr popBox_close_btn">×</a>Complete the following steps and win free gifts</h3>
+
+			<ul>
+
+				<li class="popbox_step1">
+					<span class="popbox_stepTag">step1</span>
+					<p><strong class="blueColor">like</strong> us on faceBook</p>
+					<div class="popBox_step1_info">
+						<p>* Do remeber to like us at the first step</p>
+					</div>
+				</li>
+
+				<li class="popbox_step2">
+					<span class="popbox_stepTag">step2</span>
+					<p><strong class="blueColor">Share</strong> this item now</p>
+					<p class="popbox_step2_faceBtn">
+						<span class="fb_CommentWart">Waiting...</span>
+						<a onClick="share_big_pic()" fbdesc="Join Dealsmachine share and win activity, you will have the chance to win the item you share，three  winners in one week" fbname="Join DealsMachine Free Trial" fbpicture="{$goods.goods_img}" fblink="http://www.dealsmachine.com{$goods.url_title}" fblink2="http://www.dealsmachine.com{$goods.url_title}" fbuser="" rel="nofollow" href="javascript:void(0)" data-goodsId="{$goods.goods_id}" id="goods_fbComment">Share to facebook</a>
+					</p>
+				</li>
+
+			</ul>
+		</div>
+	</div>
+ 
+<input type="hidden" id="hidden-goodsUrl" value="{$goods.url_title}" />
+<input type="hidden" id="hidden-goodsId" value="{$goods.goods_id}" />
+{if $goods.cur_lang_goods_title eq '1'}
+<input type="hidden" id="hidden-history" value="best_{$goods.goods_id}.html||{$goods.goods_title|truncate:80|escape}||{$goods.goods_thumb}||{$cur_lang}" />
+{/if}
+	<div id="footer">
+	{include file="foothelp.htm"}
+	{include file="foot.htm"}
+	</div>	
+	<script type="text/javascript">				
+		var product_img = "{$imgcache_url}ximages/{$current_desc_img}xxp.gif?2014052301";		
+	</script>
+	<script src="{$imgcache_url}minjs/reviews.min.js?2014052701"></script>
+    <script src="{$imgcache_url}minjs/goods.min.js?2014051501"></script>
+	<script language="javascript" src="{$imgcache_url}minjs/LAB.min.js?2014051501" type="text/javascript"></script>
+	<script type="text/javascript">
+		user_rank="{$user_rank}";//vip
+		promote_price = {$goods.promote_price};
+		vip_price="{if $goods.promote_price > 0}{$goods.promote_price}{else}{$vip_price}{/if}";
+		is_groupbuy="{$goods.is_groupbuy}";
+		{literal}
+		$(document).ready(function(){
+			if(user_rank == "VIP Member" && is_groupbuy==0 && promote_price <=0)
+			{   
+				var bizhong=$(".bizhong").html();
+				$(".add_price").before('<p style="padding-top:5px;font-size:12px;color:red;">'+goods_vip_price+'</p>');
+				var pk3_1=vip_price; 
+				$("#unit_price").html(pk3_1);
+				$("#unit_price").attr('orgp',pk3_1);
+				var str='<span class="bizhong" style="color:red;">'+bizhong+'</span><font color="red"> '+pk3_1+'</font> x 1 = <span class="bizhong" style="color:red;">'+bizhong+'</span><font color="red"> '+pk3_1+'</font>';
+				$('#items_total').html(str);
+			}
+			if(is_groupbuy==1)
+			{
+				  $(".add_price").before('<p style="padding-top:5px;font-size:12px;color:red;">'+goods_group_price+'</p>');
+			}
+			if(promote_price>0){
+				  $(".add_price").before('<p style="padding-top:5px;font-size:12px;color:red;">'+goods_special_office+'</p>');
+			}
+			show_my_shop_price('');
+		});	
+		{/literal}
+	</script>
+
+<script type="text/javascript">
+	var historty = '{$lang.history_list}';
+	{literal}
+	(function(){
+		showHistory();
+		ulPeijianW();
+		goodsStat();
+		$(".proMain_info").find("h1").hover(function(){
+			$("#title_goodSN").css("color","#eaeaea")
+		},function(){
+			$("#title_goodSN").css("color","#fff")
+		});
+		//Ŀ
+		function ulPeijianW(){
+			var $ulPeijian =$("#ul-peijian");
+			var ulPeijianLenth =  $ulPeijian.children("li").length;
+			var ulPeiJianLiW =  $ulPeijian.find("li").outerWidth(true);
+			var ulPeijianW = ulPeijianLenth*ulPeiJianLiW
+			$ulPeijian.css("width",ulPeijianW>540?ulPeijianW:540);
+		}
+		function showHistory(){
+			var histories = $.cookie('browserHistories');
+			if (histories) {
+				histories = histories.split('EOT');
+				var html = '<div class="l_box mt10">';
+				html += '<h3 class="l_title">'+historty+'</h3>';
+				html += '<div class="l_box_display goodsRightProList"><ul>';
+				var num = 1;
+				$.each(histories, function(index, item) {
+					item = item.split('||');
+					if(item[3] == "{/literal}{$cur_lang}{literal}") {
+						if(num < 7) {
+							html += '<li><a href="'+ item[0] +'" title="'+item[1]+'" class="RePro_proImg fl"><img src="'+ item[2]+'" width="80" height="80" alt="'+ item[1]+'"/></a><p class="h_RePro_proName fz11"><a href="'+ item[0]+'" title="' + item[1] + '">'+ item[1].substr(0, 80) +'</a></p></li>';						
+						}
+						num = num + 1;						
+					}					
+				});	
+				$('#div-history').prepend(html);
+			}
+		}
+		//统计页面点击数
+		function goodsStat(itemId) {
+			itemId = itemId || $('#hidden-goodsId').val();
+			$.getJSON('http://tga72c5.faout.com/hits.php?act=goods_stat&jsoncallback=?&itemId=' + itemId, function(data) {});
+		}
+	})()
+	</script>
+{/literal}
+
+	<script  type="text/javascript">
+			//facebook 分享弹出框相关js
+			var jsCache_url ='{$imgcache_url}';
+			{literal}
+				$LAB.script(jsCache_url+"minjs/easydialog.min.js")
+				.script(jsCache_url+"minjs/facebook_review.min.js?20130801")
+				.script('http://connect.facebook.net/en_US/all.js')
+				.script('//assets.pinterest.com/js/pinit.js')
+				.wait(function(){
+				
+				})
+				.script(jsCache_url+'minjs/fb_share.min.js?20130801')
+			function share_big_pic(){
+				var href = $("#goods_fbComment").attr('fblink');
+				window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(href),'', 'width=626,height=436');
+				easyDialog.close();
+			}	
+			{/literal}
+		</script>		
+{include file="statistics_js.htm"}
+</body>
+</html>

@@ -1,0 +1,52 @@
+@charset "utf-8";
+/* CSS Document */
+.container, .container *{margin:0; padding:0; position:relative;} 
+.container *{
+	text-align:left;
+}
+
+.container{width:593px; height:155px; overflow:hidden; border:1px #DFDFDF solid; } /*控制容器的长度和宽度,使得只能看到一张图片*/
+
+.slider{position:absolute; z-index:0;} 
+.slider li{ width:593px; height:155px; list-style:none;display:inline;z-index:0;} 
+.slider img{ width:593px; height:155px; display:block;z-index:0;} 
+
+.slider2{width:13500px;} 
+.slider2 li{float:left;} 
+#idSlider2{
+	z-index:0
+	}
+#idNum2{
+	z-index:100
+	}
+
+.num{ position:absolute; right:5px; bottom:5px;} 
+.num li{ 
+    float: left; 
+    color: #FF7300; 
+    text-align: center; 
+    line-height: 16px; 
+    width: 16px; 
+    height: 16px; 
+    font-family: Arial; 
+    font-size: 12px; 
+    cursor: pointer; 
+    overflow: hidden; 
+    margin: 3px 1px; 
+    border: 1px solid #FF7300; 
+    background-color: #fff;
+   
+	
+} 
+.num li.on{ 
+    color: #fff; 
+    line-height: 21px; 
+    width: 21px; 
+    height: 21px; 
+    font-size: 16px; 
+    margin: 0 1px; 
+    border: 0; 
+    background-color: #FF7300; 
+    font-weight: bold;
+	
+} 

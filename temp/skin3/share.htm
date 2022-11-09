@@ -1,0 +1,661 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+{include file="top.htm"}
+{include file="js_language.htm"}
+<link type="text/css" rel="stylesheet" href="{$imgcache_url}mincss/fb_share_page_min.css?2013092101">
+<script language="javascript" src="{$imgcache_url}minjs/LAB.min.js" type="text/javascript"></script>
+
+</head>
+<body>
+{include file="public_top.htm"}
+<div class="fb_share_box">
+<div class="curPath mt10 md10">
+  <a title="dealsmachine.com Home" href="/" rel="nofollow">Home</a> » <h1>FaceBook Share</h1>
+</div>
+
+<div class="clear"></div>
+
+<div class="fb_banner clearfix"><img src="{$imgcache_url}ximages/fb/free_bannera.jpg?2013090501" border="0" class="fl"><img src="{$imgcache_url}ximages/fb/free_bannerb.jpg?2013090501" border="0" class="fl"><a href="/m-share.htm#eyes"><img src="{$imgcache_url}ximages/fb/free_bannerc.jpg?2014052301" border="0" data-pinit="registered" class="fl"></a>
+</div>
+<div class="clear"></div>
+<div class="fb_banner">
+  <div class="fbl">
+    <h3><img src="{$imgcache_url}ximages/fb/left_title.jpg" border="0"></h3>
+    {if $goods_info}
+    <ul>
+      {foreach from =$goods_info item=goods key=key name=loop}
+      <li>
+        <p class="fbl_img"><a href="{$goods.url_title}"><img src="{$goods.goods_thumb}" width="100" height="100" border="0"></a></p>
+        <p class="fbl_text"><a href="{$goods.url_title}">{$goods.goods_title}</a> <span class="fb_info"><strong>{$goods.share_number}</strong> have clicked! Do you want it?<br>
+          Time left: <strong class="time_coutDown"  data-time="{$goods.left_time}"></strong></span> </p>
+        <p class="fbl_btn"><span class="bizhong">USD</span><span class="through my_shop_price" orgp="{if $goods.market_price gt 0}{$goods.market_price}{else}{$goods.shop_price}{/if}">"{if $goods.market_price gt 0}{$goods.market_price}{else}{$goods.shop_price}{/if}</span> <strong><span class="bizhong">USD</span> 0.01</strong><br>
+          Shipping fee: <span class="green">Free</span><br>
+          <a class="popBtn" href="javascript:void(0);" data-goodsId="{$goods.goods_id}"><img src="{$imgcache_url}ximages/fb/btn_Sharebutton.png?2013090501" border="0"></a></p>
+      </li>
+      <div id="popBox{$goods.goods_id}" class="none popBox">
+        <div class="popBoxInner">
+          <h3><a href="javascript:void(0)" class="fr popBox_close_btn">×</a>Complete the following steps and win free gifts</h3>
+          <ul>
+            <li class="popbox_step1"> <span class="popbox_stepTag">step1</span>
+              <p><strong class="blueColor">like</strong> us on faceBook</p>
+              <div class="popBox_step1_info">
+               <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fahappydealfans&amp;width=292&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;header=true&amp;stream=false&amp;show_border=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:62px;" allowTransparency="true"></iframe>
+                <p>* Do remeber to like us at the first step</p>
+              </div>
+            </li>
+            <li class="popbox_step2"> <span class="popbox_stepTag">step2</span>
+              <p><strong class="blueColor">Share</strong> this item now</p>
+              <p class="popbox_step2_faceBtn"> <span class="fb_CommentWart">Waiting...</span> <a fbdesc="Join Dealsmachine Share and Win activity, you will have the chance to win the item you share，three  winners in one week" fbname="Join Dealsmachine Share and Win" fbpicture="{$goods.goods_img}" fblink="http://www.dealsmachine.com{$goods.url_title}" fblink2="http://www.dealsmachine.com{$goods.url_title}" fbuser="" rel="nofollow" href="javascript:void(0)" title="Share to facebook" data-goodsId="{$goods.goods_id}" id="goods_fbComment" class="goods_fbComment">Share to facebook</a></p>
+            </li>
+          </ul>
+        </div>
+      </div>
+	  {if 0 == $smarty.foreach.loop.iteration % 10 && !$smarty.foreach.loop.last}</ul><ul style="display: none" class="p_list clearfix">{/if}
+      {/foreach}
+
+    </ul>
+	{if $goods_info|@count gt 10}<a class="view_more" href="javascript:void(0)" id="seemore">VIEW MORE</a>{/if}
+    {/if}
+  </div>
+  <div class="fbr">
+    <h3><img src="{$imgcache_url}ximages/fb/right_title.jpg" border="0"></h3>
+    <div class="prize_info">The weekly main prize will be the most shared item. <span style="color:#C82100">Three winners</span> are randomly chosen from customers who shared it. If your Facebook friends clicked your post, then when they win, you also win. <span style="color:#C82100">Seven runners</span> up get 50 DM points.<br /> <strong style="font-weight:bold">contact us:</strong><br/><strong>dealsmachinewill@gmail.com</strong><p class="prize_infoline"></p></div>
+    {if $Winner}
+    <ul id="share_winner">
+      {foreach from = $Winner item = winner}
+      <li>
+        <p class="fbr_user"><a href="https://www.facebook.com/profile.php?id={$winner.fb_uid}" target="_blank"><img src="http://graph.facebook.com/{$winner.fb_uid}/picture?type=large" width="60" height="60" border="0"></a></p>
+        <p class="fbr_text"><strong>{$winner.adddate}</strong><br>
+          {$winner.email}</p>
+        <p class="fbr_img"><a href="{$winner.url_title}"><img src="{$winner.goods_thumb}" width="60" height="60" border="0"></a></p>
+        {if $winner.goods_id}<p class="fbr_icon"></p>{/if}
+      </li>
+      {/foreach}
+	  {if $winner_pagestr}<li class="winner_page"><div class="pages winner_pages">{$winner_pagestr}</div></li>{/if}
+    </ul>
+    {/if} </div>
+
+</div>
+<div class="clear"></div>
+<a name="eyes"></a>
+<div class="fb_banner eyes fb_margin10">
+  <div class="fb_messageTitle"><span class="red">Guidelines</span> of this Share and Win Activity</div>
+  <div class="gudelines">
+    <div class="gudelines_l">
+      <h4>1. How to join the Share and Win activity?</h4>
+      <p class="red">Note: There is no item limit; you can choose ANY item you want to get for free. On every product page, there is a "Share and Win" button. </p>
+      <p>Simply click this button on every item you want, then Like us on our <a class="gblue" href="http://www.facebook.com/ahappydealfans">Facebook page</a> and share with friends. The prize will be the most shared product. Seven runners up will win 50 DM points.</p>
+      <p class="gudelines_step"> <span class="step1">Click Share and Win on all the items you want</span> <span class="step2">Like us on Facebook and share the item you want with your friends</span> <span class="step3">The prize is the most shared product. Winners are selected randomly from those who shared it, 7 runners up will win 50 DM Points.</span> </p>
+    </div>
+    <div class="gudelines_r">
+      <h4>2. How are the winners chosen?</h4>
+      <p>We randomly choose three winners from customers who shared the most popular item. If your Facebook friends clicked your post and joined in, you will also win the prize if one of them win. - it’s so simple! Seven runners up get 50 DM points.</p>
+      <p class="red">Hint: To improve your chances, share the item with as many friends as you can!</p>
+      <h4>3. How do we send the prize to the winners?</h4>
+      <p>Details of winners including their Facebook page will be announced every Monday here – so be sure to check! Once the winner has been chosen, we will send them an email; the top three winners will be able to order the prize for free! Winners are kindly asked to post images of the prize and to share our activity page on Facebook! Runners up will receive the DM points in their account. If you have any issues regarding the activity, <strong>contact us:</strong> <strong style="font-weight:bold">dealsmachinewill@gmail.com</strong></p>
+    </div>
+    <div class="clear0"></div>
+  </div>
+</div>
+<br>
+<div class="fb_banner eyes discussion">
+	 <div class="fb_messageTitle"><span class="red">Discussion</span> of this Share and Win Activity</div>
+	<div class="gudelines">How do you like this activity? If you have any questions or ideas about it, simply <a class="gblue" href="/log-in/">sign in</a> and share them with all of the community here on dealsmachine!</div>
+	{if $top_review}
+	 <div class="top_reviews">Top Reviews</div>
+	  <div id="updowngundong" class="fb_topInfo_left_right" style="height: 568px;overflow:hidden;">
+		<ul>
+		{foreach from=$top_review item=top_review}
+		  <li>
+		  <div class="questions">
+			{if $smarty.session.WebUserInfo.sa_user}
+				<span class="del_reply"><a href="javascript:void(0)" onClick="del_reply({$top_review.Id})">删除</a></span>&nbsp<span class="del_reply"><a href="javascript:void(0)" onClick="is_top({$top_review.Id})">置顶</a></span>
+			{/if}
+			<div class="questions_l"><img src="{if $top_review.avatar}{$top_review.avatar}{else}{$imgcache_url}ximages/62.gif{/if}" width="60" height="60" border="0"></div>
+			<div class="questions_r">
+				<div class="questions_r_q"> By <strong>{$top_review.firstname}</strong> {$top_review.add_time}<br>
+					<strong>{$top_review.contents}</strong>
+				</div>
+				<a rel="nofollow" href="javascript:void(0)" class="reply" rid="{$top_review.Id}">Reply{if $top_review.count gt 0}({$top_review.count}){/if}</a>
+				<div class="review_reply" style="display:none">
+				{if $top_review.reply}
+				{foreach from=$top_review.reply item=top_reply}
+				  <div class="questions_r_r"> {if $smarty.session.WebUserInfo.sa_user}<span class="del_reply"><a href="javascript:void(0)" onClick="del_reply({$top_reply.Id})">删除</a></span>{/if}
+					<div class="questions_l"><img src="{if $top_reply.avatar}{$top_reply.avatar}{else}{$imgcache_url}ximages/62.gif{/if}" width="60" height="60" border="0"></div>
+					<div class="questions_r"> <strong>{$top_reply.firstname}: </strong>{$top_reply.contents} <br>
+					  {$top_reply.add_time} </div>
+					<div class="clear0"></div>
+				  </div>
+			  {/foreach}
+			  {/if}
+			  <div class="re_reply"></div>
+			</div>
+		  </div>
+		  <div class="clear0"></div>
+		</div>
+		</li>
+		{/foreach}
+		</ul>
+	</div>
+	<div class="clear0"></div>
+	{/if}
+
+	{if $review}
+	<div class="top_reviews">Recent Reviews</div>
+		<div id="review_contents">
+		{foreach from = $review item = reviews key=key}
+			<div class="questions"> {if $smarty.session.WebUserInfo.sa_user}<span class="del_reply"><a href="javascript:void(0)" onClick="del_reply({$reviews.Id})">删除</a></span>&nbsp<span class="del_reply"><a href="javascript:void(0)" onClick="is_top({$reviews.Id})">置顶</a></span>{/if}
+				<div class="questions_l"><img src="{if $reviews.avatar}{$reviews.avatar}{else}{$imgcache_url}ximages/62.gif{/if}" width="60" height="60" border="0"></div>
+				<div class="questions_r">
+					<div class="questions_r_q"> By <strong>{$reviews.firstname}</strong> {$reviews.add_time}<br>
+						<strong>{$reviews.contents}</strong> </div>
+					<a rel="nofollow" href="javascript:void(0)" class="reply" rid="{$reviews.Id}">Reply{if $reviews.count gt 0}({$reviews.count}){/if}</a>
+					<div class="review_reply pt10" style="display:none"> {if $reviews.reply}
+						{foreach from=$reviews.reply item=reply}
+						<div class="questions_r_r"> {if $smarty.session.WebUserInfo.sa_user}<span class="del_reply"><a href="javascript:void(0)" onClick="del_reply({$reply.Id})">删除</a></span>{/if}
+							<div class="questions_l"><img src="{if $reply.avatar}{$reply.avatar}{else}{$imgcache_url}ximages/62.gif{/if}" width="60" height="60" border="0"></div>
+							<div class="questions_r"> <strong>{$reply.firstname}: </strong>{$reply.contents} <br>
+								{$reply.add_time} </div>
+							<div class="clear"></div>
+						</div>
+						{/foreach}
+						{/if}
+						<div class="re_reply"></div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			{/foreach}
+		 </div>
+		<div class="questions_pages">
+			<div class="pages review_page"> {$pagestr} </div>
+			<div class="clear"></div>
+	   </div>
+ {/if}
+
+	<textarea id="questions_r_p" style="display:none">
+		<div class="questIionsWarp p15">
+				&lt;textarea name="contents" rows="4" class="rev_content"&gt;&lt;/textarea&gt;
+				<div class="clearfix pt10">
+					<span class="login_tips">
+							<a class="blue_link js_signInLink" href="javascript:void(0)" >Sign in</a> or <a class="blue_link" href="/sign-up/">Register</a>
+					</span>
+					<input type="image" border="0" class="bt_post_reply fr" src="/temp/skin3/ximages/fb/post.gif"/>
+					<input type="hidden" name="re_content" class="re_content"/>
+				</div>
+
+				<div class="rw_signin none">
+					<p class="rw_sign_msg_temp none">&nbsp;</p>
+					<p class="clearfix">
+						<label class="fl">Email:</label>
+						<input type="text" style="width:150px;" value="" class="username_temp fl" name="username_temp">
+						<span class="fl pl10">New customer? <a href="/sign-up/" class="blue_link" rel="nofollow">Start here</a>.</span>
+					</p>
+					<p class="clearfix">
+						<label class="fl">Password:</label>
+						<input type="text" style="width:150px;" value="" class="password_temp fl" name="username_temp">
+						<span class="fl pl10">Forgot your account or password? <a href="m-users-a-reset_password.htm" rel="nofollow">Click here </a></span>
+					</p>
+					<p class="clearfix">
+						<label class="fl">&nbsp;</label>
+						<input type="button" value="Sign in" class="btn_signin btn_signin_temp" name="reply_signin">
+					</p>
+				</div>
+			</div>
+	</textarea>
+
+	<div class="questions">
+		<h4><span class="red">Post</span> a message</h4>
+		<div class="questions_r">
+
+			<div class="questIionsWarp p15">
+				<textarea name="contents" rows="4" class="rev_content"></textarea>
+
+				<div class="clearfix pt10">
+					<span class="login_tips">
+							<a class="blue_link js_signInLink" href="javascript:void(0)" >Sign in</a> or <a class="blue_link" href="/sign-up/">Register</a>
+					</span>
+					<input type="image" border="0" class="bt_post_reply fr" src="/temp/skin3/ximages/fb/post.gif"/>
+					<input type="hidden" name="re_content" class="re_content"/>
+				</div>
+
+				<div class="rw_signin none">
+					<p class="rw_sign_msg_temp none">&nbsp;</p>
+					<p class="clearfix">
+						<label class="fl">Email:</label>
+						<input type="text" style="width:150px;" value="" class="username_temp fl" name="username_temp">
+						<span class="fl pl10">New customer? <a href="/sign-up/" class="blue_link" rel="nofollow">Start here</a>.</span>
+					</p>
+					<p class="clearfix">
+						<label class="fl">Password:</label>
+						<input type="text" style="width:150px;" value="" class="password_temp fl" name="username_temp">
+						<span class="fl pl10">Forgot your account or password? <a href="m-users-a-reset_password.htm" rel="nofollow">Click here </a></span>
+					</p>
+					<p class="clearfix">
+						<label class="fl">&nbsp;</label>
+						<input type="button" value="Sign in" class="btn_signin btn_signin_temp" name="reply_signin">
+					</p>
+				</div>
+			</div>
+
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<div class="clear"></div>
+
+</div>
+<div id="footer">
+	{include file="foothelp.htm"}
+	{include file="foot.htm"}
+</div>
+
+ {literal}
+<script>
+	is_signin();
+
+	$(".js_signInLink").live("click",function(event) {
+		var $thatWarp = $(this).closest('div.questIionsWarp');
+		var $signWarp = $thatWarp.find("div.rw_signin");
+		$signWarp.toggle();
+	});
+
+	$("input.bt_post_reply").live("click",function(){
+		submit_review($(this));
+	});
+
+	$("input.btn_signin_temp").live("click",function(){
+		check_btn_signin($(this));
+	});
+
+	$(".reply").live("click",function(){
+
+		if(!$(this).next("div.review_reply").is(":visible")){
+
+			$("div.review_reply").hide().find("div.re_reply").html("");
+			var $questIionsWarp = $($("#questions_r_p").val());
+			$questIionsWarp.find("input.re_content").val($(this).attr("rid"));
+
+			$(this).next("div.review_reply").show().find("div.re_reply").append($questIionsWarp);
+			is_signin();
+
+		}else{
+			$("div.review_reply").hide().find("div.re_reply").html("");
+		}
+	});
+
+	function submit_review($this){
+		var that = $this;
+		var $thatWarp = $this.closest('div.questIionsWarp');
+		var $signWarp = $thatWarp.find("div.rw_signin");
+
+		if(!is_signin()){
+				alert("Please sign in");
+				$signWarp.show().find("input.username_temp ").focus();
+				return false;
+		}else{
+				var $re_content = $thatWarp.find(".rev_content");
+				var $bt_post_reply = $thatWarp.find(".bt_post_reply");
+				var rid = $thatWarp.find(".re_content").val();
+				var re_contentStr=jQuery.trim($re_content.val());
+				var msg="";
+
+				if(re_contentStr.length<1){
+						msg+="Please enter the content\r\n";
+						$re_content.focus();
+				}
+
+				if(msg!=""){alert(msg);return false;}
+
+				$bt_post_reply.hide();
+				$.ajax({
+					type:"post",
+					data:{'contents':re_contentStr,'review_id':rid},
+					url: "/m-share-a-add_reply.htm",
+					cache: false,
+					timeout: 5000,
+					error: function (xmlHttpRequest, error) {
+							$bt_post_reply.show();
+					},
+					success: function(data){
+							$bt_post_reply.show();
+							$re_content.val("");
+							if(data=='success'){
+									alert("Your review was successfully submitted.");
+									location.href="/m-share.htm";
+							}else{
+									alert(data);
+							}
+
+					}
+				});
+		}
+	}
+
+	function check_btn_signin($this){
+		var that = $this;
+		var $thatWarp = $this.closest('div.questIionsWarp');
+		var $rw_sign_msg = $thatWarp.find('p.rw_sign_msg_temp');
+		var $username = $thatWarp.find("input.username_temp");
+		var $password = $thatWarp.find("input.password_temp");
+
+		var username = $username.val();
+		var password = $password.val();
+
+		if(username!=''){
+				var p=/^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
+				if(!p.test(username)){
+						$rw_sign_msg.show().html("<img src='/temp/skin3/images/onError.gif'><span style='color:red'>This is not a valid email address</span>");
+						return false;
+				}
+		}else{
+				$rw_sign_msg.show().html("<img src='/temp/skin3/images/onError.gif'><span style='color:red'>Please Enter your email address.</span>");
+				return false;
+		}
+
+		if(password ==''){
+				$rw_sign_msg.show().html("<img src='/temp/skin3/images/onError.gif'><span style='color:red'>Please Enter the password.</span>");
+		}else{
+				var URL=DOMAIN_USER+'m-users-a-act_sign.htm?&jsoncallback=?&email='+username+"&password="+password;
+				$rw_sign_msg.show().html("<span style='color:green'>Processing...</span>");
+
+				$.ajax({
+				  type:"post",
+				  data:"email="+username+"&password="+password,
+				  url: '/'+js_cur_lang_url + "m-users-a-act_sign.htm",
+				  cache: false,
+				  timeout: 5000,
+				   error: function (xmlHttpRequest, errors) {
+				  			alert(errors);
+                            $rw_sign_msg.show().html("<span style='color:red'>"+errors+"</span>");
+                   },
+				  beforeSend :function(){
+					   $rw_sign_msg.show().html("<span style='color:green'>"+reviews_func_check_btn_signin_3+"</span>");
+					  },
+				  success: function(data){
+					 $rw_sign_msg.hide();
+					if(data!='Successfully sign'){
+						$rw_sign_msg.show().html("<img src='/temp/skin3/images/onError.gif'><span style='color:red'>"+data+"</span>");
+					}else{
+						$thatWarp.find("span.login_tips").html('(1000 characters)');
+						$thatWarp.find(".review_sigin,div.rw_signin").hide();
+						GLOBAL.isLogin();
+					}}
+				});
+
+
+				/*$.getJSON(URL, function(data){
+						$rw_sign_msg.hide()
+						if (data.msg.indexOf('Success')>=0){
+								$thatWarp.find("span.login_tips").html('(1000 characters)');
+								$thatWarp.find(".review_sigin,div.rw_signin").hide();
+								info_check(1)
+							}else{
+								 $rw_sign_msg.show().html("<img src='/temp/skin2/images/onError.gif'><span style='color:red'>"+data+"</span>");
+							}
+					});*/
+
+		}
+	}
+
+	function is_signin(){
+		//islogin()
+		if(!$.cookie("WEBF-user_id")){
+			return false;
+		}else{
+			$("span.login_tips").html('(1000 characters)');
+			return true;
+		}
+	}
+
+</script>
+ {/literal}
+<script type="text/javascript">
+	var jsCache_url ='{$imgcache_url}';
+	{literal}
+	(function(){
+		$LAB.script(jsCache_url+"minjs/easydialog.min.js")
+		.script(jsCache_url+"minjs/facebook_review.min.js?20130801")
+		.script(jsCache_url+"minjs/jquery.validate.min.js")
+		.script('http://connect.facebook.net/en_US/all.js')
+		.wait(function(){
+			//定义ScrollTop滚动对象
+			function ScrollTop(scrollId) {
+				this.ele = $(scrollId);
+			};
+			ScrollTop.prototype.scrollFun = function(){
+				var self = this;
+				var _handel;
+				self.ele.hover(function(){
+					clearInterval(_handel);
+				},function(){
+					_handel = setInterval(function(){
+						var $eleFisrt = self.ele.find("li:first");
+						$eleFisrt.animate({"marginTop":"-120px"},500,function(){
+							$eleFisrt.appendTo(self.ele).css("marginTop",0);
+						});
+					},3000)
+				}).trigger("mouseleave")
+			};
+
+			var ScrollTopObj = new ScrollTop(".fb_topInfo_left_right");
+			ScrollTopObj.scrollFun();
+			//倒计时
+			$(".time_coutDown").each(function(index, element) {
+				var that = $(this);
+				var runs = 0;
+				uutime(that,runs)
+			});
+			function uutime($obj,runs) {
+				var _handle = setInterval(function(){
+					var zongshi = parseInt($obj.attr("data-time"))*1000-runs*1000;
+					if(zongshi>=0){
+						var dantian = parseInt(Math.floor(zongshi/(1000*60*60*24)));
+						//if(dantian<10){dantian="0"+dantian;}
+						var danshi=parseInt(Math.floor((zongshi-dantian*24*60*60*1000)/(1000*60*60)));
+						if(danshi<10){danshi="0"+danshi;}
+						var danfen=Math.floor(zongshi/(1000*60)) % 60;
+						if(danfen<10){danfen="0"+danfen;}
+						var danmiao=Math.floor(zongshi/1000) % 60;
+						if(danmiao<10){danmiao="0"+danmiao;}
+						$obj.html(dantian+" Day "+danshi+":"+danfen+":"+danmiao)
+					}else{
+						clearInterval(_handle);
+					}
+					runs++;
+				},1000)
+			}
+			//弹出弹出层
+			$(".popBtn").each(function(index, element) {
+				var that =  $(this);
+				var goodsId = 'popBox'+that.attr('data-goodsId');
+				var Id = that.attr('data-goodsId');
+				that.click(function(){
+					fb_signup(goodsId,Id)
+
+				})
+			});
+			//关闭弹出层
+			$(".popBox_close_btn").each(function(index, element) {
+				var $this = $(this);
+				$this.click(function(){
+					easyDialog.close();
+				})
+			});
+
+			//判断是否like
+			$(".popbox_step2_faceBtn").each(function(index, element){
+				var that = $(this);
+				that.hover(function(){
+					that.find(".fb_CommentWart").show();
+
+					var self = that.find(".goods_fbComment");
+					var goodsId = self.attr("data-goodsId");
+					var shareYet = self.attr("data-shareYet");
+					if (goodsId) {
+							$.getJSON('/m-share-a-add_link_auto-pid-'+goodsId+'.htm?jsoncallback=?', function(data){
+									that.find(".fb_CommentWart").hide();
+									data = data && data.data ? data.data : data;
+									self.attr({"fblink":data,"data-shareYet":1,'fblink2':data});
+
+							});
+					}
+
+				},function(){
+
+				});
+
+			});
+			$(".goods_fbComment").live('click',function() {
+						var href = $(this).attr('fblink');
+						href = 'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(href);
+						window.open(href,'','width=626,height=436');
+						easyDialog.close();
+			});
+			//分享发送ajax
+			$(".fbComment").each(function(index, element){
+				var that = $(this);
+				that.click(function(){
+						$(".popBox").hide();
+						easyDialog.close();
+				})
+			})
+			window.fbAsyncInit = function() {
+				FB.init({ appId: '1410602322494403', status: true, cookie: true, oauth: true, xfbml: true });
+			};
+			$(".page_down").live('click',function(){
+				var URL = $(this).attr('data-href');
+				$.getJSON(URL, function(data) {
+						$("#review_contents").html(data.str);
+						$(".review_page").html(data.page);
+				})
+			});
+			$(".winner_page_down").live('click',function(){
+				var URL = $(this).attr('data-href');
+				$.getJSON(URL, function(data) {
+						$("#share_winner").html(data.str);
+						$(".winner_pages").html(data.page);
+				})
+			});
+			$("#seemore").live('click',function(){
+				if($(".p_list").css("display")=="none"){
+					$(".p_list").show();
+					$(this).removeClass("view_more");
+					$(this).addClass("view_less");
+					$(this).html("VIEW LESS");
+				}else{
+					$(".p_list").hide();
+					$(this).removeClass("view_less");
+					$(this).addClass("view_more");
+					$(this).html("VIEW MORE");
+				}
+
+			});
+			function fb_signup(goodsId,Id) {
+				FB.login(function(response) {
+					if (response.authResponse) {
+						var fbuid = response.authResponse.userID;
+						var fbtoken = response.authResponse.accessToken;
+						var page_id = 189166971214680;
+						var fql_query = "select uid,email,name from user where uid in (SELECT uid FROM page_fan WHERE page_id = " + page_id + " and uid=" + fbuid + ")";
+						var the_query = FB.Data.query(fql_query);
+						the_query.wait(function (rows) {
+							if (rows.length == 1 && rows[0].uid == fbuid) {
+									$('#fbComment'+Id).hide();
+							}
+
+						});
+						if($.cookie('fbuid')==null){
+							$.cookie('fbuid', fbuid, {expires: 365, path: '/'});
+						}
+						FB.api({
+							method: 'fql.query',
+							query: 'select first_name,last_name,email from user where uid=' + fbuid
+						},
+						function(rep){
+							var fname = rep[0].first_name;
+							var lname = rep[0].last_name;
+							var fbEmail = rep[0].email;
+							dinoLoginForFB(fbuid,fbtoken,fname,lname,fbEmail,0,1);
+						}
+					);
+						if(goodsId){
+							easyDialog.open({
+									container : goodsId
+							});
+						}
+					} else {
+						return;
+					}
+				}, {scope:'email'});
+
+			}
+			function dinoLoginForFB(fbuid,fbtoken,fname,lname,fbEmail,fstats,status){
+				if(status==1){
+					var postData = "FTextUserEmail="+fbEmail+"&ebID="+fbuid+"&firstname="+fname+"&lastname="+lname+"&FTextUserPwd2="+parseInt(Math.random()*1000000);
+					postData = postData + "&ebToken=" + fbtoken + "&ebStats=" + fstats + "&ebUid=" + fbuid + "&actions=facebookLogin";
+					$.ajax({
+						type:'post',
+						url: 'http://' + location.hostname + '/fb_eb_login.php',
+						data:postData,
+						error:function(XMLHttpRequest, textStatus, errorThrown){
+								//alert("AJAX Login Error."+textStatus+"-"+errorThrown,26,0,fbEmail);
+						},
+						success:function(result){
+							$.cookie('fb_email', fbEmail, {expires: 365, path: '/'});
+							$(".fbComment").attr('fbuser',fname);
+						}
+					});
+				}
+			}
+
+	  })
+
+	})()
+		</script>
+<script type="text/javascript">
+	//删除评论
+	function del_reply(rid){
+		if(rid){
+			if (confirm("确认要删除？")) {
+				$.ajax({
+					type:"post",
+					data:{'review_id':rid},
+					url: "/m-share-a-del_reviww.htm",
+					success: function(data){
+							alert(data);
+							location.href="/m-share.htm";
+					}
+				});
+			}
+		}else{
+			alert("获取id失败");
+		}
+
+	}
+function is_top(rid){
+	if(rid){
+		$.ajax({
+			type:"post",
+			data:{'review_id':rid},
+			url: "/m-share-a-is_top.htm",
+			success: function(data){
+					alert(data);
+					location.href="/m-share.htm";
+			}
+		});
+	}else{
+		alert("获取id失败");
+	}
+
+
+}
+</script>
+{/literal}
+
+
+{include file="statistics_js.htm"}
+</body>
+</html>

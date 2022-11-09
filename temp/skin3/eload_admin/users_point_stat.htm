@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link type="text/css" rel="stylesheet" href="{$jscache_url}sysjs/calendar/calendar.css" />
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php"></script>
+</head>
+<body>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->>积分统计报表</td>
+          <td width="44%" align="right"><span class="navright"><a href="?act=add">会员添加</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <form action="?" name="thisform" method="get"><tr>
+    <th>
+<input name="act" type="hidden" value="point_stat" />
+    <img src="/temp/skin3/images/admin/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    时间段： 从 <input name="start_date" value="{$smarty.get.start_date}" style="width:130px;" ondblclick="return showCalendar(this, '%Y-%m-%d %H:%M:%S', false, false, this);"/>&nbsp;&nbsp;到 &nbsp;&nbsp; <input name="end_date" value="{$smarty.get.end_date}" style="width:130px;" ondblclick="return showCalendar(this, '%Y-%m-%d %H:%M:%S', false, false, this);"/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    &nbsp;  关键字 &nbsp;<input type="text" id="keyword" name="keyword"  value="{$smarty.get.keyword}"/> <input type="submit" value=" 搜索 " />
+</td>
+  </tr></form>
+</table>
+
+<form method="POST" action="?act=batch_remove" name="listForm">
+<div id="list">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="8%">编号{$sort_user_id}
+    </th>
+    <th width="11%">姓名</th>
+    <th width="8%"> 邮件地址</th>
+    <th width="8%" nowrap="nowrap" ><a href="?act=point_stat&sort_by=income&start_date={$filter.start_date}&end_date={$filter.end_date}&sort_order={$filter.sort_order_income}"> 新增积分</a>{$sort_income}</th>
+    <th width="13%"><strong><a href="?act=point_stat&sort_by=outgo&start_date={$filter.start_date}&end_date={$filter.end_date}&sort_order={$filter.sort_order_outgo}">使用积分{$sort_outgo}</a></strong></th>
+    <th width="6%"><a href="?act=point_stat&sort_by=avaid_point&start_date={$filter.start_date}&end_date={$filter.end_date}&sort_order={$filter.sort_order_avaid_point}"><strong>帐户积分总额</strong></a>{$sort_avaid_point}</th>
+
+
+    <th width="8%"><a href="?act=point_stat&sort_by=reg_time&start_date={$filter.start_date}&end_date={$filter.end_date}&sort_order={$filter.sort_order_reg_time}">注册日期</a>{$sort_reg_time}</th>
+    <th width="10%">操作</th>
+  <tr>
+  {foreach from=$user_list item=user name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+    <td>
+    {$user.user_id}</td>
+    <td>{$user.firstname} {$user.lastname}</td>
+    <td>{$user.email}</td>
+
+    <td>{$user.income|string_format:'%.2f'}</td>
+    <td>{$user.outgo|string_format:'%.2f'}</td>
+    <td>{$user.avaid_point}</td>
+    <td style="text-align: center; ">{$user.reg_time}<!--({$user.order_amount|default:'0.00'})--></td>
+    <td align="center">
+      <a href="?act=ebpoint&id={$user.user_id}{$edit_url}" title="查看积分明细">查看积分明细</a></td>
+  </tr>
+  {foreachelse}
+  <tr><td colspan="8" align="center" class="no-records">{if $is_search}暂无记录{/if}</td></tr>
+  {/foreach}
+  <tr>
+      <td colspan="1"><input type="hidden" name="act" value="batch_remove" /><input type="hidden" id="selAction"/></td>
+      <td align="right" nowrap="true" colspan="7">
+     	<div id="pager">{$pagestr}</div></td>
+  </tr>
+</table>
+</div>
+</form>
+{include file="copyright.htm"}

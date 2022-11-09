@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>查看php日志</title>
+    <link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css" />
+</head>
+<body>
+    <div style="margin: 10px; line-height: 150%; font-size: 13px; color: #000; white-space: pre;" id="content"></div>
+    <script>
+        var content     = {$content},
+            tmp         = content.toLowerCase(),
+            loop        = ['error', 'eval', 'invalid', 'failed', 'uncaught'],
+            regexp      = [],
+            separator   = '{$smarty.const.LOG_SEPARATOR}',
+            item;
+        {literal}
+            for(var i = 0, len = loop.length; i < len; i++) {
+                item = loop[i];
+
+                if (tmp.indexOf(item) > -1) {
+                    regexp.push(item);
+                }
+            };
+
+            if (regexp.length) {
+                regexp  = new RegExp('(.*\\b(' + regexp.join('|') + ')\\b.*)', 'gi');
+                content = content.replace(regexp, '<span style="color: red">$1</span>');
+            }
+
+            document.getElementById('content').innerHTML = content.split(separator).reverse().join('').replace(/\[(\/?(b|i))\]/g, '<$1>');
+        {/literal}
+    </script>

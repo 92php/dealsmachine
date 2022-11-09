@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$imgcache_url}eload_admin/js/admin_action.js"></script>
+<link href='{$imgcache_url}eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 批发询价列表</td>
+          <td width="44%" align="right"></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+<form method="POST" action="?" name="listForm">
+  <tr>
+    <th>
+    <img src="{$imgcache_url}images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />    
+    关键字： 
+    <input type="text" name="keyword" id="keyword" value="{$smarty.post.keyword}"/>
+    &nbsp;语言
+	<select name="lang" id="lang">
+	<option value="">请选择...</option>
+	<option value="en">英语</option>
+	{foreach from=$lang_arr item=item key=key}
+	<option value="{$item.title_e}" {if $cur_lang eq $item.title_e}selected="selected"{/if}>{$item.title}</option>
+	{/foreach}
+	</select>	
+    <input type="submit" value="搜索" class="button" />
+</th>
+  </tr>
+  </form>
+</table>
+
+<form method="POST" action="?act=batch_remove" name="listForm">
+<div id="list">
+<table width="99%" align="center" cellpadding="5" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  {foreach from=$article_list item=list name=area_name}
+<tr bgColor="{if $smarty.foreach.area_name.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.area_name.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+    <td width="7%" height="56"><span><input type="checkbox" name="checkboxes[]" value="{$list.id}" onclick="checkone('checkboxes[]')"/>{$list.id}</span></td>
+    <td colspan="2" class="first-cell" style="line-height:20px;">
+    <strong>姓 名：</strong> {$list.txtTrueName} <br />
+    <strong>时 间：</strong>{$list.date} <br />
+    <strong>询问产品：</strong><a href="{$list.goods_url}" target="_blank">{$list.goods_title}</a> <br />
+    <strong>目标价格：</strong>{$list.txtPrice} <br />
+    <strong>批发数量：</strong>{$list.txtQuantity} <br />
+    <strong>国家/洲：</strong>{$list.txtDelDay} <br />
+    <strong>联系电话：</strong>{$list.txtPhone} <br />
+    <strong>Email：</strong>{$list.txtEMail} <br />
+    <strong>所在公司：</strong>{$list.txtCorpName} <br />
+    <strong>留言：</strong>{$list.txtMessage}<br /> 
+	<strong>语言：</strong>{$list.lang}
+	</td>
+    </tr>
+   {foreachelse}
+    <tr><td colspan="3" align="center" class="no-records"> 暂无记录 </td></tr>
+  {/foreach}
+  <tr>
+    <td colspan="2"><input type="checkbox" onclick="checkAll(this, 'checkboxes[]');"><input type="hidden" id="selAction"/>
+      
+      <input type="submit" class="button" id="btnSubmit" value="删除所选" disabled="true" /></td>
+    <td width="84%" align="right" nowrap="true"><div id="pager">{$pagestr}</div></td>
+  </tr>
+</table>
+</div></form>
+{include file="copyright.htm"}

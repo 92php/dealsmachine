@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css?2013073102' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="/sysjs/eload13pack.js"></script>
+<script language="javascript" src="/sysjs/jlivequery.js"></script>
+<script language="javascript" src="/sysjs/jcookie.js"></script>
+<script language="javascript" src="/sysjs/validator.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 添加邮件模板</td>		  
+          <td width="44%" align="right"><span class="navright"><a href="?">邮件模板列表</a></span></td>		  
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+  <td>
+	<div id="tabbar-div">
+	  <p>
+		<span class="tab-front" id="general-tab" atr = '0'>原始语言</span>
+		{foreach from=$lang_arr name=lang_arr item=c}
+		<span class="tab-back" id="detail-tab"  atr = '{$smarty.foreach.lang_arr.iteration}'>{$c.title}</span>
+		{/foreach}
+		</p>
+	</div>
+</td>
+</tr>
+</table>
+<form name="regform" method="post" action="?act=save_template&tpl_id={$smarty.get.id}" onSubmit="return Validator.Validate(this,3)">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="showtab0" style="margin-top:0px;">
+  <tr>
+    <td width="8%" height="30" style="font-weight: bold; ">邮件主题:</td>
+    <td><input type="text" name="subject" id="subject" style="width: 800px" value="{$mailtemp.template_subject}"  dataType="Require" msg="请填写邮件主题！"  class="input_style" /> 
+    *</td>
+  </tr>
+  <tr>
+    <td height="30" style="font-weight: bold; ">中文备注:</td>
+    <td><input type="text" name="note" id="note" style="width: 300px" value="{$mailtemp.note}"  dataType="Require" msg="请填写备注！"  class="input_style" /> 
+    *</td>
+  </tr> 
+ <tr>
+    <td style="font-weight: bold; ">商品编码:</td>
+    <td><textarea name="goods_sn" style="width: 400px;height: 50px;">{$mailtemp.goods_sn}</textarea>多个编码之间用 <strong>半角逗号</strong> 隔开</td>
+  </tr>  
+  <tr>
+    <td style="font-weight: bold" >邮件类型:</td>
+    <td>
+      <input type="radio" name="mail_type" value="0" {if $mailtemp.is_html == "0"}checked="true"{/if}/>纯文本邮件      <input type="radio" name="mail_type" value="1"  {if $mailtemp.is_html == "1" or $mailtemp.is_html == "" }checked="true"{/if} />HTML 邮件    </td>
+  </tr>
+  <tr>
+  	<td style="font-weight: bold" >内容:</td>
+    <td style="padding-top:10px;">
+	<span class="sbutton" onclick="controlDiv('msgDiv',1,'content_en')">模版预览</span><br>
+	<textarea name="content" id="content_en" cols="120" rows="15">{$mailtemp.template_content}</textarea>
+	</td>
+  </tr>
+  {if $default_lang eq '1'}
+  <tr>
+    <td colspan="2" align="center"><input type="submit" value=" 确定 " class="button" onclick="DoProcess();" /></td>
+  </tr>
+  {/if}
+</table>
+</form>
+
+{foreach from=$lang_arr name=lang_arr item=c key=key}
+<form action="?act=save_template_language" method="post">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="showtab{$smarty.foreach.lang_arr.iteration}" style="display:none;margin-top:0px;"  >
+  <tr>
+    <td style="font-weight: bold; " width="8%" height="50">邮件主题:</td>
+    <td><input type="text" name="subject" id="subject" style="width: 300px" value="{$mailtemp_language.$key.template_subject}"  dataType="Require" msg="请填写邮件主题！"  class="input_style" /> 
+    *
+<input type="hidden" value="{$smarty.get.id}" name="template_id"/>
+<input type="hidden" value="{$c.title_e}" name="mail_language"/>
+<input type="hidden" value="{$mailtemp_language.$key.action}" name="action"/>	
+	</td>
+  </tr>
+  <tr>
+  	<td style="font-weight: bold; ">内容:</td>
+    <td style="padding-top:10px;">   
+	<span class="sbutton" onclick="controlDiv('msgDiv',1,'content_{$c.title_e}')">模版预览</span><br>
+	<textarea name="content_{$c.title_e}" id="content_{$c.title_e}" cols="120" rows="15">{$mailtemp_language.$key.template_content}</textarea>
+	</td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><input type="submit" value=" 确定 " class="button"/></td>
+  </tr>
+</table>
+</form>
+{/foreach}  	
+
+<div id="msgDiv">
+<h1><span><a href="#" onclick="controlDiv('msgDiv',0,'')">close</a>&nbsp;</span></h1>
+    <div align="center" id="show_content"></div>
+</div>
+{literal}
+<script>
+function controlDiv(DivID,divCase,ContentID){
+	var divs    = document.getElementById(DivID); 
+	if(divCase == 0) {
+		divs.style.display="none";
+	} else {
+		var content = document.getElementById(ContentID).value;		
+		var v_left  = (document.body.clientWidth-900)/2 + document.body.scrollLeft;  	
+		var v_top   = 40;
+		divs.style.left = v_left+'px';
+		divs.style.top  = v_top+'px';
+		$('#show_content').html(content);
+		$('#msgDiv').show();
+	}
+}
+</script>
+{/literal}	
+
+{include file="copyright.htm"}
+</body>
+</html>

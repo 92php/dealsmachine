@@ -1,0 +1,25 @@
+{*BOF:推荐产品*}    
+<!--************************没有商品时显示Begin************************-->
+		{if $best_goods}
+			<div class="m_box goods_ListBox p10">
+				<h3 class="fb">{$lang.recommendations_for_you}</h3>
+				<ul class="goods_List clearfix">
+					{foreach from=$best_goods item=item}
+						<li>
+							<p class="p_mg pr">{if $item.zhekou}<strong><span>{$item.zhekou}</span>%<br/>{$lang.off}</strong>{/if}<a href="{$item.url_title}" title="{$item.goods_title}"><img src="{$item.goods_img}" alt="{$item.goods_title}" width="150" height="150" class="js_lazyLoad"/></a></p>
+							<p class="p_name"><a href="{$item.url_title}">{$item.goods_title}</a></p>
+							{if $item.market_price gt $item.shop_price}
+								<p class="p_price p_price_cost"><span class="bizhong fl">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price fl pr5" orgp="{$item.market_price}">{$item.market_price}</span></p>
+							{/if}
+							<p class="p_price fb red"><span class="bizhong fl">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price fl pl5" orgp="{$item.shop_price}">{$item.shop_price}</span></p>
+							{if $item.is_free_shipping}<p class="pt5 clearfix"><span class="p_free {$cur_lang}_p_free fl">{$lang.Free_Shipping}</span></p>{/if}
+							{if $item.is_24h_ship}<p class="pt5 clearfix"><span class="p_Ship fl">{$lang.ship_in_24_hrs}</span></p>{/if}
+							{if $item.review_count}
+								<p class="pt5 pping"><span class="start_5"><i>5 {$lang.satrts}</i></span><a rel="nofollow" href="/m-review-a-view_review-goods_id-{$item.goods_id}.htm">{$item.review_count} review{if $item.review_count gt '1'}s{/if}</a></p>
+							{/if}
+						</li>
+					{/foreach}
+				</ul>
+			</div>
+	{/if}
+	{*EOF:推荐产品*} 

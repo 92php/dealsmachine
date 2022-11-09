@@ -1,0 +1,410 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+{include file="top.htm"}
+<link rel="stylesheet" href="{$imgcache_url}mincss/category_min.css?2014021901" />
+</head>
+<body>
+{include file="public_top.htm"}
+	<div id="email_box">
+		<p class="info" id="email_info">info</p>
+		<div class="email_check">
+			<ul>
+				<li class="li1">{$lang.get_50_coupons}<em></em></li>
+				<li class="li2">{$lang.when_you_sign}</li>
+				<li class="li3"><input type="text" value="{$lang.your_email_address}" class="text" id="email_address" data-emailAddress="{$lang.your_email_address}"><a href="javascript:void(0);" class="btn" id="btn_email_check">{$lang.sign_up_now}</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="curPath mt10"><a href="/{$cur_lang_url}" title="{$shop_name} {$lang.home}">{$lang.home}</a>{$nav_title}</div>
+	<div id="mainWarp" class="clearfix mt10">
+		<div id="mainbar">
+
+			{if $category_ad and $cur_lang eq $default_lang}
+        	<div class="section mainBarAd mb10">
+				{include file="category_ad.htm"}
+			</div>
+			{/if}
+			
+			{if $cur_lang eq $default_lang}
+        	{if $super_star}
+            <div class="section m_box borderTop3 m_box mt10 mb10 superStar">
+            	<h2 class="fb pl5 pr5">{$lang.best_c} {$cat_name} {$lang.deals_c}</h2>
+                <ul class="clearfix">
+				{foreach from=$super_star item=item key=key}
+					{if $key < 4}
+                	<li>
+						<p class="p_mg pr">
+							{if $item.is_super_star}{if $cur_lang eq 'en'}<strong class="starPro"></strong>{/if}
+
+							{else}	
+								{if $item.save_zekou}<strong><span>{$item.save_zekou}</span>%<br/>{$lang.off}</strong>{/if}
+                            {/if}
+							<a href="{$item.url_title}" >
+								<img alt="{$item.goods_full_title}" src="{$item.goods_grid}" width="150" height="150" />
+							</a>
+						</p>
+                        <p class="p_name pt10"><a href="{$item.url_title}" title="{$item.goods_full_title}">{$item.goods_title}</a></p>
+						{if $item.market_price > 0}
+							<p class="p_price p_price_cost"><span class="bizhong fl">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price fl pr5" orgp="{$item.market_price}">{$item.market_price}</span></p>
+						{/if}
+						<p class="p_price fb red"><span class="bizhong fl">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price fl pl5" orgp="{$item.shop_price}">{$item.shop_price}</span></p>
+					</li>
+					{/if}
+				{/foreach}
+                </ul>
+            </div>
+			{/if}
+			{/if}
+			<!--end .superStar-->
+			
+			{if $template_attr_info}
+			{if $cur_lang eq $default_lang}
+			<div class="section mb10 NYR">
+            	<div class="fb m_box borderTop3 pl5 pr5 fbTitle">{$lang.Category_Narrow_Your_Results}<strong></strong></div>
+				<div class="attrs" id="js_attrs">
+				{foreach from=$template_attr_info.search_templae item=template_attr key=key}
+					<dl class="m_box mt_1 clearfix" {if $template_attr_info.all_display_template ==0 && $template_attr.num >=5}style="display:none;"{/if} {if $template_attr.num >=5}is_display_temp=1{else}is_display_temp=0{/if}>
+
+						<dt>{$template_attr.search_attr_name}:</dt>
+						<dd>
+							{foreach from=$template_attr.search_key item=att_value key=key1}
+								<a href="{$att_value.url}?display={$display}" {if $att_value.style == 1} class="on"{/if}  rel="nofollow">{$att_value.keyword}</a>
+							{/foreach}
+						</dd>
+
+					</dl>
+				{/foreach}
+				</div>
+				<a href="javascript:void(0)" id="js_vall_attr" class="viewAll_up">{$lang.view_all}</a>
+			</div><!--end .Narrow Your Results-->
+			{/if}
+			{/if}
+			{if $ByCatNewArr|@count neq 0}
+				{if $module neq 'search'}
+				<div class="section browseByCate m_box mb10">
+					<span class="fb pl5 pr5">{$lang.Browse_by_Categories}</span>
+					<ul class="clearfix">
+						{foreach from=$ByCatNewArr item=catit}
+						<li {if $smarty.get.category == $catit.cat_id}class=sred{/if}><a href="{$catit.url_title}" rel="nofollow"  title="{$catit.cat_name}">{$catit.cat_name}</a>(<b>{$catit.cnum}</b>)
+						</li>
+						{/foreach}
+					</ul>
+				</div><!--end .browseByCate-->
+				{/if}
+            {/if}
+			{if $goods_list}
+			{if $search_display neq '1'}
+            <div class="sortBy m_box borderTop3 mt_1  clearfix">
+            	<strong class="fb fl">{$lang.Category_Sort_by}:</strong>
+				<a rel="nofollow" href="{$index_page}?display={$display}&24h_ship={$24h_ship}&page_size={$page_size}&freeship={$freeship}&sortby=hot&newpage=1" {if $odr == "hot"} class="on"{/if}>{$lang.Category_Best_Selling}</a>
+				<a rel="nofollow" href="{$index_page}?display={$display}&24h_ship={$24h_ship}&page_size={$page_size}&freeship={$freeship}&sortby=conversion&newpage=1" {if $odr == "conversion"} class="on"{/if}>{$lang.Category_Recommended}</a>
+				<a rel="nofollow" href="{$index_page}?display={$display}&24h_ship={$24h_ship}&page_size={$page_size}&freeship={$freeship}&sortby=new&newpage=1" {if $odr == "new"} class="on"{/if}>{$lang.new_arrival}</a>
+				<a rel="nofollow" href="{$index_page}?display={$display}&24h_ship={$24h_ship}&page_size={$page_size}&freeship={$freeship}&sortby=reviews&newpage=1" {if $odr == "reviews"} class="on"{/if}>{$lang.Category_Review}</a>
+				<a rel="nofollow" href="{$index_page}?display={$display}&24h_ship={$24h_ship}&page_size={$page_size}&freeship={$freeship}&sortby=highprice&newpage=1" {if $odr == "highprice"}class="on"{/if}>{$lang.Category_Highest_Price}</a>
+				<a href="{$index_page}?display={$display}&24h_ship={$24h_ship}&page_size={$page_size}&freeship={$freeship}&sortby=lowprice&newpage=1" rel="nofollow" {if $odr == "lowprice"}class="on"{/if}>{$lang.Category_Lowest_Price}</a>
+            </div><!--end .sortBy-->
+			{/if}
+            <div class="sortFilter borderTop1 mt_1 clearfix">
+				{if $search_display neq '1'}
+            	<div class="sortFilter_perpage pr10 fl">
+                	<span class="fl">{$lang.Per_page}:</span>
+					{foreach from=$layoutpage item=list}
+						<a rel="nofollow" href='?display={$display}&24h_ship={$24h_ship}&freeship={$freeship}&sortby={$sortby}&page_size={$list}&newpage=1' {if $page_size == $list } class='on'{/if} title="Per page {$list}">{$list}</a>
+					{/foreach}
+                </div>
+               <div class="sortFilter_view fl">
+					<span class="fl">{$lang.View}:</span>
+					<a href="?freeship={$freeship}&sortby={$sortby}&page_size=40&24h_ship={$24h_ship}&display=l&newpage=1" rel="nofollow" class="view_tag view_tagList {if $display=='l'}view_tagListOn{/if}">{$lang.List}</a>
+					<a href="?freeship={$freeship}&sortby={$sortby}&page_size=48&24h_ship={$24h_ship}&display=g&newpage=1" rel="nofollow" class="view_tag view_tagGgrid {if $display=='g'}view_tagGgridOn{/if}">{$lang.Grid}</a>
+					{if $24h_ship eq 't'}
+					<a href="?display={$display}&freeship={$freeship}&sortby={$sortby}&page_size={$page_size}&24h_ship=f&newpage=1" rel="nofollow" class="view_ship sortFilter_ship {if $24h_ship eq 't'}sortFilter_shipOn{/if}">{$lang.ship_in_24_hrs_1}</a>
+					{else}
+					<a href="?display={$display}&freeship={$freeship}&sortby={$sortby}&page_size={$page_size}&24h_ship=t&newpage=1" rel="nofollow" class="view_ship sortFilter_ship {if $24h_ship eq 't'}sortFilter_shipOn{/if}">{$lang.ship_in_24_hrs_1}</a>
+					{/if}
+					{if $freeship eq 't'}
+						<a href="?display={$display}&24h_ship={$24h_ship}&page_size={$page_size}&sortby={$sortby}&freeship=f&newpage=1" rel="nofollow" class="view_ship sortFilter_freeShipOn">{$lang.freeship}</a>
+					{else}
+						<a href="?display={$display}&24h_ship={$24h_ship}&page_size={$page_size}&sortby={$sortby}&freeship=t&newpage=1" rel="nofollow" class="view_ship sortFilter_freeShip ">{$lang.freeship}</a>
+					{/if}
+			   </div><!--end .sortFilter_view-->
+			   {/if}
+			   <div class="page fr">
+					<div class='page'>{$pagestr}</div>
+			   </div>
+			 <!--end .page-->
+            </div><!--end .sortFilter-->
+			{/if}
+			{if $display == 'g'}
+			<div class="section m_box">
+				<ul class="p_listBox clearfix">
+					{foreach from=$goods_list item=goods name=list}
+					<li>
+						<p class="p_mg pr">	
+						{if $goods.goods_sn|truncate:2:"" == "KA" || $goods.goods_id == 70787 || $goods.goods_id == 70786 || $goods.goods_id == 70785 || $goods.goods_id == 70788}
+							{if $goods.promote_zhekou > 0}
+								<strong class="p_mg_usa"></strong>
+							{/if}
+                        {elseif $goods.is_super_star}{if $cur_lang eq 'en' || $cur_lang eq 'ru'}<strong class="starPro"></strong>{/if}
+						{else}
+							{if $goods.promote_zhekou > 0}
+								<strong><span>{$goods.promote_zhekou}</span>%<br/>{$lang.off}</strong>
+							{/if}
+						{/if}
+						
+						<a href="{$goods.url_title}" >
+                        {if $smarty.foreach.list.iteration > 8}
+                        <img alt="{$goods.goods_full_title}" rel="external nofollow" src="{$imgcache_url}images/styleimg/grey.gif"  data-original="{$goods.goods_grid}"  class="js_lazyLoad" width="150" height="150"/>
+                        {else}
+ <img alt="{$goods.goods_full_title}" rel="external nofollow" src="{$goods.goods_grid}"   class="js_lazyLoad" width="150" height="150"/>
+                        {/if}
+                        </a></p>
+                        <p class="p_name pt10"><a href="{$goods.url_title}" title="{$goods.goods_full_title}">{$goods.goods_title}</a></p>
+                        <p class="p_price  fb red"><span class="bizhong fl">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price fl pl5" orgp="{$goods.shop_price}">{$goods.shop_price}</span><i class="fl addToCarTag js_new_addcart"  id="add_cart_msg{$goods.goods_id}" gid="{$goods.goods_id}">{$lang.add_to_car}</i></p>
+						{if not $goods.goods_number && $out_of_stock}<p class="p_out_of_stock"><span>{$lang.sorry_sold_out}</span></p>{/if}
+						{if $goods.is_free_shipping == 1}<p class="p_free {$cur_lang}_p_free">{$lang.Free_Shipping}</p>{/if}
+						{if $goods.presale_date_from}<p class="presale_date_from"><span>{$lang.presale_date_from}</span></p>{/if}
+						{if $goods.is_24h_ship and $goods.goods_number}<p class="p_Ship"><span>{$lang.ship_in_24_hrs}</span></p>{/if}
+						{if $goods.review.review_count gt 0}
+							<p class="p_writeReview"><span class="start_{$goods.review.avg_rate_img}"><i>{$goods.review.avg_rate_img} {$lang.satrts}</i></span><a rel="nofollow" href="/m-review-a-view_review-goods_id-{$goods.goods_id}.htm">({$goods.review.review_count})</a></p>
+						{else}
+							<p class="p_writeReview none"><a rel="nofollow" href="/{$cur_lang_url}m-review-a-write_review-goods_id-{$goods.goods_id}.htm">{$lang.Write_a_review} (0)</a></p>
+						{/if}
+					</li>
+					{/foreach}
+					{include file='no_result.htm'}
+				</ul><!--end .p_listBox-->
+			</div><!--end .section-->
+			{else}
+
+			<div class="section m_box mt_1">
+
+				<div class="itemWarp">
+					<strong class="item1 fl tc">{$lang.Category_Item_Image}</strong>
+					<strong class="item2 fl">{$lang.Category_Item_Name}</strong>
+					<strong class="item3 fl">{$lang.Category_Item_Price}</strong>
+				</div>
+
+				<div class="list_p_warp clearfix">
+				 {if $NewArrivalArr}
+						<div class="list_newarrivals fr">
+							<div>{$lang.new_arrival}</div>
+							<ul>
+								{foreach from=$NewArrivalArr item=goods name=list}
+								<li>
+									<p class="new_p_img">
+										<a href="{$goods.goods_url}" title="{$item.goods_title}"><img src="{$goods.goods_thumb}" rel="external nofollow" alt="$goods.goods_title}" width="80" height="80"  class="js_lazyLoad"></a></p>
+									<p class="new_p_name"><a href="{$goods.goods_url}">{$goods.goods_title|truncate:40:"...":true}</a></p>
+									<p class="new_p_price fb red"><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$goods.shop_price}">{$goods.shop_price}</span></p>
+								</li>
+								{/foreach}
+							</ul>
+						</div>
+				 {/if}
+				 
+				 
+				<ul class="list_p_list">
+					{foreach from=$goods_list item=goods name=list}
+					<li class="clearfix">
+                    	<p class="list_p_mg pr">
+						{if $goods.goods_sn|truncate:2:"" == "KA" || $goods.goods_id == 70787 || $goods.goods_id == 70786 || $goods.goods_id == 70785 || $goods.goods_id == 70788}
+							{if $goods.promote_zhekou > 0}
+								<strong class="p_mg_usa"></strong>
+							{/if}
+                        {elseif $goods.is_super_star}
+							{if $cur_lang eq 'en'}
+                            <strong class="starPro"></strong>
+							{/if}
+						{else}
+							{if $goods.promote_zhekou > 0}
+								<strong><span>{$goods.promote_zhekou}</span>%<br/>{$lang.off}</strong>
+							{/if}
+						{/if}
+
+						<a href="{$goods.url_title}" ><img alt="{$goods.goods_title}" rel="external nofollow" src="{$imgcache_url}images/styleimg/grey.gif"  data-original="{$goods.goods_thumb}" width="100" height="100" class="js_lazyLoad"/></a></p>
+
+						<div class="list_p_info fl">
+
+							<p class="list_p_name fb"><a href="{$goods.url_title}">{$goods.goods_title}</a></p>
+							<p class="list_p_introduce pt5">{$goods.goods_brief}</p>
+							<p class="pt5 clearfix">{if $goods.is_free_shipping ==1}<span class="p_free {$cur_lang}_p_free fl">{$lang.Free_Shipping}</span>{/if}{if $goods.is_24h_ship and $goods.goods_number}<span class="p_Ship fl">{$lang.ship_in_24_hrs}</span>{/if}</p>
+							{if (not $goods.goods_number && $out_of_stock)||$goods.presale_date_from}<p class="pt5 clearfix">{if not $goods.goods_number && $out_of_stock}<span class="p_out_of_stock pr5 fl">{$lang.sorry_sold_out}</span>{/if}{if $goods.presale_date_from}<span class="presale_date_fro fl">{$lang.presale} </span>{/if}</p>{/if}
+							{if $smarty.cookies.usertype eq '2'}
+							<p  class="pt5 clearfix"><span id="aff{$goods.goods_id}" style=" cursor:pointer;"><img src="{$imgcache_url}images/styleimg/recomm.gif" onClick="add_wj_link({$goods.goods_id})" /></span></p>
+							{/if}
+						</div>
+
+						<div class="list_p_attr fr">
+
+							<p class="list_p_price  fb red clearfix"><span class="bizhong fl">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price fl pl5" orgp="{$goods.shop_price}">{$goods.shop_price}</span></p>
+							{if $goods.review.review_count gt 0}
+								<p class="list_p_writeReview"><span class="start_{$goods.review.avg_rate_img}"><i>{$goods.review.avg_rate_img} {$lang.satrts}</i></span><a href="/m-review-a-view_review-goods_id-{$goods.goods_id}.htm" class="no_unl" rel="nofollow">({$goods.review.review_count})</a></p>
+							{else}
+								<p class="list_p_writeReview none"><a href="/{$cur_lang_url}m-review-a-write_review-goods_id-{$goods.goods_id}.htm" rel="nofollow" class="list_p_writeReview_btn">{$lang.Write_a_review} (0) </a><em>{$lang.start_write}</em></p>
+							{/if}
+
+							<p class="list_p_addToCart"  id="add_cart_msg{$goods.goods_id}"><a href="#" gid="{$goods.goods_id}" class="js_new_addcart">{$lang.add_to_cart}</a></p>
+
+						</div>
+
+					</li>
+					{/foreach}
+					{include file='no_result.htm'}
+
+					</ul><!--end .list_p_list-->
+
+					
+				</div><!--end .list_p_warp-->
+
+			</div><!--end .section-->
+			{/if}
+			{if $goods_list}
+			<div class="bottomPageBox m_box mt_1 borderTop1">
+				<div class="page fr">
+					<div class='page'>{$pagestr}</div>
+			    </div>
+			<!--end .page-->
+			</div><!--end .bottomPageBox-->
+			{/if}
+            {if $smarty.get.m eq 'search' and $smarty.get.k}
+			<div class="surveyBox m_box mt_1">
+				<span class="fb">{$lang.Search_Feedback1}<sup class="red">{$lang.new}</sup></span>
+				<p id="js_PVot">{$lang.customer_service_1} <a href="javascript:void(0)" class="surveyBtn" id="js_surveyYes">{$lang.yes}</a><a href="javascript:void(0)" class="surveyBtn" id="js_surveyNo">{$lang.no}</a></p>
+				<p>{$lang.customer_service_2} <a href="/{$cur_lang_url}m-article-id-20-pid-.html" style="color:#1A75CF" rel="nofollow">{$lang.customer_service_3}</a>.</p>
+			</div><!--end .surveyBox-->
+			{/if}
+			{if $best_goods}
+				<div class="superStar  m_box mt_1 customeFavoritPro">
+					<div class="fb pl5 pr5">{$lang.Recommendations_For_You}</div>
+					<ul class="clearfix">
+						{foreach from=$best_goods item=item}
+						<li>
+						<p class="p_mg pr">
+							{if $item.save_zekou}<strong><span>{$item.save_zekou}</span>%<br/>{$lang.off}</strong>{/if}
+							<a href="{$item.url_title}" >
+								<img alt="{$item.goods_title}"  src="{$imgcache_url}images/styleimg/grey.gif" data-original="{$item.goods_img}" width="150" height="150" class="js_lazyLoad"/>
+							</a>
+						</p>
+                        <p class="p_name pt5"><a href="{$item.url_title}" title="{$item.goods_title}">{$item.goods_title}</a></p>
+						<p class="p_price fb red"><span class="bizhong fl">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price fl pl5" orgp="{$item.shop_price}">{$item.shop_price}</span></p>
+					</li>
+						{/foreach}
+					</ul>
+				</div>
+			{/if}
+			{if 1 eq 0}{*去掉底部seo描述*}
+			{if $cur_lang eq $default_lang and (( $smarty.get.k and $goods_list ) or $cat_cont)}
+				<div class="categoryPageTips  m_box mt_1">
+				    {if $smarty.get.k}
+				   		{$abc_foot_description}
+					{/if}
+					{if $cat_cont}{$cat_cont}{/if}
+			   </div><!--end .categoryPageTips-->
+			{/if}
+			{/if}
+		</div><!--end #mainbar-->
+		<div id="sideBar">
+		{if $matches_cat_arr}{*按类搜索 by mashanling on 2013-08-30 13:52:11*}
+			<div class="l_box mb10">
+				<h3 class="l_title">See Matches In</h3>
+				<div class="l_box_display  seeMatcheList">
+					<ul>
+						{foreach from=$matches_cat_arr item=item}
+							<li><a rel="nofollow" href="{$item.url}">{$item.name}</a></li>
+						{/foreach}
+					</ul>
+				</div>
+			</div>
+		{/if}		
+		{include file="left.htm"}
+		</div><!--end #sideBar-->
+	</div><!--end #mainWarp-->
+	<div id="footer">
+	{include file="foothelp.htm"}
+	{include file="foot.htm"}
+	</div>
+	{literal}
+    <script>
+		(function(){
+			//问卷回答
+			GLOBAL.survey.upSurvey();
+			//添加到购物车
+			$("ul.p_listBox").on("click",".js_new_addcart",function(){
+				GLOBAL.CartCheckout.addcart(this);
+				return false;
+			});
+			$("ul.list_p_list").on("click",".js_new_addcart",function(){
+				GLOBAL.CartCheckout.addcart(this);
+				return false;
+			});
+			$("#js_vall_attr").click(function(){
+				$(this).toggleClass("viewAll_down");
+				$("#js_attrs").children("dl").slice("5").toggle();
+			});
+		})();
+
+		function add_wj_link(id){
+			if(id !=""){
+				$("#aff"+id).html(category_func_add_wj_link_0);
+				URL = DOMAIN_USER+"/{/literal}{$cur_lang_url}{literal}m-webad-a-add_link_auto-pid-"+id+".htm?jsoncallback=?";
+				$.getJSON(URL, function(data) {
+					$("#aff"+id).html(data.ms)
+				});
+			}
+		}
+	</script>
+{/literal}
+{literal}
+<script type="text/javascript">
+	$(function(){
+		$('#email_address').focus(function(){
+			var $this = $(this);
+			var emailAddressText = $this.attr('data-emailAddress');
+			if($.trim($this.val()) == emailAddressText){
+				$this.val('');
+				$this.addClass('edit');
+			}
+		});
+		$('#email_address').blur(function(){
+			var $this = $(this);
+			var emailAddressText = $this.attr('data-emailAddress');
+			if($.trim($this.val()) == ''){
+				$this.val(emailAddressText);
+				$this.removeClass('edit');
+			}
+		});
+		$('#btn_email_check').click(function(){
+			var $email_address = $('#email_address');
+			var $email_info = $('#email_info');
+			$email_address.focus();
+			var emailVal = $email_address.val().trim();
+
+			if (!emailVal) {
+				$email_info.removeClass('info_right');
+				$email_info.html(jsLang.email_notValid).slideDown();
+				return false;
+			}
+			else if (!checkmail(emailVal)) {
+				$email_info.removeClass('info_right');
+				$email_info.html(jsLang.email_notValid).slideDown();
+				return false;
+			}
+			var postData = 'email=' + emailVal + '&source=3';
+			$.getJSON(DOMAIN_USER+'/'+cur_lang+'/m-users-a-email_list-job-add-email-' + emailVal + '.htm?jsoncallback=?', postData, function(data){
+				if(data.type!=1){
+					$email_info.addClass('info_right');
+				}
+				else{
+					$email_info.removeClass('info_right');
+				}
+				$email_info.html(data.info).slideDown();
+				return false;
+			});
+		});
+	});
+</script>
+{/literal}
+{include file="statistics_js.htm"}
+</body>
+</html>

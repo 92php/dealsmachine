@@ -1,0 +1,41 @@
+@charset "utf-8";
+/* .signBox .usersignbtn,.signBox .loginWithFacebook a,.register .joinNow{ background:url(../images/styleimg/ahappydealtag.png) no-repeat 0 0;} */
+.borderTop3{ border-top:3px solid #ececec;}
+label.error{ color:red; font-weight:bold; display:inline; float:left; width:100%;}
+/* label.checked{background-position:right -1250px; width:15px; height:15px; margin:8px 0 0 5px; text-indent:-9999px; overflow:hidden;} */
+.signBox{ width:550px;}
+.register{ width:355px; padding-left:15px;}
+.borderBottomLine{ border-bottom:1px dashed #ddd;}
+.signBox h3,.register h3{ padding:10px 0 5px;}
+#ajaxmsg,#ajaxmsg1{ min-height:20px; height:20px; height:auto!important; padding-bottom:5px; line-height:20px; display:none;}
+.input_style,.input_style1{ display:inline; float:left; width:250px; height:20px; padding:4px 5px 4px; border:1px solid #C4DDE8; line-height:20px; font-size:14px;
+-webkit-border-radius:3px; -moz-border-radius:3px;border-radius:3px;
+-webkit-box-shadow:2px 2px 3px #f7f7f7 inset;-moz-box-shadow:2px 2px 3px #f7f7f7 inset;box-shadow:2px 2px 3px #f7f7f7 inset;}
+/*sign*/
+#ajaxmsg{ padding-left:100px;}
+.signBox,.register{ font-size:12px;}
+.signBox .item{ height:50px; padding:0 0 5px 220px; line-height:20px;}
+.signBox .itemLabel{ margin-left:-220px; width:210px; height:30px; line-height:30px; text-align:right;}
+.signBox .itemBtn{ padding-left:220px;}
+.signBox .usersignbtn{ background-position:0 -1100px; width:154px; height:36px; border:none; cursor:pointer;}
+.signBox .itemForget{ padding:10px 0 0 220px; line-height:25px;}
+.signBox .itemForget a{color:#03c; text-decoration:underline;}
+.signBox .loginWithFacebook{ padding:20px 0; line-height:25px;}
+.signBox .loginWithFacebook strong{ width:210px; padding-right:10px; text-align:right;}
+.signBox .loginWithFacebook a{ background-position:0 -1180px; width:178px; height:25px; overflow:hidden; text-indent:-9999px;}
+/*register*/
+.register .r_item{height:75px;}
+.register .r_itemLabel{ display:block; height:20px; line-height:20px;}
+.register .r_item_tips{ line-height:20px; padding-left:20px; position:relative; height:auto; _height:36px; zoom:1;}
+.newsletter{height:36px;}
+.register .r_item_tips a{ color:#03c;}
+.register .r_item_tips label{ display:block; clear:both; line-height:16px; }
+.register .r_item_tips input{position:absolute; margin:0;  top:3px; *top:0; left:0;}
+/*.register .r_item_tips label.checked{ background:none; height:0; overflow:hidden;}*/
+.register input{ margin:5px 0 0;}
+.register .r_item_btn{ height:32px; padding:0 0 10px;}
+.register .joinNow{ background-position:0 -1140px; width:132px; height:29px; border:none; cursor:pointer;}
+
+/*forger ps*/
+.confirm{ padding:20px 0 0 15px; line-height:20px; font-weight:bold; text-align:left;}
+.confirm input{ width:250px; height:18px; padding:3px; border:1px solide #ddd;}

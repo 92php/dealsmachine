@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php?lang="></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->>affiliate 订单统计</td>
+          <td width="44%" align="right"><span class="navright"><a href="{$action_link.href}">{$action_link.text}</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <form name="timetnterval" style="margin:0px" method="get" class="thisfrm">
+  <tr>
+    <td><table width="100%" border="0" cellpadding="3" cellspacing="0">
+      <tr>
+          <td width="382" align="right" bgcolor="#FFFFFF">下单时间： </td>
+          <td width="585" bgcolor="#FFFFFF">从 <input name="start_date" value="{$start_date}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />&nbsp;&nbsp;到 &nbsp; <input name="end_date" value="{$end_date}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" /> </td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">付款时间： </td>
+          <td bgcolor="#FFFFFF">从 <input name="start_date2" value="{$start_date2}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />&nbsp;&nbsp;到 &nbsp; <input name="end_date2" value="{$end_date2}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" /> </td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">拥金发放情况：</td>
+          <td bgcolor="#FFFFFF">
+          <select name="com_is_fa">
+            <option value="">未选择</option>
+            <option value="2">已发放</option>
+            <option value="1">未发放</option>
+          
+          </select>
+          </td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">用户：</td>
+          <td bgcolor="#FFFFFF"><input name="add_user" value="{$smarty.get.add_user}" /> 
+            （查单个用户）</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">LInkID：</td>
+          <td bgcolor="#FFFFFF"><input name="linkid" id="linkid" value="{$smarty.get.linkid}" size="10" /> 
+            查链接下的订单</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">订单状态：</td>
+          <td bgcolor="#FFFFFF">  <select name="order_status" id="order_status">
+            <option value="-1">所有状态</option>
+            <option value="0" {if $smarty.get.order_status eq "0"}selected{/if}>未付款</option>
+            <option value="1" {if $smarty.get.order_status eq "1"}selected{/if}>已付款</option>
+            </select></td>
+          
+        </tr>
+    
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">&nbsp; </td>
+          <td bgcolor="#FFFFFF"><input type="submit" name="submit" value="开始查询" class="button" /></td>
+        </tr>
+      </table>
+      </td>
+  </tr>
+ 
+  </form>
+</table>
+
+
+
+
+
+<form method="POST" action="?act=batch" name="listForm" onsubmit="return confirmSubmit(this)">
+  <div class="list-div" id="listDiv">
+
+  <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+     <tr>
+      <th width="5%" height="21"><input type="checkbox" onclick="checkAll(this, 'checkboxes[]');"><a href="?sort_by=order_id&sort_order={$filter.sort_order_order_id}{$search_url}">ID</a>{$sort_order_id}</th>
+      <th width="6%">状态</th>
+      <th width="9%">订单号</th>
+      <th width="7%"><a href="?sort_by=add_time&sort_order={$filter.sort_order_add_time}{$search_url}">订单金额</a>{$sort_add_time}</th>
+      <th width="7%">佣金</th>
+      <th width="7%">佣金发放情况</th>
+      <th width="5%">下单时间</th>
+      <th width="9%">付款时间</th>
+      <th width="18%">所属用户</th>
+      <th width="6%">图片</th>
+      <th width="5%">链接</th>
+	 <th width="5%" nowrap="nowrap">来源</th>
+      </tr>
+     
+<tr bgcolor="#FDE8FF">
+      <td height="37" colspan="4" align="right">总金额：$ {$tj.turnover}</td>
+      <td height="37" align="right">总佣金：$ {$tj.com_money}</td>
+      <td height="37" colspan="6" align="right">&nbsp;</td>
+      </tr>
+     
+     
+  {foreach from=$goods_order_data item=list name=val}
+<tr bgColor="{if $smarty.foreach.val.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.val.iteration is even}#f4f9fd{else}#e8f1fd{/if}'";>
+      <td align="center"><input type="checkbox" name="checkboxes[]" value="{$list.order_id}" onclick="checkone('checkboxes[]')"/>{$list.order_id}</td>
+      <td align="center">{$list.order_status_str}</td>
+      <td><a href="/m-users-a-queryorder-n-{$list.order_sn}.htm" target="_blank">{$list.order_sn}</a></td>
+      <td align="right">$ {$list.order_amount}</td>
+      <td align="right">$ {$list.pay_amount}</td>
+      <td align="center">{if $list.com_is_fa eq '2'}
+      
+      <span style="color:#A0A0A4">已发放{if $list.com_fa_date}   <br>{$list.com_fa_date}{/if}</span>{else}<span style="color:#2A00FF">未发放</span>
+
+ 
+      {/if}</td>
+      <td align="center">{$list.add_time}</td>
+      <td align="center">{$list.pay_time}</td>
+      <td align="center"><a href="affiliate_users.php?act=edit&id={$list.user_id}">{$list.email}</a></td>
+      <td align="center"><a href="{$list.link_url}" target="_blank"><img src="{$list.img}" width="50" border="0"/></a></td>
+      
+       <td align="center">{$list.link_url_jump}</td>
+       <td align="center">{$list.wj_referer}</td>
+      </tr>
+  {foreachelse}
+    <tr><td colspan="11" align="center" class="no-records">暂无记录</td></tr>
+  {/foreach}
+  </table>
+  <table width="100%" cellspacing="0" id="page-table">
+  <tr>
+    <td width="437"> &nbsp; &nbsp; &nbsp;<input type="checkbox" onclick="checkAll(this, 'checkboxes[]');"> 全选   <input type="submit" value="已发放"  name="btnSubmit" class="button" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <input type="submit" value="未发放"  name="btnSubmit" class="button" /></td>
+    <td width="482" align="right" nowrap="true">
+    {$pagestr}
+    </td>
+  </tr>
+  </table>
+</div>
+</form>
+{include file="copyright.htm"}

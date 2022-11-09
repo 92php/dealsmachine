@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="/sysjs/eload13pack.js"></script>
+<script language="javascript" src="/sysjs/validator.js"></script>
+<script language="javascript" src="/sysjs/jcookie.js"></script>
+<script language="javascript" src="/sysjs/jlivequery.js"></script>
+<script language="javascript" src="/eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" border="0" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 网站发送邮件日志</td>
+          <td width="44%" align="right">&nbsp;</td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form name="ttform" method="get" action="email_web_send_log.php" >
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+    <tr>
+      <td width="80%" bgcolor="#EEF7FF">
+	  <select name="template_list">
+	  {foreach from=$template_list item=item name=loglist key=key}
+	  <option value="{$key}">{$key}-{$item}</option>
+	  {/foreach}
+	  </select>
+	  <input type="text" name="keywords" id="keywords" size="25" value="{$smarty.get.keywords}"/>
+      <input type="submit" value="搜索" id="logsearch"/>	  
+      </td>       
+      <td width="20%" bgcolor="#EEF7FF">&nbsp;
+      </td>
+    </tr>
+</table>
+</form>
+
+<form method="POST" action="admin_logs.php?act=batch_drop" name="listForm"  onSubmit="return Validator.Validate(this,1)">
+<div id="list">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th><a href="">编号</a>{$sort_log_id}</th>
+    <th><a href="">邮箱</a>{$sort_said}</th>
+    <th><a href="">邮件ID</a>{$sort_log_time}</th>
+    <th><a href="">邮件状态</a>{$sort_ip_address}</th>
+    <th><a href="">发送时间</a>{$sort_ip_address}</th>
+  </tr>  
+  {foreach from=$listdb item=item name=loglist}
+  <tr bgColor="{if $smarty.foreach.loglist.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loglist.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+    <td width="10%" align="center"><span>{$item.id}</span></td>
+    <td width="" class="first-cell"><span>{$item.email}</span></td>
+    <td width="20%" align="center"><span>{$item.template_id}</span></td>
+    <td width="10%" align="center"><span>{if $item.state eq '1'}成功{else}失败{/if}</span></td>
+    <td width="20%" align="center"><span>{$item.last_send}</span></td>
+  </tr>
+  {/foreach}
+  <tr>
+    <td colspan="2">&nbsp;
+	</td>
+    <td align="right" nowrap="true" colspan="3">
+	<div id="pager">{$pagestr}</div>
+	</td>
+  </tr>
+</table>
+</div>
+</form>
+{include file="copyright.htm"}

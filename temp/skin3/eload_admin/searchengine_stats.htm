@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='{$imgcache_url}eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/sysjs/calendar.php?lang="></script>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 搜索引擎关键字</td>
+          <td width="44%" align="right"><span class="navright"><a href="{$action_link.href}">{$action_link.text}</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr><td>
+  <form action="" method="get" id="selectForm">
+     
+       {$lang.start_date}&nbsp;&nbsp;
+       <input name="start_date" value="{$start_date}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />
+       {$lang.end_date}&nbsp;&nbsp;
+       <input name="end_date" value="{$end_date}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" /> 
+      
+        <input type="submit" name="submit" value="{$lang.query}" class="button" />
+  </form>
+  
+</td>
+  </tr>
+</table>
+
+<div  id="list">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+  	<th><strong>排名</strong></th>
+    <th><strong>搜索关键词</strong></th>
+    <th><a href="?sort_by=count&sort_order={$filter.new_sort_order}{$title_url}">搜索次数</a>{$sort_count}</th>
+    <th><a href="?sort_by=not_found&sort_order={$filter.new_sort_order}{$title_url}">搜索结果为空次数</a>{$sort_not_found}</th>
+    <th><a href="?sort_by=not_found_by_user&sort_order={$filter.new_sort_order}{$title_url}">用户没找到想找的次数</a>{$sort_not_found_by_user}</th>
+    <th><a href="?sort_by=found_by_user&sort_order={$filter.new_sort_order}{$title_url}">用户找到想找的次数</a>{$sort_found_by_user}</th>
+  <tr>
+  {foreach from=$searchengines item=keyword name=loopname key=key}
+	<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';"> 
+	    <td valign="top" nowrap="nowrap" align="center">{$key+1}</td>
+		<td valign="top" nowrap="nowrap" align="center">{$keyword.keyword}</td>
+	    <td valign="top" nowrap="nowrap" align="center">{$keyword.count}</td>
+        <td valign="top" nowrap="nowrap" align="center">{$keyword.not_found}</td>
+        <td valign="top" nowrap="nowrap" align="center">{$keyword.not_found_by_user}</td>
+        <td valign="top" nowrap="nowrap" align="center">{$keyword.found_by_user}</td> 
+	</tr>
+  {/foreach}
+  <tr>
+    <td align="right" nowrap="true"  colspan="6" >
+   <div id="pager">{$pagestr}</div>
+    </td>
+  </tr>
+</table>
+</div>
+
+{include file="copyright.htm"}

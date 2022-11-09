@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 修改商品价格</td>
+          <td width="44%" align="right"><span class="navright"><a href="category.php">商品分类列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<div class="main-div">
+<form action="?" method="get" name="theForm"  onSubmit="return Validator.Validate(this,1)">
+<table width="99%" align="center" class="borderline">
+  <tr>
+    <td>
+      <div style="font-weight:bold"><img src="/temp/skin3/images/admin/notice.gif" width="16" height="16" border="0" /> 什么是修改商品分类价格?</div>
+       <ul>
+         <li>在添加商品或者在商品管理中,如果需要对商品的分类下的所有商品的价格进行变更,那么你可以通过此功能,正确管理你的商品分类下的商品价格。<br />
+         注意，此功能可以修改子类下的所有子类产品的价格！</li>
+       </ul>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><input type="hidden" value="up_cat_price" name="act" />
+      <strong>从此分类</strong>&nbsp;&nbsp;
+      <select name="cat_id">
+       <option value="0">请选择...</option>
+       {$cat_select}
+      </select>
+      &nbsp;&nbsp;
+      <strong> 修改成</strong>&nbsp;&nbsp;&nbsp;商品原价
+      <select name="model" id="model" >
+        <option value="1">加</option>
+        <option value="2">减</option>
+      </select>
+      <p>
+        <label>
+          <input name="leixing" type="radio" id="leixing_0" value="1" checked="checked" />
+          按百分数</label>
+        <label>
+          <input type="radio" name="leixing" value="2" id="leixing_1" />
+          按钱数</label>
+      &nbsp;
+<input name="baifenshu" type="text" id="baifenshu" value="5" size="3" maxlength="10"  dataType="Double" msg="请输入数字！" />
+<span id="leixingfuhao">%</span>
+<input type="submit" name="move_cat" value="开始修改" class="button">
+      <input type="reset" value="重置" class="button" />
+    </td>
+  </tr>
+</table>
+</form>
+</div>
+{include file="copyright.htm"}

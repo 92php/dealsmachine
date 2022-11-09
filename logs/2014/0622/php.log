@@ -1,0 +1,270 @@
+[2014-06-22 21:01:31.7401]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:14:26.1085]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:19:32.7372]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:21:15.3754]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:25:38.4420]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:35:55.6125]  [127.0.0.1] GET /dealsmachine/(http://localhost/)
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:36:46.8270]  [127.0.0.1] GET /dealsmachine/(http://localhost/)
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:46:19.9195]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:49:03.6476]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:49:05.0336]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:49:17.0967]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:49:23.6296]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:49:24.0857]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:49:24.2588]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:49:24.4084]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:49:24.5765]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:49:24.7620]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:49:24.9247]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:49:25.0839]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:49:27.5688]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:49:27.7428]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:49:27.9003]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:49:28.0875]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:49:28.4250]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:49:43.0935]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:52:35.5109]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:53:36.5974]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#
+[2014-06-22 21:59:09.4796]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+[2014-06-22 21:59:09.5030]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2542
+PHP Notice[8]锛歎ndefined index: _BEGINTIME
+
+[2014-06-22 21:59:09.5031]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2601
+PHP Notice[8]锛歎ndefined index: start_time
+
+[2014-06-22 21:59:09.5032]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2598
+PHP Notice[8]锛歎ndefined index: start_time
+
+$@!#
+[2014-06-22 22:34:54.9602]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+[2014-06-22 22:34:54.9776]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2542
+PHP Notice[8]锛歎ndefined index: _BEGINTIME
+
+[2014-06-22 22:34:54.9777]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2601
+PHP Notice[8]锛歎ndefined index: start_time
+
+[2014-06-22 22:34:54.9777]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2598
+PHP Notice[8]锛歎ndefined index: start_time
+
+$@!#
+[2014-06-22 22:41:05.8601]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 192.168.3.3 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+[2014-06-22 22:41:05.8760]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2542
+PHP Notice[8]锛歎ndefined index: _BEGINTIME
+
+[2014-06-22 22:41:05.8761]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2601
+PHP Notice[8]锛歎ndefined index: start_time
+
+[2014-06-22 22:41:05.8762]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2598
+PHP Notice[8]锛歎ndefined index: start_time
+
+$@!#
+[2014-06-22 22:45:14.8486]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 127.0.0.1 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+[2014-06-22 22:45:14.8572]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2542
+PHP Notice[8]锛歎ndefined index: _BEGINTIME
+
+[2014-06-22 22:45:14.8574]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2601
+PHP Notice[8]锛歎ndefined index: start_time
+
+[2014-06-22 22:45:14.8575]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2598
+PHP Notice[8]锛歎ndefined index: start_time
+
+$@!#
+[2014-06-22 22:45:20.4335]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 127.0.0.1 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+[2014-06-22 22:45:20.4506]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2542
+PHP Notice[8]锛歎ndefined index: _BEGINTIME
+
+[2014-06-22 22:45:20.4507]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2601
+PHP Notice[8]锛歎ndefined index: start_time
+
+[2014-06-22 22:45:20.4508]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2598
+PHP Notice[8]锛歎ndefined index: start_time
+
+$@!#
+[2014-06-22 23:04:51.1733]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 127.0.0.1 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+[2014-06-22 23:04:51.1886]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2542
+PHP Notice[8]锛歎ndefined index: _BEGINTIME
+
+[2014-06-22 23:04:51.1887]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2601
+PHP Notice[8]锛歎ndefined index: start_time
+
+[2014-06-22 23:04:51.1888]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\inc.fun.php on line 2598
+PHP Notice[8]锛歎ndefined index: start_time
+
+$@!#

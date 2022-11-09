@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php?lang="></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->>affiliate 来访清单</td>
+          <td width="44%" align="right"><span class="navright"></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <form name="timetnterval" style="margin:0px" method="get" class="thisfrm">
+  <tr>
+    <td><table width="100%" border="0" cellpadding="3" cellspacing="0">
+      <tr>
+          <td width="382" align="right" bgcolor="#FFFFFF">访问时间</td>
+          <td width="585" bgcolor="#FFFFFF">从 <input name="start_date" value="{$start_date}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />&nbsp;&nbsp;到 &nbsp; <input name="end_date" value="{$smarty.get.end_date}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" /> </td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">输入用户：</td>
+          <td bgcolor="#FFFFFF"><input name="email" value="{$smarty.get.email}" /></td>
+        </tr>
+         <tr>
+          <td align="right" bgcolor="#FFFFFF">来源搜索：</td>
+          <td bgcolor="#FFFFFF"><input name="referer" value="{$smarty.get.referer}" /></td>
+        </tr>   
+         <tr>
+          <td align="right" bgcolor="#FFFFFF">链接ID：</td>
+          <td bgcolor="#FFFFFF"><input name="linkid" value="{$smarty.get.linkid}" /></td>
+        </tr>           
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">&nbsp; </td>
+          <td bgcolor="#FFFFFF"><input type="submit"  value="开始查询" class="button" /></td>
+        </tr>
+      </table></td>
+  </tr>
+ 
+  </form>
+</table>
+
+
+
+
+
+<form method="POST" action="" name="listForm">
+  <div class="list-div" id="listDiv">
+
+  <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+     <tr>
+     
+      <th width="5%" height="21"><a href="?sort_by=id&sort_order={$filter.sort_order_id}{$search_url}">ip</a></th>
+      <th width="5%" height="21"><a href="?sort_by=id&sort_order={$filter.sort_order_id}{$search_url}">链接ID</a></th>      
+      <th width="6%"><a href="?sort_by=adddate&sort_order={$filter.sort_order_adddate}{$search_url}">来访时间</a>{$sort_adddate}</th>
+      <th width="10%"  ><p>来源{$sort_HTTP_REFERER}</p></th>
+     
+      <th width="8%"><a href="?sort_by=link_text&sort_order={$filter.sort_order_link_text}{$search_url}">link text</a>{$sort_link_text}</th>
+      <th width="10%">Affiliates link</th>
+      <th width="9%"><a href="?sort_by=email&sort_order={$filter.sort_order_email}{$search_url}">所属用户</a>{$sort_email}</th>
+
+
+
+
+      </tr>
+     
+     
+  {foreach from=$ip_list item=link name=val}
+<tr bgColor="{if $smarty.foreach.val.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.val.iteration is even}#f4f9fd{else}#e8f1fd{/if}'";>
+      <td align="center">{$link.ips}</td>
+      <td align="center">{$link.id}</td>
+      <td align="center">{$link.adddate}</td>
+
+      <td align="right" width="100" style="overflow:auto">{$link.HTTP_REFERER}</td>
+      <td align="center">{$link.link_text}</td>
+ <td align="center">{$link.link_url}</td>      
+      <td align="center"><a href="users.php?act=edit&id={$link.user_id}">{$link.email}</a></td>
+
+
+      </tr>
+  {foreachelse}
+    <tr><td colspan="6" align="center" class="no-records">暂无记录</td></tr>
+  {/foreach}
+  </table>
+  <table width="100%" cellspacing="0" id="page-table">
+  <tr>
+    <td width="8">&nbsp;</td>
+    <td width="964" align="right" nowrap="true">
+    {$pagestr}
+    </td>
+  </tr>
+  </table>
+</div>
+</form>
+{include file="copyright.htm"}

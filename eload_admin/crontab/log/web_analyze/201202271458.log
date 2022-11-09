@@ -1,0 +1,406 @@
+20120227已经是最新时间，不需要重新插入
+2012-02-27
+array (
+  'new_registers' => '0',
+  'old_logins' => '0',
+  'first_orders' => 0,
+  'multi_orders' => 0,
+  'new_registers_orders' => 0,
+)
+
+更新网站客户分析结束，用时0.301141s
+20120227已经是最新时间，不需要重新插入
+2012-02-27
+array (
+  'review_nums' => '0',
+  'inquiry_nums' => '0',
+  'groupbuy_nums' => '0',
+  'point_nums' => '0',
+  'promotion_nums' => 0,
+  'coupon_nums' => 0,
+)
+
+更新网站客户行为分析结束，用时0.046612s
+20120227已经是最新时间，不需要重新插入
+2012-02-26
+array (
+  'order_amount' => 0,
+  'order_payed_amount' => 0,
+  'order_nums' => 0,
+  'order_payed_nums' => 0,
+  'new_registers_orders' => 0,
+  'new_registers_amount' => 0,
+  'point_amount' => 0,
+  'promotion_amount' => NULL,
+  'lt_15_usd_nums' => 0,
+  'gt_100_usd_nums' => 0,
+  'gt_500_usd_nums' => 0,
+  'multi_buy_nums' => 0,
+  'multi_buy_amount' => 0,
+  'first_buy_nums' => 0,
+  'first_buy_amount' => 0,
+  'single_good_nums' => 0,
+  'multi_good_nums' => 0,
+)
+
+2012-02-27
+array (
+  'order_amount' => 0,
+  'order_payed_amount' => 0,
+  'order_nums' => 0,
+  'order_payed_nums' => 0,
+  'new_registers_orders' => 0,
+  'new_registers_amount' => 0,
+  'point_amount' => 0,
+  'promotion_amount' => NULL,
+  'lt_15_usd_nums' => 0,
+  'gt_100_usd_nums' => 0,
+  'gt_500_usd_nums' => 0,
+  'multi_buy_nums' => 0,
+  'multi_buy_amount' => 0,
+  'first_buy_nums' => 0,
+  'first_buy_amount' => 0,
+  'single_good_nums' => 0,
+  'multi_good_nums' => 0,
+)
+
+更新网站订单分析结束，用时0.011006s
+20120227已经是最新时间，不需要重新插入
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '0',
+  'new_good_nums' => '0',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '0',
+  'new_good_nums' => '0',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '0',
+  'new_good_nums' => '0',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '0',
+  'new_good_nums' => '1',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '0',
+  'new_good_nums' => '0',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '1',
+  'new_good_nums' => '118',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0.85,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '0',
+  'new_good_nums' => '0',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '0',
+  'new_good_nums' => '0',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '0',
+  'new_good_nums' => '0',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '0',
+  'new_good_nums' => '0',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '0',
+  'new_good_nums' => '0',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '0',
+  'new_good_nums' => '8',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '0',
+  'new_good_nums' => '0',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '0',
+  'new_good_nums' => '0',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '0',
+  'new_good_nums' => '0',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '0',
+  'new_good_nums' => '0',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '0',
+  'new_good_nums' => '0',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '1',
+  'new_good_nums' => '1',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 100,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '7',
+  'new_good_nums' => '146',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 4.79,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '0',
+  'new_good_nums' => '0',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '0',
+  'new_good_nums' => '0',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '0',
+  'new_good_nums' => '0',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '1',
+  'new_good_nums' => '187',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0.53,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+2012-02-27
+array (
+  'amount' => 0,
+  'sole_good_nums' => 0,
+  'new_nums' => '0',
+  'new_sole_good_nums' => '0',
+  'new_good_nums' => '0',
+  'week_amount' => '0.00',
+  'week_rate' => 0,
+  'new_sole_good_rate' => 0,
+  'buy_rate' => 0,
+  'hits' => 0,
+)
+
+更新网站销售分析结束，用时2.02234s
+统计结束，用时2.385184s

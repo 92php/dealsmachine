@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 回收站</td>
+          <td width="44%" align="right"><span class="navright"><a href="goods.php">商品列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<!-- 商品搜索 -->
+{include file="goods_search.htm"}
+
+<form method="post" action="?act=batch" name="listForm" onsubmit="return confirmSubmit(this)">
+<div id="list">
+<table width="99%" align="center" cellpadding="3" cellspacing="1"  class="borderline" id="stripe_tb">
+  <tr>
+    <th width="14%">
+      <input type="checkbox" onclick="checkAll(this, 'checkboxes[]');">
+      <a href="?act=trash&sort_by=goods_id&sort_order={$filter.sort_order_goods_id}">编号</a>{$sort_goods_id}
+    </th>
+    <th width="41%"><a href="?act=trash&sort_by=goods_name&sort_order={$filter.sort_order_goods_name}">商品标题</a>{$sort_goods_name}</th>
+    <th width="14%"><a href="?act=trash&sort_by=goods_sn&sort_order={$filter.sort_order_goods_sn}">商品货号</a>{$sort_goods_sn}</th>
+    <th width="15%"><a href="?act=trash&sort_by=shop_price&sort_order={$filter.sort_order_shop_price}">售价</a>{$sort_shop_price}</th>
+    <th width="16%">操作</th>
+  <tr>
+  {foreach from=$goods_list item=goods name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">  
+  
+    <td><input type="checkbox" name="checkboxes[]" value="{$goods.goods_id}" onclick="checkone('checkboxes[]')"/>{$goods.goods_id}</td>
+    <td><a href="/product{$goods.goods_id}.html" target="_blank">{$goods.goods_title}</a></td>
+    <td>{$goods.goods_sn}</td>
+    <td align="right">{$goods.shop_price}</td>
+    <td align="center">
+      <a  href="javascript:;" delatr="goods.php?act=restore_goods&goods_id={$goods.goods_id}" delmsg="你确定要还原商品吗？" onclick="del_acttion(this);" >还原 </a> |
+      <a  href="javascript:;" delatr="goods.php?act=drop_goods&goods_id={$goods.goods_id}" delmsg="删除之后将无法恢复，你确定要彻底删除该商品吗？"  onclick="del_acttion(this);"> 删除 </a>
+    </td>
+  </tr>
+  {foreachelse}
+  <tr><td colspan="10" align="center" class="no-records">暂无记录！</td></tr>
+  {/foreach}
+</table>
+
+<table width="99%" align="center" cellspacing="0" id="page-table">
+  <tr>
+    <td width="41%"><input type="checkbox" onclick="checkAll(this, 'checkboxes[]');"> 全选
+      <input type="hidden" name="act" value="batch" />
+      <select name="type" id="selAction"  onchange="changeAction()" disabled="true">
+        <option value="">请选择...</option>
+        <option value="restore">还原</option>
+        <option value="drop">删除</option>
+      </select>
+      <select name="target_cat" style="display:none" onchange="checkIsLeaf(this)"><option value="0">{$lang.select_please}</caption></select>
+      <input type="submit" value="确 定" id="btnSubmit" name="btnSubmit" class="button" disabled="true" />
+    </td>
+    <td width="59%" align="right" nowrap="true">
+   <div id="pages">{$pagestr}</div>
+    </td>
+  </tr>
+</table>
+</div>
+</form>
+{include file="copyright.htm"}

@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/autocomplete/jquery.autocomplete.pack.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link href="{$jscache_url}sysjs/autocomplete/jquery.autocomplete.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php?lang="></script>
+{literal}
+<script language="javascript">
+ 
+$(document).ready(function(){
+		/* $(".goods_name").autocomplete("?act=search_goods", {
+			width: 609,
+			selectFirst: false,
+			formatItem: function(row, i, max) {
+				return "<span style='float:left; width:50px;'> <img src='/" + row[2] + "' width = '50' height ='50' ></span> <span style='float:left; margin-left:3px; width:525px;'>" + row[1] +"("+row[3]+")"+ "</span>";
+			}
+		});		
+		$(".goods_name").result(function(event, data, formatted) {
+			if (data){
+				$(this).next().val(data[3]);
+				//$(this).next().next().next().next().next().val([''+data[4]+'']);
+			}
+		});	
+		$("#purchaser").autocomplete("?act=search_purchase", {
+			width: 450,
+			selectFirst: false
+		});
+ */
+	 
+		$("#goods_sn").blur(function(){
+			var goods_sn = encodeURIComponent($(this).val());
+			var shop_price = $('#shop_price');
+			//var purchaser = $(this).next().next().next().next();
+			//if (encodeURIComponent(goods_name.val())) return false; //当产品名称不为空的时候，不进行AJAX异步查询产品名称
+			if (!goods_sn) return false;
+			$.ajax({
+				type: "GET",
+				url: '?act=goods_sn_get_shop_price&goods_sn=' + goods_sn,
+				cache:false,
+				dataType:"json",
+				//beforeSend:function(){toploadshow();}, 
+				success: function(data){
+					//toploadhide();
+					shop_price.val(data.shop_price);
+					//purchaser.val([''+data.purchaser+'']);
+				} 
+			});
+		});
+		
+		$("#daydeal_price").keyup(function(){
+			 	var shop_price = parseFloat($('#shop_price').val());
+				var daydeal_price = parseFloat($(this).val());
+				if(shop_price){
+					if(shop_price>=daydeal_price ){
+					    $('#zhekoulv').html((((shop_price - daydeal_price)/shop_price)*100).toFixed(2)+' %');
+					}else if (daydeal_price>0){
+						alert('促销价请不要大于正常价格。');
+						$("#daydeal_price").val('');
+					}
+				}
+		});
+
+		 
+});
+
+
+
+
+</script>
+{/literal}
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> -&gt;&gt; <a href="?">每日特销管理</a> -&gt;&gt; 添加</td>
+        <td width="44%" align="right"><span class="navright"><a href="?">每日特销列表</a></span></td>
+      </tr>
+    </table></th>
+  </tr>
+</table>
+<form name="regform" method="post" action="{$url}"  onSubmit="return Validator.Validate(this,3);">
+  <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+    <tr>
+      <th colspan="4">商品特销信息</th>
+    </tr>
+    <tr>
+      <td align="right">SKU（产品编码）：</td>
+      <td><input name="goods_sn"  class="input_style" id="goods_sn" value="{$goods.goods_sn}" size="20"   dataType="Require"  msg="请输入产品编码"//>
+        <input type="hidden" name="id"  value="{$smarty.get.id}" />
+        *</td>
+    </tr>
+    <tr>
+      <td height="24" align="right">正常价格：</td>
+      <td><input name="shop_price"  class="input_style" id="shop_price" value="{$goods.shop_price}" size="15" readonly="readonly" datatype="Require"  msg="请输入产品价格"//> USD
+*</td>
+    </tr>
+    <tr>
+      <td height="24" align="right">促销价格：</td>
+      <td><input name="daydeal_price"  class="input_style" id="daydeal_price" value="{$goods.daydeal_price}" size="20"   datatype="Require"  msg="请输入促销价格"//>
+*</td>
+    </tr>
+    <tr>
+      <td height="24" align="right">折扣：</td>
+      <td><span id="zhekoulv">{$goods.zhekoulv}</span></td>
+    </tr>
+    <tr>
+      <td height="24" align="right">发布状态：</td>
+      <td>
+        <label>
+          <input type="radio" name="status" value="2" id="status0" {if $goods.is_daydeal eq '2'}checked="checked"{/if}/>
+          发布</label>
+        <label>
+          <input name="status" type="radio" id="status1" value="1"  {if $goods.is_daydeal neq '2'}checked="checked"{/if} />
+          暂不发布</label>
+        
+     </td>
+    </tr>
+    <tr>
+      <td height="24" align="right">发布日期：</td>
+      <td><input name="daydeal_time" id="daydeal_time" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" value="{$goods.daydeal_time}" /></td>
+    </tr>
+    <tr>
+      <td width="45%" height="24" align="right">&nbsp;</td>
+      <td width="55%"><input type="submit" value="确定" class="sub_but"/></td>
+    </tr>
+  </table>
+</form>
+{include file="copyright.htm"}

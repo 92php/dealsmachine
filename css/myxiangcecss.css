@@ -1,0 +1,85 @@
+@charset "utf-8";
+/* CSS Document */
+.myImagesSlideBox{
+	 width:300px;
+	 overflow:hidden;
+	 margin:auto;
+	 z-index:0 !important;
+	 
+}
+.myImages{position:relative;
+	text-align:center;
+	overflow:hidden;
+	margin:0px auto 10px;
+	height:250px;
+	width:250px;
+	cursor:pointer;
+	background:#fff url(http://cloud4.faout.com/imagecache/A/images/loading.gif) center center no-repeat;
+	z-index:0 !important;
+	
+}
+
+.myImgs {
+	display:none;
+	z-index:0;
+}
+/*  wrapper element  */
+#scrollable {
+	float:left;
+	background-color:#efefef;
+	padding:5px;
+	width:280px;
+	height:45px;
+	z-index:0;
+    margin-left:40px;
+}
+
+div.items {
+	height:66px;	
+	_height:48px;
+	float:left;
+	width:256px !important;
+
+	overflow: hidden; 
+	position: relative;
+	z-index:0;
+}
+/* item */
+div.items a {
+	display:inline-block;
+	float:left;
+	margin-left:6px;
+	width:42px;
+	height:42px;
+	background:#fff;
+	text-decoration:none;
+	text-align:center;
+	cursor:pointer;
+	border:1px solid #bbb;
+	z-index:0;
+}
+div.items a:hover {
+	border:1px solid #FF3F3F;
+}
+div.items a.active {
+	border:1px solid #FF3F3F;
+}
+.scrollableDiv{
+	position: absolute; width: 200000em; left: 0px;z-index:0 !important;
+	
+}
+
+/* next / prev buttons */
+a.xiang_prev, a.xiang_next {
+	background:url(http://cloud4.faout.com/imagecache/A/images/go_down.jpg) no-repeat 0 0;
+	display:block;
+	width:12px;
+	height:50px;
+	float:left;	
+	cursor:pointer;
+	z-index:0;
+}
+a.xiang_next {
+	background:url(http://cloud4.faout.com/imagecache/A/images/go_up.jpg) no-repeat;	
+	z-index:0;	
+}

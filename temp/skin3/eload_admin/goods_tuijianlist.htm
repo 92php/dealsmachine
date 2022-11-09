@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 商品推荐列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="goods.php">商品管理</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<!-- 商品搜索 -->
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+ <form action="goods_tuijian.php" name="searchform" method="get">
+ <tr>
+    <th align="left"> <input type="hidden" value="{$smarty.get.act}" name="act" />
+ <img src="/temp/skin3/images/admin/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+      <input type="hidden"  value="{$smarty.get.act}" id="actx"/>
+
+        {$cat_list}
+    <select name="intro_type" id="intro_type">
+        <option value="0">全部</option>
+        <option value="is_best" {if $smarty.get.intro_type eq 'is_best'}selected{/if}>特价</option>
+        <option value="is_new" {if $smarty.get.intro_type eq 'is_new'}selected{/if}>新品</option>
+        <option value="is_hot" {if $smarty.get.intro_type eq 'is_hot'}selected{/if}>热卖</option>
+        <option value="is_super_star" {if $smarty.get.intro_type eq 'is_super_star'}selected{/if}>Super Star</option>
+    </select>
+      关键字
+      <input type="text" name="keyword" id="keyword" size="45" value="{$smarty.get.keyword}"/>
+      <input type="submit" value="搜 索" class="sub_but" />
+    </th>
+  </tr>
+  {if $filter.kuozhan_count}
+  <tr>
+     <td style="padding-left:27px;">
+         本分类产品数：{$filter.record_count}个，
+
+         其中主分类产品数{$filter.zhucat_count}个，扩展类产品数{$filter.kuozhan_count} 个。
+     </td>
+  </tr>
+  {/if}
+  </form>
+</table>
+
+
+<form method="post" action="goods_tuijian.php?act=batch" name="listForm" onsubmit="return confirmSubmit(this)">
+<div id="list">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="10%">
+      <input type="checkbox" onclick="checkAll(this, 'checkboxes[]');">
+      <a href="goods.php?sort_by=goods_id&sort_order={$filter.sort_order_goods_id}">编号</a>{$sort_goods_id}
+    </th>
+    <th width="4%">图片</th>
+    <th width="40%"><a href="goods.php?sort_by=goods_title&sort_order={$filter.sort_order_goods_title}">产品标题</a>{$sort_goods_title}</th>
+    <th><a href="goods.php?sort_by=goods_sn&sort_order={$filter.sort_order_goods_sn}">产品编号</a>{$sort_goods_sn}</th>
+    <th>所在类</th>
+    <th><a href="goods.php?sort_by=shop_price&sort_order={$filter.sort_order_shop_price}">价格</a>{$sort_shop_price}</th>
+    <th><a href="goods.php?sort_by=is_free_shipping&sort_order={$filter.sort_order_is_free_shipping}">免邮</a>{$sort_is_free_shipping}</th>
+    <th><a href="goods.php?sort_by=is_on_sale&sort_order={$filter.sort_order_is_on_sale}">上架</a>{$sort_is_on_sale}</th>
+    <!--
+    <th><a href="goods.php?sort_by=is_best&sort_order={$filter.sort_order_is_best}">特价</a>{$sort_is_best}</th>
+    <th><a href="goods.php?sort_by=is_new&sort_order={$filter.sort_order_is_new}">新品</a>{$sort_is_new}</th>
+    <th><a href="goods.php?sort_by=is_hot&sort_order={$filter.sort_order_is_hot}">热卖</a>{$sort_is_hot}</th>
+    -->
+    <th><a href="goods.php?sort_by=is_super_star&sort_order={$filter.sort_order_is_super_star}">Super Star</a>{$sort_is_super_star}</th>
+    {if $use_storage}
+    <th><a href="goods.php?sort_by=goods_number&sort_order={$filter.sort_order_goods_number}">库存</a>{$sort_goods_number}</th>
+    {/if}    </tr>
+{foreach from=$goods_list item=goods name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';" id="eff{$goods.goods_id}">
+    <td><input type="checkbox" name="checkboxes[]" value="{$goods.goods_id}|{$goods.cat_id}" onclick="checkone('checkboxes[]')"/>{$goods.goods_id}</td>
+    <td><a href="{$goods.url_title}" target="_blank" title="在前台打开"><img width="50" height="50" src="{$goods.goods_thumb}" border="0"/></a></td>
+    <td class="first-cell"><a style="{if $goods.is_promote}color:red;{/if}{if $goods.updatesign == 1}color:#703A65;{/if}" href="goods.php?act=edit&goods_id={$goods.goods_id}" title="编辑">{$goods.goods_title|escape:html}</a></td>
+    <td>{$goods.goods_sn}</td>
+    <td>{$goods.cat_name}</td>
+    <td align="right">{$goods.shop_price}</td>
+    <td align="center"><img src="{$imgcache_url}images/{if $goods.is_free_shipping}yes{else}no{/if}.gif"   onclick="cimage(this,'state.php?act=goods&field=is_free_shipping&did={$goods.is_free_shipping}&id_field=goods_id');" state="{$goods.is_free_shipping}" /></td>
+    <td align="center"><img src="{$imgcache_url}images/{if $goods.is_on_sale}yes{else}no{/if}.gif"   onclick="cimage(this,'state.php?act=goods&field=is_on_sale&did={$goods.goods_id}&id_field=goods_id');" state="{$goods.is_on_sale}" /></td>
+    <!--
+    <td align="center">
+    <img src="/temp/skin3/images/admin/{if $goods.is_best}yes{else}no{/if}.gif"  onclick="cimage(this,'goods_tuijian.php?act=goods_tuijian&field=is_best&did={$goods.goods_id},{$goods.cat_id}&id_field=goods_id');" state="{$goods.is_best}"/>
+
+    </td>
+    <td align="center"><img src="/temp/skin3/images/admin/{if $goods.is_new}yes{else}no{/if}.gif"   onclick="cimage(this,'goods_tuijian.php?act=goods_tuijian&field=is_new&did={$goods.goods_id},{$goods.cat_id}&id_field=goods_id');" state="{$goods.is_new}" /></td>
+    <td align="center"><img src="/temp/skin3/images/admin/{if $goods.is_hot}yes{else}no{/if}.gif" onclick="cimage(this,'goods_tuijian.php?act=goods_tuijian&field=is_hot&did={$goods.goods_id},{$goods.cat_id}&id_field=goods_id');" state="{$goods.is_hot}" /></td>
+    -->
+<td align="center"><img src="{$imgcache_url}images/{if $goods.is_super_star}yes{else}no{/if}.gif" onclick="cimage(this,'goods_tuijian.php?act=goods_tuijian&field=is_super_star&did={$goods.goods_id},{$goods.cat_id}&id_field=goods_id');" state="{$goods.is_super_star}" /></td>
+    {if $use_storage}
+    <td align="right" title="双击进行修改"><span {literal}onclick="$(this).editable('goods.php?act=editinplace', {type: 'text',event: 'dblclick',width:'90%',indicator:'Saving...',onblur:'submit',tooltip: ''});"{/literal} id="{$goods.goods_id}||goods_number">{$goods.goods_number}</span></td>
+    {/if}  </tr>
+  {foreachelse}
+  <tr><td colspan="10" align="center" >暂无商品</td></tr>
+  {/foreach}
+   <tr>
+    <td colspan="3" valign="top" ><input type="checkbox" onclick="checkAll(this, 'checkboxes[]');"> 全选
+      <select name="type" id="selAction" onchange="changeAction()" disabled="true">
+        <option value="">请选择...</option>
+        <option value="best">特价</option>
+        <option value="new">新品</option>
+        <option value="hot">热卖</option>
+        <option value="not_best">取消特价</option>
+        <option value="not_new">取消新品</option>
+        <option value="not_hot">取消热卖</option>
+        <option value="del_tuijian">删除记录</option>
+      </select>
+
+
+
+
+
+<span id="target_cat" style="display:none">
+{$target_cat_list}
+</span>
+
+
+
+
+    <select name="type_id" id="type_id"  style="display:none">
+    <option value="0">请选择属性</option>
+    {$attr_list}
+    </select>
+
+  <select name="other_cat[]"  multiple="multiple"  style="height:140px;width:320px;display:none;" title="按住“Ctrl”或“Shift”键可以多选，按住“Ctrl”可取消选择">
+  <option value="0">请选择分类</option>
+  </select>
+  {if $code neq 'real_goods'}
+  <input type="hidden" name="extension_code" value="{$code}" />
+  {/if}
+    <input type="submit" value=" 确定 " id="btnSubmit" name="btnSubmit" class="button" disabled="true" /></td>
+    <td colspan="7" align="right"><div id="pager">{$pagestr}</div></td>
+    </tr>
+</table>
+</div>
+</form>
+
+{include file="copyright.htm"}

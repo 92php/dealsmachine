@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php?lang="></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/colorselector.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 邮件查询</td>
+          <td width="44%" align="right"><span class="navright"><a href="?act=list">邮件队列</a></span></td>
+        </tr>
+      </table></th>
+  </tr>
+</table>
+<div class="main-div">
+  <form action="?" method="get" name="searchForm"  onSubmit="return Validator.Validate(this,3)">
+    <table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+      <tr>
+        <th colspan="4">邮件查询<input name="act" type="hidden" value="addlist" /></th>
+      </tr>
+      <tr>
+        <td height="30"><div align="right"><strong>依据类型：</strong></div></td>
+        <td colspan="3"><select name="email_type" id="email_type"  dataType="Require" msg="请选择依据类型！">
+            <option value="" selected>请选择...</option>
+            <option value="1">按注册时间</option>
+            <option value="2">按登录时间</option>
+            <option value="3">按下单时间</option>
+          </select>
+          <span class="login_state">
+          <label for="is_login_0">
+            <input name="is_login" type="radio" id="is_login_0" value="1" checked="checked" />
+            有登录</label>
+          <span class="login_times">次数在
+          <input type="text" value="不限" size="4" maxlength="10" name="login_times_from"/>
+          到
+          <input  type="text" value="不限" size="6" maxlength="10"  name="login_times_to"/>
+          之间 </span> &nbsp; &nbsp;
+          <label for="is_login_1">
+            <input type="radio" name="is_login" value="0" id="is_login_1" />
+            没有登录</label>
+          </span> 
+          <span class="order_state">
+             下单次数在<input type="text" value="不限" size="4" maxlength="10"  name="order_times_from"/>
+          到
+          <input type="text" value="不限" size="6" maxlength="10"  name="order_times_to"/>
+          之间  &nbsp; &nbsp;
+          
+          订单金额在<input type="text" value="不限" size="4" maxlength="10"  name="order_amount_from" />
+          到
+          <input type="text" value="不限" size="10" maxlength="20"  name="order_amount_to" />
+          之间 
+          
+          </span></td>
+      </tr>
+      <tr>
+        <td width="29%" height="30"><div align="right"><strong>时间段：</strong></div></td>
+        <td width="71%"  colspan="3"><input type="text" name="start_time" maxlength="60" size="20"  id="start_time_id" />
+          <input name="start_time_btn" type="button" id="start_time_btn" onclick="return showCalendar('start_time_id', '%Y-%m-%d', false, false, 'start_time_btn');" value="选择" class="button"/>
+          ~
+          <input type="text" name="end_time" maxlength="60" size="20" id="end_time_id" />
+          <input name="end_time_btn" type="button" id="end_time_btn" onclick="return showCalendar('end_time_id', '%Y-%m-%d', false, false, 'end_time_btn');" value="选择" class="button"/></td>
+      </tr>
+      <tr>
+        <td height="30" align="right"><strong>邮件模板类型：</strong></td>
+        <td colspan="3"><select name="mail_temp" id="mail_temp"  dataType="Require" msg="请选择邮件模板类型！">
+            <option value="" selected="selected">请选择...</option>
+            {foreach from=$mailtemp item=list}
+            <option value="{$list.template_id}">{$list.template_subject}</option>
+            {/foreach}
+          </select></td>
+      </tr>
+      <tr>
+        <td height="27" colspan="4"><div align="center">
+            <input name="query" type="submit" class="button" id="query" value="搜索并加入邮件队列" />
+        </div></td>
+      </tr>
+    </table>
+  </form>
+</div>
+{include file="copyright.htm"} 

@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/editinplace.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 商品列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="?act=add">商品添加</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<!-- 商品搜索 -->
+{include file="goods_search.htm"}
+
+<form method="post" action="?act=batch" name="listForm" onsubmit="return confirmSubmit(this)">
+<div id="list">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="8%">
+      <input id="all_select[]" type="checkbox" class="cls"/>
+      <a href="javascript:;" atr="?sort_by=goods_id&sort_order={$filter.sort_order_goods_id}">编号</a>{$sort_goods_id}
+    </th>
+    <th width="40%"><a href="javascript:;"  atr="?sort_by=goods_name&sort_order={$filter.sort_order_goods_name}">商品名称</a>{$sort_goods_name}</th>
+    <th><a href="javascript:; "  atr="?sort_by=goods_sn&sort_order={$filter.sort_order_goods_sn}">货号</a>{$sort_goods_sn}</th>
+    <th><a href="javascript:; " atr="?sort_by=shop_price&sort_order={$filter.sort_order_shop_price}">价格</a>{$sort_shop_price}</th>
+    <th><a href="javascript:; " atr="?sort_by=is_on_sale&sort_order={$filter.sort_order_is_on_sale}">上架</a>{$sort_is_on_sale}</th>
+    <th><a href="javascript:; " atr="?sort_by=is_best&sort_order={$filter.sort_order_is_best}">特价</a>{$sort_is_best}</th>
+    <th><a href="javascript:; " atr="?sort_by=is_new&sort_order={$filter.sort_order_is_new}">新品</a>{$sort_is_new}</th>
+    <th><a href="javascript:; " atr="?sort_by=is_hot&sort_order={$filter.sort_order_is_hot}">热卖</a>{$sort_is_hot}</th>
+    <th><a href="javascript:; " atr="?sort_by=sort_order&sort_order={$filter.sort_order_sort_order}">排序</a>{$sort_sort_order}</th>
+    {if $use_storage}
+    <th><a href="javascript:; " atr="?sort_by=goods_number&sort_order={$filter.sort_order_goods_number}">库存</a>{$sort_goods_number}</th>
+    {/if}
+    <th>操作</th>
+    </tr>
+      {foreach from=$goods_list item=goods}
+  <tr id="eff{$goods.goods_id}">
+    <td><input type="checkbox" name="checkboxes[]" value="{$goods.goods_id}" class="cls"/>{$goods.goods_id}</td>
+    <td class="first-cell" style="{if $goods.is_promote}color:red;{/if}"  title='添 加 人：{$goods.add_user}&#10添加时间：{$goods.add_time}&#10修 改 人：{$goods.update_user}&#10修改时间：{$goods.last_update}'><span class="edit_goods" id="{$goods.goods_id}||goods_name">{$goods.goods_name|escape:html}</span></td>
+    <td><span class="edit_goods" id="{$goods.goods_id}||goods_sn">{$goods.goods_sn}</span></td>
+    <td align="right"><span class="edit_goods" id="{$goods.goods_id}||shop_price">{$goods.shop_price}</span></td>
+    <td align="center"><img src="/temp/skin3/images/admin/{if $goods.is_on_sale}yes{else}no{/if}.gif" field="is_on_sale" id="is_on_sale{$goods.goods_id}" state="{$goods.is_on_sale}" did="{$goods.goods_id}"  act="goods" id_field="goods_id" /></td>
+    <td align="center"><img src="/temp/skin3/images/admin/{if $goods.is_best}yes{else}no{/if}.gif"  field="is_best" id="is_best{$goods.goods_id}" state="{$goods.is_best}" did="{$goods.goods_id}"  act="goods" id_field="goods_id" /></td>
+    <td align="center"><img src="/temp/skin3/images/admin/{if $goods.is_new}yes{else}no{/if}.gif" field="is_new" id="is_new{$goods.goods_id}" state="{$goods.is_new}" did="{$goods.goods_id}"  act="goods" id_field="goods_id" /></td>
+    <td align="center"><img src="/temp/skin3/images/admin/{if $goods.is_hot}yes{else}no{/if}.gif"  field="is_hot" id="is_hot{$goods.goods_id}" state="{$goods.is_hot}" did="{$goods.goods_id}"  act="goods" id_field="goods_id" /></td>
+    <td align="center"><span class="edit_goods" id="{$goods.goods_id}||sort_order">{$goods.sort_order}</span></td>
+    {if $use_storage}
+    <td align="right"><span class="edit_goods" id="{$goods.goods_id}||goods_number">{$goods.goods_number}</span></td>
+    {/if}
+    <td align="center">
+      <a href="../m-goods-id-{$goods.goods_id}.htm" target="_blank" title="浏览"><img src="{$jscache_url}temp/skin3/eload_admin/images/icon_view.gif" width="16" height="16" border="0" /></a>
+      <a href="goods.php?act=edit&goods_id={$goods.goods_id}{if $code neq 'real_goods'}&extension_code={$code}{/if}" title="编辑"><img src="{$jscache_url}temp/skin3/eload_admin/images/icon_edit.gif" width="16" height="16" border="0" /></a>
+      <a href="goods.php?act=copy&goods_id={$goods.goods_id}{if $code neq 'real_goods'}&extension_code={$code}{/if}" title="复制"><img src="{$jscache_url}temp/skin3/eload_admin/images/icon_copy.gif" width="16" height="16" border="0" /></a>
+      <a  href="javascript:;" delatr="goods.php?act=remove&goods_id={$goods.goods_id}" delmsg="你确定要把该商品放入回收站吗？" class="del_acttion" title="放入回收站"><img src="{$jscache_url}temp/skin3/eload_admin/images/icon_trash.gif" width="16" height="16" border="0" /></a>
+      {if $add_handler}
+        |
+        {foreach from=$add_handler item=handler}
+        <a href="{$handler.url}&goods_id={$goods.goods_id}" title="{$handler.title}"><img src="/temp/skin3/images/admin/{$handler.img}" width="16" height="16" border="0" /></a>
+        {/foreach}
+      {/if}
+    </td>
+  </tr>
+  {foreachelse}
+  <tr><td colspan="11" align="center" >暂无商品</td></tr>
+  {/foreach}
+   <tr>
+    <td colspan="2" ><input id="all_select[]" type="checkbox" class="cls"/> 全选 
+  <select name="type" id="selAction" onchange="changeAction()" disabled="true">
+    <option value="">请选择...</option>
+    <option value="trash">回收站</option>
+    <option value="on_sale">上架</option>
+    <option value="not_on_sale">下架</option>
+    <option value="best">特价</option>
+    <option value="new">新品</option>
+    <option value="hot">热卖</option>
+    <option value="not_best">取消特价</option>
+    <option value="not_new">取消新品</option>
+    <option value="not_hot">取消热卖</option>
+    <option value="move_to">转移到分类</option>
+  </select>
+  <select name="target_cat" style="display:none">
+  <option value="0">请选择分类</option>{$cat_list}
+  </select>
+  {if $code neq 'real_goods'}
+  <input type="hidden" name="extension_code" value="{$code}" />
+  {/if}
+    <input type="submit" value=" 确定 " id="btnSubmit" name="btnSubmit" class="button" disabled="true" /></td>
+    <td colspan="9" align="right"><div id="pager">{$pagestr}</div></td>
+    </tr>
+</table>
+</div>
+</form>
+
+
+{include file="copyright.htm"}

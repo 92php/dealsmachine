@@ -1,0 +1,261 @@
+{if $smarty.get.pro eq 'hot' || $is_index eq 1 || $is_sitemap || $is_search} 
+<h3 class="sidebar_menuTitle">{$lang.browse_by_category}</h3>
+<div class="sidebar_menu mb10 js_sidebar_menu">
+	{if $left_catArr}
+	<div id="smoothmenu" class="ddsmoothmenu-v">{$left_catArr}</div>
+	{else}
+	<div class="litem js_litem" data-cat="22">
+		<a class="litem_list js_litem_list" href="/cell-phones-mobiles-c_59/">Cell Phones / Mobiles</a>
+		<div class="subitem js_subitem clearfix w470">
+			
+		</div>
+	</div>
+  
+	<div class="litem js_litem" data-cat="95">
+		<a class="litem_list js_litem_list" href="/notebook-umpc-c_95/">Notebook / Tablet PC</a>
+		<div class="subitem js_subitem clearfix w470">
+			
+		</div>
+	</div>
+    
+    <div class="litem js_litem none" data-cat="87">
+		<a class="litem_list js_litem_list" href="/gifts-festival-supplies-c_1735/">Gifts & Festival Supplies</a>
+		<div class="subitem js_subitem clearfix w230" style="width:220px; top:40px;">
+			
+		</div>
+	</div>
+
+    <div class="litem js_litem" data-cat="1832">
+		<a class="litem_list js_litem_list" href="/mobile-power-bank-c_1832/">Mobile Power Bank</a>
+		<div class="subitem js_subitem clearfix w230" style="width:220px; top:40px;">
+			
+		</div>
+	</div>
+
+    <div class="litem js_litem" data-cat="109">
+		<a class="litem_list js_litem_list" href="/headphones-c_109/">Headphones <img src="{$imgcache_url}images/styleimg/new.gif" /></a>
+		<div class="subitem js_subitem clearfix w230 mt30" style="width:220px; top:30px;">
+			
+		</div>
+	</div>
+
+	<div class="litem js_litem" data-cat="86">
+		<a class="litem_list js_litem_list" href="/computer-peripherals-c_86/">Computer Peripherals</a>
+		<div class="subitem js_subitem clearfix w470">
+		
+		</div>
+	</div>
+	
+	<div class="litem js_litem" data-cat="93"> 
+		<a class="litem_list js_litem_list" href="/iphone-ipad-ipod-c_93/">iPhone & iPad & iPod</a>
+		<div class="subitem js_subitem clearfix w470">
+		
+		</div>
+	</div>
+	
+	<div class="litem js_litem" data-cat="1782">
+		<a class="litem_list js_litem_list" href="/consumer-electronics-c_1782/">Consumer Electronics</a>
+		<div class="subitem js_subitem clearfix w470" >
+		</div>
+	</div>
+	
+	<div class="litem js_litem" data-cat="63">
+		<a class="litem_list js_litem_list" href="/car-electronics-c_63/" style="color:#f60">Car Electronics<i class="hot red">hot</i></a>
+		<div class="subitem js_subitem clearfix" style=" width:220px" >
+		</div>
+	</div>	
+
+	<div class="litem js_litem" data-cat="96">
+		<a class="litem_list js_litem_list" href="/watches-c_96/">Watches</a>
+		<div class="subitem js_subitem clearfix w470  mt100">
+		
+		</div>
+	</div>
+  
+	<div class="litem js_litem" data-cat="91"> 
+	<a class="litem_list js_litem_list" href="/lasers-flashlights-c_91/">Flashlights & LED lights</a>
+		<div class="subitem js_subitem clearfix w470" >
+		
+		</div>
+	</div>
+  
+	<div class="litem js_litem" data-cat="107">
+		<a class="litem_list js_litem_list" href="/outdoors-sports-c_107/">Outdoors & Sports</a>
+		<div class="subitem js_subitem clearfix w470 mt50" >
+		
+		</div>
+	</div>
+  
+	<div class="litem js_litem" data-cat="89">
+		<a class="litem_list js_litem_list" href="/cell-phone-accessories-c_89/"><i class="litem_freeShop fr"></i>Cell Phone Accessories</a>
+		<div class="subitem js_subitem clearfix w470 mt100">
+		
+		</div>
+	</div>
+  
+	<div class="litem js_litem" data-cat="105">
+		<a class="litem_list js_litem_list" href="/home-office-c_105/">Home & Office</a>
+		<div class="subitem js_subitem clearfix w470" >
+			
+		</div>
+	</div>
+  
+	<div class="litem js_litem" data-cat="103">
+		<a class="litem_list js_litem_list" href="/hobbies-toys-c_103/">Hobbies & Toys</a>
+		<div class="subitem js_subitem clearfix w230" style="margin-top:160px; width:220px;">
+
+		</div>
+	</div>
+	{/if}
+</div>
+{/if}
+
+{if $goods_list_flag eq 'yes'}
+<div class="l_box mb10">
+  <h3 class="l_title ">{$lang.Sub_Categories}</h3>
+	{if $left_sub_catArr}
+		  <div class="l_box_display BBRD_list subCategories">
+			{$left_sub_catArr}
+		  </div>
+    {/if}
+	{if $smarty.get.pro neq 'new'}
+		  <div id="smoothmenu" class="ddsmoothmenu-v">
+		  {$left_catArr_top}
+		  </div>
+	{/if}			
+</div>
+{/if}
+
+{if $nav_date}
+<div class="l_box">
+	<h3 class="l_title">{$lang.browse_by_release_dates}</h3>
+	<div class="l_box_display">
+		<ul class="BBRD_list pt5 pl5" >
+		{foreach  from = $nav_date item = d}
+			  <li class="pl20 pb5"><b></b><a href="/{$cur_lang_url}pt-new-date-{$d.adate}/">{$d.date}({$d.dnum})</a></li>
+		{/foreach}
+		</ul>
+	</div>
+</div>
+{/if}
+
+{if $daily_recommended}
+<div class="l_box mt10">
+	<h2 class="l_title">{$lang.TODAY_ONLY}</h2>
+	<div class="l_box_display">
+		<div class="TO_imgBox">
+			<a href="{$daily_recommended.url_title}"><img src="{$daily_recommended.goods_thumb}" width="150" height="150"/></a>
+			{if $daily_recommended.is_free_shipping}<span class="tmfr"></span>{/if}
+			<div class="TO_priceBox">
+				<p class="TO_price_costPrice"><span class="bizhong">USD</span><strong class="my_shop_price" orgp="{$daily_recommended.shop_price}">{$daily_recommended.shop_price}</strong></p>
+				{if $daily_recommended.market_price > 0}
+					<p class="TO_price_currentPrice"><span class="bizhong">USD</span><strong class="my_shop_price" orgp="{$daily_recommended.market_price}">{$daily_recommended.market_price}</strong></p>
+				{/if}
+			</div>
+		</div>
+		<p class="TO_productName fz11"><a href="{$daily_recommended.url_title}">{$daily_recommended.short_name}</a></p>
+		{if $daily_recommended_review}
+		{if $cur_lang eq $default_lang}
+		<div class="TO_comment fz11">
+			<em>"</em>{$daily_recommended_review|substr:0:70}<em>"</em>
+		</div>
+		{/if}
+		{/if}
+	</div>
+</div>
+{/if}
+
+{if $is_index eq 1}
+<div class="ad_pic mt10"><img class="js_lazyLoad" src="{$imgcache_url}images/styleimg/grey.gif" data-original="{$imgcache_url}ximages/90.jpg" width="190" height="100"/></div>
+{/if}
+
+{if $cur_lang eq $default_lang}
+{if $order_list}
+<div class="l_box mt10">
+	<h3 class="l_title">{$lang.recent_orders}</h3>
+	<div class="l_box_display ReOdBox">
+		<ul  id="js_upSlide">
+			{foreach from=$order_list item=goods}
+			<li>
+				<a href="{$goods.url_title}" class="ReOd_proImg" title="{$goods.goods_full_name}"><img src="{$goods.goods_thumb}" width="50" height="50" alt="{$goods.goods_full_name}"/></a>
+				<p class="ReOd_proName fz11"><a href="{$goods.url_title}" title="{$goods.goods_full_name}">{$goods.goods_name}</a></p>
+				<p><strong class="my_shop_price pr5 fb red" orgp="{$goods.goods_price}">{$goods.goods_price}</strong><span class="bizhong fb red">USD</span></p>
+				<P>ship to  {$goods.province}, {$goods.country} </p>
+			</li>
+			{/foreach}
+		</ul>
+	</div>
+</div>
+{/if}
+{/if}
+
+{if $cur_lang eq $default_lang}
+{if $left_seo_recommened}
+<div class="l_box mt10">
+	<h3 class="l_title">{$lang.Recommended_products}</h3>
+	<div class="l_box_display ReProBox">
+		<ul>
+		{foreach from=$left_seo_recommened item=goods}
+			<li>
+				<a href="{$goods.url_title}" class="RePro_proImg fl" title="{$goods.goods_title}" {if $cur_lang neq $default_lang}rel="nofollow"{/if}><img src="{$goods.goods_thumb}" width="80" height="80"  alt="{$goods.goods_title}"/></a>
+				<p class="RePro_proName fz11"><a href="{$goods.url_title}" title="{$goods.goods_title}" {if $cur_lang neq $default_lang}rel="nofollow"{/if}>{$goods.short_name}</a></p>
+				<p><span class="bizhong fb pr5 red">USD</span><strong class="my_shop_price fb red" orgp="{$goods.shop_price}">{$goods.shop_price}</strong></p>
+			</li>
+		{/foreach}	
+		</ul>
+	</div>
+</div>
+{/if}
+{/if}
+
+{if $is_index eq 1}
+	<div class="ad_pic mt10"><a href="/{$cur_lang_url}m-promotion-active-14.htm"><img class="js_lazyLoad" src="{$imgcache_url}images/styleimg/grey190_80.gif" data-original="{$imgcache_url}ximages/dm.jpg" width="190" height="80" /></a></div>
+	<div class="ad_pic mt10"><a href="/{$cur_lang_url}gp/contact-us-20/"><img class="js_lazyLoad" src="{$imgcache_url}images/styleimg/grey190_80.gif" data-original="{$imgcache_url}ximages/wi.jpg" width="190" height="80" ></a></div>
+	
+	<div class="ad_pic mt10"><a href="/{$cur_lang_url}m-ucoupon-a-couponlist.htm"><img class="js_lazyLoad" src="{$imgcache_url}images/styleimg/grey190_80.gif" data-original="{$imgcache_url}ximages/gc.jpg" width="190" height="80" ></a></div>
+	<div class="ad_pic mt10"><a href="/{$cur_lang_url}pt-freeship/"><img class="js_lazyLoad" src="{$imgcache_url}images/styleimg/grey190_80.gif" data-original="{$imgcache_url}ximages/free.jpg" width="190" height="80" ></a></div>
+{/if}
+
+{if $Price_Arr}{* 价格区间 *}
+<div class="l_box mt10">
+	<h3 class="l_title">{$lang.Browse_by_price}</h3>
+    <div class="l_box_display wholesalePrices">
+      <ul>
+	    {foreach from=$Price_Arr item=list}
+	    <li>
+	      <p> <a rel="nofollow" href="{$list.url}" title="Wholesale Price from {$list.0} to {$list.1}"> <span class="bizhong">USD</span> <span class="my_shop_price" orgp="{$list.0}">{$list.0}</span> - <span class="bizhong">USD</span> <span class="my_shop_price" orgp="{$list.1}">{$list.1}</span> </a> </p>
+	    </li>
+	    {/foreach}
+      </ul>
+    </div>
+    <div class="clear"></div>
+</div>
+{/if}{* end 价格区间 *}
+
+{if $is_category eq 1}
+	{include file="category_include_left.htm"}
+{/if}
+
+{if $cur_lang eq $default_lang}
+{if $hot_products}
+<div class="l_box mt10">
+	<h3 class="l_title">{$lang.new_arrival}</h3>
+	<div class="l_box_display ReProBox">
+		<ul>
+		{foreach from=$hot_products item=goods}
+			<li>
+				<a href="{$goods.url_title}" class="RePro_proImg fl" title="{$goods.goods_title}" {if $cur_lang neq $default_lang}rel="nofollow"{/if}><img  class="js_lazyLoad" src="{$imgcache_url}images/styleimg/grey.gif" data-original="{$goods.goods_thumb}" width="80" height="80"  alt="{$goods.goods_title}"/></a>
+				<p class="RePro_proName fz11"><a href="{$goods.url_title}" {if $cur_lang neq $default_lang}rel="nofollow"{/if} title="{$goods.goods_title}">{$goods.short_name}</a></p>
+				<p><span class="bizhong fb pr5 red">USD</span><strong class="my_shop_price fb red" orgp="{$goods.shop_price}">{$goods.shop_price}</strong></p>
+			</li>
+		{/foreach}	
+		</ul>
+	</div>
+</div>
+{/if}
+{/if}
+
+{if ($page eq 'index' || $page eq 'search') && $cur_lang neq $default_lang}
+{else}
+<script src="{$imgcache_url}minjs/index.js?2014051501"></script>
+{/if}

@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 邮件模板</td>
+		  {if $default_lang eq '1'}
+          <td width="44%" align="right"><span class="navright"><a href="?act=add">模板添加</a></span></td>
+		  {/if}
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td id="navleft">选择语言：
+		  <select name="lang" id="lang" onchange="select_lang(this.value);">
+		  	<option value="">选择语言</option>
+		    <option value="0">原始语言</option>
+		    {foreach from=$lang_arr item=item key=key}
+		  	<option value="{$item.title_e}" {if $cur_lang eq $item.title_e}selected="selected"{/if}>{$item.title}</option>
+			{/foreach}
+		  </select>
+		  </td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="12%">编号</th>
+    <th width="10%">中文备注</th>
+    <th width="38%">主题</th>
+    <th width="15%">邮件类型</th>
+    
+    <th width="16%">最后修改时间</th>
+    <th width="19%" align="center">操作</th>
+  </tr>
+  {foreach from=$mailtemp item=list name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';"> 
+    <td height="20" >{$list.template_id}</td>
+ 	<td>{$list.note}</td>    
+    <td><a href="?act=add&id={$list.template_id}">{$list.template_subject}</a></td>
+    <td>{if $list.is_html == 0} 文本{else} html{/if}</td>
+    <td>{$list.last_modify}</td>
+    <td align="center"><a href="?act=add&id={$list.template_id}">修改</a><span style="display:none"> | <a href="?act=del&id={$list.template_id}" class="del_act" delmsg="你确定要删除吗？">删除</a></span>
+      <input type="hidden" id="{$list.template_id}" value="{$list.template_id}" /></td>
+  </tr>
+  {/foreach}
+</table>
+{include file="copyright.htm"}
+{literal}
+<script>
+function select_lang(lang) {
+	window.location.href = 'mail_template.php?lang='+ lang +'';
+}
+</script>
+{/literal}
+</body>
+</html>

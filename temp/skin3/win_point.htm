@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	{include file="top.htm"}
+    <link rel="stylesheet" href="{$imgcache_url}mincss/otherpage_min.css?2013061901" />
+</head>
+<body>
+<!-- <script language="javascript" src="{$jscache_url}sysjs/jvalidate.min.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/user_js.js"></script> 
+{include file="js_language.htm"}-->
+<body>
+{include file="public_top.htm"}
+	<div class="curPath"><a  href="/{$cur_lang_url}" title="web home">{$lang.home}</a> &raquo;  {$lang.point_name}</div>
+	
+	<div id="mainWarp" class="msgWarpBox">
+		<form action="m-users-a-win_point.htm" name="" method="get" >
+			<ul class="winPoint">
+				<li class="clearfix pr">
+					<label for="" class="fl">{$lang.point_name} {$lang.coupon}:</label>
+					<input type="text" size="30" value="{$code_number}" name="code" class="winpointInput fl"/><input type="hidden" name="act" value="check"/>
+				</li>
+				<li>
+					<input name="submit" type="submit" value="Submit" class="winpointBtn"/>
+				</li>
+				<li>
+					{$lang.win_point_des_1}
+				</li>
+			</ul>
+		</form>
+	</div>
+	<div id="footer">
+	{include file="foothelp.htm"}
+	{include file="foot.htm"} 
+	</div>
+	{include file="statistics_js.htm"}
+</body>
+</html>

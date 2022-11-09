@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+{include file="top.htm"}
+<script src="{$imgcache_url}minjs/vote_default.min.js"></script>
+</head>
+<body>
+    {include file="public_top.htm"}
+	<div class="clear"></div>
+<div style="width:997px; margin:0px auto; clear:both; background:#EDFBFE;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="center"><img src="{$imgcache_url}images/vote/t1.jpg" alt="vote"/></td>
+  </tr>
+  <tr>
+    <td style="background:url({$imgcache_url}images/vote/bg.jpg) repeat-y center;"><table width="800" border="0" align="center" cellpadding="0" cellspacing="0">
+      <tr>
+        <td class="voteli">        {$data.description}
+        <form id="form-vote" action="index.php?m=vote&a=vote" method="post">
+            <ul>
+                {foreach from=$data.titles item=item name=item}
+                <li class="vote-title {$type_arr[$item.s_type]}{if $item.needed} needed{/if}" id="li-{$item.title_id}">
+                    <p><span>{$smarty.foreach.item.iteration}. {$item.title|replace:'$br':'<br />'}<span></p>
+                    {smarty_set_option option_arr=$item.options title_arr=$item}
+                </li>
+                {/foreach}
+            </ul>
+            <input type="hidden" name="sid" id="hidden-sid" value="{$subject_id}" />
+        </form><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="center" style="padding-top:20px;"><input type="image" src="{$imgcache_url}images/submit.jpg" id="btn-vote"></td>
+  </tr>
+</table>
+
+        </td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="{$imgcache_url}images/vote/f1.jpg" alt="vote"/></td>
+  </tr>
+</table>
+
+
+    </div>
+<div id="footer">
+	{include file="foot.htm"}
+	</div>

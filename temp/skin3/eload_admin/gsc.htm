@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>gmc设置更新及删除编码</title>
+    <link type="text/css" rel="stylesheet" href="/temp/skin3/eload_admin/images/admin_css.css" />
+    <script src="{$jscache_url}sysjs/eload13pack.js"></script>
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td id="navleft">
+                            <a href="index.php?act=main">管理中心</a>
+                            &gt;&gt; gmc设置更新及删除编码
+                        </td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <form id="form" method="post">
+        <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+            <tr>
+                <td style="width: 150px; text-align: right;">需要更新的编码</td>
+                <td>
+                    <textarea style="font-size: 12px;" rows="20" cols="20" name="data[update]">{$data.update}</textarea>
+                    <span style="color: gray">一行一个,同步更新后自动清除,下同</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">需要删除的编码</td>
+                <td>
+                    <textarea style="font-size: 12px;" rows="20" cols="20" name="data[delete]">{$data.delete}</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td align="right"></td>
+                <td>
+                    <input type="button" value="提 交" id="btn-submit" class="sub_but" />
+                    <input type="button" value="马上同步至google" style="display: none" id="btn-sync" />
+                </td>
+            </tr>
+        </table>
+    </form>
+    {literal}
+    <script>
+        $('#btn-submit').click(function() {
+            var me      = $(this);
+
+            me.val('提交中');
+
+            $.ajax({
+                url: 'gsc.php?action=save',
+                type: 'post',
+                dataType: 'json',
+                data: $('#form').serialize(),
+                complete: function() {
+                    me.val('提 交');
+                },
+                error: function() {
+                    alert('系统繁忙，请稍后再试！');
+                },
+                success: function(data) {
+
+                    if (data.success) {
+                        $('#btn-sync').show();
+                        alert('设置成功');
+                    }
+                    else {
+                        alert(data.error || '系统繁忙，请稍后再试！');
+                    }
+                }
+            });
+        });
+
+        $('#btn-sync').click(function() {
+            var me      = $(this)
+                value   = me.val();
+
+
+            me.val('同步中，请耐心等待，不要关闭浏览器');
+
+            $.get('/gsc/gsc.php?action=update', function() {
+                alert('同步成功');
+                location.reload();
+            });
+        });
+    </script>
+    {/literal}
+    {include file="copyright.htm"}

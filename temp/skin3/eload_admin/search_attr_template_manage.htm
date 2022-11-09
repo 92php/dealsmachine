@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$imgcache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script language="javascript" src="{$imgcache_url}temp/skin3/eload_admin/js/editinplace.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 属性查找模板列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="search_attr_template.php?act=add">属性查找模板添加</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form method="post" action="" name="listForm">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="58%">模板名称</th>
+    <th width="10%">前台模板显示位置</th>
+    <th width="10%">查询规格个数</th>
+    <th width="22%">操作</th>
+  </tr>
+  {if $template_info_arr}
+	  {foreach from=$template_info_arr item=template  name=loopname}
+		<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+		    <td height="20">{$template.template_name}</td>
+		    <td width="10%" align="center">
+		    {if $template.template_site == 1} 
+		    	左侧菜单栏
+		    {elseif $template.template_site == 2}
+		    	列表头部
+		    {/if}
+		    </td>
+		    <td align="center">{$template.attr_num}</td>
+		    <td align="center">
+		      <a href="search_attr_template.php?act=attr_list&template_id={$template.template_id}" title="{$lang.attribute}">属性列表</a> |
+		      <a href="search_attr_template.php?act=add&template_id={$template.template_id}" title="{$lang.edit}">修改</a> |
+		      <a href="search_attr_template.php?act=remove&template_id={$template.template_id}" class="del_act" delmsg="删除属性查找模板将会清除该模板下的所有规格属性。您确定要删除选定的属性查找模板吗？">删除</a>
+		    </td>
+		  </tr>
+	    {/foreach}
+	{else}
+		<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+		    <td height="20" colspan="4" align="center">暂时没有查找模板</td>
+		  </tr>
+    {/if}
+  </table>
+</form>
+{include file="copyright.htm"}
+

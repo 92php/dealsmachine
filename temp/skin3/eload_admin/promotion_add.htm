@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php?lang="></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 促销码{$tag_msg}</td>
+          <td width="44%" align="right"><span class="navright"><a href="promotion_manage.php">促销码列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<div class="main-div">
+  <form  method="post" name="theForm"  action="{$url}" onSubmit="return Validator.Validate(this,3)">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th colspan="3">促销码{$tag_msg}</th>
+  </tr>
+      <tr>
+        <td width="22%" class="label">促销码:</td>
+        <td width="78%"><input name="code" type="text" id="code" value="{$pcodeArr.code}" size="30"  dataType="Require" msg="请填写促销码！"/>
+        *<span id="error_msg" style="color:red"></span>
+       </td>
+      </tr>
+
+      <tr>
+        <td class="label">到期日期:</td>
+        <td><input name="exp_time" value="{$pcodeArr.exp_time}" style="width:150px;" ondblclick="return showCalendar(this, '%Y-%m-%d %H:%M', true, true, this);"  datatype="Require" msg="请填写到期日期！"/>
+        * 双击选择</td>
+      </tr>
+      <tr>
+        <td class="label">最多可使用的次数:</td>
+        <td><input name="times" id="times" style="width:40px;"  value="{$pcodeArr.times}"  datatype="Require" msg="请填写最多可使用的次数！"/>
+          填0表示不限制使用次数</td>
+      </tr>
+      <tr>
+        <td class="label">促销方式:</td>
+        <td>
+          <label for="fangshi_0">
+            <input name="fangshi" type="radio" id="fangshi_0" value="1" {if $pcodeArr.fangshi eq '1' or $pcodeArr.fangshi eq ''} checked="checked" {/if}/>
+           百分比 </label>
+          <label  for="fangshi_1">
+            <input type="radio" name="fangshi" value="2" id="fangshi_1" {if $pcodeArr.fangshi eq '2'} checked="checked" {/if}/>
+            直减金额</label>
+        </td>
+      </tr>
+	  <tr>
+        <td class="label">指定分类:</td>
+        <td>
+           <input type="text" name="cat_id" value="{$pcodeArr.cat_id}">说明:填写分类id号多个分类使用,分割
+        </td>
+      </tr>
+      <tr>
+        <td class="label">优惠段:</td>
+        <td><textarea name="youhuilv" cols="45" rows="2" id="youhuilv" datatype="Require" msg="请填写优惠率！">{$pcodeArr.youhuilv}</textarea>
+          *<br />
+说明： 例如：100-20,300-50 表示两个价格段，<br />
+满100对应20的优惠，满300对应50的优惠。支持多段优惠价格。<br />
+对单个产品使用直减金额优惠的时候，直接写减的优惠即可。
+		</td>
+      </tr>
+      <tr align="center">
+        <td align="right"><span class="label">针对用户:</span></td>
+        <td align="left"><textarea name="users" id="users" cols="45" rows="5">{$pcodeArr.users}</textarea>
+          <br />
+          多用户请使用半角逗号( , )隔开。针对所有用户请保持空</td>
+      </tr>
+       <tr align="center">
+        <td align="right"><span class="label">针对产品:</span></td>
+        <td align="left"><textarea name="goods" id="goods" cols="45" rows="5">{$pcodeArr.goods}</textarea>
+          <br />
+          请填产品编号，多用户请使用半角逗号( , )隔开。针对所有产品请保持空(只针对产品单价)</td>
+      </tr>
+     <tr align="center">
+        <td align="center">&nbsp;</td>
+        <td align="left">
+        <input name="button" type="submit" class="sub_but" id="button" value="{$tag_msg}" /></td>
+      </tr>
+    </table>
+  </form>
+  <input type="hidden" id="poce_id" value="{$pcodeArr.id}">
+</div>
+{literal}
+<script type="text/javascript">
+$("#code").blur(function(){
+	var code = $("#code").val();
+	var poce_id = $("#poce_id").val();
+	if(code && !poce_id){
+		$.ajax({
+			url: "promotion_manage.php?act=check_code&code="+code, 
+			type:'post',
+			success: function(data){
+				if(data ==1){
+					$("#error_msg").html(code+"促销码已经存在");
+					$("#error_msg").show();
+				}else{
+					$("#error_msg").hide();
+				}
+		  }});
+	}
+});
+
+</script>
+{/literal}
+{include file="copyright.htm"}

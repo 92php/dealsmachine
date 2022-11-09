@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站客户分析</title>
+    <link type="text/css" rel="stylesheet" href="/temp/skin3/eload_admin/images/admin_css.css" />
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> &gt;&gt; 网站客户分析</td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;">
+        <tr>
+            <th>时间</th>
+            <th>新注册客户人数</th>
+            <th>老客户登陆人数</th>
+            <th>第一次购买的客户人数</th>
+            <th>多次购买的客户人数</th>
+            <th>新注册客户下单人数</th>
+        </tr>
+        {foreach from=$data item=item name=loop}
+        <tr bgColor="{cycle values='#f4f9fd,e8f1fd' name=cycle1}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{cycle values='#f4f9fd,e8f1fd' name=cycle2}'">
+            <td>{$item.unixtime|date_format:'%Y-%m-%d'}</td>
+            <td>{$item.new_registers}</td>
+            <td>{$item.old_logins}</td>
+            <td>{$item.first_orders}</td>
+            <td>{$item.multi_orders}</td>
+            <td>{$item.new_registers_orders}</td>
+        </tr>
+        {foreachelse}
+        <tr>
+            <td colspan="15" class="no-records">{$no_records}</td>
+        </tr>
+        {/foreach}
+        <tr>
+          <td align="right" nowrap="true" colspan="11"><div id="pager">{$pagestr}</div></td>
+        </tr>
+    </table>
+    <div style="color: grey; margin-left: 10px;">
+        <p style="color: red; font-weight: bold;">说明</p>
+        <ul>
+            <li>新注册客户人数：当日新注册用户累积数</li>
+            <li>老客户登陆人数：当日老客户登陆（注册大于2天的客户）的客户累积数</li>
+            <li>第一次购买的客户人数：当日历史第一次购买的客户个数累积</li>
+            <li>多次购买的客户人数：当日历史大于一次购买的客户个数累积</li>
+            <li>新注册客户下单人数：当日新注册客户下单的客户个数累积</li>
+        </ul>
+    </div>
+    <script type="text/javascript"></script>
+    {include file="copyright.htm"}

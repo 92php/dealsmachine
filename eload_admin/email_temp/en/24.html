@@ -1,0 +1,52 @@
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="800">
+<tbody>
+<tr>
+<td colspan="3" width="2400">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="800">
+<tbody>
+<tr>
+<td rowspan="2" height="65" width="185"><a href="http://www.bestafford.com/"><img src="http://www.bestafford.com/temp/skin3/images/logo_email.jpg" border="0" height="65" width="185"></a></td>
+<td style="FONT-FAMILY: Arial,Helvetica,sans-serif; COLOR: rgb(0,0,0); FONT-SIZE: 12px" rowspan="2" align="center" background="http://www.bestafford.com/images/c_tbge.jpg" width="229">Welcome!<a href="http://www.bestafford.com/m-users-a-sign.htm" target="_blank"> Sign in</a> or <a href="http://www.bestafford.com/m-users-a-join.htm" target="_blank">register</a>.</td>
+<td height="20" width="386">&nbsp;</td></tr>
+<tr>
+<td style="FONT-FAMILY: Arial,Helvetica,sans-serif; COLOR: rgb(255,255,255); FONT-SIZE: 13px; FONT-WEIGHT: bold" align="center" background="http://www.bestafford.com/images/r_tbge.jpg" height="45"><a style="COLOR: rgb(255,255,255)" href="http://www.bestafford.com/" target="_blank">Home</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a style="COLOR: rgb(255,255,255)" href="http://www.bestafford.com/new-products.html" target="_blank">New Products</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a style="COLOR: rgb(255,255,255)" href="http://www.bestafford.com/m-users.htm" target="_blank">My Account</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a style="COLOR: rgb(255,255,255)" href="http://www.bestafford.com/m-article.htm" target="_blank">Support</a> </td></tr></tbody></table></td></tr>
+<tr>
+<td style="PADDING-TOP: 10px" colspan="3" align="center">
+<table border="0" cellpadding="0" cellspacing="0" width="780">
+<tbody>
+<tr>
+<td style="BACKGROUND: url(http://www.bestafford.com/images/ccbgbge.jpg) no-repeat left top" align="center" valign="top">
+<table border="0" cellpadding="0" cellspacing="0" width="95%">
+<tbody>
+<tr>
+<td style="LINE-HEIGHT: 23px; FONT-FAMILY: Arial,Helvetica,sans-serif; COLOR: rgb(0,0,0); FONT-SIZE: 12px; PADDING-TOP: 15px" align="left">
+<p><strong style="FONT-SIZE: 19px">Hello, {$review.nickname}</strong></p>Congratulations! Your reviews for the following products you purchased have been posted on our website <a href="http://www.bestafford.com" target="_blank">www.bestafford.com</a>, and {$review.get_point} points are added to your account. You can use <span>DM </span> points to save money during next shopping on our website. The more you get, the more you save. <br><br></td></tr>
+<tr>
+<td style="LINE-HEIGHT: 15px; FONT-FAMILY: Arial,Helvetica,sans-serif; COLOR: rgb(0,0,0); FONT-SIZE: 12px; PADDING-TOP: 5px" align="left">
+{if $review neq '} 
+{/if} 
+<table style="MARGIN-BOTTOM: 10px" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td rowspan="5" width="165">
+<table border="0" cellpadding="0" cellspacing="0" height="150" width="150">
+<tbody>
+<tr>
+<td style="BORDER-BOTTOM: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; BORDER-RIGHT: #cccccc 1px solid"><a href="{$goods.url_title}" target="_blank"><img alt="Produte picture" src="{$goods.goods_grid}" border="0" height="150" width="150"></a></td></tr></tbody></table></td>
+<td style="PADDING-BOTTOM: 10px; COLOR: #0033cc; FONT-SIZE: 13px; FONT-WEIGHT: bold" height="20" valign="top"><a href="{$goods.url_title}" target="_blank">{$goods.goods_name}</a></td></tr>
+<tr>
+<td style="PADDING-BOTTOM: 10px; FONT-SIZE: 12px" height="10" valign="top"><br></td></tr><tr>
+<td style="PADDING-BOTTOM: 10px; FONT-SIZE: 12px" height="30" valign="top"><img src="{$o.review.avg_rate_img}"> {$review.avg_rate}(<a href="{$goods.url_title}" target="_blank">{$review.review_count} Customer Review{if $review.review_count gt 1}s{/if}</a>)</td></tr><tr>
+<td style="COLOR: #ff6600; FONT-SIZE: 14px; FONT-WEIGHT: bold" height="30">{$review.get_point} <span>DM </span> points gained for this post</td></tr>
+<tr>
+<td style="FONT-SIZE: 18px; FONT-WEIGHT: bold"><a href="{$goods.url_title}">Check my review</a></td></tr></tbody></table></td></tr>
+<tr>
+<td style="LINE-HEIGHT: 20px; FONT-FAMILY: Arial,Helvetica,sans-serif; COLOR: rgb(0,0,0); FONT-SIZE: 12px; PADDING-TOP: 5px" align="left"><strong>Check </strong><span>DM </span><strong> points in My Account: </strong>&nbsp;<a href="http://www.bestafford.com/m-users-a-points_record.htm">http://www.bestafford.com/m-users-a-points_record.htm</a></td></tr></tbody></table></td></tr></tbody></table></td></tr>
+<tr>
+<td style="PADDING-BOTTOM: 10px; LINE-HEIGHT: 15px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; FONT-FAMILY: Arial,Helvetica,sans-serif; COLOR: rgb(0,0,0); FONT-SIZE: 11px; PADDING-TOP: 10px" colspan="3" align="left">For any after sales questions, please <a href="http://support.bestafford.com" target="_blank">Contact Customer Service</a> and get a response within 24 hours</td></tr>
+<tr>
+<td style="LINE-HEIGHT: 15px; FONT-FAMILY: Arial,Helvetica,sans-serif; COLOR: rgb(0,0,0); FONT-SIZE: 11px" colspan="3" align="left">Please don't reply this email directly, this mailbox is not monitored. Please email to <a href="mailto:support@bestafford.com">support@bestafford.com</a> if you have any questions.<br><span style="PADDING-TOP: 10px">If you prefer not to receive promotional email messages from us <a href="http://www.bestafford.com/m-users-a-unsubmail-e-{$review.email}.htm" target="_blank">click here</a></span></td></tr>
+<tr>
+<td colspan="3" background="http://www.bestafford.com/images/f_bbge.jpg" height="15">&nbsp;</td></tr>
+<tr>
+<td style="LINE-HEIGHT: 15px; FONT-FAMILY: Arial,Helvetica,sans-serif; COLOR: rgb(153,153,153); FONT-SIZE: 11px" colspan="3" align="center">Registered Names and Trademarks are the copyright and property of their respective owners.<br>Copyright 2006-2011 <span style="COLOR: rgb(0,51,153)">bestafford.com</span> All Rights Reserved</td></tr></tbody></table>

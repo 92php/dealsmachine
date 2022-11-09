@@ -1,0 +1,6 @@
+[2014-06-22 23:05:19.7287]  [127.0.0.1] POST /eload_admin/landing.php?act=signin(http://www.dealsmachine_v.com/eload_admin/landing.php)
+in C:\wamp\wamp\www\dealsmachine\lib\cache\Memcache.php on line 34
+PHP Notice[8]锛歁emcache::get() [<a href='memcache.get'>memcache.get</a>]: Server 127.0.0.1 (tcp 11212) failed with: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ (10060)
+
+$@!#

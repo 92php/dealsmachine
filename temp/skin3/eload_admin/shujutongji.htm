@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php?lang="></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 数据统计</td>
+          <td width="44%" align="right"> </td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <form name="timetnterval" style="margin:0px" method="get" class="thisfrm">
+  <tr>
+    <td><table width="100%" border="0" cellpadding="3" cellspacing="0">
+      <tr>
+          <td bgcolor="#FFFFFF">时间段： 从 <input name="start_date" value="{$start_date}" style="width:130px;" ondblclick="return showCalendar(this, '%Y-%m-%d %H:%M:%S', false, false, this);" />&nbsp;&nbsp;到 &nbsp;&nbsp; <input name="end_date" value="{$end_date}" style="width:130px;" ondblclick="return showCalendar(this, '%Y-%m-%d %H:%M:%S', false, false, this);" /> 
+
+            <select name="time_jainge" id="time_jainge">
+              <option value="">时间间隔(分钟)</option>
+        {foreach from=$time_jainge item=list}
+                <option value="{$list}" {if $list eq $smarty.get.time_jainge}selected{/if}>{$list}</option>{/foreach}
+      
+          
+            </select>
+            <input type="submit" name="submit" value="开始查询" class="button" /></td>
+          </tr>
+      </table></td>
+  </tr>
+ 
+  </form>
+</table>
+
+
+
+
+{if $smarty.get}
+<form method="POST" action="" name="listForm">
+  <div class="list-div" id="listDiv">
+
+  <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+     <tr>
+      <th width="32%" height="21">时间段</th>
+      <th width="17%">注册数</th>
+      <th width="17%">购物车(产品/人数)</th>
+      <th width="19%">下单数(全/已)</th>
+      <th width="15%">登陆数</th>
+      </tr>
+     
+<tr bgcolor="#FDE8FF">
+      <td height="37" align="right"><!--这一搜索条件下的产品所在订单金额：{$tj.turnover}--></td>
+      <td height="37" align="right">&nbsp;</td>
+      <td height="37" align="right">&nbsp;</td>
+      <td height="37" align="right">&nbsp;</td>
+      <td height="37" align="right">&nbsp;</td>
+      </tr>
+     
+     
+  {foreach from=$tongji_data item=list name=val}
+<tr bgColor="{if $smarty.foreach.val.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.val.iteration is even}#f4f9fd{else}#e8f1fd{/if}'";>
+      <td align="center">{$list.time_start}</td>
+      <td align="center">{$list.reg_num}</td>
+      <td align="center">{$list.cart_goods_num} / {$list.cart_user_num}</td>
+      <td align="center">{$list.order_num} / {$list.order_pay_num}</td>
+      <td align="center">{$list.login_num}</td>
+      </tr>
+  {foreachelse}
+    <tr><td colspan="5" align="center" class="no-records">暂无记录</td></tr>
+  {/foreach}
+  </table>
+  <table width="100%" cellspacing="0" id="page-table">
+  <tr>
+    <td width="8">&nbsp;</td>
+    <td width="964" align="right" nowrap="true">
+    {$pagestr}
+    </td>
+  </tr>
+  </table>
+</div>
+</form>
+{/if}
+{include file="copyright.htm"}

@@ -1,0 +1,279 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php?lang="></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/colorselector.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 商品{$tag_msg}</td>
+          <td width="44%" align="right"><span class="navright"><a href="goods.php">商品列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<div class="tab-div">
+    <div id="tabbar-div">
+      <p>
+        <span class="tab-front" id="general-tab">通用信息</span><span
+        class="tab-back" id="detail-tab">详细描述</span><span
+        class="tab-back" id="mix-tab">其他信息</span>{if $goods_type_list}<span
+        class="tab-back" id="properties-tab">商品属性</span>{/if}<span
+        class="tab-back" id="gallery-tab">商品相册</span>
+      </p>
+    </div>
+
+    <div id="tabbody-div">
+      <form name="regform" enctype="multipart/form-data" method="post" action="{$url}" onSubmit="return Validator.Validate(this,3)">
+        <input type="hidden" name="MAX_FILE_SIZE" value="2097152" />
+
+  <table width="90%" id="general-table" align="center" class="gridcss">
+         <tr>
+            <td width="21%" align="right" class="label">商品名称：</td>
+            <td width="79%"><input type="text" name="goods_name" value="{$goods.goods_name}" style="float:left;color:{$goods_name_color};" size="30"  dataType="Require"  class="input_style"  msg="请输入商品名称"/><div style="background-color:{$goods_name_color};float:left;margin-left:2px;" id="font_color" onclick="ColorSelecter.Show(this);"><img src="/temp/skin3/images/admin/color_selecter.gif" style="margin-top:-1px;" /></div><input type="hidden" id="goods_name_color" name="goods_name_color" value="{$goods_name_color}" />&nbsp;
+            <select name="goods_name_style">
+              <option value="">字体样式</option>
+              {html_options options=$lang selected=$goods_name_style}
+            </select>
+* </td>
+          </tr>
+          <tr>
+            <td align="right" class="label">商品货号：</td>
+            <td><input type="text" name="goods_sn" value="{$goods.goods_sn}" size="20" dataType="Require"  class="input_style"  msg="请输入商品货号"/> * 
+            {$lang.notice_goods_sn}</td>
+          </tr>
+          <tr>
+            <td align="right" class="label">商品分类：</td>
+            <td><select name="cat_id" id="select_cat"><option value="0">请选择...</option>{$cat_list}</select>
+              {if $is_add}
+              <a href="javascript:void(0)" onclick="rapidCatAdd()" title="{$lang.rapid_add_cat}" class="special">{$lang.rapid_add_cat}</a>
+              <span id="category_add" style="display:none;">
+              <input class="text" size="10" name="addedCategoryName" />
+               <a href="javascript:void(0)" onclick="addCategory()" title="{$lang.button_submit}" class="special" >{$lang.button_submit}</a>
+               <a href="javascript:void(0)" onclick="return goCatPage()" title="{$lang.category_manage}" class="special" >{$lang.category_manage}</a>
+               <a href="javascript:void(0)" onclick="hideCatDiv()" title="{$lang.hide}" class="special" ><<</a>
+               </span>
+               {/if}
+               </td>
+          </tr>
+          <tr>
+            <td align="right" class="label">市场售价：</td>
+            <td><input type="text" name="market_price" value="{$goods.market_price}" size="20" /></td>
+          </tr>
+          <tr>
+            <td align="right" class="label">本店售价：</td>
+            <td><input type="text" name="shop_price" value="{$goods.shop_price}" size="20" id="shop_price"/>
+            (单价)<span class="label">
+              <input type="checkbox" id="is_promote" name="is_promote" value="1" {if $goods.is_promote}checked="checked"{/if}/>
+              该商品促销</span></td>
+          </tr>
+
+          <tr>
+            <td align="right" valign="top" class="label">优惠价格区间：</td>
+            <td>
+             <span class="zhekoustyle">按折扣: "<span id="lilv">{$price_great}</span>"折自动计算每个区间价格</span>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0"  id="tbody-volume">
+                {foreach from=$volume_price_list item=volume_price name="volume_price_tab"}
+                  <tr id="{$smarty.foreach.volume_price_tab.iteration}">
+                    <td height="23">
+                    {if $smarty.foreach.volume_price_tab.iteration eq 1}
+                        <a href="javascript:;" id="addPrice">[+]</a>
+                    {else}
+                       <a href='javascript:;' onclick='deltr({$smarty.foreach.volume_price_tab.iteration})'>[- ]</a>
+                     {/if} 
+                     
+                     数量 <input type="text" name="volume_number[]" size="8" value="{$volume_price.number}"/>
+                     价格 <input type="text" name="volume_price[]" id="count_volume_price{if $smarty.foreach.volume_price_tab.iteration-1 != 0}{$smarty.foreach.volume_price_tab.iteration}{/if}" size="8" value="{$volume_price.price}"/>
+                     
+                    </td>
+                  </tr>
+                {/foreach}
+                </table>
+            </td>
+          </tr>
+
+          <tr  id="promote_c" {if $goods.is_promote != 1} style="display:none"{/if}>
+            <td align="right" class="label"><label for="is_promote"> 促销价：</label></td>
+            <td id="promote_3"><input type="text" id="promote_1" name="promote_price" value="{$goods.promote_price}" size="20" /></td>
+          </tr>
+          <tr id="promote_4" {if $goods.is_promote != 1} style="display:none"{/if}>
+            <td align="right" class="label" id="promote_5">  促销时间： </td>
+            <td id="promote_6">
+              <input name="promote_start_date" type="text" id="promote_start_date" size="12" value='{$goods.promote_start_date}' readonly="readonly" /><input name="selbtn1" type="button" id="selbtn1" onclick="return showCalendar('promote_start_date', '%Y-%m-%d', false, false, 'selbtn1');" value="选择" class="button"/> - <input name="promote_end_date" type="text" id="promote_end_date" size="12" value='{$goods.promote_end_date}' readonly="readonly" /><input name="selbtn2" type="button" id="selbtn2" onclick="return showCalendar('promote_end_date', '%Y-%m-%d', false, false, 'selbtn2');" value="选择" class="button"/>
+            </td>
+          </tr>
+          <tr>
+            <td align="right" class="label">商品图片地址：<br />
+              (应控制在480*480以内)<br /></td>
+            <td>
+              <input type="text" name="goods_img" size="35" value=""/>
+              {if $goods.goods_img}
+                <a href="goods.php?act=show_image&img_url={$goods.goods_img}" target="_blank"><img src="/temp/skin3/images/admin/yes.gif" border="0" /></a>
+              {else}
+                <img src="/temp/skin3/images/admin/no.gif" />
+              {/if}
+              <input type="text" size="40"   value="商品图外部URL" style="color:#aaa;display:none" name="goods_img_url"/>
+              <span class="label">自动生成缩略图 {if $gd > 0}
+              <input type="checkbox" id="auto_thumb" name="auto_thumb" checked="true" value="1"/>
+            {/if}</span></td>
+          </tr>
+          <tr id="auto_thumb_1" style="display:none">
+            <td align="right" class="label">(150*150)网格图：</td>
+            <td id="auto_thumb_3">
+              <input type="text" name="goods_grid" size="35" value=""/>
+              {if $goods.goods_grid}
+                <a href="goods.php?act=show_image&img_url={$goods.goods_grid}" target="_blank"><img src="/temp/skin3/images/admin/yes.gif" border="0" /></a>
+              {else}
+                <img src="/temp/skin3/images/admin/no.gif" />
+              {/if}
+              <br /><input type="text" size="40"  value="商品网格图外部URL" style="color:#aaa;display:none" name="goods_thumb_url"/>
+             
+              </td>
+          </tr>          <tr id="auto_thumb_2"  style="display:none">
+            <td align="right" class="label">(100*100)缩略图：</td>
+            <td id="auto_thumb_3">
+              <input type="text" name="goods_thumb" size="35" value=""/>
+              {if $goods.goods_thumb}
+                <a href="goods.php?act=show_image&img_url={$goods.goods_thumb}" target="_blank"><img src="/temp/skin3/images/admin/yes.gif" border="0" /></a>
+              {else}
+                <img src="/temp/skin3/images/admin/no.gif" />
+              {/if}
+              <br /><input type="text" size="40"   value="商品缩略图外部URL" style="color:#aaa;display:none" name="goods_thumb_url"/>
+              
+              </td>
+          </tr>
+          
+          
+            <tr {if $goods.url_title =='' }style="display:none"{/if}>
+            <td align="right" class="label">生成静态页面文件名称：</td>
+            <td id="auto_thumb_3"><input type="text" size="40" value="{$goods.url_title}" name="url_title"/>
+              
+              </td>
+          </tr>
+        </table>
+
+        <table width="99%" id="detail-table" style="display:none">
+          <tr>
+            <td><textarea name='goods_desc' rows="6" cols="48" style="display:none">{$goods.goods_desc}</textarea>
+        <IFRAME ID="eWebEditor1" src="../editorhtml/ewebeditor.htm?id=goods_desc&style=coolblue" frameborder="0" scrolling="no" width="100%" height="350"></IFRAME></td>
+          </tr>
+        </table>
+
+        <table width="90%" id="mix-table" style="display:none" align="center">
+          {if $code eq ''}
+          <tr>
+            <td width="21%" align="right" class="label">商品重量：</td>
+            <td width="79%"><input type="text" name="goods_weight" value="{$goods.goods_weight_by_unit}" size="20" /> <select name="weight_unit">{html_options options=$unit_list selected=$weight_unit}</select></td>
+          </tr>
+          {/if}
+          {if $cfg.use_storage}
+          <tr>
+            <td align="right" class="label">商品库存：</td>
+            <td><input type="text" name="goods_number" value="{$goods.goods_number}" size="20" {if $code neq ''}readonly="readonly"{/if} /></td>
+          </tr>
+          <tr>
+            <td align="right" class="label">库存警报数量：</td>
+            <td><input type="text" name="warn_number" value="{$goods.warn_number}" size="20" /></td>
+          </tr>
+          {/if}
+          <tr>
+            <td align="right" class="label">属性：</td>
+            <td> <input type="checkbox" name="is_best" value="1" {if $goods.is_best}checked="checked"{/if} />
+            特价 <input type="checkbox" name="is_new" value="1" {if $goods.is_new}checked="checked"{/if} />
+            最新 <input type="checkbox" name="is_hot" value="1" {if $goods.is_hot}checked="checked"{/if} />
+            热卖 <input name="is_free_shipping" type="checkbox" id="is_free_shipping" value="1" {if $goods.is_free_shipping}checked="checked"{/if} /> 免邮费</td>
+          </tr>
+          <tr id="alone_sale_1">
+            <td align="right" class="label" id="alone_sale_2">上架：</td>
+            <td id="alone_sale_3"><input type="checkbox" name="is_on_sale" value="1" {if $goods.is_on_sale}checked="checked"{/if} />
+            打勾表示允许销售，否则不允许销售。</td>
+          </tr>
+          <tr>
+            <td align="right" class="label">商品关键字：</td>
+            <td><input type="text" name="keywords" value="{$goods.keywords}" size="40" />各关键字以逗号隔开。例如 mp3,mp5</td>
+          </tr>
+          <tr>
+            <td align="right" class="label">商品简单描述：</td>
+            <td><textarea name="goods_brief" cols="40" rows="3">{$goods.goods_brief}</textarea></td>
+          </tr>
+          <tr>
+            <td align="right" class="label"> 备注：</td>
+            <td><textarea name="seller_note" cols="40" rows="3">{$goods.seller_note}</textarea>
+              前台不显示该内容
+            </td>
+          </tr>
+        </table>
+
+        {if $goods_type_list}
+        <table width="90%" id="properties-table" style="display:none"  align="center">
+          <tr>
+              <td width="14%" class="label">商品类型：</td>
+              <td width="86%">
+                <select name="goods_type" id="getAttrList">
+                  {$goods_type_list}
+                </select>
+              </td>
+          </tr>
+          <tr>
+            <td id="tbody-goodsAttr" colspan="2" style="padding:0">{$goods_attr_html}</td>
+          </tr>
+        </table>
+        {/if}
+
+        <table width="90%" id="gallery-table" align="center" style="display:none"  >
+          <tr>
+            <td>
+              {foreach from=$img_list item=img key=i}
+              <div id="gallery_{$img.img_id}" style="float:left; text-align:center; border: 1px solid #DADADA; margin: 4px; padding:2px;">
+                <a href="javascript:;" onclick="if (confirm('你确定要删除该图片吗？')) dropImg('{$img.img_id}')">[-]</a><br />
+                <a href="goods.php?act=show_image&img_url={$img.img_url}" target="_blank">
+                <img src="../{if $img.thumb_url}{$img.thumb_url}{else}{$img.img_url}{/if}" {if $thumb_width neq 0}width="{$thumb_width}"{/if} {if $thumb_height neq 0}height="{$thumb_height}"{/if} border="0" />
+                </a><br />
+                <input type="text" value="{$img.img_desc}" size="15" name="old_img_desc[{$img.img_id}]" />
+              </div>
+              {/foreach}
+            </td>
+          </tr>
+          <tr><td>&nbsp;</td></tr>
+          <tr>
+            <td>
+              <a href="javascript:;" onclick="addImg(this)" id="addimg">[+]</a>图片描述： <input type="text" name="img_desc[]" size="20" />
+              文件路径： <input type="text" name="img_url[]" value=""/>
+            </td>
+          </tr>
+        </table>
+
+
+
+
+
+
+        <div class="button-div">
+          <input type="hidden" name="goods_id" value="{$goods.goods_id}" />
+          {if $code neq ''}
+          <input type="hidden" name="extension_code" value="{$code}" />
+          {/if}
+          <input type="submit" value="确定"    class="sub_but"/>
+          <input type="reset" value="重置" class="sub_but" />
+        </div>
+        <input type="hidden" name="act" value="{$form_act}" />
+      </form>
+    </div>
+</div>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/tab.js"></script>
+{include file="copyright.htm"}
+</body>
+</html>

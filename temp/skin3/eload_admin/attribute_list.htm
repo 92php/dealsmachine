@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 商品属性列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="attribute.php?act=add&goods_type={$smarty.get.goods_type}">商品属性添加</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+ <tr>
+    <th align="left"> <form action="" name="searchForm">
+    <img src="/temp/skin3/images/admin/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    按商品类型显示：<select name="goods_type" class="select_type" atr="attribute.php?goods_type="><option value="0">请选择......</caption>{$goods_type_list}</select>
+  </form>
+</th>
+  </tr>
+</table>
+<form method="post" action="attribute.php?act=batch&goods_type={$smarty.get.goods_type}" name="listForm">
+<div id="list">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+    <tr>
+      <th width="9%">
+        <input name="all_select[]"  type="checkbox" id="all_select[]" class="cls">
+        <a href="attribute.php?sort_by=attr_id&goods_type={$smarty.get.goods_type}&sort_order={$filter.sort_order_attr_id}">编号</a>{$sort_attr_id}
+      </th>
+      <th width="16%"><a href="attribute.php?sort_by=attr_name&goods_type={$smarty.get.goods_type}&sort_order={$filter.sort_order_attr_name}">属性名称</a>{$sort_attr_name}</th>
+      <th width="11%"><a href="attribute.php?sort_by=cat_id&goods_type={$smarty.get.goods_type}&sort_order={$filter.sort_order_cat_id}">所属分类</a>{$sort_cat_id}</th>
+      <th width="19%"><a href="attribute.php?sort_by=attr_input_type&goods_type={$smarty.get.goods_type}&sort_order={$filter.sort_order_attr_input_type}">属性值的录入方式</a>{$sort_attr_input_type}</th>
+      <th width="26%">可选值列表</th>
+      <th width="8%"><a href="attribute.php?sort_by=sort_order&goods_type={$smarty.get.goods_type}&sort_order={$filter.sort_order_sort_order}">排序</a>{$sort_sort_order}</th>
+      <th width="11%">操作</th>
+    </tr>
+    {foreach from=$attr_list item=attr  name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+      <td nowrap="true" valign="top"><span><input value="{$attr.attr_id}" name="checkboxes[]"  type="checkbox"  class="cls">{$attr.attr_id}</span></td>
+      <td class="first-cell" nowrap="true" valign="top"><span onclick="listTable.edit(this, 'edit_attr_name', {$attr.attr_id})">{$attr.attr_name}</span></td>
+      <td nowrap="true" valign="top"><span>{$attr.cat_name}</span></td>
+      <td nowrap="true" valign="top"><span>{$attr.attr_input_type_desc}</span></td>
+      <td valign="top"><span>{$attr.attr_values}</span></td>
+      <td align="right" nowrap="true" valign="top"><span onclick="listTable.edit(this, 'edit_sort_order', {$attr.attr_id})">{$attr.sort_order}</span></td>
+      <td align="center" nowrap="true" valign="top">
+        <a href="?act=add&id={$attr.attr_id}" title="{$lang.edit}"><img src="{$jscache_url}temp/skin3/eload_admin/images/icon_edit.gif" border="0" height="16" width="16"></a>
+        <a href="?act=remove&id={$attr.attr_id}&goods_type={$smarty.get.goods_type}" class="del_act" title="删除该记录"><img src="{$jscache_url}temp/skin3/eload_admin/images/icon_drop.gif" border="0" height="16" width="16"></a></td>
+    </tr>
+    {foreachelse}
+    <tr><td colspan="7" align="center" class="no-records">暂无属性！</td></tr>
+    {/foreach}
+    <tr>
+      <td colspan="2"><input name="all_select[]"  type="checkbox" id="all_select[]" class="cls"> <input type="submit" id="btnSubmit" value="删除所选记录" class="button" disabled="true" /></td>
+      <td align="right" colspan="5">	<div id="pager">{$pagestr}</div>
+
+      </td>
+    </tr>
+  </table>
+</div></form>
+{include file="copyright.htm"}
+</body>
+</html>

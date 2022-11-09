@@ -1,0 +1,293 @@
+@charset "utf-8";
+/* CSS Document */
+.classrmenu {
+	width: 749px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	position:relative;
+}
+.hiddencat{
+	position:relative;
+	height:105px;	
+	width: 750px;
+	overflow: hidden;
+}
+.zhankai{
+	width:200px;
+	margin:auto;
+	height:25px;
+	line-height:25px;
+}
+
+.classrmenu ul li {
+	margin:0px 2px 0px 2px;
+	width: 240px; 
+	float:left;
+	height:25px;
+	line-height:25px;
+	background:url(http://cloud4.faout.com/imagecache/A/images/leftmenu_line.gif) 0px 0px;
+	position: relative;
+}
+
+* html .classrmenu ul li a{ /*IE6 hack to get sub menu links to behave correctly*/
+	display: inline-block;
+}
+.classrmenu ul li ul{
+	position:absolute;
+	visibility: hidden;
+	border-bottom:1px solid #ccc;
+	border-left:1px solid #ccc;
+	z-index:9000;
+}
+
+.classrmenu ul li ul li {
+	width:238px;
+	margin:0px;
+	border-right:1px solid #ccc;
+	border-top: none;
+	border-bottom:none;
+}
+
+.classrmenu ul li ul li a:link, .classrmenu ul li ul li a:visited, .classrmenu ul li ul li a:active{
+	padding-left:10px;
+	display:block;
+	background-color: #fff;
+	text-decoration:none;
+}
+
+
+.classrmenu ul li a.selected{
+	color: #ff0000;
+	height:23px;
+	line-height:23px;
+	display:block;
+	background:#fff;
+	border:1px solid #ccc;
+	border-bottom:1px solid #fff;
+}
+
+.classrmenu ul li a:hover{
+	color: #ff0000;
+}
+
+.classrmenu ul li ul li a:hover,.classrmenu ul li ul li a.selected{
+	border-left: none;
+	height:25px;
+	line-height:25px;
+	border-bottom:1px solid #000;
+	border-right: none;
+}
+
+.classrmenu ul li ul li ul{
+	border-top:1px solid #999;
+}
+
+.classrmenu ul li ul li ul li a:hover{
+	border:0px;
+}
+
+
+
+/*index cate*/
+
+.ddsmoothmenu-v,.goods_list_style {
+	width: 100%;
+	margin:auto 0px;
+}
+
+
+.ddsmoothmenu-v ul,.goods_list_style ul{
+	margin: 0;
+	padding: 0;
+	width: 100%; /* Main Menu Item widths */
+	list-style-type: none;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	font-weight:normal;
+}
+ 
+.ddsmoothmenu-v ul li{
+	position: relative;
+}
+
+/* Top level menu links style */
+.ddsmoothmenu-v ul li a ,.goods_list_style ul li a {
+	display: block;
+	overflow: auto; /*force hasLayout in IE7 */
+	text-decoration: none;
+	padding: 0px 0px 0px 5px;
+	height:24px;
+	line-height:24px;
+	font-weight:bold;
+	color:#000;
+	border:1px #eeeeee solid;
+	margin:0px 0px 1px;
+}
+
+
+.ddsmoothmenu-v ul li a:link, .ddsmoothmenu-v ul li a:visited, .ddsmoothmenu-v ul li a:active{
+	text-decoration:none;
+	text-align:left;
+	color: #000;
+}
+
+
+.goods_list_style ul li a:hover,.ddsmoothmenu-v ul li a:hover{
+	text-decoration:none;
+	height:24px;
+	line-height:24px;
+	background: #ffffff; 
+	color: #990000;
+	border:1px #999 solid;
+}
+
+
+.ddsmoothmenu-v ul li a.selected{
+	background: #ffffff; 
+	color: #990000;
+	height:24px;
+	line-height:24px;
+}
+
+
+
+
+
+
+
+
+
+
+/*Sub level menu items */
+.ddsmoothmenu-v ul li ul{
+	position: absolute;
+	width: 230px; /*Sub Menu Items width */
+	top:0;
+	border:1px solid #999;
+	border-left:none;
+	visibility: hidden;
+}
+
+
+
+
+/*Sub level menu items */
+.ddsmoothmenu-v ul li ul li{
+	border-left:1px solid #999;
+}
+.ddsmoothmenu-v ul li ul .first_li{ border-left:none;}
+.ddsmoothmenu-v ul li ul li a{ border:0px; margin:0px;}
+
+.ddsmoothmenu-v ul li ul li a:link, .ddsmoothmenu-v ul li ul li a:visited, .ddsmoothmenu-v ul li ul li a:active{
+	height:24px;
+	line-height:24px;
+	background:#fff;
+	color: #000;
+	text-decoration:none;
+	font-weight:normal
+}
+
+.ddsmoothmenu-v ul li ul li a:hover{
+	background:#fff;
+	color: #990000;
+}
+.ddsmoothmenu-v ul li ul li ul li a:hover{
+	border:0px;
+	background:#fff;
+	color: #990000;
+}
+.ddsmoothmenu-v ul li ul li a.selected{
+	background:#fff;
+	color: #990000;
+}
+ 
+/* Holly Hack for IE \*/
+* html .ddsmoothmenu-v ul li { float: left; height:100%}
+* html .ddsmoothmenu-v ul li a { height:100%}
+/* End */
+
+
+
+
+/* Holly Hack for IE \*/
+* html .classrmenu ul li { float: left; height:100%}
+* html .classrmenu ul li a { height:100%}
+/* End */
+
+
+
+
+/* ######### CSS classes applied to down and right arrow images  ######### */
+
+.downarrowclass{
+position: absolute;
+top: 12px;
+right: 7px;
+}
+
+.rightarrowclass{
+position: absolute;
+top: 6px;
+right: 5px;
+}
+
+/* ######### CSS for shadow added to sub menus  ######### */
+
+.ddshadow{
+position: absolute;
+left: 0;
+top: 0;
+width: 0;
+height: 0;
+background: silver;
+}
+
+.toplevelshadow{ /*shadow opacity. Doesn't work in IE*/
+opacity: 0.8;
+}
+
+
+
+
+
+.ddsmoothmenu-v #chcss a.selected{
+	background: #ffffff; 
+	color: #990000;
+	height:24px;
+	line-height:24px;
+	border:1px solid #999;
+	border-right: none;
+	z-index:1000;
+}
+
+.ddsmoothmenu-v #chcss a:hover,.ddsmoothmenu-v #chcss #chcss a:hover{
+	height:24px;
+	line-height:24px;
+	background: #ffffff; 
+	color: #990000;
+	border:1px solid #999;
+	border-right: none;
+}
+
+.ddsmoothmenu-v #chcss ul li a:hover,.ddsmoothmenu-v #chcss #chcss ul li a:hover{
+	height:24px;
+	line-height:24px;
+	background: #ffffff; 
+	color: #990000;
+	border:none;
+}
+
+.classrmenu #chcss #chcss a:hover {
+	height:25px;
+	line-height:25px;
+	background: #ffffff; 
+	color: #990000;
+	border:1px solid #999;
+	border-right: none;
+	border-left: none;
+}
+
+.classrmenu  #chcss ul li a:hover,.classrmenu #chcss #chcss ul li a:hover{
+	border:none;
+}
+li.first_li a.imstyle{ color:#FF3300!important}

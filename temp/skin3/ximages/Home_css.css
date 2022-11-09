@@ -1,0 +1,165 @@
+BODY {
+	MARGIN: 0px; FONT-FAMILY: Tahoma
+}
+.Home_smalltitle {
+	FONT-SIZE: 11px; COLOR: #612500; TEXT-DECORATION: none
+}
+.Home_smalltitle:link {
+	FONT-SIZE: 11px; COLOR: #612500; TEXT-DECORATION: none
+}
+.Home_smalltitle:visited {
+	FONT-SIZE: 11px; COLOR: #612500; TEXT-DECORATION: none
+}
+.Home_smalltitle:hover {
+	FONT-SIZE: 11px; COLOR: #612500; TEXT-DECORATION: underline
+}
+.Home_Marquee {
+	FONT-SIZE: 11px; COLOR: #14156a
+}
+A.Home_hometitle:link {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.Home_hometitle:visited {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.Home_hometitle:hover {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #ff7900; TEXT-DECORATION: underline
+}
+A.Home_bigtiltle:link {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; FILTER: glow(color=white,strength=2); COLOR: #14156a; TEXT-DECORATION: none
+}
+A.Home_bigtiltle:visited {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; FILTER: glow(color=white,strength=2); COLOR: #14156a; TEXT-DECORATION: none
+}
+A.Home_bigtiltle:hover {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; FILTER: glow(color=white,strength=2); COLOR: #ff7900; TEXT-DECORATION: underline
+}
+.Home_cartcheckout {
+	FONT-WEIGHT: bold; FONT-SIZE: 10px; COLOR: #ff5b14
+}
+.Home_item {
+	FONT-WEIGHT: bold; FONT-SIZE: 10px; COLOR: #14156a
+}
+.Home_more {
+	FONT-SIZE: 9px; COLOR: #ffffff; TEXT-DECORATION: underline
+}
+.Home_title {
+	PADDING-LEFT: 18px; FONT-SIZE: 12px; COLOR: #612500
+}
+.Home_Prolist {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; TEXT-TRANSFORM: capitalize; COLOR: #003399
+}
+.Home_Prolist:link {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; TEXT-TRANSFORM: capitalize; COLOR: #003399
+}
+.Home_Prolist:visited {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; TEXT-TRANSFORM: capitalize; COLOR: #003399
+}
+.Home_Prolist:hover {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; TEXT-TRANSFORM: capitalize; COLOR: #ff7900; TEXT-DECORATION: underline
+}
+.Home_feaproname {
+	FONT-SIZE: 11px; COLOR: #003399
+}
+.Home_feaproname:link {
+	FONT-SIZE: 11px; COLOR: #003399; TEXT-DECORATION: none
+}
+.Home_feaproname:visited {
+	FONT-SIZE: 11px; COLOR: #003399; TEXT-DECORATION: none
+}
+.Home_feaproname:hover {
+	FONT-SIZE: 11px; COLOR: #ff7900; TEXT-DECORATION: underline
+}
+.Home_feaproprice {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #d11921
+}
+.Home_newproname {
+	FONT-SIZE: 11px; COLOR: #333333
+}
+.Home_newproname:link {
+	FONT-SIZE: 11px; COLOR: #333333; TEXT-DECORATION: none
+}
+.Home_newproname:visited {
+	FONT-SIZE: 11px; COLOR: #333333; TEXT-DECORATION: none
+}
+.Home_newproname:hover {
+	FONT-SIZE: 11px; COLOR: #003399; TEXT-DECORATION: underline
+}
+.Home_newproprice {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #d11921; TEXT-DECORATION: underline
+}
+.Home_text {
+	FONT-SIZE: 11px; COLOR: #612500
+}
+.Home_payment {
+	FONT-SIZE: 11px; COLOR: #666666
+}
+.page_title {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #ff8000; FONT-FAMILY: Arial
+}
+.listpro_title {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #ff8000; FONT-FAMILY: Arial
+}
+.class_smalltitle {
+	FONT-SIZE: 10px; COLOR: #666666
+}
+.Class_Classname {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #003399
+}
+.Class_Classname:link {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #003399; TEXT-DECORATION: none
+}
+.Class_Classname:visited {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #003399; TEXT-DECORATION: none
+}
+.Class_Classname:hover {
+	FONT-SIZE: 12px; COLOR: #ff7900; TEXT-DECORATION: underline
+}
+.Class_page {
+	FONT-SIZE: 11px; COLOR: #333333
+}
+.Class_page:link {
+	FONT-SIZE: 11px; COLOR: #333333; TEXT-DECORATION: none
+}
+.Class_page:visited {
+	FONT-SIZE: 11px; COLOR: #333333; TEXT-DECORATION: none
+}
+.Class_page:hover {
+	FONT-SIZE: 11px; COLOR: #333333; TEXT-DECORATION: underline
+}
+.Top_keyword {
+	FONT-SIZE: 9px; COLOR: #ff5b14
+}
+.Top_keyword:link {
+	FONT-SIZE: 9px; COLOR: #ff5b14; TEXT-DECORATION: none
+}
+.Top_keyword:visited {
+	FONT-SIZE: 9px; COLOR: #ff5b14; TEXT-DECORATION: none
+}
+.Top_keyword:hover {
+	FONT-SIZE: 9px; COLOR: #ff5b14; TEXT-DECORATION: underline
+}
+.bottom_link {
+	FONT-SIZE: 10px; COLOR: #666666; TEXT-DECORATION: none
+}
+.bottom_link:link {
+	FONT-SIZE: 10px; COLOR: #666666; TEXT-DECORATION: none
+}
+.bottom_link:visited {
+	FONT-SIZE: 10px; COLOR: #666666; TEXT-DECORATION: none
+}
+.bottom_link:hover {
+	FONT-SIZE: 10px; COLOR: #666666; TEXT-DECORATION: underline
+}
+.UserLeft {
+	FONT-SIZE: 11px; COLOR: #545454; LINE-HEIGHT: 16px; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.UserLeft:link {
+	FONT-SIZE: 11px; COLOR: #545454; LINE-HEIGHT: 16px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.UserLeft:visited {
+	FONT-SIZE: 11px; COLOR: #545454; LINE-HEIGHT: 16px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.UserLeft:hover {
+	FONT-SIZE: 11px; COLOR: #a72d2c; LINE-HEIGHT: 16px; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: underline
+}

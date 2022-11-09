@@ -1,0 +1,217 @@
+{if !$goods_list || 'search' == $smarty.get.m}
+<li id="no_result" class="category_seachResult" style="padding-bottom:10px;{if $goods_list}display: none;{/if}">
+    <p class="category_seachResult_text">{$lang.no_results1}&nbsp;"{$kk}"</p>
+    <div class="clearfix"  style=" padding-bottom:10px;">
+        {$lang.no_results2}
+        <p style="line-height: 30px;">
+        {$lang.no_results3}
+        <input name="k" id="txt-keyword" type="text"   class="category_searchInput fl"  value="{if $kk == ''}{$lang.input_text}{else}{$kk}{/if}" tips='{$lang.input_text}' maxlength="150" onFocus="kw_onfocus(this);"/>
+        <input type="submit" onClick="tempSearch()" alt="submit" class="category_searchBtn fl" value=""/>
+        </p>
+        {if $goods_list}
+        {$lang.no_results4|replace:'3.':''|replace:'4.':''}
+        {else}
+        {$lang.no_results4}
+        {/if}
+    </div>
+{literal}
+<style>
+    .bluemain{ background:#f8fcff; padding:10px; width:500px;font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:24px; color:#787878;}
+    .bluemain h3{  font-size:30px; color:#00629b; line-height:45px; border-bottom:1px dashed #b5dbfb; height:50px;  font-weight:bold; padding:0; margin:0; padding-left:10px;}
+    .bluemain p{ width:500px; margin:0; padding-left:10px; }
+    .txtiy{ padding:20px 0 10px 10px;}
+    .txtiy span{ font-size:14px; font-weight:bold;}
+    .buttons{text-align:center;}
+    .postex,.inputstyle,.categoryselect{ border:1px solid #e1e1e1; font-size:12px; color:#404040; background:#fff; line-height:18px;padding-left:3px; font-family:Arial, Helvetica, sans-serif}
+    .postex{ width:300px; height:100px; padding:5px; font-size: 12px; }
+    .postsubmit{ background-position:0 0;}
+    .postcancel{ background-position:0 -38px;}
+    .inputstyle{width:259px;height:20px;}
+    .bluemain ul{ list-style-type:none; padding:15px 0 0 0; margin:0; width:500px;}
+    .bluemain ul li{ float:left; padding:0; margin:0;}
+    .bluemain ul li strong{ color:#F00; padding-right:5px; font-weight:bold;}
+    .bluemain ul li{ height:24px; line-height:20px; padding-bottom:15px;}
+    .bluemain ul li label,.bluemain ul li input,.bluemain ul li select{ display:inline; float:left;}
+    .bluemain ul li label{width:120px; padding-right:10px; text-align:right;}
+    .bluemain ul li .userName{ width:250px;}
+    .bluemain ul li .address{ width:310px;}
+    .bluemain ul li .urlprod{ width:340px;}
+    .bluemain ul li .pricewant{ width:200px;}
+    .bluemain ul li select{ width:260px}
+    .categoryselect{list-style:18px; padding:3px;}
+    .bluemain ul li .notes{ width:330px;}
+    .clear{ clear:both;}
+</style>
+{/literal}
+<div id="temp-div1" style="display: none">
+    <div class="bluemain">
+        <p class="txtiy">{$collect_info_lang.STRING_1}</p>
+        <form id="temp-form1" onsubmit="return false">
+        <ul>
+            <li><label><strong>*</strong>{$collect_info_lang.LABEL_NAME}:</label><input name="username" type="text" class="inputstyle userName" /></li>
+            <li><label><strong>*</strong>{$collect_info_lang.LABEL_EMAIL}:</label><input name="email" type="text" class="inputstyle address" /></li>
+            <li><label>{$collect_info_lang.LABEL_URL_OF_PRODUCT}:</label><input name="url" type="text" class="inputstyle urlprod" /></li>
+            <li><label>{$collect_info_lang.LABEL_PRICE_TO_SEE}:</label><input name="price" type="text" class="inputstyle pricewant" /></li>
+            <li><label><strong>*</strong>{$collect_info_lang.LABEL_CATEGORY}:</label>{html_options name=cat_id class="categoryselect" options=$cat_arr}</li>
+            <li><label><strong>*</strong>{$collect_info_lang.LABEL_NOTE}:</label><input name="note" type="text" class="inputstyle notes" /></li>
+        </ul>
+        <input type="hidden" name="type" value="0" />
+        <div class="clear"></div>
+        <p class="buttons"><input type="button" onclick="postsubmit1()" class="postsubmit postsubmit1" value="" /><input type="button" value="" class="postcancel" onclick="ymPrompt.close()" /></p>
+        </form>
+    </div>
+</div>
+<div id="temp-div2" style="display: none">
+    <div class="bluemain">
+        <p class="txtiy">{$collect_info_lang.STRING_2}</p>
+        <form id="temp-form2" onsubmit="return false" style="display: block">
+        <ul>
+            <li><label><strong>*</strong>{$collect_info_lang.LABEL_NAME}:</label><input name="username" type="text" class="inputstyle userName" /></li>
+            <li><label><strong>*</strong>{$collect_info_lang.LABEL_EMAIL}:</label><input name="email" type="text" class="inputstyle address" /></li>
+            <li style="height: 120px;"><label><strong>*</strong>{$collect_info_lang.LABEL_NOTE}:</label><textarea name="note" cols="" rows="" class="postex"></textarea></li>
+        </ul>
+        <input type="hidden" name="type" value="1" />
+        <div class="clear"></div>
+        <p class="buttons"><input type="button" onclick="postsubmit2()" class="postsubmit postsubmit2" /><input type="button" class="postcancel" onclick="ymPrompt.close()" /></p>
+        </form>
+    </div>
+</div>
+<script>
+    var L = {php}echo json_encode($this->_tpl_vars['lang']['COLLECT_INFO']);{/php};
+    {assign var=collect_info_lang value=$lang.COLLECT_INFO}
+    {literal}
+    function kw_onfocus(obj){
+        tips_word=$(obj).attr('tips');
+        kw = $.trim($(obj).val());
+        if (kw==tips_word||kw == 'Products keyword' || kw == 'New Arrival'){
+            $(obj).val('');
+        }
+        $(obj).attr('style','color:#000000');
+    };
+    function tempSearch() {
+        var keyword = $('#txt-keyword').val().trim().replace(/\/|\\|\s/g, '-');
+        if (keyword.length) {
+            window.location.href = DOMAIN + '/' + js_cur_lang_url + 'wholesale/' + keyword + '.html';
+        }
+    }
+    function tempSearch() {
+        var keyword = $('#txt-keyword').val().trim().replace(/\/|\\|\s/g, '-');
+        if (keyword.length) {
+            window.location.href = DOMAIN + '/' + js_cur_lang_url + 'wholesale/' + keyword + '.html';
+        }
+    }
+    /*$('.postcancel').on('click', function () {
+        ymPrompt.close();
+    });*/
+    function postsubmit1() {
+        var form = $('#post-form1');
+        var elArr = [[form.find('input[name=username]'), L.ENTER_USERNAME], [form.find('input[name=email]'), L.ENTER_EMAIL], [form.find('input[name=note]'), L.ENTER_CONTENT]];
+
+        for(var i = 0, len = elArr.length; i < len; i++) {
+            var el = elArr[i];
+
+            if (!$.trim(el[0].val())) {
+                alert(el[1]);
+                el[0].focus();
+                return;
+            }
+        }
+
+        if (!checkmail(elArr[1][0].val())) {
+            alert(L.INVALID_EMAIL);
+            elArr[1][0].focus();
+            return;
+        }
+
+        var el = form.find('input[name=url]'), url = $.trim(el.val());
+
+        if (url.length && !/^http:\/\/[A-Za-z0-9]+\.[A-Za-z0-9]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/.test(url)) {
+            alert(L.INVALID_URL);
+            el.focus();
+            return;
+        }
+
+        $.post('/fun/?act=collect_info', form.serialize(), function () {
+            ymPrompt.close();
+            ymPrompt.succeedInfo({
+                closeTxt:'Close',
+                okTxt: 'Ok',
+                width: 400,
+                height: 220,
+                title: L.SUCCESS_TITLE_1,
+                message: '<div style="text-align: left">' + L.SUCCESS_CONTENT_1 + '</div>'
+            });
+        });
+
+    }
+
+    function postsubmit2() {
+        var form = $('#post-form2');
+        var elArr = [[form.find('input[name=username]'), L.ENTER_USERNAME], [form.find('input[name=email]'), L.ENTER_EMAIL], [form.find('textarea[name=note]'), L.ENTER_CONTENT]];
+
+        for(var i = 0, len = elArr.length; i < len; i++) {
+            var el = elArr[i];
+
+            if (!$.trim(el[0].val())) {
+                alert(el[1]);
+                el[0].focus();
+                return;
+            }
+        }
+
+        if (!checkmail(elArr[1][0].val())) {
+            alert(L.INVALID_EMAIL);
+            elArr[1][0].focus();
+            return;
+        }
+
+        $.post('/fun/?act=collect_info', form.serialize(), function () {
+            ymPrompt.close();
+            ymPrompt.succeedInfo({
+                closeTxt:'Close',
+                okTxt: 'Ok',
+                width: 400,
+                height: 200,
+                title: L.SUCCESS_TITLE_2,
+                message: '<div style="text-align: left">' + L.SUCCESS_CONTENT_2 + '</div>'
+            });
+        });
+
+    };
+    $('#temp-win1').click(function () {
+        ymPrompt.win({
+            width: 530,
+            height: 440,
+            closeTxt:'Close',
+            title: L.YMPROMPT_TITLE_1,
+            allowSelect: true,
+            allowRightMenu: true,
+            message: $('#temp-div1').html().replace('temp-form1', 'post-form1')
+        });
+
+        return false;
+    });
+    $('#temp-win2').click(function () {
+        ymPrompt.win({
+            width: 530,
+            height: 395,
+            closeTxt:'Close',
+            title: L.YMPROMPT_TITLE_2,
+            allowSelect: true,
+            allowRightMenu: true,
+            message: $('#temp-div2').html().replace('temp-form2', 'post-form2')
+        });
+
+        return false;
+    });
+
+    function vote_callback(v) {
+
+        if ('n' == v && !$('#no_result').is(':visible')) {
+            $('#temp-appendto').insertAfter($('#js_PVot')).html();
+        }
+    }
+{/literal}
+</script>
+</li>
+{/if}

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 活动列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="?act=festival">固定活动</a>&nbsp;&nbsp;<a href="?act=add">活动添加</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form method="post" action="" name="listForm">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="5%">ID</th>
+    <th width="20%">活动名称</th>
+    <th width="5%">类型</th>
+    <th width="8%">在售产品</th>
+    <th width="8%">下架产品</th>
+    <th width="20%">备注</th>
+    <th >固定活动URL</th>	
+    <th width="8%" nowrap="nowrap">操作</th>
+  </tr>
+  {foreach from=$activity_list item=activityArr  name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+    <td height="26" align="center">{$activityArr.id}</td>
+    <td height="26" align="left"><a href="?act=add&id={$activityArr.id}" title="{$lang.edit}">{$activityArr.name}</a></td>
+    <td height="26" align="center">{if $activityArr.type==1}普通{elseif $activityArr.type==2}固定{/if}</td>
+    <td height="26" align="center">{$activityArr.onsale}</td>
+    <td height="26" align="center">{if {$activityArr.notnosale_goods_sn}<a target="_blank" href="goods.php?keyword={$activityArr.notnosale_goods_sn}">{$activityArr.notnosale_goods_sn}</a>{/if}({$activityArr.notnosale})</td>
+    <td height="26" align="left">{$activityArr.remark}</td>        
+    <td height="26" align="left">{$activityArr.redirection}</td>        	
+    <td align="center">
+      <a href="?act=remove&id={$activityArr.id}" class="del_act" delmsg="您确定要删除选定的活动吗？">删除</a>
+    </td>
+  </tr>
+  {foreachelse}
+    <tr><td colspan="8" align="center" class="no-records">{$lang.no_records}</td></tr>
+    {/foreach}
+    <tr>
+      <td align="right" nowrap="true" colspan="8">
+	<div id="pager">{$pagestr}</div>
+      </td>
+    </tr>
+  </table>
+</form>
+{include file="copyright.htm"}
+

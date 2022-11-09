@@ -1,0 +1,43 @@
+<title>{$seo_title}</title>
+<meta name="keywords" content="{$seo_keywords}"/>
+<meta name="description" content="{$seo_description}"/>
+{if $smarty.server.QUERY_STRING eq ''}
+<meta name="msvalidate.01" content="BB45D374D07FC29CC00E573CEA0399B9" />
+{/if}
+<meta property="fb:app_id" content="166958673424232"/>
+<meta name="google-site-verification" content="bTBS7Km1EZnWyTZ1jwN84bctvyHkI5zy80CSS-wP4aU" />
+{if $cmodel eq 'goods'}
+	{$facebook_meta}
+{/if}
+{if $canonical_uri}
+	<link rel="canonical" href="{$canonical_uri}"/>
+{/if}
+<link rel="stylesheet" href="{$imgcache_url}mincss/base_min.css" />
+<link rel="stylesheet" href="{$imgcache_url}mincss/encommon_min.css?2014061401" />
+{if $cur_lang!='en'}<link rel="stylesheet"  href="{$imgcache_url}mincss/{$cur_lang}/private_min.css?2014051501" >{/if}
+<script src="{$imgcache_url}minjs/jquery-1.8.0.min.js"></script>
+
+<script src="{$DOMAIN}/data-cache/currency_huilv.js"></script>
+<script src="{$DOMAIN}/data-cache/lang_currency.js?2014051501"></script>
+<script src="{$imgcache_url}minjs/languages/{$cur_lang}/var_languages.js?2014051501"></script>
+<script src="{$jscache_url}sysjs/languages/{$cur_lang}/var_html_languages.js?2014051501" type="text/javascript"></script>
+{if $smarty.get.m eq 'users' and $smarty.get.a eq 'order_detail'}
+<script type="text/javascript">
+{literal}
+    if (self === top) {
+        var antiClickjack = document.getElementById("antiClickjack");
+        antiClickjack.parentNode.removeChild(antiClickjack);
+    } else {
+        top.location = self.location;
+    }
+</script>
+{/literal}
+{/if}
+<script type="text/javascript">
+var js_cur_lang_url = '{$cur_lang_url}';
+var js_cur_lang = '{$cur_lang}';
+var COOKIESDIAMON = '{$COOKIESDIAMON}';
+var DOMAIN = '{$DOMAIN}';
+var DOMAIN_USER = '{$DOMAIN_USER}';
+var DOMAIN_CART = '{$DOMAIN_CART}';
+</script>

@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link type="text/css" rel="stylesheet" href="{$jscache_url}sysjs/jquery_dialog/jquery_dialog.css" />
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jquery_dialog/jquery_dialog.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/editinplace.js"></script>
+</head>
+<body>
+<form method="get" >
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 分类销售统计</td>
+          <td width="44%" align="right"><input maxlength="3"  type="text" name="days"  style="width:30px" value="{if $smarty.get.days}{$smarty.get.days}{else}90{/if}" />天内<input type="submit" value="重新统计" />
+<input type="hidden" name="act" value="stat" />          
+          </td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+</form>
+<table width="60%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline"  id="stripe_tb">
+  <tr>
+    <th width="25%" height="26">分类名称</th>        
+   
+
+     <th width="10%">销售数量</th>
+    <th width="10%">销售金额</th>  
+    <th width="10%">产品数量</th>
+   <th width="10%">级数</th>    
+
+
+  </tr>
+  <tbody id="tbody_id">
+  {foreach from=$catArr item=cat name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';"  id="cat_tab_tr{$cat.cat_id}" class="parentid{$cat.parent_id}">    
+    <td nowrap="nowrap" width="10%" style="padding-left:{$padding}px">
+     
+&nbsp;
+     
+      <span><a target="_blank" href="/{$cat.url_title}">{$cat.cat_name}</a></span>
+    </td>
+    <td align="right">{$cat.qty}</td>
+    <td align="right">{$cat.amt}</td>
+
+    <td align="right">{$cat.goods_count}</td>
+
+    <td align="center">{$cat.level}</td>
+
+
+
+  </tr>
+  {/foreach}
+  </tbody>
+</table>
+{include file="copyright.htm"}
+</body>
+</html>

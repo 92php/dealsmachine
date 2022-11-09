@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{$msg}邮件期刊</title>
+    <link type="text/css" rel="stylesheet" href="/temp/skin3/eload_admin/images/admin_css.css" />
+    <link type="text/css" rel="stylesheet" href="{$jscache_url}sysjs/calendar/calendar.css" />
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft">
+                            <a href="index.php?act=main">管理中心</a> &gt;&gt;
+                            <a href="newsletter.php">邮件期刊管理</a>
+                            &gt;&gt; {$msg}邮件期刊
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <form method="post" action="newsletter.php?act=save" enctype="multipart/form-data" id="form">
+        <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+            <tr>
+                <th colspan="3">{$msg}邮件期刊</th>
+            </tr>
+            <tr>
+                <td><input type="hidden" name="auto_id" value="{$data.auto_id}" /></td>
+                <td>
+                    <input type="submit" class="sub_but" value="提 交" />
+                    <input type="button" class="sub_but" id="btn-preview" value="生成预览" />
+                    <span id="span-preview" style="color: gray;"></span>
+                </td>
+            </tr>
+            <tr>
+                <td width="22%" class="label"><strong style="color: red;">*</strong>标题：</td>
+                <td width="78%">
+                    <input type="text" id="txt-title" name="title" value="{$data.title}" size="50" />
+                    <span class="font-gray">80个字符以内</span>
+                </td>
+            </tr>
+            <tr>
+                <td width="22%" class="label"><strong style="color: red;">*</strong>描述：</td>
+                <td width="78%">
+                    <textarea name="description" id="txt-description" class="font-12" rows="3" cols="120">{$data.description}</textarea>
+                  <br />
+                  <span class="font-gray">200个字符以内</span>
+                </td>
+            </tr>
+            <tr>
+                <td width="22%" class="label"><strong style="color: red;">*</strong>日期：</td>
+                <td width="78%">
+                    <input type="text" id="txt-date" autocomplete="off" name="date" value="{$data.date}" ondblclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />
+                    <span class="font-gray">双击选择</span>
+                </td>
+            </tr>
+            <tr>
+                <td width="22%" class="label">{if !$data.img}<strong style="color: red;">*</strong>{/if}图片路径：</td>
+                <td width="78%">
+                    <input type="text" name="img" size="50" value=""/><span class="font-gray">最佳高宽比: 50px x 50px</span>
+                    {if $data.img}<br /><a href="{$data.img}" target="_blank" /><img height="50" width="50" src="{$data.img}" id="img" alt="" /></a>{/if}
+                </td>
+            </tr>
+            <tr>
+                <td width="22%" class="label">
+                    <strong style="color: red;">*</strong>html代码：
+                    <br />
+                    <span style="color: gray; font-weight: normal;">只复制&lt;body&gt;&lt;/body&gt;之间内容即可</span>
+                </td>
+                <td width="78%"><textarea name="body" id="txt-body" class="font-12" rows="30" cols="120">{$data.body}</textarea></td>
+            </tr>
+        </table>
+    </form>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+    <script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/common.js"></script>
+    <script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/newsletter.js"></script>
+    <script type="text/javascript" src="{$website_url|default:'/'}sysjs/calendar.php"></script>
+    <script type="text/javascript">NEWSLETTER.add();</script>
+    {include file="copyright.htm"}

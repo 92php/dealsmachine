@@ -1,0 +1,38 @@
+@charset "utf-8";
+/*zt*/
+
+html,body{-webkit-text-size-adjust:none; }
+body{ background:#fff; margin:0px;font-family:Verdana, Arial, Helvetica, sans-serif; color:#333333;  text-align:center;}
+img{border:0;}
+img{margin:0; padding:0;}
+
+.clear{ CLEAR: both; OVERFLOW: hidden; HEIGHT: 10px}
+.clear1{ CLEAR: both; OVERFLOW: hidden; HEIGHT: 6px}
+a{color: #333; text-decoration:none;}
+a:hover {text-decoration: underline; color:333}
+td{ line-height:normal;}
+ul {list-style: none; margin: 0; padding: 0;}
+p,div,li{ margin: 0; padding: 0;}
+.cl{ clear:both} .red{ color:#F00;}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}.clearfix{display:inline-block}* html .clearfix{height:1%}.clearfix{display:block}
+
+.ztt1{ width:100%; height:41px; margin:0px auto; clear:both;background:url(../ximages/zttopbg.jpg) repeat-x;}
+.ztt2{ width:997px; margin:0px auto;}
+.ztlo{ width:165px; float:left;}
+.ztmo{ float:left; margin-left:45px; line-height:36px; color:#FFFFFF; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px;}
+.ztmo a{ color:#FFFFFF}
+.ztt3{ width:100%; margin:0px auto; clear:both; height:170px;background:url(../ximages/zttopbg2.gif) repeat-x top; padding-top:0px;}
+.ztt4{ width:997px; margin:0px auto;}
+.ztt4l{ width:24px; float:left; padding-top:49px;}
+.ztt4r{ width:24px; float:left; padding-top:49px;}
+.ztt4c{ width:949px; float:left; height:170px; overflow:hidden;}
+
+.ztt4c li{ width:171px; height:171px; background:url(../ximages/ztp1.jpg) no-repeat top center; float:left; display:inline; margin:0px 9px; text-align:center; padding-top:20px;}
+p.ztpp{ padding-top:10px;}
+p.zttt{ padding-top:5px; line-height:14px; font-size:11px; font-weight:bold; height:30px; overflow:hidden; width:150px; margin:0px auto; color:#999999}
+.ztt4c li.lan{ width:171px; height:171px; background:url(../ximages/ztp2.jpg) no-repeat top center;}
+.ztt4c li.lan p.zttt{ color:#FFFFFF}
+.ztbtt{ width:997px; margin:0px auto; clear:both;font-family:Verdana, Arial, Helvetica, sans-serif; font-weight:bold; font-size:14px; text-align:left; padding:5px 0px 2px 0px;}
+.ztbtt h1{ font-size:18px;}
+
+

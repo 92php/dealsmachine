@@ -1,0 +1,161 @@
+<IfModule mod_rewrite.c>
+#order allow,deny
+# 禁止一个ip地址
+#deny from 127.0.0.1
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{QUERY_STRING} ^lkid=(\d+)$  
+RewriteRule ^(.*)$ $1#lkid=%1? [NE,L,R=301]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ /index.php/$1 [QSA,PT,L]
+
+#category attribute
+RewriteRule ^(.*)/(.{3,})/(.*)-c-(\d+).html$ index\.php?m=category&id=$4&attr=$2&%{QUERY_STRING} [L]
+RewriteRule ^(.*)/(.{3,})/(.*)-c-(\d+)-page-(\d+).html$ index\.php?m=category&id=$4&&page=$5&attr=$2&%{QUERY_STRING} [L]
+
+#category
+RewriteRule ^(.*)/(.*)-c_([0-9]*)/$ index\.php?m=category&id=$3&%{QUERY_STRING} [L]
+RewriteRule ^(.*)/(.*)-c_([0-9]*)/([0-9]*).html$ index\.php?m=category&id=$3&page=$4&%{QUERY_STRING} [L]
+RewriteRule ^(.*)/(.*)-c_([0-9]*)/-page-([0-9]*).html$ index\.php?m=category&id=$3&page=$4&%{QUERY_STRING} [L]
+
+#goods
+RewriteRule ^(.*)/best_(\d+)-a-(.*).html$  index\.php?m=goods&id=$2&atrid=$3&%{QUERY_STRING} [L]
+RewriteRule ^(.*)/best_(\d+).html$  index\.php?m=goods&id=$2&%{QUERY_STRING} [L]
+RewriteRule ^(.*)/class(.*).html$ index\.php?m=category&id=$2&%{QUERY_STRING} [L]
+RewriteRule ^(.*)/(.*)_best-page-(.*)\.html$ index\.php?m=search&pro=$2&page=$3&%{QUERY_STRING} [QSA,L]
+RewriteRule ^(.*)/(.*)_best\.html$ index\.php?m=search&pro=$2&%{QUERY_STRING} [QSA,L]
+
+#new hot best product
+RewriteRule ^(.*)/new-arrivals/$ index\.php?m=search&pro=new&%{QUERY_STRING} [L]
+#new page type
+RewriteRule ^(.*)/new-arrivals/-page-([0-9]*).html$ index\.php?m=search&pro=new&page=$2 [QSA,L]
+RewriteRule ^(.*)/new-arrivals/([0-9]*).html$ index\.php?m=search&pro=new&page=$2 [QSA,L]
+RewriteRule ^(.*)/popular-products/$ index\.php?m=search&pro=hot&%{QUERY_STRING} [L]
+RewriteRule ^(.*)/popular-products/-page-([0-9]*).html$ index\.php?m=search&pro=hot&page=$2 [QSA,L]
+
+RewriteRule ^(.*)/pt-(\w+)-date-(\d+)/$ index\.php?m=search&pro=$2&date=$3&%{QUERY_STRING} [QSA,L]
+RewriteRule ^(.*)/pt-(\w+)-date-(\d+)/-page-([0-9]+)\.html$ index\.php?m=search&pro=$2&date=$3&page=$4&%{QUERY_STRING}  [QSA,L]
+#new page type
+RewriteRule ^(.*)/pt-(\w+)-date-(\d+)/([0-9]+)\.html$ index\.php?m=search&pro=$2&date=$3&page=$4&%{QUERY_STRING}  [QSA,L]
+RewriteRule ^(.*)/pt-(\w+)-date-(\d+)-c-(\d+)\.html$ index\.php?m=search&pro=$2&date=$3&category=$4&%{QUERY_STRING} [QSA,L]
+RewriteRule ^(.*)/pt-(\w+)-date-(\d+)-c-(\d+)-page-(\d+)\.html$ index\.php?m=search&pro=$2&date=$3&category=$4&page=$6&%{QUERY_STRING} [QSA,L]
+#new page type
+RewriteRule ^(.*)/pt-(\w+)-date-(\d+)-c-(\d+)/(\d+)\.html$ index\.php?m=search&pro=$2&date=$3&category=$4&page=$6&%{QUERY_STRING} [QSA,L]
+
+RewriteRule ^(.*)/pt-(\w+)-c-(\d+)/$ index\.php?m=search&pro=$2&category=$3&%{QUERY_STRING} [QSA,L]
+RewriteRule ^(.*)/pt-(\w+)-c-(\d+)/(\d+)\.html$ index\.php?m=search&pro=$2&category=$3&page=$4&%{QUERY_STRING} [QSA,L]
+RewriteRule ^(.*)/pt-(\w+)-sortby\d-page(\d+)\.html$ index\.php?m=search&pro=$2&page=$3&%{QUERY_STRING} [QSA,L]
+
+#groupbuy
+RewriteRule ^(.*)/daily-deals/$ index\.php?m=groupbuy [QSA,L]
+RewriteRule ^(.*)/daily-deals/([0-9]*).html$ index\.php?m=groupbuy&page=$2&%{QUERY_STRING} [QSA,L]
+
+
+
+
+
+#freeship
+RewriteRule ^(.*)/pt-freeship/$ index\.php?m=search&pro=freeship [QSA,L]
+RewriteRule ^(.*)/pt-freeship/-page-([0-9]*).html$ index\.php?m=search&pro=freeship&page=$2 [QSA,L]
+
+#special offer
+RewriteRule ^(.*)/dollar-zone/$ index\.php?m=special_offer [QSA,L]
+
+#abc search
+RewriteRule ^(.*)/popular-searches/$ index\.php?m=abcindex [QSA,L]
+RewriteRule ^(.*)/popular-searches/([0-9]*)\.html$ index\.php?m=abcindex&page=$2 [QSA,L]
+RewriteRule ^(.*)/buy-cheap-(.*)-for-sale-page-\d+\.html$ index\.php?m=search&k=$2&page=$3&t=seo [QSA,L]
+RewriteRule ^(.*)/buy-cheap-(.*)for-sale\.html$ index\.php?m=search&k=$2&t=seo [QSA,L]
+#abc old-v05
+#RewriteRule ^(.*)/wholesale-(.*)-page-(.*)\.html$ index\.php?m=search&k=$2&page=$3&%{QUERY_STRING} [QSA,L,NC]
+#RewriteRule ^(.*)/wholesale-(.*)\.html$ index\.php?m=search&k=$2&%{QUERY_STRING} [QSA,L,NC]
+
+#special custom
+RewriteRule ^(.*)/affiliate/$ index\.php?m=promotion&active=28 [QSA,L]
+RewriteRule ^(.*)/affiliate/$ index\.php?m=promotion&active=28 [QSA,L]
+#special custom old-v05
+RewriteRule vip_only_a\.html index.php?m=promotion&active=138_139 [L]
+RewriteRule vip_only_b\.html index.php?m=promotion&active=140_141 [L]
+RewriteRule vip_only_c\.html index.php?m=promotion&active=142_143 [L]
+RewriteRule Christmas_surprise\.html index.php?m=promotion&active=131_132_133_134_135_136_137 [L]
+RewriteRule black-friday\.html index.php?m=promotion&active=301_302_308_303_304_305_306_307 [L]
+
+#user center
+RewriteRule ^(.*)/sign-up/$ index\.php?m=users&a=sign [QSA,L]
+RewriteRule ^(.*)/log-in/$ index\.php?m=users&a=join [QSA,L]
+RewriteRule ^(.*)/order-history/$ index\.php?m=users&a=order_list [QSA,L]
+RewriteRule ^(.*)/my-favorites/$ index\.php?m=users&a=collection_list [QSA,L]
+RewriteRule ^(.*)/password-recovery/$ index\.php?m=users&a=profile [QSA,L]
+
+#article
+RewriteRule ^(.*)/gp/(.*)-([0-9]*)/$ index\.php?m=article&id=$3 [QSA,L]
+
+#customer search
+RewriteRule ^(.*)/affordable-(.*)-page-(.*)\.html$ index\.php?m=search&k=$2&page=$3&%{QUERY_STRING} [QSA,L,NC]
+#new page style
+RewriteRule ^(.*)/affordable-(.*)/([0-9]*)\.html$ index\.php?m=search&k=$2&page=$3&%{QUERY_STRING} [QSA,L,NC]
+RewriteRule ^(.*)/affordable-(.*)/$ index\.php?m=search&k=$2&%{QUERY_STRING} [QSA,L,NC]
+
+#customer search category
+#RewriteRule ^(.*)/affordable/(.*)/([0-9]*)\.html$ index\.php?m=search&k=$2&category=$3&%{QUERY_STRING} [QSA,L,NC]
+#RewriteRule ^(.*)/affordable/(.*)/([0-9]*)-page-([0-9]*)\.html$ index\.php?m=search&k=$2&category=$3&page=$4&%{QUERY_STRING} [QSA,L,NC]
+
+#hit search page
+RewriteRule ^(.*)/affordable/(.*)/(.*)/-page-(.*)\.html$ index\.php?m=search&k=$2&category=$3&page=$4&%{QUERY_STRING} [QSA,L]
+#new page style
+RewriteRule ^(.*)/affordable/(.*)/(.*)/(.*)\.html$ index\.php?m=search&k=$2&category=$3&page=$4&%{QUERY_STRING} [QSA,L]
+RewriteRule ^(.*)/affordable/(.*)/(.*)/$ index\.php?m=search&k=$2&category=$3&%{QUERY_STRING} [QSA,L]
+RewriteRule ^(.*)/affordable/(.*)/-page-(.*)\.html$ index\.php?m=search&k=$2&page=$3&%{QUERY_STRING} [QSA,L]
+#new page style
+RewriteRule ^(.*)/affordable/(.*)/(.*)\.html$ index\.php?m=search&k=$2&page=$3&%{QUERY_STRING} [QSA,L]
+RewriteRule ^(.*)/affordable/(.*)/$ index\.php?m=search&k=$2&%{QUERY_STRING} [QSA,L]
+RewriteRule ^(.*)/search.html$ index\.php?m=search [QSA,L]
+
+# Dropshipping
+#RewriteRule ^(.*)/dropshipping-products(.*)-page-(\d+)\.html$ index\.php?m=dropshipping&a=products&category=$2&page=$3&%{QUERY_STRING} [QSA,L]
+#RewriteRule ^(.*)/dropshipping-products(.*)\.html$ index\.php?m=dropshipping&a=products&category=$2&%{QUERY_STRING} [QSA,L]
+#RewriteRule ^(.*)/dropshipping-(.+)\.html$ index\.php?m=dropshipping&a=$2&%{QUERY_STRING} [QSA,L]
+#RewriteRule ^(.*)/dropshipping-products(.*)-page-(.*)\.html$ index\.php?m=dropshipping&a=products&category=2&page=$3&%{QUERY_STRING} [QSA,L]
+
+# link search page
+RewriteRule ^(.*)/c-(\d+)-wholesale-(.*)-page-(\d+)\.html$ index\.php?m=search&k=$3&category=$2&page=$4&%{QUERY_STRING} [QSA,L,NC]
+RewriteRule ^(.*)/c-(\d+)-wholesale-(.*)\.html$ index.php?m=search&k=$3&category=$2&%{QUERY_STRING} [QSA,L,NC]
+RewriteRule ^(.*)-c-(\d+).html$ index\.php?m=category&id=$2&%{QUERY_STRING} [L]
+RewriteRule ^(.*)-sid(\d+).html$ index\.php?m=category&id=$2&%{QUERY_STRING} [L]
+RewriteRule ^(.*)-sid(\d+)-page-(\d+).html$ index\.php?m=category&id=$2&page=$3&%{QUERY_STRING} [L]
+RewriteRule ^(.*)-c-(\d+)-page-(\d+).html$ index\.php?m=category&id=$2&&page=$3&%{QUERY_STRING} [L]
+RewriteRule ^(.*)-sid(\d+)-sortby\d-page(\d+).html$ index\.php?m=category&id=$2&page=$3&%{QUERY_STRING} [L]
+RewriteRule ^(.*)-(.*)-(.*)-(.*)-wholesale-page-(.*).html$ index\.php?m=category&id=$2&price_min=$3&price_max=$4&page=$5&%{QUERY_STRING} [L,NC]
+RewriteRule ^(.*)-(.*)-(.*)-(.*)-wholesale.html$ index\.php?m=category&id=$2&price_min=$3&price_max=$4&%{QUERY_STRING} [L,NC]
+
+# product price
+#RewriteRule ^(.*)-(.*)-(.*)-wholesale-(.*).html$ index\.php?m=category&price_min=$2&price_max=$3&id=$4%{QUERY_STRING} [L,NC]
+#RewriteRule ^(.*)-(.*)-(.*)-wholesale-(.*)-page-(.*).html$ index\.php?m=category&price_min=$2&price_max=$3&id=$4&page=$5%{QUERY_STRING} [L,NC]
+#RewriteRule ^(.*)-(.*)-price-wholesale.html$ index\.php?m=price_list&id=$2%{QUERY_STRING} [L]
+
+# Sitemap Index
+RewriteRule ^(.*)/sitemap-index-(.*)\.html$ index\.php?m=sitemap&id=$2 [QSA,L]
+RewriteRule ^(.*)/sitemap-index.html$ index\.php?m=sitemap [QSA,L]
+RewriteRule ^(.*)-(.*)-sitemap-Top-Searches-page-(.*).html$ index\.php?m=sitemap&a=search&id=$2&page=$3 [QSA,L]
+RewriteRule ^(.*)-(.*)-sitemap-Top-Searches.html$ index\.php?m=sitemap&a=search&id=$2 [QSA,L]
+RewriteRule ^(.*)-(.*)-sitemap-Top-Features.html$ index\.php?m=sitemap&a=features&id=$2 [QSA,L]
+RewriteRule ^(.*)-(.*)-sitemap-Top-Wholesalers-Products-page-(.*).html$ index\.php?m=sitemap&a=products&id=$2&page=$3 [QSA,L]
+RewriteRule ^(.*)-(.*)-sitemap-Top-Wholesalers-Products.html$ index\.php?m=sitemap&a=products&id=$2 [QSA,L]
+RewriteRule ^(.*)-(.*)-sitemap-Top-Wholesalers.html$ index\.php?m=sitemap&a=wholesalers&id=$2 [QSA,L]
+
+
+
+#专题 by lchen 2013/11/7
+RewriteRule ^(.*)/promotion-(.*)-special-(\d+).html$ index\.php?m=special&special=$3&%{QUERY_STRING} [L]
+
+#Vote
+RewriteRule ^(.*)/vote-(\d+)\.html index\.php?m=vote&sid=$2 [QSA,L]
+
+#other
+RewriteRule ^(.*)/shopping-cart/$ index\.php?m=flow&a=cart [QSA,L]
+
+
+</IfModule>

@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<div align="center" style="width:98% ; margin:auto; height:30px; padding-top:5px;">
+  <input name="prev" type="button" class="button" onClick="location.href='order.php?act=info&order_id={$prev_id}';" value="{$lang.prev}" {if !$prev_id}disabled{/if} />
+  <input name="next" type="button" class="button" onClick="location.href='order.php?act=info&order_id={$next_id}';" value="{$lang.next}" {if !$next_id}disabled{/if} />
+</div>
+<table width="95%" border="0" align="center" cellpadding="4" cellspacing="1" bgcolor="#dddddd">
+  <tr>
+    <td width="15%" bgcolor="#FFFFFF"><strong>{$lang.label_order_sn}</strong></td>
+    <td width="85%" bgcolor="#FFFFFF"><span class="red">{$order.order_sn}</span></td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF"><strong>{$lang.label_order_status}</strong></td>
+    <td bgcolor="#FFFFFF"><span  style="font-size:14px; font-weight:bold;">{$order.order_status_str}</span>
+                {if $ship_info}
+	                <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+	                <th align="center" bgcolor="#ffffff">物流单号</th>
+	                <th align="center" bgcolor="#ffffff">物流单商品明细</th>
+	                {foreach from=$ship_info item=ship} 
+	                <tr>
+	                	<td bgcolor="#ffffff" align="center">
+	                	Tracking Number: <b>{$ship.shipping_no}</b>  &nbsp;   By {if $ship.ship_url}<a href="{$ship.ship_url}" target="_blank"  class="f6">{$ship.shipping_name}</a>{else}{$ship.shipping_name}{/if}  Update date: {$ship.add_time} PST Delivery estimate: {$ship.ship_desc}. Exact time depends on courier. {if $ship.demo}<br><i style="padding-left:30px;">{$ship.demo}</i>{/if}
+	                	</td>
+	                	<td bgcolor="#ffffff" align="center">
+	                		{foreach from=$ship.track_goods item=track_goods }
+	                			{$track_goods.goods_sn} X {$track_goods.goods_num}<br>
+	                		{/foreach}
+	                	</td>
+	                </tr>
+	                {/foreach}
+	                </table>
+                {/if}</td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">商品信息 : </td>
+    <td bgcolor="#FFFFFF"><table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+        <tr>
+          <th width="55%" align="center" bgcolor="#ffffff">{$lang.goods_name}</th>
+          <td  align="center" bgcolor="#ffffff">{$lang.goods_sn}</td>
+          <!--<th>{$lang.market_price}</th>-->
+          <th width="8%" align="center" bgcolor="#ffffff">{$lang.goods_price}
+            <!-- {if $order.extension_code eq "group_buy"} -->
+            {$lang.gb_deposit}
+            <!-- {/if} --></th>
+          <th width="6%" align="center" bgcolor="#ffffff">数量</th>
+          <td width="8%" align="center" bgcolor="#ffffff">{$lang.storage}</td>
+          <td width="10%" align="center" bgcolor="#ffffff">加入<br />
+          购物车时间</td>
+          <th width="8%" align="center" bgcolor="#ffffff">{$lang.subtotal}</th>
+        </tr>
+        <!-- {foreach from=$goods_list item=goods} -->
+        <tr>
+          <td bgcolor="#ffffff"><!-- {if $goods.goods_id gt 0 && $goods.extension_code neq 'package_buy'} 商品 -->
+            <a href="{$goods.url_title}" target="_blank" class="f6">{$goods.goods_name}</a>
+            <!-- {elseif $goods.goods_id gt 0 && $goods.extension_code eq 'package_buy'} -->
+            <a href="javascript:void(0)" onclick="setSuitShow({$goods.goods_id})" class="f6">{$goods.goods_name}</a>
+            <div id="suit_{$goods.goods_id}" style="display:none">
+              <!-- {foreach from=$goods.package_goods_list item=package_goods_list} -->
+              <a href="{$goods.url_title}" target="_blank" class="f6">{$package_goods_list.goods_name}</a><br />
+              <!-- {/foreach} -->
+            </div>
+            <!-- {/if} -->{$goods.goods_attr}</td>
+          <!--<td align="right">{$goods.market_price}</td>-->
+          <td  align="center" bgcolor="#ffffff">{$goods.goods_sn}</td>
+          <td align="right" bgcolor="#ffffff">
+              {if $goods.goods_off}
+                <span class="price_off">
+                {if $goods.goods_off eq '100'}
+                    Free!
+                {else}
+                    {$goods.goods_off}%off
+                {/if}
+                </span>
+             {/if}
+
+          
+          {$goods.goods_price}</td>
+          <td align="center" bgcolor="#ffffff">{$goods.goods_number}</td>
+          <td align="center" bgcolor="#ffffff">{$goods.storage}</td>
+          <td align="center" bgcolor="#ffffff">{$goods.addtime}</td>
+          <td align="right" bgcolor="#ffffff">{$goods.formated_subtotal}</td>
+        </tr>
+   {if $goods.custom_size}
+            <tr bgcolor="#fff">
+                <td  colspan="7" bgcolor="#FFFFFF" >
+                    {include file='../custom_size.htm'}
+                </td>
+          </tr>
+              {/if}            
+        <!-- {/foreach} -->
+        <tr>
+          <td colspan="7" bgcolor="#ffffff" align="right">
+            <!-- {if $order.promotion_code_youhuilv} -->
+             促销码优惠: {$order.promotion_code_youhuilv}
+            <!-- {/if} -->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                   
+			{if $order.total_weight}<strong>{$lang.label_total_weight} </strong>{$order.total_weight}
+            {/if}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>商品总价</strong> : {$order.formated_goods_amount}<br />
+			<!-- {if $order.promotion_code_youhuilv} -->
+			<span class="red">注意：促销码优惠价＝促销码优惠 * 订单中优惠产品数量；此处只显示单价，并未计算优惠码总价.</span>
+			<!-- {/if} -->
+			</td>
+        </tr>
+      </table>
+      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd" style=" margin-top:5px;">
+        <tr>
+          <td bgcolor="#F1FAFE">{$lang.fee_info}</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#ffffff"><strong>商品总价</strong> : {$order.formated_goods_amount}
+             <!-- {if $order.point_money > 0} -->
+            - 使用{$order.used_point}点积分:${$order.point_money}
+            <!-- {/if} -->         
+            <!-- {if $order.shipping_fee > 0} -->
+            + 配送费: {$order.shipping_fee}
+            <!-- {/if} -->
+            <!-- {if $order.free_shipping_fee > 0} -->
+            <!-- + 配送费: {$order.free_shipping_fee} -->
+            <!-- {/if} -->
+            
+            <!-- {if $order.insure_fee > 0} -->
+            + 保险费: {$order.formated_insure_fee}
+            <!-- {/if} -->
+            
+            <!-- {if $order.Need_Traking_number > 0} -->
+            + 需要挂号: <span class="my_shop_price" orgp="{$order.Need_Traking_number}">{$order.Need_Traking_number}</span>
+            <!-- {/if} -->
+            
+            
+            </td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#ffffff">{$lang.order_amount}: {$order.formated_order_amount} USD</td>
+        </tr>
+      </table></td>
+  </tr>
+  <tr style="display:none;">
+    <td bgcolor="#FFFFFF">追踪单号 : </td>
+    <td bgcolor="#FFFFFF">{$order.shipping_method} :    {$order.Tracking_NO} {$order.Tracking_NO} &nbsp;   {if $order.shipping_time ne 0}{$lang.shipping_time}{$order.shipping_time|date_format:"%m/%d/%Y %H:%M:%S %p"}{/if}    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">收货人 : </td>
+    <td bgcolor="#FFFFFF">{$order.consignee}</td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">详细地址 :</td>
+    <td bgcolor="#FFFFFF">{$order.address}
+   </td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">城市 :</td>
+    <td bgcolor="#FFFFFF">{$order.city }</td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">洲 :</td>
+    <td bgcolor="#FFFFFF">{$order.province}</td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">国家 :</td>
+    <td bgcolor="#FFFFFF">{$order.country}</td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">{$lang.zipcode}  : </td>
+    <td bgcolor="#FFFFFF">{$order.zipcode}</td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">{$lang.tel} : </td>
+    <td bgcolor="#FFFFFF">{$order.tel} </td>
+  </tr>
+                 {if !$order.order_status}
+  <tr>
+    <td bgcolor="#FFFFFF">{$lang.email} : </td>
+    <td bgcolor="#FFFFFF">{$order.email}</td>
+  </tr>
+                 {/if}
+  <tr>
+    <td bgcolor="#FFFFFF">邮寄方式 : </td>
+    <td bgcolor="#FFFFFF">{$order.shipping_name}</td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">支付方式: </td>
+    <td bgcolor="#FFFFFF">{$order.pay_name}   {if $order.pay_time ne 0}  {$lang.label_pay_time}{$order.pay_time}{/if}</td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">是否需要发票 : </td>
+    <td bgcolor="#FFFFFF">{if $order.Invoice eq 0}不需要发票 {else}需要发票{/if}</td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">客户留言 : </td>
+    <td bgcolor="#FFFFFF">{$order.postscript}</td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">下单时间 : </td>
+    <td bgcolor="#FFFFFF">{$order.formated_add_time}</td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">订单语言 : </td>
+    <td bgcolor="#FFFFFF">{$order.lang}<br />注: en->英语; fr->法语; ru->俄语; es->西班牙语; pt->葡萄牙语; de->德语;</td>
+  </tr>  
+</table>
+{include file="copyright.htm"}

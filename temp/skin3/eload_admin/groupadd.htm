@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+{literal}
+<script language="javascript">
+$(document).ready(function(){ 
+	$("input[id='group_power[]']").click(function(){
+		if($(this).attr("checked") == true){ 
+			$("input[class*="+this["className"]+"]").each(function(){
+				$(this).attr("checked",true);  
+			});
+		}else{
+			$("input[class*="+this["className"]+"]").each(function(){
+				$(this).attr("checked",false);
+		    });
+		}
+	});
+})
+
+</script>
+{/literal}
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 系统组{$tag_msg}</td>
+          <td width="44%" align="right"><span class="navright"><a href="protect.php?act=grouplist">系统组列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+{if $msg != ''}
+<div id="result">
+    <div id="resultmsg">{$msg}</div>
+</div>
+{/if}
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th colspan="3">系统组{$tag_msg}</th>
+  </tr>
+  <form name="regform" method="post" action="{$url}" onSubmit="return Validator.Validate(this,3)">
+  <tr>
+    <td colspan="1">系统组名称：</td>
+    <td ><input name="group_name" type="text" class="input_style" id="group_name"  value="{$infoArr.group_name}"  dataType="Require" msg="请填写系统组名称！"/>
+      *</td>
+  </tr>
+  <tr>
+    <td colspan="1" >系统组备注：</td>
+    <td ><textarea name="group_desc" cols="50" id="group_desc">{$infoArr.group_desc}</textarea> </td>
+  </tr>
+  <tr>
+    <td colspan="1" >系统组权限：
+      <input name="group_power[]" type="checkbox" id="group_power[]" value="all_root" class="cls"
+     {php}
+      if (strpos(',' . $this->_tpl_vars['infoArr']['group_power'] . ',', ',all_root,') !== false) echo 'checked="checked"';
+      {/php}  />全选</td>
+    <td ><table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#FFFFFF">
+{foreach from=$menuArr item=list name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+        <td width="21%" height="25"><input name="group_power[]" type="checkbox" class="cls{$list.action_id}" id="group_power[]" value="{$list.action_code}"  {php}
+      if (strpos(',' . $this->_tpl_vars['infoArr']['group_power'] . ',', ','.$this->_tpl_vars['list']['action_code'].',') !== false) echo 'checked="checked"';
+      {/php}/>
+          {$list.action_name}</td>
+        <td width="79%">
+            { foreach from=$list._child item=slist }
+
+        <input name="group_power[]" type="checkbox"  value="{$slist.action_code}"  class="cls{$slist.parent_id}"  {php}
+      if (strpos(',' . $this->_tpl_vars['infoArr']['group_power'] . ',',  ','.$this->_tpl_vars['slist']['action_code'].',') !== false) echo 'checked="checked"';
+      {/php}/>
+          {$slist.action_name}，
+          {/foreach}
+       </td>
+      </tr>
+ {/foreach}
+ 	<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+		<td  width="21%" height="25"></td>
+		<td>	
+		<input name='group_power[]' type="checkbox"  value="lang_en" {if $default_lang eq '1'}checked="checked"{/if}/> 原始语言	
+		{php}
+		$group_power = $this->_tpl_vars['infoArr']['group_power'];		
+		$power_lang  = $this->_tpl_vars['lang_arr'];
+		foreach($power_lang as $value) {
+			$lang = 'lang_' . $value['title_e'];
+			$str = "<input name='group_power[]'  type='checkbox' value='lang_".$value['title_e']."'";
+			if(strpos($group_power, $lang)) {
+				$str .= " checked='checked'"; 
+			}
+			$str .= "/> ". $value['title'];
+			echo $str;
+			$str = '';
+		}
+		{/php}		
+		</td>
+	</tr>     
+    </table></td>
+  </tr>
+  <tr>
+    <td colspan="1" >&nbsp;</td>
+    <td width="73%" ><input name="" type="submit" class="sub_but" id="button" value="{$tag_msg}" /></td>
+  </tr>
+  </form>
+</table>
+{include file="copyright.htm"}
+</body>
+</html>

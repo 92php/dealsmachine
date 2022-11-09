@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>配件管理</title>
+<link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css" />
+<script language="javascript" src="{$jscache_url}sysjs/jquery-1.8.0.min.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$imgcache_url}eload_admin/js/admin_action.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script language="javascript" src="{$imgcache_url}eload_admin/js/admin_action.js?20140225"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php?lang="></script>
+<script language="javascript" type="text/javascript" src="{$imgcache_url}eload_admin/js/common.js"></script>
+<script language="javascript" type="text/javascript" src="{$imgcache_url}eload_admin/js/peijian.js?2014030702"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+	<tr>
+		<th>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="56%" id="navleft">
+						<a href="index.php?act=main">管理中心</a> &gt;&gt; Deals 列表</td>
+					<td width="44%" align="right">
+						<span class="navright">
+							<a href="?act=deals_add">添加deals</a>
+						</span>
+					</td>
+				</tr>
+			</table>
+		</th>
+	</tr>
+</table>
+
+
+<form method="post" action="?act=del_select" name="listForm" onsubmit="return confirmSubmitPeijian(this)">
+<span style="display:none">{$cat_list}<input type="text" name="keywords" id="keywords" size="30" value="{$keywords}" /></span>	
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;" cellpadding="4">
+	<tr>
+		<th style="width:80px;">
+    ID</th>
+
+	  <th>标题</th>
+		<th style="width: 140px;">品牌</th>
+		<th style="width: 100px;">产品编码</th>
+		<th style="width: 100px;">添加时间</th>
+		<th style="width: 100px;">截止时间</th>
+		<th style="width: 50px;">赞</th>
+
+	</tr>
+	{foreach from=$data.list item=item}
+	<tr style="background: #{cycle values='f4f9fd,e8f1fd' name=cycle1}" onmouseover="this.style.background='#FEF3D1'" onmouseout="this.style.background='#{cycle values='f4f9fd,e8f1fd' name=cycle2}'">
+		<td class="text-center">
+		<input type="checkbox" name="checkboxes[]" value="{$item.deals_id}" onclick="checkone('checkboxes[]')"/>		
+		{$item.deals_id}<br />		
+		</td>
+		<td><a href="deals.php?act=deals_add&id={$item.deals_id}">{$item.title}</a></td>
+
+		<td>{$item.brand}</td>
+		<td>{$item.goods_sn}</td>
+		<td>{$item.add_time}</td>
+		<td align="right" title="双击进行修改">
+			<span {literal}onclick="$(this).editable('goods.php?act=editpeijian', {type: 'text',event: 'dblclick',width:'90%',indicator:'Saving...',onblur:'submit',tooltip: ''});"{/literal} id="{$item.parent_id}||{$item.goods_id}||sort_order">{$item.expried_time}</span>
+		</td>
+
+		<td class="operate">
+			<p>{$item.ups}</p>
+		</td>
+	</tr>
+	{foreachelse}
+	<tr>
+		<td colspan="15" style="color: red;">{$no_records}</td>
+	</tr>
+	{/foreach}
+	<tr>
+		<td colspan="3" align="left"><span id="peijian_order" style="display:none">
+		序号：<input type="text" name="order" value="" maxlength="5"/>
+		<input type="submit" value=" 确定 " id="btnSubmit" name="btnSubmit" class="button"/>
+		</span>
+		<input type="submit" value="删除选中" />
+		</td>
+		<td style="text-align: right;" colspan="11"><div id="pager">{$pagestr}</div></td>
+	</tr>
+</table>
+</form>
+<script type="text/javascript">
+	var CATEGORY_PRIV = '{$smarty.session.WebUserInfo.category_priv}'.split(',');
+	PEIJIAN.list.bindEvents().init();
+</script>
+<script>
+
+
+</script>
+{include file="copyright.htm"}

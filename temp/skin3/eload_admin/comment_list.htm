@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 评论列表</td>
+          <td width="44%" align="right">&nbsp;</td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th> 
+    <img src="/temp/skin3/images/admin/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    输入关键字  
+ <input type="text" name="keyword" id="keyword"/> <input type="submit" class="Button" value="搜索" id="comment_seach_btn"/>
+ 
+</th>
+  </tr>
+</table>
+
+<form method="POST" action="comment_manage.php?act=batch" name="listForm">
+
+<!-- start comment list -->
+<div id="list">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th>
+      <input type="checkbox" onclick="checkAll(this, 'checkboxes[]');">
+      <a href="?sort_by=comment_id&sort_order={$filter.sort_order_comment_id}">编号</a> {$sort_comment_id}</th>
+    <th><a href="?sort_by=nickname&sort_order={$filter.sort_order_nickname}"> 呢称</a>{$sort_nickname}</th>
+    <th><a href="?sort_by=id_value&sort_order={$filter.sort_order_id_value}"> 评论对象</a>{$sort_id_value}</th>
+    <th><a href="?sort_by=ip_address&sort_order={$filter.sort_order_ip_address}"> IP地址</a>{$sort_ip_address}</th>
+    <th><a href="?sort_by=add_time&sort_order={$filter.sort_order_add_time}">评论时间</a>{$sort_add_time}</th>
+    <th> 状态</th>
+    <th>  操作</th>
+  </tr>
+  {foreach from=$comment_list item=comment  name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+    <td>    
+    <input type="checkbox" name="checkboxes[]" value="{$comment.comment_id}" onclick="checkone('checkboxes[]')"/>
+    {$comment.comment_id}</td>
+    <td>{if $comment.nickname}{$comment.nickname}{else}{$lang.anonymous}{/if}</td>
+    <td><a href="/m-{if $comment.comment_type eq '0'}goods{else}article{/if}-id-{$comment.id_value}.htm" target="_blank">{$comment.title}</td>
+    <td>{$comment.ip_address}</td>
+    <td align="center">{$comment.add_time}</td>
+    <td align="center">{if $comment.status eq 0}隐藏{else}显示{/if}</td>
+    <td align="center">
+      <a href="comment_manage.php?act=reply&amp;id={$comment.comment_id}">查看</a> |
+      <a  href="javascript:;" delatr="?act=remove&id={$comment.comment_id}" delmsg="你确定要删除该评论吗？"  onclick="del_acttion(this);">删除</a>
+    </td>
+  </tr>
+    {foreachelse}
+    <tr><td colspan="10" align="center" class="no-records">暂无记录</td></tr>
+    {/foreach}
+    <tr>
+      <td colspan="2" >
+      <div><input type="checkbox" onclick="checkAll(this, 'checkboxes[]');">全选
+      <select id="selAction" disabled="disabled" name="sel_action">
+        <option value="remove">删除评论</option>
+        <option value="allow">允许显示</option>
+        <option value="deny">禁止显示</option>
+      </select>
+      <input type="hidden" name="act" value="batch" />
+      <input type="submit" name="drop" id="btnSubmit" value="确定" class="button" disabled="true" /></div></td>
+      <td align="right" colspan="9"><div id="pager">{$pagestr}</div></td>
+    </tr>
+  </table>
+</div>
+
+</form>
+
+{include file="copyright.htm"}

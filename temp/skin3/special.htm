@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+{include file="top.htm"}
+<link href="{$imgcache_url}mincss/special_min.css" type="text/css" rel="stylesheet">
+<body>
+{include file="public_top.htm"}
+<div class="curPath mt10"><a href="/{$cur_lang_url}" title="{$shop_name} {$lang.home}" class="fl">{$lang.home}</a><h1 class="fl fb">&raquo; {$nav_title}</h1></div>
+{if 1 == $_temp}
+    {include file='special/goods_special.htm'}
+{elseif $_temp == 2}
+	{include file='special/goods_category.htm'}
+{/if}
+{include file="foothelp.htm"}
+{include file="foot.htm"}

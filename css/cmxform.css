@@ -1,0 +1,22 @@
+﻿
+
+
+
+FORM.cmxform LABEL.error {
+	FONT-STYLE: italic; COLOR: red
+}
+LABEL.error {
+	FONT-STYLE: italic; COLOR: red
+}
+DIV.error {
+	DISPLAY: none
+}
+
+
+
+INPUT.error {
+	BORDER-BOTTOM: red 1px dotted; BORDER-LEFT: red 1px dotted; BORDER-TOP: red 1px dotted; BORDER-RIGHT: red 1px dotted
+}
+FORM.cmxform .gray * {
+	COLOR: gray
+}

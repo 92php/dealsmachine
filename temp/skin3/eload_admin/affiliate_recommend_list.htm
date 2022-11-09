@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->>affiliate推荐链接</td>
+          <td width="44%" align="right"><span class="navright"><a href="?act=add">链接添加</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<!-- 商品搜索 -->
+{if $smarty.get.act == 'add'}
+ <div id="tabbody-div">
+<form enctype="multipart/form-data" action="affiliate_links_list.php" method="post" >
+<table cellpadding="0" border="0">
+   <tr>
+    <td valign="top" >              图片路径</td><td><input type="text" name="img" src="" size="35" value=""/></td>
+    
+    </tr>  
+    <tr>
+<td align="left">Link text</td><td>
+      <input type="text"  value="{$link.link_name}" name="link_name"  size="80" /></td>
+    
+      <td><input type="hidden" name="act" value="save_link" /></td>    
+    
+    </tr>
+<tr>
+<td align="left">描述</td><td>
+      <input type="text"  value="{$link.des}" name="des"  size="80" /></td>
+<td>
+          
+      <td><input type="hidden" name="act" value="save_link" /></td>    
+    
+    </tr>    
+    <tr>
+<td  align="left">URL</td><td>
+      <input type="text" size="80" value="{$link.url}" name="url" />
+      <input type="hidden" name='id' value="{$link.id}" />
+      </td>
+      
+    
+    </tr>
+    <tr>
+<td  align="left">排序</td><td>
+      <input type="text" size="80" value="{$link.sort_order}" name="sort_order" />
+
+      </td>
+      
+    
+    </tr>    
+    <tr>
+<td></td><td><input type="submit" value="保存推荐链接" /><input type="hidden" name="act" value="save_link" /></td>        
+    </tr>
+ </table>   
+</form>
+</div>
+{else}
+<form method="post" action="affiliate_links_list.php" name="listForm" onsubmit="return confirmSubmit(this)">
+<div id="list">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="4%">
+      <input type="checkbox" onclick="checkAll(this, 'checkboxes[]');">
+      编号</th>
+    <th width="10%">图片</th>
+    <th width="20%">link name</th>
+<th width="60%">URL</th>
+<th width="10%">排序</th>
+    </tr>
+{foreach from=$link_arr item=link name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';" id="eff{$goods.goods_id}">  
+    <td><input type="checkbox" name="checkboxes[]" value="{$link.id}" onclick="checkone('checkboxes[]')"/>      
+      {$link.id}</td>
+    <td><img width="50" height="50" src="/{$link.img}" border="0"/></td>
+    <td class="first-cell">
+
+    <a href="?act=add&id={$link.id}">{$link.link_name}</a></td>
+    <td class="first-cell">
+
+    {$link.url}</td>
+    <td class="first-cell">
+
+   {$link.sort_order}</td>
+
+
+   
+  </tr>
+  {foreachelse}
+  <tr>
+    <td colspan="13" align="center" >暂无链接 
+</td></tr>
+  {/foreach}
+   <tr>
+    <td colspan="3" valign="top" ><input type="submit" value=" 删除 " id="btnSubmit" name="btnSubmit" class="button" disabled="true" /></td>
+    <td colspan="10" align="right"><div id="pager"></div></td>
+    </tr>
+  <input type="hidden" name="act" value="del_link" />
+</table>
+</div>
+</form>
+{/if}
+{include file="copyright.htm"}

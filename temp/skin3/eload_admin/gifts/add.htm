@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php?lang="></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->>赠品</td>
+          <td width="44%" align="right"><span class="navright"><a href="activity_manage.php">赠品管理</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<div class="main-div">
+<form  method="post" name="theForm"  action="{$url}" onSubmit="return Validator.Validate(this,3)">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+    <tr>
+        <th colspan="3">赠品</th>
+    </tr>
+ 
+    <tr>
+        <td width="22%" class="label">赠品名称:</td>
+        <td width="78%"><input name="gifts_name" type="text" id="gifts_name" value="{$gifts.gifts_name}" size="30"  dataType="Require" msg="请填写活动名称！"/>*<br>请用英文 </td>
+    </tr> 
+    <tr>
+        <td width="22%" class="label">赠送需达到的金额:</td>
+        <td width="78%"><input name="need_money" type="text" id="need_money" value="{$gifts.need_money}" size="30"  dataType="Range" min=0.01 max =999999 msg="请输入金额！"/>*<br></td>
+    </tr>       
+    <tr>
+        <td width="22%" class="label">备注:</td>
+        <td width="78%">
+        <textarea name="remark" rows="3" cols="50">{$gifts.remark}</textarea><br>前台不显示
+        </td>
+    </tr>
+    <tr>
+        <td align="center">&nbsp;</td>
+        <td align="left">
+        <input type="hidden" name="gifts_id" value="{$gifts.gifts_id}" />
+        <input name="button" type="submit" class="sub_but" id="button" value="保存" /></td>
+    </tr>
+    </table>
+  </form>
+</div>
+{include file="copyright.htm"}

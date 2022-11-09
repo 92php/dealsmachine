@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>php日志</title>
+    <link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css" />
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td id="navleft">
+                            <a href="index.php?act=main">管理中心</a>
+                            &gt; &gt; php日志
+                        </td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <p style="margin: 10px; padding: 6px; color: #666;">
+    路径：{html_options options=$path_arr selected=$path id=path name=path}
+    </p>
+
+
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;" cellpadding="4">
+        <tr>
+            <th>日志名</th>
+            <th width="100">大小</th>
+            <th width="140">修改日期</th>
+        </tr>
+        {foreach from=$file_arr item=item}
+        <tr style="background: #{cycle values='f4f9fd,e8f1fd' name=cycle1}" onmouseover="this.style.background='#FEF3D1'" onmouseout="this.style.background='#{cycle values='f4f9fd,e8f1fd' name=cycle2}'">
+            <td style="text-align: left">
+                {if $item.is_file}
+                <a href="phplog.php?action=view&amp;filename={$item.filename}"{if $item.error} style="color: red"{/if}>{$item.filename}</a>
+                {else}
+                <a href="phplog.php?path={$item.filename}" style="color: blue;"><b><i>{$item.filename}</i></b></a>
+                {/if}
+            <td class="size">{$item.size_format}</td>
+            <td>{$item.time}</td>
+        </tr>
+        {foreachelse}
+        <tr>
+            <td colspan="15" style="color: red;">暂无日志</td>
+        </tr>
+        {/foreach}
+    </table>
+    {literal}
+    <script>
+        document.getElementById('path').onchange = function() {
+            location.href = 'phplog.php?path=' + this.options[this.selectedIndex].value;
+        };
+    </script>
+    {/literal}
+    {include file="copyright.htm"}

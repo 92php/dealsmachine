@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php?lang="></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 网站配置</td>
+           
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<div class="main-div">
+<form  method="post" name="theForm"  action="shop_config.php">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th colspan="3"></th>
+  </tr>
+      <tr>
+        <td width="22%" class="label">通用热门搜索关键字:</td>
+        <td width="78%">
+        <textarea name="hot_keywords" rows="5" cols="60">{$hot_keywords}</textarea> 
+       </td>
+</tr>
+      <tr>
+        <td width="22%" class="label">通用SEO 关键词:</td>
+        <td width="78%">
+        <textarea name="shop_keywords" rows="5" cols="60">{$shop_keywords}</textarea> 
+       </td>
+</tr>
+      <tr>
+        <td width="22%" class="label">通用SEO 描述:</td>
+        <td width="78%">
+        <textarea name="shop_desc" rows="5" cols="60">{$shop_desc}</textarea> 
+       </td>
+</tr>
+     <tr align="center">
+        <td align="center">&nbsp;</td>
+        <td align="left">
+        <input name="button" type="submit" class="sub_but" id="button" value="添加" /></td>
+      </tr>
+    </table>
+  </form>
+</div>
+{include file="copyright.htm"}

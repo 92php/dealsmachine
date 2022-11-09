@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link type="text/css" rel="stylesheet" href="/sysjs/calendar/calendar.css" />
+<script type="text/javascript" src="/sysjs/calendar.php"></script>
+<script language="javascript" src="/sysjs/eload13pack.js"></script>
+<script language="javascript" src="/sysjs/jlivequery.js"></script>
+<script language="javascript" src="/sysjs/jcookie.js"></script>
+<script language="javascript" src="/sysjs/jjeditable.js"></script>
+<script type="text/javascript" src="/temp/skin3/eload_admin/js/admin_action.js"></script>
+<script type="text/javascript" src="/temp/skin3/eload_admin/js/review.js?20130412_1"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php">管理中心</a> ->> 分享列表</td>
+          <td width="44%" align="right"></td>
+        </tr>
+    </table></th>
+  </tr>
+  <tr>
+	<form method="get" action="share_winner.php?act=share_list">
+		<td>时间段：从 <input name="start_date" value="{$start_date}" style="width:130px;" ondblclick="return showCalendar(this, '%Y-%m-%d %H:%M:%S', false, false, this);"/>&nbsp;&nbsp;到 &nbsp;&nbsp; <input name="end_date" value="{$end_date}" style="width:130px;" ondblclick="return showCalendar(this, '%Y-%m-%d %H:%M:%S', false, false, this);"/>
+		<input type="hidden" name="act" value="share_list" />	
+		<input type="submit" value=" 搜索 " />
+	    </td>
+	</form>
+  </tr>
+</table>
+<form method="post" action="" name="listForm" onsubmit="return confirmSubmit(this)">
+<div id="list">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;">
+    <tr>
+        <th style="width:10%;">User Id</th>
+        <th style="width:20%;">分享数</th>
+        <th style="width:20%;">Email</th>
+        <th style="width:20%;">最后分享时间</th>
+		<th style="width:10%;">最后登录时间</th>
+        <th style="width:10%;">登录次数</th>
+    </tr>
+    {foreach from=$data item=r}
+    <tr bgColor="{cycle values='#f4f9fd,e8f1fd' name=cycle1}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{cycle values='#f4f9fd,e8f1fd' name=cycle2}'">
+		<td>{$r.user_id}</td>
+		<td>{$r.sum}</td>
+        <td>{$r.email}</td>
+        <td>{$r.adddate}</td>
+        <td align="center">{$r.last_time} </td>
+		<td>{$r.visit_count}</td>
+  </tr>
+  {foreachelse}
+  <tr>
+    <td colspan="12" style="color: red;">暂无记录</td>
+  </tr>
+  {/foreach}
+   <tr>
+    <td colspan="10" style="text-align: right">
+        <div id="pager">{$pagestr}</div>
+    </td>
+    </tr>
+</table>
+</div>
+</form>
+ {include file="copyright.htm"}

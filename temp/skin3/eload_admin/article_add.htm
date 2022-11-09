@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css?2013080503' rel='stylesheet' type='text/css'/>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="/sysjs/eload13pack.js"></script>
+<script language="javascript" src="/sysjs/jlivequery.js"></script>
+<script language="javascript" src="/sysjs/validator.js"></script>
+<script language="javascript" src="/sysjs/jcookie.js"></script>
+<script language="javascript" src="/sysjs/calendar.php?lang="></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/colorselector.js"></script> 
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 文章{$tag_msg}</td>
+          <td width="44%" align="right"><span class="navright"><a href="goods.php">文章列表</a></span></td>
+        </tr>
+      </table></th>
+  </tr>
+</table>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+  <td>
+	<div id="tabbar-div">
+	  <p>
+		<span class="tab-front" id="general-tab" atr = '0'>原始语言</span>
+		{foreach from=$lang_arr name=lang_arr item=c}
+		<span class="tab-back" id="detail-tab"  atr = '{$smarty.foreach.lang_arr.iteration}'>{$c.title}</span>
+		{/foreach}
+		</p>
+	</div>
+	</td>
+</tr>
+</table>
+<!-- start goods form -->
+<div class="main-div margin-top-clear">
+<form  action="article.php?act={$form_action}" method="post" enctype="multipart/form-data" name="theForm" onSubmit="return Validator.Validate(this,3)">
+  <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="showtab0">
+  <tr>
+    <td width="19%" align="right" class="narrow-label" height="40">文章标题：</td>
+    <td width="81%"><input type="text" name="title" size ="40" maxlength="60" value="{$article.title}"  dataType="Require"  class="input_style"  msg="请输入文章标题"/></td>
+  </tr>
+  <!-- {if $article.cat_id >= 0} -->
+  <tr>
+    <td align="right" class="narrow-label">文章分类 ：</td>
+    <td><select name="article_cat"  dataType="Require"  msg="请选择">
+        <option value="">请选择...</option>
+        
+            {$cat_select}
+          
+      </select></td>
+  </tr>
+  <!-- {else} -->
+  <input type="hidden" name="article_cat" value="-1" />
+  <!-- {/if} -->
+  <tr>
+    <td align="right" class="narrow-label">置顶：</td>
+    <td><input type="radio" name="article_type" value="0" {if $article.article_type eq 0}checked{/if}>
+      普通
+      <input type="radio" name="article_type" value="1" {if $article.article_type eq 1}checked{/if}>
+      置顶 </td>
+  </tr>
+  <tr>
+    <td align="right" class="narrow-label">是否显示：</td>
+    <td><input type="radio" name="is_open" value="1" {if $article.is_open eq 1}checked{/if}>
+      显示
+      <input type="radio" name="is_open" value="0" {if $article.is_open eq 0}checked{/if}>
+      关闭</td>
+  </tr>
+  <tr>
+    <td align="right" class="narrow-label">文章排序：</td>
+    <td><input name="sort_order" type="text" value="{$article.sort_order}" size="10" /></td>
+  </tr>
+  <tr>
+    <td align="right" class="narrow-label">关键字：</td>
+    <td><input name="keywords" type="text" value="{$article.keywords}" size="40" />
+      搜索引擎，以逗号隔开</td>
+  </tr>
+  <tr>
+    <td align="right" class="narrow-label">内部链接：</td>
+    <td><input name="site_link" type="text" id="site_link" value="{if $article.site_link neq ''}{$article.site_link|escape}{else}/{/if}" size="80" maxlength="60" />&nbsp;例：/gp/contact-us-20/</td>
+  </tr>  
+  <tr>
+    <td align="right" class="narrow-label">外部链接：</td>
+    <td><input name="link_url" type="text" id="link_url" value="{if $article.link neq ''}{$article.link|escape}{else}http://{/if}" size="80" maxlength="60" /></td>
+  </tr>
+  <tr>
+    <td align="right" class="narrow-label">文件地址：</td>
+    <td>
+      <span class="narrow-label">
+      <input name="file_url" type="text" value="{$article.file_url|escape}" size="80" maxlength="255" />
+      </span></td>
+  </tr>
+  <tr>
+    <td align="right">简单描述：</td>
+    <td><textarea name="article_desc" cols="100" rows="4">{$article.article_desc}</textarea></td>
+  </tr>
+  <tr>
+    <td align="right">文章内容：</td>
+    <td>
+	<span class="sbutton" onclick="controlDiv('msgDiv',1,'content_en')">预览</span><br>
+	<textarea name="content" id="content_en" cols="110" rows="10">{$article.content}</textarea>           
+    </td>
+  </tr>
+  {if $default_lang eq '1'}
+  <tr>
+    <td></td>
+    <td>
+	  <input type="hidden" name="old_title" value="{$article.title}"/>
+      <input type="hidden" name="id" value="{$article.article_id}" />
+      <input type="submit" value="确定" class="button"  onclick="DoProcess();" />
+      <input type="reset" value="重置" class="button" />
+	</td>	
+  </tr>
+  {/if} 
+</table>
+</form>
+	
+
+<!-------------------多语言------------------->
+{foreach from=$lang_arr name=lang_arr item=c key=key}
+<form name="regform"  enctype="multipart/form-data" method="post" action="">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="showtab{$smarty.foreach.lang_arr.iteration}" style="display:none"  >
+  <tr>
+    <td height="40" align="right" width="19%">文章标题：</td> 
+    <td height="40"><input type="text" name="title" id="title_{$key}" maxlength="60" size = "30" value="{$article_lang.$key.title}"   dataType="Require" msg="请请输入分类名称！" class="input_style" /> *</td>
+  </tr>
+  <tr>
+    <td align="right">关键词：</td>
+    <td><input type="text" name="keywords" id="keywords_{$key}" maxlength="60" size="50" value="{$article_lang.$key.keywords}"   dataType="Require" msg="请请输入分类关键词！" class="input_style" /><br />注：关键词之间以逗号隔开
+    </td>
+  </tr>
+  <tr>
+    <td align="right">简单描述：</td>
+    <td><textarea  name="article_desc" id="article_desc_{$key}" cols="100" rows="4">{$article_lang.$key.article_desc}</textarea></td>
+  </tr>
+  <tr>
+    <td align="right" class="narrow-label">外部链接：</td>
+    <td>
+	<input name="link_url_{$key}" type="text" id="link_url_{$key}" value="{$article_lang.$key.link}" maxlength="150" size="80"/><br />
+	链接格式: <br>法语: http://www.xxx.com/fr/xxx.html <br>俄语: http://www.xxx.com/ru/xxx.html
+	</td>
+  </tr>  
+  <tr>
+    <td align="right">文章内容：</td>
+    <td>
+	<span class="sbutton" onclick="controlDiv('msgDiv',1,'content_{$key}')">预览</span><br>
+	<textarea name="content_{$key}" id="content_{$key}" cols="110" rows="10">{$article_lang.$key.content}</textarea>
+	</td>
+  </tr>  
+  <tr>
+    <td colspan="2" align="center" height="40">
+	<input type="hidden" name="lang" id="lang_{$key}" value="{$key}" />
+	<input type="hidden" name="article_id" id="article_id" value="{$article.article_id}" />
+	<span id="submit{$key}" class="goods_submit">确定</span>
+    </td>
+  </tr>
+  <tr>
+  	<td colspan="2">注：确定按钮只对当前显示页面有效，不会提交所有语言切换页面信息。<br /></td>
+  </tr>
+</table>
+</form>
+
+<div id="msgDiv">
+<h1><span><a href="#" onclick="controlDiv('msgDiv',0,'')">close</a>&nbsp;</span></h1>
+    <div align="center" id="show_content"></div>
+</div>
+{literal}
+<script>
+function controlDiv(DivID,divCase,ContentID){
+	var divs    = document.getElementById(DivID); 
+	if(divCase == 0) {
+		divs.style.display="none";
+	} else {
+		var content = document.getElementById(ContentID).value;		
+		var v_left  = (document.body.clientWidth-900)/2 + document.body.scrollLeft;  	
+		var v_top   = 40;
+		divs.style.left = v_left+'px';
+		divs.style.top  = v_top+'px';
+		$('#show_content').html(content);
+		$('#msgDiv').show();
+	}
+}
+</script>
+{/literal}	
+
+{literal}
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#submit{/literal}{$key}{literal}").click(function(){
+	  var article_id    = $("#article_id").val();	
+	  var title         = $("#title_{/literal}{$key}{literal}").val();
+	  var keywords      = $("#keywords_{/literal}{$key}{literal}").val();
+	  var article_desc  = $("#article_desc_{/literal}{$key}{literal}").val();
+	  var content       = $("#content_{/literal}{$key}{literal}").val();	  
+	  var link_url      = $("#link_url_{/literal}{$key}{literal}").val();	  
+	  var lang          = $("#lang_{/literal}{$key}{literal}").val();
+	  if(title == "") {
+		alert("请输入文章名称!"); return false;	 
+	  }
+	  if(content == "") {
+		alert("请输入文章内容!"); return false;	 
+	  }	  
+	  $.post("article.php?act=add_save",{
+			article_id:article_id, 
+			title:title,
+			keywords:keywords,
+			article_desc:article_desc,
+			content:content,
+			link_url:link_url,
+			lang:lang			
+			},function(result){
+		alert(result);
+	  });
+	});
+});
+</script>
+{/literal}
+{/foreach} 
+</div>
+{include file="copyright.htm"}
+</body>
+</html>

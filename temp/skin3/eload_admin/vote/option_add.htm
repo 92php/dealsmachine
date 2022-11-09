@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{$nav}</title>
+    <link type="text/css" rel="stylesheet" href="/temp/skin3/eload_admin/images/admin_css.css" />
+    <script type="text/javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+    <script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+    <script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/vote.js"></script>
+    {literal}
+    <style type="text/css">
+        .font-red { color: red; }
+        .font-green { color: green; }
+        .font-grey { color: grey; }
+        .font-bold { font-weight: bold; }
+    {/literal}
+    </style>
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> &gt;&gt; <a href="vote.php">投票管理</a> &gt;&gt; {$nav}</td>
+                        <!--<td width="44%" align="right"><span class="navright"><a href="vote.php?act=subject_add">添加题组</a></span></td>-->
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <form method="post" action="vote.php?act=option_update" id="form-option">{assign var=data value=$data[0]}
+        <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+            <tr>
+                <th colspan="3">{$nav}</th>
+            </tr>
+            <tr>
+                <td width="22%" class="label">选项名称：</td>
+                <td width="78%">
+                    <input type="text" name="name" id="txt-name" value="{$data.name}" size="50" />
+                    <span class="font-red">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">所属题组：</td>
+                <td>
+                    <select name="subject_id" id="select-subjectId">
+                        {foreach from=$subjects item=item}
+                        <option value="{$item.subject_id}"{if $subject_id == $item.subject_id} selected="selected"{/if}>{$item.subject}</option>
+                        {/foreach}
+                    </select>
+                    <a href="vote.php">题组管理</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">所属标题：</td>
+                <td>
+                    <select name="title_id" id="select-titleId">
+                        <option value="">请选择...</option>
+                    </select>
+                    <!--<a href="vote.php?act=title_list&amp;subject_id={$subject_id}">标题管理</a>-->
+                </td>
+            </tr>
+            <tr>
+                <td class="label">排序：</td>
+                <td>
+                    <input type="text" name="order" size="4" value="{$data.s_order|default:0}" />
+                    <span class="font-grey">值越小越靠前</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">票数：</td>
+                <td><input type="text" name="vote_counts" size="4" value="{$data.vote_counts|default:0}" /></td>
+            </tr>
+            <tr>
+                <td class="label">状态：</td>
+                <td>{html_radios options=$enable_arr name=enable checked=$data.enable|default:1}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;<input type="hidden" name="option_id" value="{$data.option_id}" /></td>
+                <td align="left"><input type="submit" class="sub_but" id="btn-submit" value="提 交" /></td>
+            </tr>
+        </table>
+    </form>
+    <script type="text/javascript">
+        var optionId = '{$data.option_id}', titleId = '{$title_id}', subjectId = '{$subject_id}';
+        var subject = $('#select-subjectId');
+        var title = $('#select-titleId');
+        subject.change(VOTE.option.initTitle);
+        VOTE.option.add().initTitle();
+    </script>
+    {include file="copyright.htm"}

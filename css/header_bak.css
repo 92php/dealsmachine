@@ -1,0 +1,82 @@
+/*
+
+*/
+* html{}
+body{ font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; color:#333333; margin:0px;}
+.clear{ CLEAR: both; OVERFLOW: hidden; HEIGHT: 10px}
+.clear1{ CLEAR: both; OVERFLOW: hidden; HEIGHT: 6px}
+A {COLOR: #333; TEXT-DECORATION: none}
+A:hover {TEXT-DECORATION: underline; color:333}
+/**/
+#topmenuwrap{ width:100%; margin:0px auto; background:url(../images/top_bg.jpg) repeat-x; height:28px;}
+.topmenu{ width:997px; margin:0px auto;}
+.toptext{  line-height:26px; float:left; font-size:10px; color:#999999; text-align:left;}
+.toptextmenu{  text-align:right; float:right; line-height:26px; font-size:11px;}
+.orge{ color:#FF3300}
+
+/**/
+select#currency{font-size:10px;}
+
+#mainmenuwrap{ width:997px; margin:0px auto; text-align:left; overflow:hidden;}
+.mainmenuwrap1{ width:100%; float:left;height:68px; background:url(../images/top_logo_bg.jpg) repeat-x;}
+.logowrap{ width:358px; float:left;}
+.logowrapge{float:left; text-align:left; padding-top:1px; background: url(/images/ganenlogo.jpg) no-repeat; height:65px; width:358px;}
+.logowrapge a{ height:65px}
+.logo{ float:left; width:161px; padding-top:10px;}
+.logotext{ float:left; width:185px; padding-top:33px; padding-left:8px;font-size:11px;}
+.logotext h1{ font-size:11px; margin:0px; padding:0px; font-weight:normal}
+.menuwrap{ width:639px; float:right;}
+.menu_top{ width:639px; float:left; height:38px; overflow:hidden;}
+.menu_w{ width:533px; float:right; height:30px; overflow:hidden;}
+.menu_wjia{ width:639px; float:left; height:30px; overflow:hidden;}
+.menu_w ul{ margin:0px; padding:0px; list-style:none;}
+.menu_w li{ line-height:30px; text-align:center; float:left; height:30px; overflow:hidden; font-weight:bold;font-size:12px;}
+li.m1{ width:95px; background:url(../images/mbg1.jpg) no-repeat; color:#00236A;}
+li.m2{ width:106px; background:url(../images/mbg2.jpg) no-repeat; color:#00236A;}
+li.m3{ width:108px; background:url(../images/mbg3.jpg) no-repeat; color:#00236A}
+li.m4{ width:110px; background:url(../images/mbg4.jpg) no-repeat; color:#00236A}
+li.m5{ width:114px; background:url(../images/mbg5.jpg) no-repeat; color:#00236A}
+li.m01{ width:95px; background:url(../images/mbg01.jpg) no-repeat; color:#ffffff;}
+li.m02{ width:106px; background:url(../images/mbg02.jpg) no-repeat; color:#ffffff;}
+li.m03{ width:108px; background:url(../images/mbg03.jpg) no-repeat; color:#ffffff}
+li.m04{ width:110px; background:url(../images/mbg04.jpg) no-repeat; color:#ffffff}
+li.m05{ width:114px; background:url(../images/mbg05.jpg) no-repeat; color:#ffffff}
+.menu_w h1{ font-size:12px; margin:0px; padding:0px;}
+.menu_w h2{ font-size:12px; margin:0px; padding:0px;}
+li.b a{ color:#FFFFFF; text-decoration:none}
+li.b a:hover{ color:#FFFFFF; text-decoration:underline}
+li.h a{ color:#00236A; text-decoration:none;}
+li.h a:hover{ color:#00236A; text-decoration:underline;}
+
+.mainmenuwrap2{ width:100%; float:left; height:43px; overflow:hidden; background:url(../images/search_bg.jpg) repeat-x;}
+.search_l{ width:80px; float:left; background:url(../images/search_1.jpg) no-repeat;height:43px;}
+.search_c{ width:642px; float:left;}
+.search_r{ width:275px; float:right; background:url(../images/cart_bg.jpg) no-repeat;height:43px; line-height:40px; color:#FFFFFF; text-indent:37px; font-weight:bold}
+.search_r a{ color:#FFF; text-decoration:none;}
+.search_r a:hover{ color:#FFF; text-decoration:underline;}
+.search_r span{ color:#FFFF00; font-size:15px;}
+.search_r span a{ color:#FFFF00; text-decoration:none;}
+.search_r span a:hover{ color:#FFFF00; text-decoration:underline;}
+.search_c p{ float:left; margin:0px; padding:0px; padding-top:8px; padding-left:4px;}
+.s_input{ width:400px; height:22px;*height:20px;_height:20px; border:1px #0B2344 solid; background:url(../images/bnt_bg.gif) no-repeat left top; line-height:20px; padding:0px 3px; color:#999999; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:11px;}
+.s_sls{ height:23px;*height:24px;_height:24px;color:#999999; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; *font-size:13px; _font-size:13px;border:1px #0B2344 solid; background:url(../images/bnt_bg.gif) no-repeat left top; width:150px;}
+
+.mainmenuwrap3{ width:997px; margin:0 auto; text-align:left; height:32px; overflow:hidden; background:url(../images/center_s.jpg) repeat-x;}
+.key_l{ width:5px; height:32px; float:left; overflow:hidden; background:url(../images/left_s.jpg) no-repeat;}
+.key_r{ width:5px; height:32px; overflow:hidden; float:left; background:url(../images/right_s.jpg) no-repeat;}
+.key_c{ width:987px; height:32px; float:left; line-height:30px; font-size:11px; color:#666666}
+.key_c a{ color:#666;}
+.key_c p{display:inline; padding:0 3px;}
+.key_c a:hover{ color:#333333; text-decoration:underline;}
+.red{ color:#F30}
+
+.Home_Prolist{ font-weight:bold;}
+.logotext_pic{ float:left; padding-top:1px; padding-left:15px;}
+.s_input1{ width:520px; height:23px;*height:22px;_height:22px; border:1px #0B2344 solid; background:url(../images/bnt_bg.gif) no-repeat left top; line-height:20px; padding:0px 3px; color:#999999; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:11px;}
+#bz_wim_contentarea{
+	font-size:10px !important;
+	font-family:Arial, Helvetica, sans-serif !important;
+	text-align:left;
+	margin-left:0;
+}
+#bt_apple_code{ background:#E8E8E8; border:0px; color:#999999}

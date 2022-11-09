@@ -1,0 +1,33 @@
+/* CSS Document */
+body{ font-size:12px; color:#000000; margin:0px;}
+.clear{ height:10px; clear:both; width:100%; margin:0px}
+#main{ width:957px; background:url(../images/c_sale_bg.jpg) repeat-x top left; margin:0px auto; padding:30px 20px;}
+.leftmain{ width:230px; float:left;}
+.rightmain{ width:710px; float:right;}
+.middlebg{background: url(../images/c_sale_middlebg.jpg) repeat-y; overflow:hidden; width:100%;}
+.Title{  width:678px; font-family:Arial, Helvetica, sans-serif; font-size:18px; color:#2C92BA; margin:0 auto; line-height:24px; }
+.Title1{  font-family:Arial, Helvetica, sans-serif; font-size:24px; color:#2C92BA; FONT-WEIGHT: bold;}
+.Title2{  font-family:Arial, Helvetica, sans-serif; font-size:24px; color:#FC974D; FONT-WEIGHT: bold;}
+.Title3{   width:678px;font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#676767; margin:0 auto; line-height:24px;}
+.Title4{  font-family:Arial, Helvetica, sans-serif; font-size:19px; color:#909090;}
+.middle{width:678px; float:left; overflow:hidden;}
+.middleleft{ width:176px; float:left; text-align:center; padding-left:12px;}
+.middleright{width:490px; float:left;font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#909090; margin:0 auto; line-height:24px;}
+.middleText{font-family:Arial, Helvetica, sans-serif; font-size:18px; color:#898989;line-height:24px; FONT-WEIGHT: bold;}
+.middlebottom{width:100%; float:left;}
+
+.product{ width:678px; margin:0px auto; padding:6px 0px;}
+.p_1{ width:225px; float:left; border-right:1px #CCCCCC dashed; padding:0px 0px 15px;}
+.p_2{ width:226px; float:left;}
+p{ margin:0px; padding:0px;}
+p.p_text{ line-height:15px; font-weight:bold; color:#999; padding:0px 10px; height:45px;}
+p.p_text a{ color:#999; text-decoration:none;}
+p.p_text a:hover{ color:#4398D7; text-decoration:underline;}
+p.p_pic{ text-align:center; }
+p.p_left{width:115px; float:left; height:28px; text-align:center; line-height:28px}
+.p_leftTitle{ font-size:12px; color:#778D94;}
+.p_leftTitle2{font-size:12px; color:#454545; FONT-WEIGHT: bold;}
+p.p_right{width:110px;float:left; padding-top:3px;}
+
+.p_title{ font-weight:bold; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:18px;}
+.p_title1{ font-weight:bold; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:16px;}

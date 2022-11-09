@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css" />
+<link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/tree.css" />
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> abc分类关键字显示个数</td>
+          <td width="44%" align="right"><span class="navright"><a href="new_abc_index_keyword.php">ABC关键字列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form id="form" method="post" action="?act=save_category_num">
+  <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+    <tr>
+      <th colspan="4">abc分类关键字显示个数</th>
+    </tr>
+    {foreach from=$cache key=cat_id item=item name=loop}
+    <tr>
+      <td align="right">{$cat_arr[$cat_id].cat_name}</td>
+      <td>
+          <input name="num[{$cat_id}]" value="{','|join:$item}" size="30" />
+          {if $smarty.foreach.loop.first}<span class="font-red">1-5个词分别显示个数,分别不能大于1000,半角逗号隔开,下同</span>{/if}
+      </td>
+    </tr>
+    {/foreach}
+    <tr>
+      <td width="29%" height="24" align="right">&nbsp;</td>
+      <td width="71%">
+          <input type="submit" value="确定" class="sub_but" />
+          <span class="font-red">填写多少个前台将显示多少个</span>
+      </td>
+    </tr>
+  </table>
+</form>
+<script src="{$jscache_url}sysjs/jquery-1.7.2.min.js"></script>
+<script src="{$jscache_url}sysjs/jcookie.js"></script>
+<script src="{$jscache_url}sysjs/tree.js"></script>
+<script src="{$imgcache_url}eload_admin/js/common.js"></script>
+{literal}
+<script>
+    $('#form').on('submit', function() {
+        var me = $(this);
+
+        $.post(me.attr('action'), me.serialize(), function (data) {
+
+            if (data) {
+                alert(data);
+            }
+            else {
+                Alert('保存成功', true);
+            }
+        });
+
+        return false;
+    });
+</script>
+{/literal}
+{include file="copyright.htm"}

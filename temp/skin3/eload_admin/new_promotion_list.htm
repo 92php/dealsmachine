@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> -&gt;&gt; 代金券申请用户列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="?act=add">添加</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form method="post" action="" name="listForm">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="15%">促销码</th>
+    <th width="12%">优惠</th>
+    <th width="10%">方式</th>
+    <th width="4%">使用用户</th>
+    <th width="4%">使用产品</th>
+    <th width="12%">创建时间</th>
+    <th width="12%">到期时间</th>
+    <th width="8%">已使用</th>
+    <th width="10%">次数限制</th>
+    <th width="15%">操作</th>
+  </tr>
+  {foreach from=$pcode_list item=pcodeArr  name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+    <td height="26">{$pcodeArr.code}</td>
+    <td height="26" align="center">{if $pcodeArr.youhuilv}{$pcodeArr.youhuilv}{/if}</td>
+    <td height="26" align="center">{if $pcodeArr.fangshi eq '1'}百分比{/if}{if $pcodeArr.fangshi eq '2'}直减金额{/if}</td>
+    <td height="26" align="center">{if $pcodeArr.users} {$pcodeArr.users}{else}无限制{/if}</td>
+    <td height="26" align="center">{if $pcodeArr.goods} {$pcodeArr.goods}{else}无限制{/if}</td>
+    <td align="center">{$pcodeArr.create_time}</td>
+    <td align="center">{$pcodeArr.exp_time}</td>
+    <td align="center">{$pcodeArr.cishu}次</td>
+    <td align="center">{if $pcodeArr.times} {$pcodeArr.times}次{else}不限{/if}</td>
+    <td align="center"><a href="?act=add&id={$pcodeArr.id}" title="{$lang.edit}">修改</a> |
+      <a href="?act=remove&id={$pcodeArr.id}" class="del_act" delmsg="您确定要删除选定的促销码吗？">删除</a>
+    </td>
+  </tr>
+  {foreachelse}
+    <tr><td colspan="15" align="center" class="no-records">{$lang.no_records}</td></tr>
+    {/foreach}
+    <tr>
+      <td align="right" nowrap="true" colspan="11">
+	<div id="pager">{$pagestr}</div>
+      </td>
+    </tr>
+  </table>
+</form>
+{include file="copyright.htm"}
+

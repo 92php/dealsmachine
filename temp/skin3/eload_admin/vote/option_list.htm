@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>选项列表</title>
+    <link type="text/css" rel="stylesheet" href="/temp/skin3/eload_admin/images/admin_css.css" />
+    <script type="text/javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+    <script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+    <script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/vote.js"></script>
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> &gt;&gt; <a href="vote.php">投票管理</a> {if $subjects[$subject_id]}&gt;&gt; <a href="vote.php?act=title_list&amp;subject_id={$subject_id}" title="查看该题组下标题">{$subjects[$subject_id].subject}</a>{/if} {if $title_arr[0]}&gt;&gt; <a href="vote.php?act=option_list&amp;subject_id={$subject_id}&amp;title_id={$title_id}" title="查看该标题下选项">{$title_arr[0].title}</a>{/if} &gt;&gt; 选项列表</td>
+                        <td width="44%" align="right"><span class="navright"><a href="vote.php?act=option_add&amp;subject_id={$subject_id}&amp;title_id={$title_id}">添加选项</a></span></td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;">
+        <tr>
+            <th>序号</th>
+            <th>选项名</th>
+            <th>所属标题</th>
+            <th>所属题组</th>
+            <th>排序</th>
+            <th>票数</th>
+            <th>状态</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+        {foreach from=$data item=item name=option}
+        <tr bgColor="{cycle values='#f4f9fd,e8f1fd' name=cycle1}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{cycle values='#f4f9fd,e8f1fd' name=cycle2}'">
+            <td>{$smarty.foreach.option.iteration}</td>
+            <td><a href="vote.php?act=option_add&amp;option_id={$item.option_id}&amp;title_id={$item.title_id}&amp;subject_id={$item.subject_id}">{$item.name}</a></td>
+            <td><a href="vote.php?act=title_add&amp;title_id={$item.title_id}&amp;subject_id={$item.subject_id}">{$item.title}</a></td>
+            <td><a href="vote.php?act=subject_add&amp;subject_id={$item.subject_id}">{$subjects[$item.subject_id].subject}</a></td>
+            <td>{$item.s_order}</td>
+            <td>{$item.vote_counts}</td>
+            <td><a href="javascript://" class="a-enable s-{$item.option_id}" value="{$item.enable}">{$enable_arr[$item.enable]}</a></td>
+            <td>{smarty_local_date time=$item.create_time}</td>
+            <td>
+                <a href="vote.php?act=option_add&amp;option_id={$item.option_id}&amp;title_id={$item.title_id}&amp;subject_id={$item.subject_id}">编辑</a> |  
+                <a class="a-delete" href="javascript://" id="s-{$item.option_id}">删除</a>
+            </td>
+        </tr>
+        {foreachelse}
+        <tr>
+            <td colspan="15" class="no-records">{$no_records}</td>
+        </tr>
+        {/foreach}
+    </table>
+    <script type="text/javascript">
+        var titleId = '{$title_id}', subjectId = '{$subject_id}';
+        VOTE.option.list();
+    </script>
+    <p style="color: grey; margin-left: 10px;"><span style="color: red">提示：</span>点击状态单元格可进行“开启/关闭”操作</p>
+    {include file="copyright.htm"}

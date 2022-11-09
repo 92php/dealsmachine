@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>代金券管理</title>
+    <link type='text/css' rel='stylesheet' href='/temp/skin3/eload_admin/images/admin_css.css'/>
+    <link type="text/css" rel="stylesheet" href="{$jscache_url}sysjs/calendar/calendar.css" />
+    <script type="text/javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+    <script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/validator.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/calendar.php"></script>
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> -&gt;&gt; {$nav}</td>
+                        <td width="44%" align="right"><span class="navright">{$nav_right}</span></td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <form method="post" action="promotion.php?act={if $act == 'add'}update{/if}" name="listForm" onSubmit="return Validator.Validate(this,3)">
+        {* 用户具体代金券列表 start *}
+        {if $act == 'email'}
+        <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;">
+            <tr>
+                <th>代金券号码</th>
+                <th>优惠</th>
+                <th>方式</th>
+                <th>创建时间</th>
+                <th>到期时间</th>
+                <th>已使用</th>
+                <th>次数限制</th>
+                <th>操作</th>
+            </tr>
+            {foreach from=$data item=item}
+            <tr bgColor="{cycle values='#f4f9fd,e8f1fd' name=cycle1}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{cycle values='#f4f9fd,e8f1fd' name=cycle2}'">
+                <td>{$item.code}</td>
+                <td>{$item.youhuilv}</td>
+                <td>{$method_arr[$item.fangshi]|default:$method_arr[1]}</td>
+                <td>{smarty_local_date time=$item.create_time format='Y-m-d'}</td>
+                <td>{smarty_local_date time=$item.exp_time format='Y-m-d'}</td>
+                <td>{$item.cishu}次</td>
+                <td>{if $item.times}{$item.times}次{else}不限{/if}</td>
+                <td>
+                    <a href="promotion.php?act=add&amp;id={$item.id}">编辑</a> &nbsp; 
+                    <a href="promotion.php?act=remove&id={$item.id}" delmsg="删除后将无法恢复，你确定要删除吗？" onclick="del_acttion(this);">删除</a>
+                </td>
+            </tr>
+            {foreachelse}
+            <tr>
+                <td colspan="15" class="no-records">{$no_records}</td>
+            </tr>
+            {/foreach}
+            <tr>
+                <td align="right" nowrap="true" colspan="11">
+                    <div id="pager">
+                        {$pagestr}
+                    </div>
+                </td>
+            </tr>
+        </table>
+        {* 用户具体代金券列表 end *}
+        {elseif $act == 'add'}
+        {* 添加或编辑 start *}
+        <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+            <tr>
+                <th colspan="3">{$title}代金券{$data[0]}</th>
+            </tr>
+            <tr>
+                <td width="22%" class="label">代金券号码:</td>
+                <td width="78%"><input name="code" type="text" id="code" value="{$data.code}" size="30" dataType="Require" msg="代金券号码！"/>* </td>
+            </tr>
+            <tr>
+                <td class="label">到期日期:</td>
+                <td><input name="exp_time" value="{smarty_local_date format='Y-m-d' time=$data.exp_time}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" datatype="Require" msg="请填写到期日期！"/>* </td>
+            </tr>
+            <tr>
+                <td class="label">最多可使用的次数:</td>
+                <td><input name="times" id="times" style="width:40px;" value="{$data.times|default:0}" datatype="Require" msg="请填写最多可使用的次数！"/>填0表示不限制使用次数</td>
+            </tr>
+            <tr>
+                <td class="label">方式:</td>
+                <td>{html_radios name="fangshi" options=$method_arr checked=$data.fangshi|default:1 separator='&nbsp;'}</td>
+            </tr>
+            <tr>
+                <td class="label">优惠段:</td>
+                <td>
+                    <textarea name="youhuilv" cols="45" rows="2" id="youhuilv" datatype="Require" msg="请填写优惠段！">{$data.youhuilv|default:10}</textarea>
+                    *
+                    <br/>
+                    说明： 例如：100-20,300-50 表示两个价格段，
+                    <br/>
+                    满100对应20的优惠，满300对应50的优惠。支持多段优惠价格。
+                </td>
+            </tr>
+            <tr>
+                <td align="right"><span class="label">针对用户:</span></td>
+                <td align="left">
+                    <textarea name="users" id="users" cols="45" rows="5">{$data.users}</textarea>
+                    <br/>
+                    多用户请使用半角逗号( , )隔开。针对所有用户请保持空
+                </td>
+            </tr>
+            <tr>
+                <td align="right"><span class="label">针对产品:</span></td>
+                <td align="left">
+                    <textarea name="goods" id="goods" cols="45" rows="5">{$data.goods}</textarea>
+                    <br/>
+                    请填产品编号，多用户请使用半角逗号( , )隔开。针对所有产品请保持空(只针对产品单价)
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;<input type="hidden" name="id" value="{$id}" /></td>
+                <td align="left"><input type="submit" class="sub_but" id="button" value="保存" /></td>
+            </tr>
+        </table>
+        {* 添加或编辑 end *}
+        {* 代金券管理首页 *}
+        {else}
+        <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;">
+            <tr>
+                <th>申请用户</th>
+                <th>使用次数/可用次数</th>
+                <th>申请时间</th>
+                <th>最后登陆时间</th>
+                <th>登陆次数</th>
+                <th>最后登陆IP</th>
+                <th>会员等级</th>
+                <th>注册时间</th>
+                <th>操作</th>
+            </tr>
+            {foreach from=$data item=item}
+            <tr bgColor="{cycle values='#f4f9fd,e8f1fd' name=cycle1}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{cycle values='#f4f9fd,e8f1fd' name=cycle2}'">
+                <td><a href="?act=email&amp;email={$item.email}">{$item.email}</a></td>
+                <td><span style="color: red">{$item.cishu}</span>/{$item.times}</td>
+                <td>{smarty_local_date time=$item.create_time}</td>
+                <td>{smarty_local_date time=$item.last_login}</td>
+                <td>{$item.visit_count}</td>
+                <td>{$item.last_ip}</td>
+                <td>{$user_rank[$item.user_rank].grade_name}</td>
+                <td>{smarty_local_date time=$item.reg_time}</td>
+                <td>
+                    <a href="users.php?act=edit&id={$item.user_id}{$edit_url}" title="编辑该会员">
+                        <img src="{$jscache_url}temp/skin3/eload_admin/images/icon_edit.gif" border="0" height="16" width="16" />
+                    </a>
+                    <a href="users.php?act=address_list&id={$item.user_id}" title="查看该会员地址簿">
+                        <img src="{$jscache_url}temp/skin3/eload_admin/images/book_open.gif" border="0" height="16" width="16" />
+                    </a>
+                    <a href="order.php?act=list&user_id={$item.user_id}" title="查看该会员订单">
+                        <img src="{$jscache_url}temp/skin3/eload_admin/images/icon_view.gif" border="0" height="16" width="16" />
+                    </a>
+                    <!--<a href="javascript:;" delatr="users.php?act=remove&id={$item.user_id}" delmsg="删除后将无法恢复，你确定要删除吗？" onclick="del_acttion(this);" title="删除">
+                        <img src="{$jscache_url}temp/skin3/eload_admin/images/icon_drop.gif" border="0" height="16" width="16" />
+                    </a>-->
+                    {if $item.user_type}
+                    <br/>
+                    <a href="affiliate_count.php?act=underlayer&user_id={$item.user_id}">查看下家</a>{/if}
+                </td>
+            </tr>
+            {foreachelse}
+            <tr>
+                <td colspan="15" class="no-records">{$no_records}</td>
+            </tr>
+            {/foreach}
+            <tr>
+                <td align="right" nowrap="true" colspan="11">
+                    <div id="pager">
+                        {$pagestr}
+                    </div>
+                </td>
+            </tr>
+        </table>
+        {/if}
+    </form>
+    {include file="copyright.htm"}

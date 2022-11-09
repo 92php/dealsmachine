@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>专题管理</title>
+    <link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css" />
+    <script type="text/javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+    <script type="text/javascript" src="{$imgcache_url}eload_admin/js/admin_action.js?2013122601"></script>
+    <script type="text/javascript" src="{$imgcache_url}eload_admin/js/special.js?20131203"></script>
+    <style type="text/css">
+    {literal}
+        #stripe_tb td img { cursor: default; }
+        ul { margin: 0; padding: 0; list-style: none; text-align: left; }
+        li { padding-top: 4px;}
+        .font-red { color: red; }
+        .font-green { color: green; }
+        .text-left { text-align: left; }
+        .float-right { float: right; }
+    {/literal}
+    </style>
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> &gt;&gt; 专题管理</td>
+                        <td width="44%" align="right">
+                            <span class="navright">
+                                <a href="special_mgr.php?act=special_add">添加专题</a>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;" cellpadding="4">
+        <tr>
+            <th style="width: 50px;">专题id</th>
+            <th style="width: 150px;">专题名称</th>
+            <th style="width: 300px;">专题板块（板块id+板块名称）</th>
+            <th>备注</th>
+            <th style="width: 200px;">操作</th>
+        </tr>
+        {foreach from=$data item=item}
+        <tr style="background: #{cycle values='f4f9fd,e8f1fd' name=cycle1}" onmouseover="this.style.background='#FEF3D1'" onmouseout="this.style.background='#{cycle values='f4f9fd,e8f1fd' name=cycle2}'">
+            <td>{$item.special_id}</td>
+            <td><a href="special_mgr.php?act=special_position_list&amp;special_id={$item.special_id}" title="查看其下板块">{$item.name}</a></td>
+            <td>
+                <ul>
+                {foreach from=$item.special_positions item=position}
+                <li>{$position.position_id}、<a href="special_mgr.php?act=special_position_add&amp;position_id={$position.position_id}&amp;special_id={$item.special_id}">{$position.name}</a></li>
+                {foreachelse}
+                <li>--</li>
+                {/foreach}
+                </ul>
+            </td>
+            <td>{$item.memo}</td>
+            <td>
+                <a href="special_mgr.php?act=special_position_add&amp;special_id={$item.special_id}">添加板块</a> |
+                <a href="{$item.url}" target="_blank">预览</a> |
+                <a href="special_mgr.php?act=special_add&amp;special_id={$item.special_id}">编辑</a> |
+                <a href="special_mgr.php" class="a-delete" id="s-{$item.special_id}">删除</a>
+            </td>
+        </tr>
+        {foreachelse}
+        <tr>
+            <td colspan="15" style="color: red;">{$no_records}</td>
+        </tr>
+        {/foreach}
+    </table>
+    <script type="text/javascript">SPECIAL.special.list();</script>
+    {include file="copyright.htm"}

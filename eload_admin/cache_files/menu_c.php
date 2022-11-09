@@ -1,0 +1,1513 @@
+<?php
+//后台自动生成，最后生成时间 2014-06-09 16:53:44
+$data = array (
+  0 => 
+  array (
+    'action_id' => '1',
+    'parent_id' => '0',
+    'action_code' => 'goods',
+    'action_name' => '商品管理',
+    'action_url' => '#',
+    'enable' => '1',
+    'action_order' => '0',
+    'leaf' => false,
+    '_child' => 
+    array (
+      0 => 
+      array (
+        'action_id' => '2',
+        'parent_id' => '1',
+        'action_code' => 'goods_list',
+        'action_name' => '商品列表',
+        'action_url' => 'goods.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      1 => 
+      array (
+        'action_id' => '6',
+        'parent_id' => '1',
+        'action_code' => 'goods_add',
+        'action_name' => '添加商品',
+        'action_url' => 'goods.php?act=add',
+        'enable' => '0',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      2 => 
+      array (
+        'action_id' => '76',
+        'parent_id' => '1',
+        'action_code' => 'catalog',
+        'action_name' => '商品分类',
+        'action_url' => 'category.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      3 => 
+      array (
+        'action_id' => '77',
+        'parent_id' => '1',
+        'action_code' => 'catalog_add',
+        'action_name' => '添加分类',
+        'action_url' => 'category.php?act=add',
+        'enable' => '0',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      4 => 
+      array (
+        'action_id' => '83',
+        'parent_id' => '1',
+        'action_code' => 'goods_trash',
+        'action_name' => '商品回收站',
+        'action_url' => 'goods.php?act=trash',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      5 => 
+      array (
+        'action_id' => '117',
+        'parent_id' => '1',
+        'action_code' => 'client_flow_stats',
+        'action_name' => '搜索引擎',
+        'action_url' => 'searchengine_stats.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      6 => 
+      array (
+        'action_id' => '118',
+        'parent_id' => '1',
+        'action_code' => 'promotion_manage',
+        'action_name' => '促销码管理',
+        'action_url' => 'promotion_manage.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      7 => 
+      array (
+        'action_id' => '119',
+        'parent_id' => '1',
+        'action_code' => 'goods_inquiry',
+        'action_name' => '批发询价',
+        'action_url' => 'goods_inquiry.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      8 => 
+      array (
+        'action_id' => '123',
+        'parent_id' => '1',
+        'action_code' => 'sales_report',
+        'action_name' => '产品销售报表',
+        'action_url' => 'sales_report.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      9 => 
+      array (
+        'action_id' => '127',
+        'parent_id' => '1',
+        'action_code' => 'goods_tuijian',
+        'action_name' => '商品推荐管理',
+        'action_url' => 'goods_tuijian.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      10 => 
+      array (
+        'action_id' => '130',
+        'parent_id' => '1',
+        'action_code' => 'goods_daydeal',
+        'action_name' => '每日特销管理',
+        'action_url' => 'goods_daydeal.php',
+        'enable' => '0',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      11 => 
+      array (
+        'action_id' => '132',
+        'parent_id' => '1',
+        'action_code' => 'review_list',
+        'action_name' => '新评论管理',
+        'action_url' => 'review.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      12 => 
+      array (
+        'action_id' => '133',
+        'parent_id' => '1',
+        'action_code' => 'inquiry_list',
+        'action_name' => '产品咨询',
+        'action_url' => 'inquiries.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      13 => 
+      array (
+        'action_id' => '136',
+        'parent_id' => '1',
+        'action_code' => 'coupon_point',
+        'action_name' => '积分兑换券管理',
+        'action_url' => 'coupon_point.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      14 => 
+      array (
+        'action_id' => '146',
+        'parent_id' => '1',
+        'action_code' => 'activity_manage',
+        'action_name' => '活动管理',
+        'action_url' => 'activity_manage.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      15 => 
+      array (
+        'action_id' => '159',
+        'parent_id' => '1',
+        'action_code' => 'peijian_manage',
+        'action_name' => '配件管理(组合销售)',
+        'action_url' => 'peijian.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      16 => 
+      array (
+        'action_id' => '161',
+        'parent_id' => '1',
+        'action_code' => 'newsletter',
+        'action_name' => '邮件期刊管理',
+        'action_url' => 'newsletter.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      17 => 
+      array (
+        'action_id' => '162',
+        'parent_id' => '1',
+        'action_code' => 'gifts_manage',
+        'action_name' => '赠品级别管理',
+        'action_url' => 'gifts_manage.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      18 => 
+      array (
+        'action_id' => '171',
+        'parent_id' => '1',
+        'action_code' => 'collect_info',
+        'action_name' => '用户产品需求信息收集',
+        'action_url' => 'collect_info.php?type=0',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      19 => 
+      array (
+        'action_id' => '172',
+        'parent_id' => '1',
+        'action_code' => 'collect_info2',
+        'action_name' => '用户搜索意见信息收集',
+        'action_url' => 'collect_info.php?type=1',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      20 => 
+      array (
+        'action_id' => '173',
+        'parent_id' => '1',
+        'action_code' => 'category_list',
+        'action_name' => '分类配件管理',
+        'action_url' => 'peijian.php?act=category_list',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      21 => 
+      array (
+        'action_id' => '206',
+        'parent_id' => '1',
+        'action_code' => 'gsc',
+        'action_name' => 'gmc设置更新及删除编码',
+        'action_url' => 'gsc.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      22 => 
+      array (
+        'action_id' => '207',
+        'parent_id' => '1',
+        'action_code' => 'goods_edit',
+        'action_name' => '商品编辑',
+        'action_url' => '#',
+        'enable' => '0',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      23 => 
+      array (
+        'action_id' => '175',
+        'parent_id' => '1',
+        'action_code' => 'goods_super',
+        'action_name' => '明星产品',
+        'action_url' => 'goods.php?act=super_star',
+        'enable' => '1',
+        'action_order' => '1',
+        'leaf' => true,
+      ),
+      24 => 
+      array (
+        'action_id' => '124',
+        'parent_id' => '1',
+        'action_code' => 'exchange',
+        'action_name' => '汇率管理',
+        'action_url' => 'exchange.php',
+        'enable' => '1',
+        'action_order' => '4',
+        'leaf' => true,
+      ),
+      25 => 
+      array (
+        'action_id' => '80',
+        'parent_id' => '1',
+        'action_code' => 'goods_type',
+        'action_name' => '商品类型',
+        'action_url' => 'goods_type.php',
+        'enable' => '1',
+        'action_order' => '5',
+        'leaf' => true,
+      ),
+      26 => 
+      array (
+        'action_id' => '82',
+        'parent_id' => '1',
+        'action_code' => 'comment_manage',
+        'action_name' => '用户评论',
+        'action_url' => 'comment_manage.php',
+        'enable' => '0',
+        'action_order' => '6',
+        'leaf' => true,
+      ),
+      27 => 
+      array (
+        'action_id' => '122',
+        'parent_id' => '1',
+        'action_code' => 'goods_tj',
+        'action_name' => '产品访问统计',
+        'action_url' => 'goods_tj.php',
+        'enable' => '0',
+        'action_order' => '7',
+        'leaf' => true,
+      ),
+      28 => 
+      array (
+        'action_id' => '157',
+        'parent_id' => '1',
+        'action_code' => 'search_attr_template',
+        'action_name' => '属性查找管理',
+        'action_url' => 'search_attr_template.php',
+        'enable' => '1',
+        'action_order' => '8',
+        'leaf' => true,
+      ),
+      29 => 
+      array (
+        'action_id' => '193',
+        'parent_id' => '1',
+        'action_code' => 'redirect301',
+        'action_name' => '分类及商品301跳转设置',
+        'action_url' => 'redirect301.php',
+        'enable' => '1',
+        'action_order' => '20',
+        'leaf' => true,
+      ),
+      30 => 
+      array (
+        'action_id' => '169',
+        'parent_id' => '1',
+        'action_code' => 'datafeed',
+        'action_name' => 'datafeed',
+        'action_url' => 'data_feed.php',
+        'enable' => '1',
+        'action_order' => '99',
+        'leaf' => true,
+      ),
+    ),
+  ),
+  1 => 
+  array (
+    'action_id' => '63',
+    'parent_id' => '0',
+    'action_code' => 'order_action',
+    'action_name' => '订单管理',
+    'action_url' => '#',
+    'enable' => '1',
+    'action_order' => '0',
+    'leaf' => false,
+    '_child' => 
+    array (
+      0 => 
+      array (
+        'action_id' => '81',
+        'parent_id' => '63',
+        'action_code' => 'goods_order',
+        'action_name' => '订单列表',
+        'action_url' => 'order.php?order_status=-1',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      1 => 
+      array (
+        'action_id' => '95',
+        'parent_id' => '63',
+        'action_code' => 'order_query',
+        'action_name' => '订单查询',
+        'action_url' => 'order.php?act=query',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      2 => 
+      array (
+        'action_id' => '120',
+        'parent_id' => '63',
+        'action_code' => 'cart_manage',
+        'action_name' => '购物车管理',
+        'action_url' => 'cart_manage.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      3 => 
+      array (
+        'action_id' => '134',
+        'parent_id' => '63',
+        'action_code' => 'shujutongji',
+        'action_name' => '数据统计',
+        'action_url' => 'shujutongji.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      4 => 
+      array (
+        'action_id' => '135',
+        'parent_id' => '63',
+        'action_code' => 'groupdeals',
+        'action_name' => '团购统计',
+        'action_url' => 'groupdeals.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+    ),
+  ),
+  2 => 
+  array (
+    'action_id' => '98',
+    'parent_id' => '0',
+    'action_code' => 'creat_html',
+    'action_name' => '生成HTML',
+    'action_url' => '#',
+    'enable' => '1',
+    'action_order' => '0',
+    'leaf' => false,
+    '_child' => 
+    array (
+      0 => 
+      array (
+        'action_id' => '99',
+        'parent_id' => '98',
+        'action_code' => 'creat_index',
+        'action_name' => '更新首页',
+        'action_url' => 'creat_index.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      1 => 
+      array (
+        'action_id' => '100',
+        'parent_id' => '98',
+        'action_code' => 'creat_goods',
+        'action_name' => '更新商品',
+        'action_url' => 'creat_goods.php',
+        'enable' => '0',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      2 => 
+      array (
+        'action_id' => '104',
+        'parent_id' => '98',
+        'action_code' => 'creat_goods_recomed',
+        'action_name' => '更新推荐商品(含特,新,热)',
+        'action_url' => 'creat_goods_recomed.php',
+        'enable' => '0',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      3 => 
+      array (
+        'action_id' => '101',
+        'parent_id' => '98',
+        'action_code' => 'creat_goods_content',
+        'action_name' => '更新商品内容页',
+        'action_url' => 'creat_goods_content.php',
+        'enable' => '0',
+        'action_order' => '1',
+        'leaf' => true,
+      ),
+      4 => 
+      array (
+        'action_id' => '103',
+        'parent_id' => '98',
+        'action_code' => 'creat_article_content',
+        'action_name' => '更新文章内容页',
+        'action_url' => 'creat_article_content.php',
+        'enable' => '0',
+        'action_order' => '3',
+        'leaf' => true,
+      ),
+    ),
+  ),
+  3 => 
+  array (
+    'action_id' => '109',
+    'parent_id' => '0',
+    'action_code' => 'template',
+    'action_name' => '模板管理',
+    'action_url' => '#',
+    'enable' => '1',
+    'action_order' => '0',
+    'leaf' => false,
+    '_child' => 
+    array (
+      0 => 
+      array (
+        'action_id' => '110',
+        'parent_id' => '109',
+        'action_code' => 'mail_template',
+        'action_name' => '邮件模板',
+        'action_url' => 'mail_template.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      1 => 
+      array (
+        'action_id' => '200',
+        'parent_id' => '109',
+        'action_code' => 'mail_auto_temp',
+        'action_name' => '自助邮件模板',
+        'action_url' => 'mail_auto_temp.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+    ),
+  ),
+  4 => 
+  array (
+    'action_id' => '137',
+    'parent_id' => '0',
+    'action_code' => 'promotion',
+    'action_name' => '代金券管理',
+    'action_url' => '#',
+    'enable' => '1',
+    'action_order' => '0',
+    'leaf' => false,
+    '_child' => 
+    array (
+      0 => 
+      array (
+        'action_id' => '138',
+        'parent_id' => '137',
+        'action_code' => 'promotion_list',
+        'action_name' => '申请用户列表',
+        'action_url' => 'promotion.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+    ),
+  ),
+  5 => 
+  array (
+    'action_id' => '139',
+    'parent_id' => '0',
+    'action_code' => 'vote_manage',
+    'action_name' => '投票管理',
+    'action_url' => '#',
+    'enable' => '1',
+    'action_order' => '0',
+    'leaf' => false,
+    '_child' => 
+    array (
+      0 => 
+      array (
+        'action_id' => '140',
+        'parent_id' => '139',
+        'action_code' => 'vote_subject_list',
+        'action_name' => '投票题组列表',
+        'action_url' => 'vote.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      1 => 
+      array (
+        'action_id' => '141',
+        'parent_id' => '139',
+        'action_code' => 'vote_subject_add',
+        'action_name' => '添加投票题组',
+        'action_url' => 'vote.php?act=subject_add',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      2 => 
+      array (
+        'action_id' => '142',
+        'parent_id' => '139',
+        'action_code' => 'vote_title_add',
+        'action_name' => '添加投票标题',
+        'action_url' => 'vote.php?act=title_add',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      3 => 
+      array (
+        'action_id' => '143',
+        'parent_id' => '139',
+        'action_code' => 'vote_option_add',
+        'action_name' => '添加投票选项',
+        'action_url' => 'vote.php?act=option_add',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+    ),
+  ),
+  6 => 
+  array (
+    'action_id' => '148',
+    'parent_id' => '0',
+    'action_code' => 'web_analyze',
+    'action_name' => '网站统计',
+    'action_url' => '#',
+    'enable' => '1',
+    'action_order' => '0',
+    'leaf' => false,
+    '_child' => 
+    array (
+      0 => 
+      array (
+        'action_id' => '149',
+        'parent_id' => '148',
+        'action_code' => 'customer_analyze',
+        'action_name' => '客户分析',
+        'action_url' => 'web_analyze.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      1 => 
+      array (
+        'action_id' => '150',
+        'parent_id' => '148',
+        'action_code' => 'customer_action_analyze',
+        'action_name' => '客户行为分析',
+        'action_url' => 'web_analyze.php?act=customer_action',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      2 => 
+      array (
+        'action_id' => '151',
+        'parent_id' => '148',
+        'action_code' => 'order_analyze',
+        'action_name' => '订单分析',
+        'action_url' => 'web_analyze.php?act=order',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      3 => 
+      array (
+        'action_id' => '152',
+        'parent_id' => '148',
+        'action_code' => 'sales_analyze',
+        'action_name' => '产品销售分析',
+        'action_url' => 'web_analyze.php?act=sale',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      4 => 
+      array (
+        'action_id' => '153',
+        'parent_id' => '148',
+        'action_code' => 'index',
+        'action_name' => '后台首页 订单分析',
+        'action_url' => 'index.php?act=main',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      5 => 
+      array (
+        'action_id' => '158',
+        'parent_id' => '148',
+        'action_code' => 'country_analyze',
+        'action_name' => '订单国家统计',
+        'action_url' => 'web_analyze.php?act=country',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      6 => 
+      array (
+        'action_id' => '163',
+        'parent_id' => '148',
+        'action_code' => 'payment_rate',
+        'action_name' => '付款率统计',
+        'action_url' => 'payment_rate.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      7 => 
+      array (
+        'action_id' => '166',
+        'parent_id' => '148',
+        'action_code' => 'cat_sale',
+        'action_name' => '分类销售统计',
+        'action_url' => 'cat_sale.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      8 => 
+      array (
+        'action_id' => '201',
+        'parent_id' => '148',
+        'action_code' => 'repeat_buy_stat',
+        'action_name' => '重复购买率统计',
+        'action_url' => 'repeat_buy_stat.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      9 => 
+      array (
+        'action_id' => '204',
+        'parent_id' => '148',
+        'action_code' => 'order_cencel',
+        'action_name' => '订单取消统计',
+        'action_url' => 'order_cencel.php',
+        'enable' => '1',
+        'action_order' => '3',
+        'leaf' => true,
+      ),
+    ),
+  ),
+  7 => 
+  array (
+    'action_id' => '164',
+    'parent_id' => '0',
+    'action_code' => 'seo_manage',
+    'action_name' => 'SEO 管理',
+    'action_url' => '#',
+    'enable' => '1',
+    'action_order' => '0',
+    'leaf' => false,
+    '_child' => 
+    array (
+      0 => 
+      array (
+        'action_id' => '187',
+        'parent_id' => '164',
+        'action_code' => 'abckeyword',
+        'action_name' => 'ABC索引关键字',
+        'action_url' => 'new_abc_index_keyword.php',
+        'enable' => '1',
+        'action_order' => '1',
+        'leaf' => true,
+      ),
+      1 => 
+      array (
+        'action_id' => '178',
+        'parent_id' => '164',
+        'action_code' => 'hot_search_keywords',
+        'action_name' => '首页热门搜索关键字设置',
+        'action_url' => 'hot_search_keywords.php',
+        'enable' => '1',
+        'action_order' => '2',
+        'leaf' => true,
+      ),
+      2 => 
+      array (
+        'action_id' => '179',
+        'parent_id' => '164',
+        'action_code' => 'filter_search_keywords',
+        'action_name' => '搜索关键字过滤设置',
+        'action_url' => 'filter_search_keywords.php',
+        'enable' => '1',
+        'action_order' => '3',
+        'leaf' => true,
+      ),
+      3 => 
+      array (
+        'action_id' => '165',
+        'parent_id' => '164',
+        'action_code' => 'seo_keyword_to_url',
+        'action_name' => '关键词跳转到指定url',
+        'action_url' => 'seo_keyword_to_url.php',
+        'enable' => '1',
+        'action_order' => '4',
+        'leaf' => true,
+      ),
+      4 => 
+      array (
+        'action_id' => '184',
+        'parent_id' => '164',
+        'action_code' => 'category_num',
+        'action_name' => 'abc分类关键字显示个数',
+        'action_url' => 'new_abc_index_keyword.php?act=category_num',
+        'enable' => '1',
+        'action_order' => '5',
+        'leaf' => true,
+      ),
+      5 => 
+      array (
+        'action_id' => '185',
+        'parent_id' => '164',
+        'action_code' => 'search_no_abc',
+        'action_name' => '搜索排除加入abc词库词',
+        'action_url' => 'filter_search_keywords.php?act=search_no_abc',
+        'enable' => '1',
+        'action_order' => '6',
+        'leaf' => true,
+      ),
+      6 => 
+      array (
+        'action_id' => '192',
+        'parent_id' => '164',
+        'action_code' => 'filter_search_result',
+        'action_name' => 'and关系查询关键字',
+        'action_url' => 'filter_search_result.php',
+        'enable' => '1',
+        'action_order' => '7',
+        'leaf' => true,
+      ),
+      7 => 
+      array (
+        'action_id' => '190',
+        'parent_id' => '164',
+        'action_code' => 'sitemap_new',
+        'action_name' => '站点地图',
+        'action_url' => 'sitemap_new.php',
+        'enable' => '1',
+        'action_order' => '11',
+        'leaf' => true,
+      ),
+      8 => 
+      array (
+        'action_id' => '116',
+        'parent_id' => '164',
+        'action_code' => 'abckeyword',
+        'action_name' => 'ABC索引关键字(旧版)',
+        'action_url' => 'abcindex.php',
+        'enable' => '1',
+        'action_order' => '20',
+        'leaf' => true,
+      ),
+      9 => 
+      array (
+        'action_id' => '94',
+        'parent_id' => '164',
+        'action_code' => 'sitemap',
+        'action_name' => '站点地图(旧版)',
+        'action_url' => 'sitemap.php',
+        'enable' => '1',
+        'action_order' => '21',
+        'leaf' => true,
+      ),
+      10 => 
+      array (
+        'action_id' => '170',
+        'parent_id' => '164',
+        'action_code' => 'seo_link',
+        'action_name' => 'seo 链接(停用)',
+        'action_url' => 'seo_link_manage.php',
+        'enable' => '1',
+        'action_order' => '22',
+        'leaf' => true,
+      ),
+    ),
+  ),
+  8 => 
+  array (
+    'action_id' => '194',
+    'parent_id' => '0',
+    'action_code' => 'special_mgr',
+    'action_name' => '专题管理',
+    'action_url' => '#',
+    'enable' => '1',
+    'action_order' => '0',
+    'leaf' => false,
+    '_child' => 
+    array (
+      0 => 
+      array (
+        'action_id' => '195',
+        'parent_id' => '194',
+        'action_code' => 'special_list',
+        'action_name' => '专题列表',
+        'action_url' => 'special_mgr.php',
+        'enable' => '1',
+        'action_order' => '1',
+        'leaf' => true,
+      ),
+      1 => 
+      array (
+        'action_id' => '196',
+        'parent_id' => '194',
+        'action_code' => 'special_add',
+        'action_name' => '专题添加',
+        'action_url' => 'special_mgr.php?act=special_add',
+        'enable' => '1',
+        'action_order' => '2',
+        'leaf' => true,
+      ),
+      2 => 
+      array (
+        'action_id' => '197',
+        'parent_id' => '194',
+        'action_code' => 'special_position_add',
+        'action_name' => '添加专题板块',
+        'action_url' => 'special_mgr.php?act=special_position_add',
+        'enable' => '1',
+        'action_order' => '3',
+        'leaf' => true,
+      ),
+      3 => 
+      array (
+        'action_id' => '198',
+        'parent_id' => '194',
+        'action_code' => 'special_goods',
+        'action_name' => '专题商品管理',
+        'action_url' => 'special_mgr.php?act=special_goods',
+        'enable' => '1',
+        'action_order' => '4',
+        'leaf' => true,
+      ),
+      4 => 
+      array (
+        'action_id' => '199',
+        'parent_id' => '194',
+        'action_code' => 'special_goods_add',
+        'action_name' => '添加专题商品',
+        'action_url' => 'special_mgr.php?act=special_goods_add',
+        'enable' => '1',
+        'action_order' => '5',
+        'leaf' => true,
+      ),
+      5 => 
+      array (
+        'action_id' => '210',
+        'parent_id' => '194',
+        'action_code' => 'deals',
+        'action_name' => 'deals板块',
+        'action_url' => 'deals.php',
+        'enable' => '1',
+        'action_order' => '6',
+        'leaf' => true,
+      ),
+    ),
+  ),
+  9 => 
+  array (
+    'action_id' => '202',
+    'parent_id' => '0',
+    'action_code' => 'system_log',
+    'action_name' => '系统日志',
+    'action_url' => '#',
+    'enable' => '1',
+    'action_order' => '0',
+    'leaf' => false,
+    '_child' => 
+    array (
+      0 => 
+      array (
+        'action_id' => '203',
+        'parent_id' => '202',
+        'action_code' => 'phplog',
+        'action_name' => 'php日志',
+        'action_url' => 'phplog.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      1 => 
+      array (
+        'action_id' => '23',
+        'parent_id' => '202',
+        'action_code' => 'loglist',
+        'action_name' => '系统管理日志',
+        'action_url' => 'admin_logs.php',
+        'enable' => '1',
+        'action_order' => '1',
+        'leaf' => true,
+      ),
+    ),
+  ),
+  10 => 
+  array (
+    'action_id' => '24',
+    'parent_id' => '0',
+    'action_code' => 'member',
+    'action_name' => '会员管理',
+    'action_url' => '#',
+    'enable' => '1',
+    'action_order' => '1',
+    'leaf' => false,
+    '_child' => 
+    array (
+      0 => 
+      array (
+        'action_id' => '168',
+        'parent_id' => '24',
+        'action_code' => 'member_list_all',
+        'action_name' => '查看全部用户',
+        'action_url' => '#',
+        'enable' => '1',
+        'action_order' => '-1',
+        'leaf' => true,
+      ),
+      1 => 
+      array (
+        'action_id' => '25',
+        'parent_id' => '24',
+        'action_code' => 'member_list',
+        'action_name' => '会员搜索',
+        'action_url' => 'users.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      2 => 
+      array (
+        'action_id' => '65',
+        'parent_id' => '24',
+        'action_code' => 'member_add',
+        'action_name' => '添加会员',
+        'action_url' => 'users.php?act=add',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      3 => 
+      array (
+        'action_id' => '87',
+        'parent_id' => '24',
+        'action_code' => 'user_msg',
+        'action_name' => '会员留言',
+        'action_url' => 'user_msg.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      4 => 
+      array (
+        'action_id' => '111',
+        'parent_id' => '24',
+        'action_code' => 'email_batch_send',
+        'action_name' => '邮件群发',
+        'action_url' => 'email_batch_send.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      5 => 
+      array (
+        'action_id' => '112',
+        'parent_id' => '24',
+        'action_code' => 'email_send_history',
+        'action_name' => '邮件群发历史记录',
+        'action_url' => 'email_send_history.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      6 => 
+      array (
+        'action_id' => '113',
+        'parent_id' => '24',
+        'action_code' => 'users_order',
+        'action_name' => '会员排行',
+        'action_url' => 'users_order.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      7 => 
+      array (
+        'action_id' => '121',
+        'parent_id' => '24',
+        'action_code' => 'users_temp',
+        'action_name' => '程序注册用户',
+        'action_url' => 'users_temp.php',
+        'enable' => '0',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      8 => 
+      array (
+        'action_id' => '126',
+        'parent_id' => '24',
+        'action_code' => 'email_dingyue',
+        'action_name' => '邮件订阅',
+        'action_url' => 'email_dingyue.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      9 => 
+      array (
+        'action_id' => '128',
+        'parent_id' => '24',
+        'action_code' => 'affiliate_order',
+        'action_name' => 'Affiliate 订单统计',
+        'action_url' => 'affiliate_order.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      10 => 
+      array (
+        'action_id' => '129',
+        'parent_id' => '24',
+        'action_code' => 'affiliate_links_list',
+        'action_name' => 'Affiliate 链接列表',
+        'action_url' => 'affiliate_links_list.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      11 => 
+      array (
+        'action_id' => '131',
+        'parent_id' => '24',
+        'action_code' => 'affiliate_count',
+        'action_name' => 'Affiliate 酬金报表',
+        'action_url' => 'affiliate_count.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      12 => 
+      array (
+        'action_id' => '144',
+        'parent_id' => '24',
+        'action_code' => 'user_grade_mgr',
+        'action_name' => '会员等级管理',
+        'action_url' => 'users.php?act=grade_mgr',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      13 => 
+      array (
+        'action_id' => '145',
+        'parent_id' => '24',
+        'action_code' => 'user_type_mgr',
+        'action_name' => '添加会员等级',
+        'action_url' => 'users.php?act=type_mgr',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      14 => 
+      array (
+        'action_id' => '154',
+        'parent_id' => '24',
+        'action_code' => 'affiliate_referer',
+        'action_name' => 'Affiliate 访问清单',
+        'action_url' => 'affiliate_ips.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      15 => 
+      array (
+        'action_id' => '155',
+        'parent_id' => '24',
+        'action_code' => 'affiliate_users_list',
+        'action_name' => 'affiliate 用户管理',
+        'action_url' => 'affiliate_users.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      16 => 
+      array (
+        'action_id' => '156',
+        'parent_id' => '24',
+        'action_code' => 'point_stat',
+        'action_name' => '积分统计',
+        'action_url' => 'users.php?act=point_stat',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      17 => 
+      array (
+        'action_id' => '160',
+        'parent_id' => '24',
+        'action_code' => 'recommend_list',
+        'action_name' => 'affiliate推荐链接',
+        'action_url' => 'affiliate_links_list.php?act=recommend_list',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      18 => 
+      array (
+        'action_id' => '188',
+        'parent_id' => '24',
+        'action_code' => 'share_winner',
+        'action_name' => 'FB中奖列表',
+        'action_url' => 'share_winner.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      19 => 
+      array (
+        'action_id' => '189',
+        'parent_id' => '24',
+        'action_code' => 'admin_share',
+        'action_name' => 'FB分享产品列表',
+        'action_url' => 'share_winner.php?act=admin_share',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      20 => 
+      array (
+        'action_id' => '191',
+        'parent_id' => '24',
+        'action_code' => 'share_list',
+        'action_name' => '分享统计',
+        'action_url' => 'share_winner.php?act=share_list',
+        'enable' => '1',
+        'action_order' => '20',
+        'leaf' => true,
+      ),
+      21 => 
+      array (
+        'action_id' => '205',
+        'parent_id' => '24',
+        'action_code' => 'email_web_send_log',
+        'action_name' => '网站发送邮件记录',
+        'action_url' => 'email_web_send_log.php',
+        'enable' => '1',
+        'action_order' => '21',
+        'leaf' => true,
+      ),
+    ),
+  ),
+  11 => 
+  array (
+    'action_id' => '85',
+    'parent_id' => '0',
+    'action_code' => 'webinfo',
+    'action_name' => '网站文章管理',
+    'action_url' => '#',
+    'enable' => '1',
+    'action_order' => '8',
+    'leaf' => false,
+    '_child' => 
+    array (
+      0 => 
+      array (
+        'action_id' => '86',
+        'parent_id' => '85',
+        'action_code' => 'article',
+        'action_name' => '文章列表',
+        'action_url' => 'article.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      1 => 
+      array (
+        'action_id' => '84',
+        'parent_id' => '85',
+        'action_code' => 'articlecat',
+        'action_name' => '文章分类',
+        'action_url' => 'articlecat.php',
+        'enable' => '1',
+        'action_order' => '1',
+        'leaf' => true,
+      ),
+    ),
+  ),
+  12 => 
+  array (
+    'action_id' => '88',
+    'parent_id' => '0',
+    'action_code' => 'congfig',
+    'action_name' => '系统设置管理',
+    'action_url' => '#',
+    'enable' => '1',
+    'action_order' => '9',
+    'leaf' => false,
+    '_child' => 
+    array (
+      0 => 
+      array (
+        'action_id' => '89',
+        'parent_id' => '88',
+        'action_code' => 'shop_config',
+        'action_name' => '网站设置',
+        'action_url' => 'shop_config.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      1 => 
+      array (
+        'action_id' => '90',
+        'parent_id' => '88',
+        'action_code' => 'payment',
+        'action_name' => '支付方式',
+        'action_url' => 'payment.php?act=list',
+        'enable' => '0',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      2 => 
+      array (
+        'action_id' => '96',
+        'parent_id' => '88',
+        'action_code' => 'area_payment',
+        'action_name' => '地区付款方式设置',
+        'action_url' => 'area_payment.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      3 => 
+      array (
+        'action_id' => '174',
+        'parent_id' => '88',
+        'action_code' => 'language',
+        'action_name' => '语言管理',
+        'action_url' => 'language.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      4 => 
+      array (
+        'action_id' => '91',
+        'parent_id' => '88',
+        'action_code' => 'shipping',
+        'action_name' => '配送方式',
+        'action_url' => 'shipping.php?act=list',
+        'enable' => '0',
+        'action_order' => '1',
+        'leaf' => true,
+      ),
+      5 => 
+      array (
+        'action_id' => '105',
+        'parent_id' => '88',
+        'action_code' => 'area_shipping',
+        'action_name' => '地区配送方式设置',
+        'action_url' => 'area_shipping.php',
+        'enable' => '1',
+        'action_order' => '1',
+        'leaf' => true,
+      ),
+      6 => 
+      array (
+        'action_id' => '92',
+        'parent_id' => '88',
+        'action_code' => 'area_manage',
+        'action_name' => '地区列表',
+        'action_url' => 'area_manage.php?act=list',
+        'enable' => '1',
+        'action_order' => '2',
+        'leaf' => true,
+      ),
+      7 => 
+      array (
+        'action_id' => '106',
+        'parent_id' => '88',
+        'action_code' => 'shipping_fee',
+        'action_name' => '地区运费管理',
+        'action_url' => 'shipping_fee.php',
+        'enable' => '1',
+        'action_order' => '2',
+        'leaf' => true,
+      ),
+      8 => 
+      array (
+        'action_id' => '93',
+        'parent_id' => '88',
+        'action_code' => 'mail_settings',
+        'action_name' => '邮件服务器设置',
+        'action_url' => 'shop_config.php?act=mail_settings',
+        'enable' => '0',
+        'action_order' => '3',
+        'leaf' => true,
+      ),
+    ),
+  ),
+  13 => 
+  array (
+    'action_id' => '3',
+    'parent_id' => '0',
+    'action_code' => 'root',
+    'action_name' => '系统核心管理',
+    'action_url' => '#',
+    'enable' => '1',
+    'action_order' => '10',
+    'leaf' => false,
+    '_child' => 
+    array (
+      0 => 
+      array (
+        'action_id' => '4',
+        'parent_id' => '3',
+        'action_code' => 'menulist',
+        'action_name' => '菜单管理',
+        'action_url' => 'protect.php?act=menulist',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      1 => 
+      array (
+        'action_id' => '5',
+        'parent_id' => '3',
+        'action_code' => 'menuadd',
+        'action_name' => '添加菜单',
+        'action_url' => 'protect.php?act=menuadd',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      2 => 
+      array (
+        'action_id' => '19',
+        'parent_id' => '3',
+        'action_code' => 'adminlist',
+        'action_name' => '管理员列表',
+        'action_url' => 'protect.php?act=adminlist',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      3 => 
+      array (
+        'action_id' => '20',
+        'parent_id' => '3',
+        'action_code' => 'adminadd',
+        'action_name' => '添加管理员',
+        'action_url' => 'protect.php?act=adminadd',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      4 => 
+      array (
+        'action_id' => '21',
+        'parent_id' => '3',
+        'action_code' => 'grouplist',
+        'action_name' => '系统用户组列表',
+        'action_url' => 'protect.php?act=grouplist',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      5 => 
+      array (
+        'action_id' => '22',
+        'parent_id' => '3',
+        'action_code' => 'groupadd',
+        'action_name' => '添加系统用户组',
+        'action_url' => 'protect.php?act=groupadd',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+      6 => 
+      array (
+        'action_id' => '208',
+        'parent_id' => '3',
+        'action_code' => 'memcache_manage',
+        'action_name' => '缓存管理',
+        'action_url' => 'memcache_manage.php',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+    ),
+  ),
+  14 => 
+  array (
+    'action_id' => '114',
+    'parent_id' => '0',
+    'action_code' => 'modify_password',
+    'action_name' => '修改密码',
+    'action_url' => '#',
+    'enable' => '1',
+    'action_order' => '11',
+    'leaf' => false,
+    '_child' => 
+    array (
+      0 => 
+      array (
+        'action_id' => '115',
+        'parent_id' => '114',
+        'action_code' => 'modify_my_password',
+        'action_name' => '修改密码',
+        'action_url' => 'protect.php?act=modify_my_password',
+        'enable' => '1',
+        'action_order' => '0',
+        'leaf' => true,
+      ),
+    ),
+  ),
+);
+?>

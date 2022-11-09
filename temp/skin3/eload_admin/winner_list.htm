@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href='/temp/skin2/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link type="text/css" rel="stylesheet" href="/sysjs/calendar/calendar.css" />
+<script type="text/javascript" src="{$website_url}sysjs/calendar.php"></script>
+<script language="javascript" src="/sysjs/eload13pack.js"></script>
+<script language="javascript" src="/sysjs/jlivequery.js"></script>
+<script language="javascript" src="/sysjs/jcookie.js"></script>
+<script language="javascript" src="/sysjs/jjeditable.js"></script>
+<script type="text/javascript" src="/temp/skin2/eload_admin/js/admin_action.js"></script>
+<script type="text/javascript" src="/temp/skin2/eload_admin/js/review.js?20130412_1"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 中奖列表</td>
+          <td width="44%" align="right"><a href="share_winner.php?act=edit">添加</a></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form method="post" action="" name="listForm" onsubmit="return confirmSubmit(this)">
+<div id="list">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;">
+    <tr>
+        <th style="width:10%;">ID</th>
+        <th style="width:20%;">fb_id</th>
+        <th style="width:20%;">Email</th>
+        <th style="width:20%;">SKU</th>
+		<th style="width:10%;">用户ID</th>
+        <th style="width:10%;">中奖时间</th>
+		<th style="width:10%;">操作</th>
+    </tr>
+    {foreach from=$winner_list item=r}
+    <tr bgColor="{cycle values='#f4f9fd,e8f1fd' name=cycle1}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{cycle values='#f4f9fd,e8f1fd' name=cycle2}'">
+		<td>{$r.id}</td>
+		<td>{$r.fb_uid}</td>
+        <td>{$r.email}</td>
+        <td>{$r.goods_sn}</td>
+        <td align="center">{$r.user_id} </td>
+		<td>{$r.add_time}</td>
+		<td><a href="share_winner.php?act=del&id={$r.id}">删除</a>&nbsp|&nbsp<a href="share_winner.php?act=edit&id={$r.id}">编辑</a></td>
+  </tr>
+  {foreachelse}
+  <tr>
+    <td colspan="12" style="color: red;">暂无中奖用户</td>
+  </tr>
+  {/foreach}
+   <tr>
+    <td colspan="10" style="text-align: right">
+        <div id="pager">{$pagestr}</div>
+    </td>
+    </tr>
+</table>
+</div>
+</form>
+ {include file="copyright.htm"}

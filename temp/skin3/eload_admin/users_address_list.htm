@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 会员地址</td>
+          <td width="44%" align="right"><span class="navright"><a href="?">会员列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<div class="list">
+ <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+     <tr>
+      <th width="24%">收货人</th>
+      <th width="58%">地址</th>
+      <th width="18%">联系方式</th>
+    </tr>
+  {foreach from=$address key=Key item=val name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+      <td>{$val.firstname|escape} {$val.lastname|escape}</td>
+      <td>{$val.country_name}&nbsp;&nbsp;{$val.province}&nbsp;&nbsp;{$val.city}<br />
+      {$val.addressline1|escape} {$val.addressline2|escape} 
+      {if $val.zipcode}<br />
+      邮编：[{$val.zipcode|escape}]{/if}</td>
+      <td>电话：{$val.tel}<br />
+      email: {$val.email}</td>
+    </tr>
+  {foreachelse}
+    <tr><td colspan="4" align="center" class="no-records">暂无记录</td></tr>
+  {/foreach}
+  </table>
+</div>
+{include file="copyright.htm"}

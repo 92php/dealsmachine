@@ -1,0 +1,138 @@
+[2014-06-24 20:37:21.8194]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000342[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000342)[/b]
+
+$@!#
+[2014-06-24 20:37:31.6631]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000376[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000376)[/b]
+
+$@!#
+[2014-06-24 20:37:32.7188]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000653[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000653)[/b]
+
+$@!#
+[2014-06-24 20:37:33.7826]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000426[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000426)[/b]
+
+$@!#
+[2014-06-24 20:37:34.8532]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000417[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000417)[/b]
+
+$@!#
+[2014-06-24 20:37:35.9362]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000419[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000419)[/b]
+
+$@!#
+[2014-06-24 20:37:37.0033]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000718[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000718)[/b]
+
+$@!#
+[2014-06-24 20:37:38.0912]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000437[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000437)[/b]
+
+$@!#
+[2014-06-24 20:37:39.1627]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000488[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000488)[/b]
+
+$@!#
+[2014-06-24 20:37:40.2397]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000218[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000218)[/b]
+
+$@!#
+[2014-06-24 20:37:41.2720]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000111[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000111)[/b]
+
+$@!#
+[2014-06-24 20:37:42.3277]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000474[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000474)[/b]
+
+$@!#
+[2014-06-24 20:37:43.4089]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000372[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000372)[/b]
+
+$@!#
+[2014-06-24 20:37:44.4770]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.00042[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000420)[/b]
+
+$@!#
+[2014-06-24 20:37:45.5353]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000304[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000304)[/b]
+
+$@!#
+[2014-06-24 20:37:46.5686]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000448[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000448)[/b]
+
+$@!#
+[2014-06-24 20:37:47.6152]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000451[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000451)[/b]
+
+$@!#
+[2014-06-24 20:37:48.6865]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000472[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000472)[/b]
+
+$@!#
+[2014-06-24 20:37:49.7476]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000106[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000106)[/b]
+
+$@!#
+[2014-06-24 20:38:18.1080]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000456[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000456)[/b]
+
+$@!#
+[2014-06-24 20:38:25.7483]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.000265[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000265)[/b]
+
+$@!#
+[2014-06-24 20:41:02.3902]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.00048[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.000480)[/b]
+
+$@!#
+[2014-06-24 23:02:09.8170]  [127.0.0.1] GET /
+in C:\wamp\wamp\www\dealsmachine\lib\class.mysql.php on line 720
+User Notice[1024]：localhost, root, [b]0.051297[/b]
+ 1. SELECT `content`,is_compress FROM eload_memcache WHERE mid=1622213838[b](0.051297)[/b]
+
+$@!#

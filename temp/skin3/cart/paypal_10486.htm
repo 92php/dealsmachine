@@ -1,0 +1,80 @@
+<div class="clear10"><br /><br /></div>
+
+<div class="main">
+<form method="post" action="m-flow-a-paypal_redirect_pay.htm?token={$token}&order_sn={$order_sn}">
+<table width="800" border="0" align="center" cellpadding="0" cellspacing="0" style="border:1px #ccc solid; font-family:Verdana, Arial, Helvetica, sans-serif">
+  <tr>
+    <td height="30" style="border-bottom:1px #CCCCCC solid; font-size:14px; font-weight:700; color:#990000; text-indent:10px;">Order Review</td>
+  </tr>
+  <tr>
+    <td>
+	<div class="clear15"></div>
+	        
+            <table width="95%" border="0" align="center" cellpadding="5" cellspacing="1" style="font-family:Verdana, Arial, Helvetica, sans-serif;">
+                
+                <tr>
+                  <td width="28%" align="right"><b>Order No : </b></td>
+                <td width="72%">{$order_info.order_sn}</td>
+                </tr>
+                <tr>
+                <td align="right"><b>Order Status : </b></td><td>Waiting for payment</td></tr>
+                <tr>
+                <td align="right"><b>Order Amount : </b></td><td>USD {$order_info.order_amount}</td></tr>
+                <tr>
+                <td align="right"><b>Payment Method : </b></td><td>{$order_info.pay_name}</td></tr>
+                <tr>
+                <td align="right"><b>Shipping Method : </b></td><td>{$order_info.shipping_name}</td></tr>
+                <tr><td align="right" valign="top"><b>Shipping Information : </b></td><td>
+                Name: {$order_info.consignee}<br />
+                Address Line1: {$order_info.address}<br />
+                Address: {$order_info.city} {$order_info.province} {$order_info.country}<br />
+                ZIP/Postal Code: {$order_info.zipcode}<br />
+                Phone: {$order_info.tel}<br />
+                E-mail address : {$order_info.email}<br />
+                </td></tr>
+
+                <tr><td colspan="2">
+                    
+                </td></tr>
+
+                <tr><td></td><td></td></tr>
+        </table>
+		
+		
+		<table width="98%" border=0 align="center" cellpadding="4" cellspacing="1" bgcolor="#CCCCCC" style="font-family:Verdana, Arial, Helvetica, sans-serif;">
+                        <tr>
+                            <td height="30" colspan="2" align="center" bgcolor="#F0F0F0" style="color:#1C61A6"><strong>Product</strong></td>
+                            <td align="center" bgcolor="#F0F0F0" style="width:120px; color:#1C61A6"><strong>Goods Prices</strong></td>
+                            <td align="center" bgcolor="#F0F0F0" style="width:90px;color:#1C61A6"><strong>Quantity</strong></td>
+                            <td align="center" bgcolor="#F0F0F0" style="width:110px;color:#1C61A6"><strong>Subtotal</strong></td>
+                        </tr>
+                        {foreach from=$order_goods item=goods}
+                        <tr>
+                            <td bgcolor="#FFFFFF"><img src="{$goods.goods_thumb}" width="85" height="85" border="0"></td>
+                            <td bgcolor="#FFFFFF"><a href="{$goods.url_title}" target="_blank" class="f6">{$goods.goods_name}</a></td>
+                            <td align="center" bgcolor="#FFFFFF"><span class="bizhong">USD</span>   <span class="my_shop_price" orgp="{$goods.goods_price}">{$goods.goods_price}</span></td>
+                            <td align="center" bgcolor="#FFFFFF">{$goods.goods_number}</td>
+                            <td align="center" bgcolor="#FFFFFF" style="color:#CC0000; font-weight:700"><span class="bizhong">USD</span> <span class="my_shop_price" orgp="{$goods.subtotal}">{$goods.subtotal}</span></td>
+                        </tr>
+                        {/foreach}
+          </table>		
+          
+          </td>
+  </tr>
+  <tr>
+    <td align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="center"><input id="ordersubmit" class="checkout_button" type="image" src="http://www.dealsmachine.com/images/place.jpg" title="Proceed to Checkout"></td>
+  </tr>
+  <tr>
+    <td align="center">&nbsp;</td>
+  </tr>
+</table>
+
+</form>
+
+</div>
+
+
+ 

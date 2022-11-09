@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/heditor/comm.css" />
+<script language="javascript" src="/heditor/all.js"></script>
+<script language="javascript" src="/heditor/editor.js"></script>
+<script language="javascript" src="/heditor/editor_toolbar.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 添加语言</td>
+          <td width="44%" align="right"><span class="navright"><a href="?">语言列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <form name="regform" method="post" action="?act=save_language" onSubmit="return Validator.Validate(this,3)">
+  <tr>
+    <td style="font-weight: bold; " width="12%">语言名称:</td>
+    <td><input type="text" name="title" id="title" style="width: 300px" value="{$data.title}"  dataType="Require" msg="请填写标题！"  class="input_style" /> 
+    *</td>
+  </tr>
+  <tr>
+    <td style="font-weight: bold; ">名称（英文缩写）:</td>
+    <td><input type="text" name="title_e" id="title_e" style="width: 300px" value="{$data.title_e}"  dataType="Require" msg="请填写英文标题！"  class="input_style" /> 
+    *</td>
+  </tr>  
+   <tr>
+    <td style="font-weight: bold; ">默认货币简码:</td>
+    <td><input type="text" name="huobi" id="huobi" style="width: 100px" value="{$data.huobi}"  dataType="Require"  class="input_style" /> </td>
+  </tr>
+  <tr>
+    <td style="font-weight: bold; ">对应运费国家地区:</td>
+    <td>
+    <select name="country">
+    	<option value="0">请选择...</option>
+    	{foreach from=$region_arr item=country key=key}
+    		<option value="{$country.region_id}" {if $country.region_id == $data.country}selected{/if}>{$country.region_name}</option>
+    	{/foreach}
+    </select>
+    </td>
+  </tr>
+  <tr>
+    <td style="font-weight: bold; ">序号:</td>
+    <td><input type="text" name="orders" id="orders" style="width: 100px" value="{$data.orders}"  dataType="Require"  class="input_style" /> </td>
+  </tr>    
+  <tr>
+    <td style="font-weight: bold" >状态:</td>
+    <td>
+      <input type="radio" name="status" value="1" {if $data.status == "1" or $data.status == ""}checked="true"{/if}/>可用      <input type="radio" name="status" value="0"  {if $data.status == "0"}checked="true"{/if} />不可用</td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+	<input type="hidden" value="{$data.id}" name="language_id" id="language_id"/>
+	<input type="submit" value=" 确定 " class="button" onclick="DoProcess();" />
+	</td>
+  </tr>  
+  </form>
+</table>
+{include file="copyright.htm"}
+</body>
+</html>

@@ -1,0 +1,24 @@
+<div class="w_auto">
+  <div class="w_box clearfix">
+    <div><img src="{$special.banner}"></div>
+    <div class="w_main special">
+      <div class="prod_main">
+        <ul class="clearfix">
+          {foreach from=$data item=item name=loop key=key}
+          <li {if $key lt 5}class="top5"{/if}>
+            <p class="img"><a href="{$item.link_url}" target="_blank"><img alt="{$item.cat_name} clearance sale up to {$item.zhekou} off" src="{$item.goods_grid}" width="150" height="150" /></a></p>
+            <p class="name"><a href="{$item.link_url}" target="_blank">{$item.goods_title}</a></p>
+            <p class="was"> <span class="bizhong">{$_LANG.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$item.shop_price}">{$item.shop_price}</span> {if $item.promote_price gt 0}<span class="market_price"><span class="bizhong">{$_LANG.cur_list.0.keyd}</span><span class="my_shop_price" orgp="{$item.market_price}">{$item.market_price}</span></span>{/if}</p>
+			<p class="buynow"><a href="{$item.link_url}" rel="nofollow" target="_blank">Buy Now</a></p>
+            {if $item.zekou && $item.promote_price gt 0}
+            <div class="off_s"><span>{$item.zekou}</span>%</div>
+            {/if} </li>
+          {/foreach}
+          <div class="featured"></div>
+        </ul>
+        <div class="clear"></div>
+      </div>
+    </div>
+    <div class="yourtext">{$special.remark}</div>
+  </div>
+</div>

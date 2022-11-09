@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link type="text/css" rel="stylesheet" href="{$jscache_url}sysjs/calendar/calendar.css" />
+<script type="text/javascript" src="/sysjs/calendar.php"></script>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+<script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/review.js?20130415_1"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 评论列表</td>
+          <td width="44%" align="right">&nbsp;</td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<!-- 商品搜索 -->
+<form action="">
+<div style="text-align:center">
+    {$cat_list}
+    搜索
+    {html_options options=$column_arr name=column selected=$column|default:'u.user_id'}
+    关键字<input type="text" name="keyword" id="keyword" size="15" value="{$keyword}" />
+    审核人<input type="text" name="pass_admin" size="15" value="{$pass_admin}" />
+    审核时间<input name="start_date2" value="{$start_date2}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />&nbsp;&nbsp;到 &nbsp; <input name="end_date2" value="{$end_date2}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />
+    <br />
+    {html_options options=$status_arr name=status selected=$status}
+    {html_options options=$pic_arr name=has_pic selected=$has_pic}
+    {html_options options=$video_arr name=has_video selected=$has_video}
+    时间从
+    <input name="start_date" value="{$start_date}" size="13" autocomplete="off" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);"/>
+    到
+    <input name="end_date" value="{$end_date}" size="13" autocomplete="off" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);"/>
+ <label><input type="checkbox" name="exclude_self" value="1" {if $exclude_self} checked="checked"{/if} /> 排除自己人写的早于今天的评论</label>
+    <input type="submit" value="搜 索" class="sub_but" />
+</div>
+<input type="hidden" name="record_count" value="0" />
+</form>
+<form method="post" action="" name="listForm" onsubmit="return confirmSubmit(this)">
+<div id="list">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;">
+    <tr>
+        <th style="width: 30px;"><input type="checkbox" onclick="checkAll(this, 'checkboxes[]');">{$sort_goods_id}</th>
+        <th style="width: 50px;">图片</th>
+        <th>商品编码</th>
+        <th>上架</th>
+        <th>商品标题</th>
+        <th>评论主题</th>
+        <th style="width: 200px;">评论内容</th>
+        <th>评论星级</th>
+        <th>评论赞数</th>
+        <th>操作</th>
+        <th style="width:60px;">审核人</th>
+        <th style="width:40px;">置顶</th>
+        <th>用户email</th>
+        <th style="width: 100px;">状态</th>
+        <th style="width: 80px;">积分</th>
+        <th style="width: 150px;">评论时间</th>
+    </tr>
+    {foreach from=$data item=r}
+    <tr bgColor="{cycle values='#f4f9fd,e8f1fd' name=cycle1}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{cycle values='#f4f9fd,e8f1fd' name=cycle2}'">
+        <td><input type="checkbox" name="checkboxes[]" class="cb-value" value="{$r.rid}|{$r.goods_id}" onclick="checkone('checkboxes[]')"/></td>
+        <td><a href="/m-goods-id-{$r.goods_id}.htm?islan=1" target="_blank" title="浏览" alt="图片"><img width="50" height="50" src="{$r.goods_thumb}" border="0" /></a></td>
+        <td>{$r.goods_sn}</td>
+        <td align="center">
+            <img src="{$imgcache_url}images/{if $r.is_on_sale}yes{else}no{/if}.gif" style="cursor: default" />
+        </td>
+        <td style="text-align: left;" class="first-cell"><a href="/m-goods-id-{$r.goods_id}.htm?islan=1" target="_blank">{$r.goods_title}</a></td>
+        <td style="text-align: left;"><a href="review.php?act=view&rid={$r.rid}&goods_id={$r.goods_id}">{$r.subject}</a></td>
+        <td style="text-align: left;"><div style="width: 200px;">
+            <p>
+                <b>Pros:</b> 　
+                <br />
+                {$r.pros}
+            </p>
+            <p>
+                <b>Cons:</b> 　
+                <br />
+                {$r.cons}
+            </p>
+            {if $r.other_thoughts != ''}
+            <p>
+                <b>Other Thoughts or Suggestions:</b>
+                <br />
+                {$r.other_thoughts}
+            </p>
+            {/if}
+        </div></td>
+        <td><img src="{$imgcache_url}images/stars/{$r.rate_overall}s.gif" border="0" /></td>
+        <td align="right" title="双击进行修改"><span {literal}onclick="$(this).editable('review.php?act=edit_helpful_yes', {type: 'text',event: 'dblclick',width:'90%',indicator:'Saving...',onblur:'submit',tooltip: ''});"{/literal} id="{$r.rid}">{$r.helpful_yes}</span></td>
+        <td><div style="width:60px;">
+            <a href="review.php?act=edit&rid={$r.rid}&goods_id={$r.goods_id}">编辑</a><br />
+            <a class="r-action pass_review s-{$r.rid}|{$r.goods_id}" href="javascript: void(0)">通过</a><br />
+            <a class="r-action unpass_review s-{$r.rid}|{$r.goods_id}" href="javascript: void(0)">不通过</a><br />
+            <a class="r-action disprocess s-{$r.rid}|{$r.goods_id}" href="javascript: void(0)">待处理</a><br />
+			<a class="r-action del s-{$r.rid}|{$r.goods_id}" href="javascript: void(0)">删除</a>
+
+        </div></td>
+        <td>{$r.pass_admin}<!--<br />{$r.pass_time}--></td>
+        <td>{if $r.is_top ==1}<span style="color:red">置顶</span>{else}非置顶{/if}</td>
+        <td><a href="users.php?act=edit&id={$r.user_id}" title="编辑该会员">{$r.email|default:'<span class="font-red">评论库</span>'}</a></td>
+        <td>{php}echo rw_state($this->_tpl_vars['r']['is_pass']);{/php}</td>
+        <td>{$r.get_point}</td>
+        <td>{$r.eariler}{'Y-m-d H:i:s'|local_date:$r.adddate}{if $r.adddate neq $r.addtime_real}<br/><span style="color:red">[真实]</span>{'Y-m-d H:i:s'|local_date:$r.addtime_real}{/if}
+
+        </td>
+  </tr>
+  {foreachelse}
+  <tr>
+    <td colspan="12" style="color: red;">暂无评论</td>
+  </tr>
+  {/foreach}
+   <tr>
+    <td><input type="checkbox" onclick="checkAll(this, 'checkboxes[]');"></td>
+    <td>
+        <select id="selAction" disabled="true">
+            <option value="">--操作--</option>
+            <option value="del">删除</option>
+            <option value="pass_review">通过审核</option>
+            <option value="unpass_review">不通过审核</option>
+            <option value="disprocess">待处理</option>
+            <option value="zhiding">置顶</option>
+            <option value="no_zhiding">取消置顶</option>
+        </select>
+        <input type="hidden" id="btnSubmit" />
+ </td>
+    <td colspan="10" style="text-align: right">
+        <div id="pager">{$pagestr}</div>
+    </td>
+    </tr>
+</table>
+</div>
+</form>
+ {include file="copyright.htm"}

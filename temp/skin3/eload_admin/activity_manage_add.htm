@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php?lang="></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 活动{$tag_msg}</td>
+          <td width="44%" align="right"><span class="navright"><a href="?act=festival">固定活动</a>&nbsp;&nbsp;<a href="activity_manage.php">活动列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<div class="main-div">
+<form  method="post" name="theForm"  action="{$url}" onSubmit="return Validator.Validate(this,3)">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+    <tr>
+        <th colspan="3">活动{$tag_msg}</th>
+    </tr>
+    <tr>
+        <td width="22%" class="label">活动名称:</td>
+        <td width="78%"><input name="activity_name" type="text" id="activity_name" value="{$activityArr.name}" size="30"  dataType="Require" msg="请填写活动名称！"/>* </td>
+    </tr>
+    <tr>
+        <td width="22%" class="label">活动类型:</td>
+        <td width="78%">
+        <select name="type" dataType="Require">
+            <option value="1" {if $activityArr.type eq '1'}selected{/if}>普通</option>
+            <option value="2" {if $activityArr.type eq '2'}selected{/if}>固定</option>
+        </select>
+        </td>
+    </tr>
+    <tr>
+        <td width="22%" class="label">网页标题:</td>
+        <td width="78%">
+            <textarea name="title" dataType="Require" rows="2" cols="100">{$activityArr.title}</textarea>
+        </td>
+    </tr>
+    <tr>
+        <td width="22%" class="label">SEO关键字:</td>
+        <td width="78%">
+            <textarea name="keywords" rows="2" cols="100">{$activityArr.keywords}</textarea>
+        </td>
+    </tr>
+    <tr>
+        <td width="22%" class="label">SEO描述:</td>
+        <td width="78%">
+            <textarea name="description" rows="2" cols="100">{$activityArr.description}</textarea>
+        </td>
+    </tr>
+    <tr>
+        <td width="22%" class="label">备注:</td>
+        <td width="78%">
+        <textarea name="remark" rows="2" cols="100">{$activityArr.remark}</textarea>
+        </td>
+    </tr>
+    <tr>
+        <td width="22%" class="label">产品编码:</td>
+        <td width="78%">
+        <textarea style="overflow:auto" name="act_goods_list" onpropertychange="setHeight(this);" onmouseover="setHeight(this)"; rows="3" cols="100">{$act_goods_list}</textarea>
+        </td>
+    </tr>	        
+    <tr>
+        <td width="22%" class="label">固定活动URL:</td>
+        <td width="78%">
+        <select name="redirection">
+            <option value="">--请选择--</option>
+			{foreach from=$activity item=list name=val}
+            <option value="{$list.1}" {if $activityArr.redirection eq $list.1}selected{/if}>{$list.0}</option>
+			{/foreach}					
+        </select> 
+        注:如果当前记录属于固定活动请选择。
+        </td>
+    </tr>
+    <tr>
+        <td align="center">&nbsp;</td>
+        <td align="left">
+        <input name="button" type="submit" class="sub_but" id="button" value="{$tag_msg}" /></td>
+    </tr>			
+    </table>
+  </form>
+</div>
+{literal}
+<script type="text/javascript">
+function setHeight(obj)   
+{  
+
+ obj.style.height = obj.scrollHeight +'px';  
+} 
+</script>
+{/literal}
+{include file="copyright.htm"}

@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script language="javascript" src="{$imgcache_url}eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->>产品评论</td>
+          <td width="44%" align="right"><a href="review.php"> 产品评论列表</a></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+
+<form method="post" action="review.php?act=edit&rid={$rid}&goods_id={$goods_id}" name="listForm">
+<div id="list">
+{foreach key=key from=$review.review_list item=r name=r}
+<table width="99%" align="center" border="0" cellspacing="0" cellpadding="2" style="margin-top:2px; font-size:11px; border-bottom:1px #CCCCCC dashed;">
+  <tr>
+  	<td></td>
+  </tr>
+  <tr>
+    <td width="14%" align="right" valign="top" ><b>Title：</b></td>
+    <td width="47%" align="left"> <input type="text" name="subject" value="{$r.subject|HtmlDecode}" size="50" maxlength="50"></td>
+  </tr>
+  <tr>
+  	<td width="14%" align="right" valign="top" ><b>Pros:</b></td>
+    <td width="47%" align="left"> <textarea name="pros" cols="100" rows="12">{$r.pros|HtmlDecode}</textarea></td>
+  </tr>
+  <tr>
+  	<td width="14%" align="right" ><b>Cons:</b></td>
+    <td width="47%" align="left"> <b><textarea name="cons" cols="100" rows="5">{$r.cons|HtmlDecode}</textarea></b></td>
+  </tr>
+  <tr>
+  	<td width="14%" align="right" ><b>Other Thoughts or Suggestions:</b></td>
+    <td width="47%" align="left"> <b><textarea name="other_thoughts" cols="100" rows="5">{$r.other_thoughts|HtmlDecode}</textarea></b></td>
+  </tr>
+  <tr>
+    <td colspan="2"  align="center" valign="top" class="rewp" style=" color:#666666">
+    <input type="submit" value="  保 存  "/>
+    </td>
+  </tr>
+</table>
+{/foreach}
+
+</div>
+</form>
+
+
+{include file="copyright.htm"}

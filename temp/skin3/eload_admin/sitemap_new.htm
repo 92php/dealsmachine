@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='{$imgcache_url}eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="{$imgcache_url}eload_admin/js/admin_add.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> {$mobile_name}站点地图</td>
+          <td width="44%" align="right">&nbsp;</td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form method="GET" action="?" name="theForm">
+<input name="act" type="hidden" value="creat" />
+  <div class="main-div">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+<tr>
+    <td width="44%" class="label">语言</td>
+    <td width="56%">
+	<select name="lang">
+		<option value="en">英语</option>
+		<option value="ru" style="display:none;">俄语</option>
+	</select>
+	</td>
+</tr>
+<tr>
+    <td width="44%" class="label">{$lang.homepage_changefreq}</td>
+    <td width="56%"><select name="homepage_priority">
+  {html_options values=$arr_changefreq output=$arr_changefreq  selected=$config.homepage_priority}
+  </select><select name="homepage_changefreq">
+  {html_options options=$lang.priority selected=$config.homepage_changefreq}
+  </select></td>
+</tr>
+<tr>
+    <td class="label">{$lang.category_changefreq}</td>
+    <td><select name="category_priority">
+  {html_options values=$arr_changefreq output=$arr_changefreq selected=$config.category_priority}
+  </select><select name="category_changefreq">
+  {html_options options=$lang.priority selected=$config.category_changefreq}
+  </select></td>
+</tr>
+<tr>
+    <td class="label">{$lang.content_changefreq}</td>
+    <td><select name="content_priority">
+  {html_options values=$arr_changefreq output=$arr_changefreq selected=$config.content_priority}
+  </select><select name="content_changefreq">
+  {html_options options=$lang.priority selected=$config.content_changefreq}
+  </select></td>
+</tr>
+<tr>
+    <td></td>
+    <td>
+        <input type="button" value="保存生成频率" id="btn-save-frequency" class="button" />
+        <input type="button" id="btn-save" value="生成{$mobile_name}站点地图" class="button" />
+        {if $info}<span style="color: gray;">上次更新时间: <span style="color: red">{$info}</span></span>{/if}
+        {if $mobile_name}<a href="/sitemap.all.gz?{$smarty.now}">下载</a>{/if}
+        <br />
+        <span style="color: red">如果生成频率有变更,请先保存生成频率</span>
+        <span id="info" style="display: none; color: gray;"><br />生成站点地图中,需要<strong>30秒</strong>左右,请耐心等待,不要离开此页面...</span>
+    </td>
+</tr>
+</table>
+</div>
+</form>
+<script>
+    var mobile = '{$mobile}' ? true : false;
+    {literal}
+    $('#btn-save-frequency').click(function() {
+        $.post('sitemap_new.php?action=index' + (mobile ? '&mobile' : ''), $('form[name=theForm]').serialize(), function(data) {
+            alert('保存成功');
+        });
+    });
+    $('#btn-save').click(function() {
+        var el = $('#info').show();
+        $.post('sitemap_new.php?action=_build_sitemap' + (mobile ? '&mobile' : ''), function(data) {
+            el.css('color', 'green').html('<br />生成成功');
+            alert('生成成功');
+            location.reload();
+        });
+    });
+    {/literal}
+</script>
+{include file="copyright.htm"}

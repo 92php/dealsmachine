@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php?lang="></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> deals页面统计</td>
+          <td width="44%" align="right"> </td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <form name="timetnterval" style="margin:0px" method="get" class="thisfrm">
+  <tr>
+    <td><table width="100%" border="0" cellpadding="3" cellspacing="0">
+      <tr>
+          <td bgcolor="#FFFFFF">关键字：
+            <input name="keyword" value="{$keyword}" size="60" />&nbsp;&nbsp; &nbsp;&nbsp;
+            <input type="submit" name="submit" value="搜 索" class="button" /> 
+            （支持产品名称和产品编码搜索）</td>
+          </tr>
+      </table></td>
+  </tr>
+  </form>
+</table>
+
+<form method="POST" action="" name="listForm">
+  <div class="list-div" id="listDiv">
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+      <tr>
+        <th width="10%" height="21">产品图片</th>
+        <th width="22%">产品名称</th>
+        <th width="10%">产品编码</th>
+        <th>排序</th>
+        <th width="8%">点击数</th>
+        <th width="8%">价格</th>
+        <th width="8%">过期时间</th>
+      </tr>
+      {foreach from=$tongji_data item=list name=val}
+  <tr bgcolor="{if $smarty.foreach.val.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onmouseover="this.bgColor = '#FEF3D1';" onmouseout="this.bgColor='{if $smarty.foreach.val.iteration is even}#f4f9fd{else}#e8f1fd{/if}'";>
+    <td align="center"><a href="/best_{$list.goods_id}.html" target="_blank"><img src="{$list.goods_thumb}" height="50" width="50" border="0"/></a></td>
+    <td align="left"><a href="deals.php?act=deals_add&id={$list.deals_id}">{$list.goods_title}</td>
+    <td align="center">{$list.goods_sn}</td>
+    <td align="center" title="双击进行修改"><span {literal}onclick="$(this).editable('goods.php?act=editinplace', {type: 'text',event: 'dblclick',width:'90%',indicator:'Saving...',onblur:'submit',tooltip: ''});"{/literal} id="{$goods.goods_id}||sort_order">{$list.sort_order}</span></td>   
+    <td align="center"><a href="users.php?goods_id={$list.goods_id}&groupdealflag={$list.is_compelte}">{$list.ups}</a></td>
+      <td align="center">{$list.shop_price}</td>
+    <td align="center">{$list.expried_time }</td>  
+  </tr>
+
+      {/foreach}
+    </table>
+    <table width="100%" cellspacing="0" id="page-table">
+      <tr>
+    <td width="8">&nbsp;</td>
+    <td width="964" align="right" nowrap="true">
+    {$pagestr}
+    </td>
+  </tr>
+  </table>
+</div>
+</form>
+{include file="copyright.htm"}

@@ -1,0 +1,724 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	{include file="top.htm"}
+	<link rel="stylesheet" href="{$imgcache_url}mincss/goods_min.css?2014010301" />
+</head>
+<body>
+	{include file="public_top.htm"}
+	<div class="nav_path mt10">
+		<div class="fl sideBarMenuBox"  id="js_sideBarMenuHide">
+			<h3 class="sidebar_menuTitle"><b></b>{$lang.browse_by_category}</h3>
+			{$left_catArr}
+		</div>
+		<div class="fl curPath"><a href="/{$cur_lang_url}" title="{$shop_name} {$lang.home}">{$lang.home}</a> &raquo;{$top_guide}</div>
+	</div>
+	<div id="mainWarp" class="clearfix mt10">
+{if $act == 'write_review'}
+	{if $smarty.session.WebUserInfo}
+		<link rel="stylesheet" type="text/css" href="{$jscache_url}sysjs/calendar/calendar.css" />
+		<script type="text/javascript" src="{$website_url|default:'/'}sysjs/calendar.php?lang="></script>
+    {/if}
+    	      
+            <div class="writeReviewBox m_box p10">
+                <h3 class="fb f14 lh150"><strong class="fb">{$lang.Write_a_review_and_post_pictures_videos_for}</strong><a href="{$goods.url_title}" class="color_blue">{$goods.goods_title}</a></h3>
+                
+                <div class="writeReviewForm pt20">
+                    <a href="{$goods.url_title}" class="review_proImg m_box fl"><img src="{$goods.goods_grid}" width="150" height="150"/></a>
+                    <p>{$lang.Write_a_review_1}<a href="/{$cur_lang_url}m-promotion-active-14.htm" class="color_blue">{$lang.Reviews_11}</a></p>
+                    <h4 class="pt20 fb f14">{$lang.Write_a_review}</h4>
+                    <p>{$lang.Write_a_review_2}</p>
+					<script type="text/javascript">document.domain = 'dealsmachine.com';</script>
+                    <form method="post" onSubmit="checkreviewform();" action="/{$cur_lang_url}m-review-a-save_review-goods_id-{$goods.goods_id}.htm" enctype="multipart/form-data" id="reviewForm" class="cmxform" >
+                        <ul class="mt20">
+                             {if $smarty.session.WebUserInfo}
+								 <li class="clearfix">
+									<label class="fl wr_fomrL fb">{$lang.review_time}: </label>
+									<div class="fl wr_fomrR">
+										  <input maxlength="19" size="20" type="text" name="adddate" value="{'Y-m-d H:i:s'|local_date}" autocomplete="off" onDblClick="return showCalendar(this, '%Y-%m-%d %H:%M:%S', false, false, this);" />
+											<span class="font-grey">{$lang.click_the}</span>
+									</div>
+								</li>
+                             {/if}
+                            <li class="clearfix">
+                                <label class="fl wr_fomrL fb">{$lang.title}</label>
+                                <div class="fl wr_fomrR">
+                                    <input type="hidden" name="n">
+                                    <input id="subject" class="inputStyle required" type="text" name="subject" size="50" maxlength="50"/>
+                                </div>
+                            </li>
+                            
+                            <li class="clearfix">
+                                <label class="fl wr_fomrL fb">{$lang.Price_Rating}:</label>
+                                <div class="fl wr_fomrR user_rate ">
+                                    <div class="big_rate_bak rate1"> 
+                                        <b onClick="javascript:up_rate(20,1);" rate="2">&nbsp;</b> 
+                                        <b onClick="javascript:up_rate(40,1);" rate="4">&nbsp;</b> 
+                                        <b onClick="javascript:up_rate(60,1);" rate="6">&nbsp;</b> 
+                                        <b onClick="javascript:up_rate(80,1);" rate="8">&nbsp;</b> 
+                                        <b onClick="javascript:up_rate(100,1);" rate="10">&nbsp;</b>
+                                        <span class="big_rate_up" style="width: 0px; display: block; height:16px;"></span>
+                                     </div>
+                                     <p><span class="s"></span><span class="g"></span></p>
+                                     <input type="text" value="" id="rate1" name="rate_price" class="rating wr_rate_input"/>
+                                </div>
+                            </li>
+                            
+                             <li class="clearfix">
+                                <label class="fl wr_fomrL fb">{$lang.Ease_of_use_Rating}:</label>
+                                <div class="fl wr_fomrR user_rate">
+                                    <div class="big_rate_bak rate2"> 
+                                        <b onClick="javascript:up_rate(20,2);" rate="2">&nbsp;</b> 
+                                        <b onClick="javascript:up_rate(40,2);" rate="4">&nbsp;</b> 
+                                        <b onClick="javascript:up_rate(60,2);" rate="6">&nbsp;</b> 
+                                        <b onClick="javascript:up_rate(80,2);" rate="8">&nbsp;</b> 
+                                        <b onClick="javascript:up_rate(100,2);" rate="10">&nbsp;</b>
+                                        <span class="big_rate_up" style="width: 0px; display: block; height:16px;"></span>
+                                     </div>
+                                     <p><span class="s"></span><span class="g"></span></p>
+                                     <input type="text" value="" id="rate2" name="rate_easyuse" class="required wr_rate_input"/>
+                                </div>
+                            </li>
+                            
+                             <li class="clearfix">
+                                <label class="fl wr_fomrL fb">{$lang.Build_Quality_Rating}:</label>
+                                <div class="fl wr_fomrR user_rate">
+                                    <div class="big_rate_bak rate3"> 
+                                        <b onClick="javascript:up_rate(20,3);" rate="2">&nbsp;</b> 
+                                        <b onClick="javascript:up_rate(40,3);" rate="4">&nbsp;</b> 
+                                        <b onClick="javascript:up_rate(60,3);" rate="6">&nbsp;</b> 
+                                        <b onClick="javascript:up_rate(80,3);" rate="8">&nbsp;</b> 
+                                        <b onClick="javascript:up_rate(100,3);" rate="10">&nbsp;</b>
+                                        <span class="big_rate_up" style="width: 0px; display: block; height:16px;"></span>
+                                     </div>
+                                     <p><span class="s"></span><span class="g"></span></p>
+                                     <input id="rate3" class="required wr_rate_input" type="text" value="" name="rate_quality"/>
+                                </div>
+                            </li>
+                            
+                             <li class="clearfix">
+                                <label class="fl wr_fomrL fb">{$lang.Usefulness_Rating}:</label>
+                                <div class="fl wr_fomrR user_rate">
+                                    <div class="big_rate_bak rate4 fl"> 
+                                        <b onClick="javascript:up_rate(20,4);" rate="2">&nbsp;</b> 
+                                        <b onClick="javascript:up_rate(40,4);" rate="4">&nbsp;</b> 
+                                        <b onClick="javascript:up_rate(60,4);" rate="6">&nbsp;</b> 
+                                        <b onClick="javascript:up_rate(80,4);" rate="8">&nbsp;</b> 
+                                        <b onClick="javascript:up_rate(100,4);" rate="10">&nbsp;</b>
+                                        <span class="big_rate_up" style="width: 0px; display: block; height:16px;"></span>
+                                     </div>
+                                     <p><span class="s"></span><span class="g"></span></p>
+                                     <input id="rate4" class="required wr_rate_input" type="text" value="" name="rate_usefulness"/>
+                                </div>
+                            </li>
+                            
+                            <li class="clearfix">
+                                <label class="fl wr_fomrL fb">{$lang.Overall_Rating}:</label>
+                                <div class="fl wr_fomrR user_rate">
+                                    <div class="big_rate_bak rate5"> 
+                                        <b onClick="javascript:up_rate(20,5);" rate="2">&nbsp;</b> 
+                                        <b onClick="javascript:up_rate(40,5);" rate="4">&nbsp;</b> 
+                                        <b onClick="javascript:up_rate(60,5);" rate="6">&nbsp;</b> 
+                                        <b onClick="javascript:up_rate(80,5);" rate="8">&nbsp;</b> 
+                                        <b onClick="javascript:up_rate(100,5);" rate="10">&nbsp;</b>
+                                        <span class="big_rate_up" style="width: 0px; display: block; height:16px;"></span>
+                                     </div>
+                                     <p><span class="s"></span><span class="g"></span></p>
+                                     <input id="rate5" class="required wr_rate_input" type="text" value="" name="rate_overall"/>
+                                </div>
+                            </li>
+                            
+                            <li class="clearfix">
+                                <label class="fl wr_fomrL fb">{$lang.Pros}:<br/><strong>{$lang.1000_characters}</strong></label>
+                                <div class="fl wr_fomrR">
+                                    <textarea name="pros" cols="50" rows="4" class="inputStyle required"></textarea>
+                                </div>
+                           </li> 
+                           
+                           <li class="clearfix">
+                                <label class="fl wr_fomrL fb">{$lang.Cons}:<br/><strong>{$lang.1000_characters}</strong></label>
+                                <div class="fl wr_fomrR">
+                                    <textarea name="cons" class=" inputStyle required" cols="50" rows="4"></textarea>
+                                </div>
+                           </li> 
+                           
+                           <li class="clearfix">
+                                <label class="fl wr_fomrL fb">{$lang.Other_Thoughts}:<br/><strong>{$lang.1000_characters}</strong></label>
+                                <div class="fl wr_fomrR">
+                                    <textarea name="other_thoughts" class="inputStyle" cols="50" rows="4"></textarea>
+                                </div>
+                           </li> 
+                           
+                           <li class="clearfix">
+                                <div class="fl wr_fomrR">
+                                    <p class="wr_upImg_top">{$lang.Write_a_review_3}</p>
+									
+									<div class="fl i_table_r pt10">
+										<a href="http://photo.ahappydeal.com/upload4more.action" class="ptoTagBtn fl js_ptoTagBox">SELECT IMAGE</a>
+										<span id="uploadmsg" class="fl"></span>
+									</div>
+                                </div>
+                           </li> 
+                           
+                           <li class="clearfix">
+
+                                <div class="fl wr_fomrR">
+                                    <p class="wr_upVideo_top"> {$lang.Write_a_review_4}:</p>
+                                    <dl class="wr_upVideo_list">
+                                        <dd><span>{$lang.Video_Title}: </span><input type="text" size="50"  name="video_title"  class="inputStyle" /></dd>
+                                        <dd><span>{$lang.Video_URL}:  </span><input type="text" size="50" name="video_url"  class="inputStyle" /></dd>
+                                    </dl>
+                                </div>
+                           </li> 
+                           
+                             <li class="clearfix">
+                                <label class="fl wr_fomrL fb">{$lang.Your_nickname}:</label>
+                                <div class="fl wr_fomrR">
+                                   <input type="text" value="" class="inputStyle required" name="nickname">
+                                </div>
+                            </li>
+                           
+                           <li class="clearfix pt10">
+                                <label class="fl wr_fomrL fb"></label>
+                                <div class="fl wr_fomrR">
+                                   <input type="submit" value="" class="wr_subMit"/>
+                                </div>
+                            </li>                           
+                        </ul>
+                        <input type="hidden" name="pic_src" value="" id="pic_src"/>
+                        <input type="hidden" name="pics" value="" id="pics"/>						
+                    </form>
+                </div>                            
+            </div>
+			{/if}
+			{if $act == 're_review'}
+            <div class="MSG_tipsShow">
+            	<img class="MSG_img" src="{$imgcache_url}images/styleimg/wrong.gif" width="93" height="86"/>
+                <p class="pt5 f14">{$lang.review_des_1}<br/><a  href="{$goods.url_title}" class="MSG_blue">{$lang.review_des_2}</a></p>
+            </div>
+			{/if}
+			{if $act == 'review_ok'}
+
+            <div class="MSG_tipsShow">
+            	<img class="MSG_img" src="{$imgcache_url}images/styleimg/right.gif" width="93" height="86"/>
+                <p class="fb f14">{$lang.review_des_3}</p>
+                <p class="pt5 f14">{$lang.review_des_4} {$shop_name} {$lang.review_des_5}<br/><a  href="{$goods.url_title}" class="MSG_blue">{$lang.review_des_7}</a></p>
+            </div>            
+			{/if}           
+			{if $act == 'not_bought'}             
+            <div class="MSG_tipsShow">
+            	<img class="MSG_img" src="{$imgcache_url}vimages/styleimg/wrong.gif" width="93" height="86"/>
+                <p class="fb f14 red">{$lang.review_des_8}</p>
+                <p class="pt5 f14">{$lang.back_to_write_a_review}<br/><a  href="{$goods.url_title}" class="MSG_blue">{$lang.back_to_the_product}</a></p>
+            </div>
+{/if}    
+{if $act == 'inquiry_ok'}
+	<div class="MSG_tipsShow">
+		<img  class="MSG_img"src="{$imgcache_url}images/styleimg/right.gif"/>
+		<p class="fb f14 red"><strong>{$lang.review_des_9}</strong></p>
+		<p class="pt5 f14">{$lang.review_des_10} <BR><a  href="{$goods.url_title}" style="color:#0033CC; text-decoration:underline">{$lang.review_des_11}</a></p>
+	</div>
+{/if}
+{if $act == 'view_review'}
+		<div class="reviewsMain fl">
+            <div class="review_pro">
+				<a href="{$goods.url_title}" class="review_proImg m_box fl"><img src="{$goods.goods_grid}" width="150" height="150"/></a>
+				<p class="review_pro_title fb"><strong class="fb">{$lang.review_des_12}</strong><a href="{$goods.url_title}"> {$goods.goods_title}</a></p>
+				<p class="review_proStars f12"><span>{$lang.review_des_13}:</span><span class="start_{$review.avg_rate_img}"><i>{$review.avg_rate_img} satrts</i></span>{$review.avg_rate}({$review.review_count} {$lang.customer_reviews})</p>
+				<p class="p_price review_pro_price"><span class="bizhong fb red">{$lang.cur_list.0.keyd}</span> <span orgp="{$goods.shop_price}" class="my_shop_price fb red">{$goods.shop_price}</span></p>
+				<p class="js_addCart_warp" id="add_cart_msg{$goods.goods_id}">{if $goods.goods_number}<a attrchage="{$attrkey}" num="1" gid="{$goods.goods_id}" class="js_add_cart_button add_cart_button" id="new_addcart" href="javascript:void(0)">{$lang.add_to_cart}</a>{else}<img src="{$imgcache_url}{$cur_lang_url}images/addtocart0_1.gif"/> {/if}</p>
+			</div>
+			
+			<div class="goodsBox review_goodsBox mt10 m_box">
+				<h3 class="pl5 pr5 fb f16">
+					<span class="cv1">{$lang.review_des_14}</span>
+					<span class="cv2"> {$lang.review_des_15} {$lang.point_name}</span>
+				</h3>
+				<div class="goodsShow clearfix">
+					<div class="fl">
+						<p>{$lang.review_des_13}:<span class="start_{$review.avg_rate_img}"><i>{$review.avg_rate} {$lang.satrts}</i></span>{$review.avg_rate}</p>
+						<p class="writeReviewBtnBox"><a class="fb" href="/{$cur_lang_url}m-review-a-write_review-goods_id-{$goods.goods_id}.htm">{$lang.review_des_16}</a></p>
+					</div>
+					<div class="fr">
+						<p class="orang">{$lang.review_des_17} {$lang.point_name}.  </p>
+						<p><a href="/{$cur_lang_url}m-promotion-active-14.htm">({$lang.see} {$lang.point_name} {$lang.details})</a></p>
+					</div>
+				</div>
+			</div>
+			
+			<p class="fb mt10 f14">{$lang.Reviews_for} {$goods.goods_title}</p>
+			
+			
+			<div class="commentsListWarp mt10 m_box">
+
+				<div class="pageBox mt10">
+				  <div class="pages">{$pagestr}</div>
+				</div>
+				
+				<dl class="commentsList review_commentsList">
+				{foreach key=key from=$review.review_list item=r name=r key=key}
+ 					<a name="review_helpful_div_{$r.rid}"></a>
+					<dd class="comments_box clearfix">
+
+						<div class="comments_userInfo fl">
+							<p class="userImg"><img src="{$imgcache_url}images/demoimg/goldmedal.gif"></p>
+							<p class="userName pt10 pb10 fb">{$r.nickname}</p>
+							<p class="userStatus"><span class="status_vb">{$r.subject}</span></p>
+							<p class="userTime">{$r.adddate}</p>						
+						</div>
+
+						<div class="comments_info fr">
+							<p><span class="start_{$r.rate_overall}"><i>{$r.rate_overall} satrts</i></span><strong class="fb">{$r.subject}</strong></p>
+							<p class="dottedLine">
+							{if ($r.is_top==1 || $r.helpful_yes >0) && $key<=2}
+								<b style="color:#FF6600;" class="fr">{$lang.review_des_18}</b>
+							{/if}
+							<strong class="fb orang pr5">{$r.get_point} {$lang.dm_points}</strong>{$lang.gained_for_this_post}
+							</p>
+							
+							<div class="comment_text clearfix p10">
+		
+								<div class="comment_text_left fl">										
+									<div class="pb10">
+										<strong>{$lang.Pros}:</strong>
+										<p>{$r.pros}</p>
+									</div>
+									
+									<div class="pb10">
+										<strong>{$lang.Cons}:</strong>
+										<p>{$r.cons}</p>
+									</div>
+									 {if $r.other_thoughts != ''}
+										<div class="pb10">
+											<strong>{$lang.Review_Other_Thoughts}:</strong>
+											<p>{$r.other_thoughts}</p>
+										</div> 		
+									  {/if}
+									  {if $r.pic != ''}
+										<div class="pb10">
+										<strong>{$lang.Review_Photos_related}:</strong>
+											<p>
+											{foreach from=$r.pic item=pic}
+											 <a target="_blank" href="/{$cur_lang_url}m-review_media-a-view_image-goods_id-{$goods.goods_id}-mid-{$pic.id}.htm"> <img src="{$domain_img}/{$pic.thumb_paths}" width="80"  border="0" /></a>
+											 {/foreach}
+											 </p>
+										</div>
+									  {/if}
+									  {if $r.video != ''}
+										<div class="pb10">
+											<strong>{$lang.Review_Videos_related}:</strong>
+											<p>	
+											  {foreach from=$r.video item=video}
+											  <a target="_blank" href="/{$cur_lang_url}m-review_media-a-view_video-goods_id-{$goods.goods_id}-mid-{$video.id}.htm"><img src="http://www.{$shop_name}/m-review-a-show_video_pic-code-{$video.paths}.htm"  width="80" height="80" border="0" /></a>
+											  {/foreach}
+											</p>
+										</div>
+									  {/if}
+								</div>
+
+								<dl class="comment_stars fr tr">
+									<dt>{$lang.price}:</dt>
+									<dd><span class="start_{$r.rate_price}"><i>{$r.rate_price} {$lang.satrts}</i></span></dd>
+									<dt>{$lang.Review_Ease_of_Use}:</dt>
+									<dd><span class="start_{$r.rate_easyuse}"><i>{$r.rate_easyuse} {$lang.satrts}</i></span></dd>
+									<dt>{$lang.Review_Build_Quality}:</dt>
+									<dd><span class="start_{$r.rate_quality}"><i>{$r.rate_quality} {$lang.satrts}</i></span></dd>
+									<dt>{$lang.Review_Usefulness}:</dt>
+									<dd><span class="start_{$r.rate_usefulness}"><i>{$r.rate_usefulness} {$lang.satrts}</i></span></dd>
+									<dt>{$lang.Overall_Rating}:</dt>
+									<dd><span class="start_{$r.rate_overall}"><i>{$r.rate_overall} {$lang.satrts}</i></span></dd>
+								</dl>
+
+								 {if $r.reply != ''}
+									<p>
+									
+										{foreach from=$r.reply item=reply}
+											<p> 
+												<p><b style="color:#0033CC">{$reply.re_nickname}</b> {$lang.reply}:</p>
+												{$reply.re_content} 
+											</p>
+									   {/foreach}
+									</p>
+								 {/if}
+
+								<div class="commentReplyBox">
+									<p>
+										<a rid="{$r.rid}" class="replyBtn td_reply fr" href="javascript:void(0)">{$lang.reply}</a>
+										<strong class="fl">{$lang.Review_helpful}? </strong>
+										<a onClick="review_helpful_num({$r.rid},0);" class="yesBtn fl" href="javascript:void(0)">{$lang.yes}<span id="review_helpful_yes_{$r.rid}">({$r.helpful_yes})</span></a>
+										<a onClick="review_helpful_num({$r.rid},1);" class="noBtn fl" href="javascript:void(0)">{$lang.no}<span id="review_helpful_no_{$r.rid}">({$r.helpful_no})</span></a>
+										<a class="commentFaceBook fb fl fbComment" title="Share to facebook" href="javascript:void(0)" fbuser="Fajar" fblink="{$goods.url_title}" fblink2="http://www.dealsmachine.com/{$cur_lang_url}m-review-a-view_review-goods_id-{$goods.goods_id}.htm" fbpicture="{$goods.goods_thumb}" fbname="{$r.nickname|escape:'html'}" fbdesc="{$r.pros|escape:'html'}">{$lang.share_to_facebook}</a>
+										<input type="hidden" id="hidden-goodsUrl" value="{$danqian_url}" />
+									</p>
+								</div>
+							</div>
+						</div>
+
+					</dd>
+					
+				{/foreach}	
+				</dl>
+				
+
+				<div class="pageBox mb10">
+					<div class="pages">{$pagestr}</div>
+				</div>
+			</div>
+			
+			<p class="review_writeBtnBox mt10"><a href="/{$cur_lang_url}m-review-a-write_review-goods_id-{$goods.goods_id}.htm" class="fb">{$lang.review_des_16}</a></p>
+			
+		</div>
+		
+        <div class="reviewsRight fr">
+        	<div class="l_box">
+				<h3 class="l_title">{$lang.review_des_20}</h3>
+				<ul class="othersLike">
+				{foreach from=$same_cat_goods item=list name=shop}
+					<li>
+						<p class="p_mg pr"><a href="{$list.url_title}"><img width="150" height="150" class="js_lazyLoad" alt="{$list.goods_title}" src="{$list.goods_grid}" style="display: inline;"></a></p>
+                        <p class="p_name"><a href="{$list.url_title}">{$list.goods_title}</a></p>
+						{if $goods.is_free_shipping}<p class="p_free {$cur_lang}_p_free">{$lang.Free_Shipping}</p>{/if}
+                        <p class="p_price  fb red"><span class="bizhong fl">{$lang.cur_list.0.keyd}</span> <span orgp="{$list.shop_price}" class="my_shop_price fl pl5">{$list.shop_price}</span>
+						{if $list.goods_number}	<i gid="{$list.goods_id}" id="add_cart_msg{$list.goods_id}" class="fl addToCarTag js_new_addcart">add to car</i>{/if}</p>
+					</li>
+				{/foreach}
+				</ul>
+			</div>
+        </div>
+{/if}
+{if $act == 'write_inquiry'}
+
+
+
+ <div class="rwwrap">
+          <div class="rwwrap_l">
+                        <h2 class="fancyHeadingV2"><img border="0" src="{$imgcache_url}ximages/user_titlebg.gif?2013062801" alt="YOU'RE ASKING ABOUT" /></h2>
+                        <div class="w-beingReviewed">
+                        <div class="w-productList grid-m-l">
+                            <dl class="inquiry_clearfix">
+                                <dt><a href="{$goods.url_title}"><img src="{$goods.goods_grid}" width="150" height="150"></a></dt>
+                                <dd>
+                                    <p class="prodTitle"><a title="{$goods.goods_title}" href="{$goods.url_title}">{$goods.goods_title}</a></p>
+                                                 <p class="oldPrice"><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$goods.market_price}"> {$goods.market_price} </span></p>
+                                                 <p class="price"><span class="bizhong">{$lang.cur_list.0.keyd}</span> <span class="my_shop_price" orgp="{$goods.shop_price}"> {$goods.shop_price} </span></p>
+                                </dd>
+                            </dl>
+
+                            <div class="inquiry_clearfix">
+                                {if $review.review_count > 0}
+                                <p class="rating">{$lang.review_des_13}:</p>
+                                <img src="{$goods.review.avg_rate_img}" />&nbsp;<strong class="score">{$review.avg_rate}</strong>&nbsp;
+                                {/if}
+                                <a class="gray reviewNums" href="/{$cur_lang_url}m-review-a-view_review-goods_id-{$goods.goods_id}.htm">({$review.review_count} {$lang.reviews})</a>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="write-reviewInfo">
+                   {$lang.review_des_21}
+                </div>
+
+     </div>
+
+          <div class="rwwrap_r">
+            <TABLE width="100%" border="0" align="center" cellPadding="0" cellSpacing="5">
+              <TBODY>
+                <TR>
+                  <td colspan="2" valign="top" class="write_t">{$lang.review_des_22} <b style="color:#ff6a18">{$goods.goods_sn}</b></td>
+                </TR>
+                <TR>
+                  <TD colSpan="2" vAlign="top"><form enctype="multipart/form-data" method="post" onSubmit="return(checkreviewform())" id="reviewForm" action="/{$cur_lang_url}m-review-a-save_inquiry-goods_id-{$goods.goods_id}.htm" class="cmxform" ><TABLE width="100%" border="0" cellPadding="0" cellSpacing="5">
+                    <TBODY>
+                      <TR>
+                        <Td valign="top"><span>*</span><strong>{$lang.Name}: </strong></Td>
+                      </TR>
+                      <TR>
+                        <TD align="left"><input name="i_nickname" class="required" type="text" id="i_nickname" value="{$nickname}" style="width:600px;" ></TD>
+                      </TR>
+                      <TR>
+                        <Td valign="top"><span>*</span><strong>{$lang.pre_sale_topic}:</strong></Td>
+                      </TR>
+                      <TR>
+                        <TD valign="top">
+                            <select name="type" style="width:300px; margin-bottom:10px;">
+                                <option value="">{$lang.please_select}</option>
+                                {html_options options=$type_arr}
+                            </select>
+                        </TD>
+                      </TR>
+                      <TR>
+                        <Td valign="top"><span>*</span><strong>{$lang.ask_a_question}:</strong></Td>
+                      </TR>
+                      <TR>
+                        <TD valign="top"><TEXTAREA name="i_content" rows="14"  class="required"  id="i_content" style="width:600px;"></TEXTAREA>              </TD>
+                      </TR>
+                      <TR>
+                        <TD style="color:#666666; padding-bottom:5px; font-size:12px;">{$lang.remaining_characters}:<span id="i_content_characerts_length" style="color:red;">3000</span> {$lang.review_des_23} </TD>
+                      </TR>
+                      <TR>
+                      	<TD style="height:26px; line-height:26px;"><input name="pic[]"  type="file" value="" style="width:320px; height:18px;" ></TD>
+                      </TR>
+                      <TR>
+                      	<TD style="height:26px; line-height:26px;"><input name="pic[]"  type="file" value="" style="width:320px; height:18px;" ></TD>
+                      </TR>
+
+                      <TR>
+                        <TD style="color:#666666; padding-bottom:8px; font-size:12px;">{$lang.review_des_24} <span id="i_content_characerts_length" style="color:red;">2MB</span></TD>
+                      </TR>
+
+
+
+
+                      <TR>
+                        <TD><input type="hidden" name="lang" value="{$cur_lang}"/><input type="submit" value="" class="wr_subMit wr_subMit_inquiries" style="float:left;"/><a href="{$goods.url_title}" class="inquiry_cancle">{$lang.cancle}</a></TD>
+                      </TR>
+                    </TBODY>
+                  </TABLE>
+                  </form></TD>
+                </TR>
+              </TBODY>
+            </TABLE>
+        </DIV>
+        </div>
+        <div class="clear"></div>
+         
+         
+{literal}
+<script type="text/javascript">
+	function checkreviewform(){
+
+		i_content= $("#i_content").val();
+		//alert(i_content);
+		i_nickname =$("#i_nickname").val();
+		//alert(i_nickname);
+		if (i_content==""){
+			alert(user_review_content_msg);
+			$("#i_content").focus();
+			return false;
+		}
+		if (i_nickname==""){
+			alert(user_review_name_msg);
+			$("#i_nickname").focus();
+			return false;
+		}
+		//return false;
+	}
+	$("#i_content").keyup(function() {
+	     var l_pros = $(this).val().length;
+    		var chars = ((3000-l_pros))<=0 ? 0 : 3000-l_pros;
+    		$("#i_content_characerts_length").html(chars);
+	});
+</script>
+{/literal}         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+<!--            <div class="writeReviewBox m_box p10"> 
+               <h3 class="fb f14 lh150"><strong class="fb">{$lang.Submit_inquiries_for}</strong><a href="{$goods.url_title}" class="color_blue">{$goods.goods_title}</a></h3>
+                
+                 <div class="writeReviewForm pt20">
+                    <a href="{$goods.url_title}" class="review_proImg m_box fl"><img src="{$goods.goods_grid}" width="150" height="150"/></a>
+
+                    <p>{$lang.Submit_an_inquiry_desc1}<a  rel="nofollow" "http://support.{$shop_name}" target="_blank"  class="color_blue">{$lang.Contact_Customer_Service}</a></p>
+                    
+                    <h4 class="pt20 fb f14">{$lang.Submit_an_inquiry}</h4>
+                    <p>{$lang.Inquiries_for} {$goods.goods_id}</p>
+                   
+                    <form method="post" onSubmit="return checkInquiriesform()" action="/m-review-a-save_inquiry-goods_id-{$goods.goods_id}.htm"  class="cmxform" >
+                        <ul class="mt20">
+                            <li class="clearfix">
+                                <label class="fl wr_fomrL fb">{$lang.Consultation_Content}:</label>
+                                <div class="fl wr_fomrR">
+                                    <textarea id="i_content" name="i_content" cols="40" rows="5" class="inputStyle required"></textarea>
+                                </div>
+                            </li>
+                             
+                            <li class="clearfix">
+                                <label class="fl wr_fomrL fb">{$lang.Your_name}:</label>
+                                <div class="fl wr_fomrR">
+                                    <input type="text" value="{$nickname}" id="i_nickname" name="i_nickname" class="inputStyle">
+                                </div>
+                           </li> 
+                           
+                           
+                           <li class="clearfix pt10">
+                                <label class="fl wr_fomrL fb"></label>
+                                <div class="fl wr_fomrR">
+                                   <input type="submit" value="" class="wr_subMit wr_subMit_inquiries"/>
+                                </div>
+                            </li>
+                           
+                        </ul>
+                    </form>
+					{literal}
+                    <script type="text/javascript">
+                        function checkInquiriesform(){
+                            i_content= $("#i_content").val();
+       
+                            i_nickname =$("#i_nickname").val();
+
+                            if (i_content==""){
+                                alert(review_func_checkreviewform_0);
+                                $("#i_content").focus();
+                                return false;
+                            }
+                            if (i_nickname==""){
+                                alert(review_func_checkreviewform_1);
+                                $("#i_nickname").focus();
+                                return false;
+                            }
+
+                        }
+                    </script>
+					{/literal}
+                </div>
+             </div>-->
+           
+
+{/if}
+{if $act == 'view_inquiry'}
+
+		<div class="reviewsMain fl">
+  	
+            <div class="review_pro">
+                <a href="{$goods.url_title}" class="review_proImg m_box fl"><img src="{$goods.goods_grid}" width="150" height="150"/></a>
+                <p class="review_pro_title fb"><strong class="fb">{$lang.review_des_25}</strong><a href="{$goods.url_title}">{$goods.goods_title}</a></p>
+                <p class="p_price review_pro_price"><span class="bizhong fb red">{$lang.cur_list.0.keyd}</span> <span orgp="{$goods.shop_price}" class="my_shop_price fb red">{$goods.shop_price}</span></p>
+                {if $goods.goods_number}<p class="js_addCart_warp" id="add_cart_msg{$goods.goods_id}"><a attrchage="{$attrkey}" num="1" gid="{$goods.goods_id}" class="js_add_cart_button add_cart_button" id="new_addcart" href="javascript:void(0)">{$lang.add_to_cart}</a></p>{/if}
+            </div>
+            
+            <div class="goodsBox review_goodsBox mt10 m_box">
+				<h3 class="pl5 pr5 fb f16">
+					<span class="cv1">{$lang.Inquiries_1}</span>
+				</h3>
+				<div class="goodsShow clearfix">
+                	<p class="orang">{$lang.review_des_26} </p>
+				    <p class="submitInqiriesBtnBox"><a class="fb" href="/{$cur_lang_url}m-review-a-write_inquiry-goods_id-{$goods.goods_id}.htm">{$lang.review_des_16}</a></p>	
+				</div>
+			</div>
+            
+            <p class="fb mt10 f14">{$lang.Inquiries_for} {$goods.goods_title}</p>
+			{if $inquiry.inquiry_list}	 
+            <div class="m_box reviw_inquiriesList mt10 p10">
+
+				<div class="pageBox  mb10">
+				  <div class="pages">{$pagestr}</div>
+				</div>
+                
+                <ul class="InquiriesList mt10">
+					{foreach key=key from=$inquiry.inquiry_list item=item name=item}
+                    <li>
+                        <p class="byWho">{$lang.by} <strong>{$item.nickname}</strong>{$item.adddate}</p>
+                        <p class="inquiries_content p10"><strong>{$lang.inquiry}: </strong>{$item.i_content}</p>
+                        <div class="inquiries_reply_info">
+                            <p class="inquiries_reply pb15">
+                                <strong>{$lang.reply}:</strong> {$lang.dear_customer} 
+                            </p>
+                            <p class="pb15">{$item.reply} </p>
+                        </div>
+                    </li>
+					{/foreach}
+                </ul>
+
+				<div class="pageBox mb10">
+					<div class="pages">{$pagestr}</div>
+				</div>	
+             </div> 
+			 {/if}
+             <p class="submitInqiriesBtnBox mt10"><a class="fb" href="/{$cur_lang_url}m-review-a-write_inquiry-goods_id-{$goods.goods_id}.htm">{$lang.review_des_16}</a></p>	
+             
+            <p class="goods_contact mt10 pb10 cl">{$lang.review_des_27}</p>
+
+		
+		
+		</div>
+		 <div class="reviewsRight fr">
+        	<div class="l_box">
+				<h3 class="l_title">{$lang.review_des_20}</h3>
+				<ul class="othersLike">
+				{foreach from=$same_cat_goods item=list name=shop}
+					<li>
+						<p class="p_mg pr"><a href="{$list.url_title}"><img width="150" height="150" class="js_lazyLoad" alt="{$list.goods_title}" src="{$list.goods_grid}" style="display: inline;"></a></p>
+                        <p class="p_name"><a href="{$list.url_title}">{$list.goods_title}</a></p>
+						{if $goods.is_free_shipping}<p class="p_free {$cur_lang}_p_free">{$lang.Free_Shipping}</p>{/if}
+                        <p class="p_price  fb red"><span class="bizhong fl">{$lang.cur_list.0.keyd}</span> <span orgp="{$list.shop_price}" class="my_shop_price fl pl5">{$list.shop_price}</span>
+						{if $list.goods_number}	<i gid="{$list.goods_id}" id="add_cart_msg{$list.goods_id}" class="fl addToCarTag js_new_addcart">{$lang.add_to_car}</i>{/if}</p>
+				{/foreach}
+				</ul>
+			</div>
+        </div>
+{/if}
+		
+	</div>
+	<div id="footer">
+	{include file="foothelp.htm"}
+	{include file="foot.htm"}
+	</div>
+	{if $cur_lang eq $default_lang}
+	<script src="{$imgcache_url}minjs/jquery.validate.min.js"></script>
+	{else}
+	<script src="{$imgcache_url}minjs/{$cur_lang}-jquery.validate.min.js"></script>
+	{/if}	
+	<script src="{$imgcache_url}minjs/review_submit.min.js"></script>
+    <script src="{$imgcache_url}minjs/goods.min.js"></script>
+    <script src="{$imgcache_url}minjs/reviews.min.js"></script>
+	{if $act == 'view_review' ||  $act == 'view_inquiry'}
+	{literal}
+	<script type="text/javascript">
+		$(".js_new_addcart").click(function(){
+			GLOBAL.CartCheckout.addcart(this);
+		})
+	</script>
+	{/literal}
+	{/if}
+	{include file="statistics_js.htm"}
+	{literal}
+	<script type="text/javascript">
+			var popIndex;
+			$(".js_ptoTagBox").click(function(){
+                var url = $(this).attr('href');
+                popIndex = popUpbox(url,'700px','500px');
+                return false;
+            });
+
+	        function popUpbox(url,width,height){
+	            return $.layer({
+	                type : 2,
+	                title : ['',false],
+	                iframe : {src : url},
+	                area : [width , height],
+	                offset : ['50px', ''],
+	                close : function(index){
+	                    layer.close(index);
+	                }
+	            });
+	        }
+	
+			function set_review_pics(data){
+				if(!data){
+					alert("An Error Was Encountered.");
+					return;
+				}
+				$("#uploadmsg").text("Successed!");
+				$("#pics").val(data);
+				layer.close(popIndex);
+			}
+	</script>	
+	{/literal}	
+</body>
+</html>

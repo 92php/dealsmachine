@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+</head>
+<body>
+{if $act eq 'point_stat'}
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->>积分统计报表</td>
+          <td width="44%" align="right"><span class="navright"><a href="?act=add">会员添加</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <form action="?" name="thisform" method="get"><tr>
+    <th>
+
+    <img src="/temp/skin3/images/admin/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    时间段： 从 <input name="start_date" value="{$start_date}" style="width:130px;" ondblclick="return showCalendar(this, '%Y-%m-%d %H:%M:%S', false, false, this);"/>&nbsp;&nbsp;到 &nbsp;&nbsp; <input name="end_date" value="{$end_date}" style="width:130px;" ondblclick="return showCalendar(this, '%Y-%m-%d %H:%M:%S', false, false, this);"/>
+    &nbsp;&nbsp;&nbsp; 
+     <select name=""><option value="">所有状态</option>{html_options options=$user_type selected=$smarty.get.user_type}</select>
+     &nbsp;&nbsp;    &nbsp;  关键字 &nbsp;<input type="text" id="keyword" name="keyword"  value="{$smarty.get.keyword}"/> <input type="submit" value=" 搜索 " />
+</td>
+  </tr></form>
+</table>
+
+<form method="POST" action="?act=batch_remove" name="listForm">
+<div id="list">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="8%">{$sort_user_id}
+    </th>
+    <th width="11%">姓名</th>
+    <th width="8%"><a href="users.php?sort_by=email&sort_order={$filter.sort_order_email}{$title_url}"> 邮件地址</a>{$sort_email}</th>
+    <th width="8%" nowrap="nowrap">新增积分</th>
+    <th width="13%"><strong>使用积分</strong></th>
+    <th width="6%"><a href="users.php?sort_by=visit_count&sort_order={$filter.sort_order_visit_count}{$title_url}"><strong>帐户积分总额</strong></a>{$sort_avaid_point}</th>
+
+
+    <th width="8%"><a href="users.php?sort_by=reg_time&sort_order={$filter.sort_order_reg_time}{$title_url}">注册日期</a>{$sort_reg_time}</th>
+    <th width="10%">操作</th>
+  <tr>
+  {foreach from=$user_list item=user name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+    <td>
+    {$user.user_id}</td>
+    <td>{$user.firstname} {$user.lastname}</td>
+    <td>{$user.email}</td>
+
+    <td>{$user.add_point}</td>
+    <td>{$user.used_point}</td>
+    <td>{$user.avaid_point}</td>
+    <td style="text-align: center; ">{$user.reg_time}<!--({$user.order_amount|default:'0.00'})--></td>
+    <td align="center">
+      <a href="users.php?act=ebpoint&id={$user.user_id}{$edit_url}" title="查看积分明细">查看积分明细</a></td>
+  </tr>
+  {foreachelse}
+  <tr><td colspan="10" align="center" class="no-records">{if $is_search}暂无记录{/if}</td></tr>
+  {/foreach}
+  <tr>
+      <td colspan="3"><input type="hidden" name="act" value="batch_remove" /><input type="hidden" id="selAction"/></td>
+      <td align="right" nowrap="true" colspan="7">
+     	<div id="pager">{$pagestr}</div></td>
+  </tr>
+</table>
+</div>
+</form>
+{else}
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 会员积分明细</td>
+          <td width="44%" align="right"><span class="navright"><a href="?">会员列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<div class="list">
+ <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+    <tr>
+       <th width="16%" height="29" background="/temp/skin3/images1/support_Bg.jpg" bgcolor="#f7f7f7" >日期</th>
+      <th width="11%" background="/temp/skin3/images1/support_Bg.jpg" bgcolor="#f7f7f7" >收入</th>
+       <th width="11%" background="/temp/skin3/images1/support_Bg.jpg" bgcolor="#f7f7f7" >开销</th>
+       <th width="12%" background="/temp/skin3/images1/support_Bg.jpg" bgcolor="#f7f7f7" >资产</th>
+       <th width="50%" background="/temp/skin3/images1/support_Bg.jpg" bgcolor="#f7f7f7" >备注</th></tr>
+    <!--{foreach from=$points_record item=r}-->
+    <tr><td height="35" bgcolor="#FFFFFF" style="border-bottom:1px #CCCCCC dashed;">{$r.adddate}</td>
+    <td bgcolor="#FFFFFF" style="border-bottom:1px #CCCCCC dashed;">{$r.income}</td>
+    <td bgcolor="#FFFFFF" style="border-bottom:1px #CCCCCC dashed;">{$r.outgo}</td>
+    <td bgcolor="#FFFFFF" style="border-bottom:1px #CCCCCC dashed;">{$r.balance}</td>
+    <td bgcolor="#FFFFFF" style="border-bottom:1px #CCCCCC dashed;">{$r.note}</td>
+    </tr>
+	<!--{/foreach}-->
+    <tr>
+    <td colspan="5" align="right">{$pagestr}</td>
+    </tr>
+  </table>
+  
+</div>
+{/if}
+{include file="copyright.htm"}

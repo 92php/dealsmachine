@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php?lang="></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->>affiliate 链接列表</td>
+          <td width="44%" align="right"><span class="navright"></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <form name="timetnterval" style="margin:0px" method="get" class="thisfrm">
+  <tr>
+    <td><table width="100%" border="0" cellpadding="3" cellspacing="0">
+      <tr>
+          <td width="382" align="right" bgcolor="#FFFFFF">独立IP访问链接时间</td>
+          <td width="585" bgcolor="#FFFFFF">从 <input name="start_date2" value="{$start_date2}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />&nbsp;&nbsp;到 &nbsp; <input name="end_date2" value="{$smarty.get.end_date2}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" /> </td>
+        </tr>
+      <tr>
+          <td width="382" align="right" bgcolor="#FFFFFF">链接添加时间</td>
+          <td width="585" bgcolor="#FFFFFF">从 <input name="start_date" value="{$start_date}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />&nbsp;&nbsp;到 &nbsp; <input name="end_date" value="{$smarty.get.end_date}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" /> </td>
+        </tr>
+      	<tr>
+          <td width="382" align="right" bgcolor="#FFFFFF">链接ID</td>
+          <td width="585" bgcolor="#FFFFFF"><input name="linkid" value="{$smarty.get.linkid}" style="width:80px;"  />&nbsp;&nbsp; </td>
+        </tr>
+		<tr>
+			<td width="382" align="right" bgcolor="#FFFFFF">FB User ID:</td>
+			<td width="585" bgcolor="#FFFFFF"><input type="text" name="fb_user_id" value="{$smarty.get.fb_user_id}"> </td>
+		</tr>
+		<tr>
+			<td width="382" align="right" bgcolor="#FFFFFF">FB Email:</td>
+			<td width="585" bgcolor="#FFFFFF"><input type="text" name="fb_email" value="{$smarty.get.fb_email}"> </td>
+		</tr>
+		<tr>
+			<td width="382" align="right" bgcolor="#FFFFFF">产品SKU:</td>
+			<td width="585" bgcolor="#FFFFFF"><input type="text" name="goods_sn" value="{$smarty.get.goods_sn}"> </td>
+		</tr>		        
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">输入用户：</td>
+          <td bgcolor="#FFFFFF"><input name="email" value="{$smarty.get.email}" />
+            </td>
+        </tr>
+    
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">&nbsp; </td>
+          <td bgcolor="#FFFFFF"><label><input type="checkbox" name="fb_share" value="1" {if $smarty.get.fb_share}checked="checked"{/if}>FB分享</label>&nbsp;<input type="submit"  value="开始查询" class="button" /></td>
+        </tr>
+      </table></td>
+  </tr>
+ 
+  </form>
+</table>
+
+
+
+
+
+<form method="POST" action="" name="listForm">
+  <div class="list-div" id="listDiv">
+
+  <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+     <tr>
+     
+      <th width="5%" height="21"><a href="?sort_by=id&sort_order={$filter.sort_order_id}{$search_url}">link ID</a>{$sort_id}</th>
+      <th width="6%"><a href="?sort_by=adddate&sort_order={$filter.sort_order_adddate}{$search_url}">添加时间</a>{$sort_adddate}</th>
+      <th width="4%" nowrap="nowrap">链接图片</th>
+      <th width="12%"><a href="?sort_by=link_name&sort_order={$filter.sort_order_link_name}{$search_url}">link name</a>{$sort_link_name}</th>
+      <th width="11%"><a href="?sort_by=link_text&sort_order={$filter.sort_order_link_text}{$search_url}">link text</a>{$sort_link_text}</th>
+      <th width="10%">Affiliates link</th>
+      <th width="9%"><a href="?sort_by=email&sort_order={$filter.sort_order_email}{$search_url}">所属用户</a>{$sort_email}</th>
+      <th width="4%"><a href="?sort_by=visit_count&sort_order={$filter.sort_order_visit_count}{$search_url}">点击数</a>{$sort_visit_count}</th>
+      <th width="4%"><a href="?sort_by=DIP&sort_order={$filter.sort_order_DIP}{$search_url}">独立IP</a>{$sort_DIP}</th>
+      <th width="4%"><a href="?sort_by=reg_count&sort_order={$filter.sort_order_reg_count}{$search_url}">注册数</a>{$sort_reg_count}</th>
+      <th width="4%" nowrap="nowrap"><a href="?sort_by=order_count&sort_order={$filter.sort_order_order_count}{$search_url}">下单数</a>{$sort_order_count}</th>
+      <th width="4%" nowrap="nowrap">订单金额</th>  
+	  <th width="4%" nowrap="nowrap">未付款订单数</th>
+      <th width="4%" nowrap="nowrap">已付款订单数</th>
+      <th width="4%" nowrap="nowrap">未付款订单金额</th>
+      <th width="4%" nowrap="nowrap">已付款订单金额</th>	   
+	  {if $linkArr.0.fb_user_id}
+	  <th width="4%">FB User ID</th>
+	  <th width="4%">FB Email</th>
+	  <th width="4%">SKU</th>
+	  {/if}	      
+      </tr>     
+	  <tr bgcolor="#FDE8FF">
+      <td height="37" colspan="7" align="right">总计：</td>
+      <td height="37" align="right"> {$tj.visit_count}</td>
+      <td height="37" align="right"> {$tj.DIP}</td>
+      <td height="37" align="right">{$tj.reg_count}</td>
+      <td height="37" align="right">{$tj.order_count}</td>
+      <td height="37" align="right">{$tj.order_sum}</td>	  
+	  <td height="37" align="right">{$tj.nopay_order_count}</td>
+      <td height="37" align="right">{$tj.pay_order_count}</td>
+      <td height="37" align="right">{$tj.nopay_order_acount}</td>
+      <td height="37" align="right">{$tj.pay_order_acount}</td>	  
+      </tr>
+     
+     
+  {foreach from=$linkArr item=link name=val}
+<tr bgColor="{if $smarty.foreach.val.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.val.iteration is even}#f4f9fd{else}#e8f1fd{/if}'";>
+      <td align="center">{$link.id}</td>
+      <td align="center">{$link.adddate}</td>
+      <td><img src="{$link.img}" width="50" border="0"/></td>
+      <td align="right">{$link.link_name}</td>
+      <td align="right">{$link.link_text}</td>
+      <td align="center">{$link.link_url_jump}</td>
+      <td align="center"><a href="users.php?act=edit&id={$link.user_id}">{$link.email}</a></td>
+      <td align="center"><a href="affiliate_ips.php?linkid={$link.id}">{$link.visit_count}</a></td>
+      <td align="center">{$link.DIP}</td>
+      <td align="center">{$link.reg_count}</td>
+      <td align="center"><a href="affiliate_order.php?linkid={$link.id}&order_status=1">{$link.order_count}</a></td>
+	  <td align="center">{$link.order_amount}</td>
+	  <td align="center">{$link.nopay_order_count}</td>
+      <td align="center">{$link.pay_order_count}</td>
+      <td align="center">{$link.nopay_order_acount}</td>
+      <td align="center">{$link.pay_order_acount}</td>	  	
+	  {if $link.fb_user_id}
+		 <td align="center">{$link.fb_user_id}</td>
+		 <td align="center">{$link.fb_email}</td>
+		 <td align="center">{$link.goods_sn}</td>
+	  {/if}	  
+      </tr>
+  {foreachelse}
+    <tr><td colspan="11" align="center" class="no-records">暂无记录</td></tr>
+  {/foreach}
+  </table>
+  <table width="100%" cellspacing="0" id="page-table">
+  <tr>
+    <td width="8">&nbsp;</td>
+    <td width="964" align="right" nowrap="true">
+    {$pagestr}
+    </td>
+  </tr>
+  </table>
+</div>
+</form>
+{include file="copyright.htm"}

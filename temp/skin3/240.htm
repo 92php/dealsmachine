@@ -1,0 +1,397 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	{include file="top.htm"}
+    <link rel="stylesheet" href="{$imgcache_url}mincss/otherpage_min.css?2014051501" />
+</head>
+<body>
+	{include file="public_top.htm"}
+	
+	{if $act =='index'}
+	<div class="curPath mt10"><a href="/{$cur_lang_url}" title="{$shop_name} {$lang.home}" class="fl">{$lang.home}</a> <h1 class="fl"><a href="{$goods.url_title}">{$nav_title}</a> » WIN 500 DM points</h1></div>
+	
+	<div id="mainWarp" class="clearfix mt10">
+		<div class="point_top">
+        	<img src="{$imgcache_url}images/demoimg/top1.gif" alt="WIN 500 DM points"  usemap="#more" width="997" height="294"/>
+            <map name="more"><area shape="rect" coords="465,225,606,261" href="#more" alt="More deatails"></map>
+       </div>
+       
+       <div class="winnner">
+          <ul>
+            <li class="first"><strong class="month">{$month_str}</strong> <strong class="time">End on: {$daydeal_time_end}</strong><br/>
+            <strong class="who">Every review this month has a chance to win!</strong><br/><a href="javascript:void(0)" id="see_all_win"><strong>See all previous winners</strong></a></li>
+          </ul>
+          <div class="seeall seewin"><a href="m-promotion-t-1-active-240-a-all_list.html" id="see_all_win">Check out this month's</a>
+            <div class="clear"></div>
+          </div>
+        </div>
+
+		<div class="dm_ten" style="margin-top:20px;"><img src="{$imgcache_url}images/demoimg/ten.gif?1" border="0" alt="Top ten of the highest number of reviews as helpful up to now"></div>
+        {foreach key=key from=$review_list item=r}
+			<a name="review_helpful_div_{$r.rid}"></a>
+			<div class="dm_reviews" {if $key != 0}style="display:none"{/if}>
+			<div class="prol">Customer Reviews for <a href="{$r.url_title}">{$r.goods_title}</a></div>
+            <dl class="commentsList mb10">
+              <dd class="comments_box clearfix">
+                  <!--用户信息begin-->
+                  <div class="comments_userInfo fl">
+                      <p class="userImg"><img src="{$imgcache_url}images/demoimg/goldmedal.gif"/></p>
+                      <p class="userName pt10 pb10 fb">{$r.nickname}</p>
+                      <p class="userStatus"><span class="status_vb">verified Buyer</span></p>
+                      <p class="userTime">{$r.adddate}</p>
+                  </div>
+                  <!--用户信息end-->
+                  <!--用户评论信息begin-->
+                  <div class="comments_info fr">
+                      <p><span class="start_{$r.rate_overall}"><i>{$r.rate_overall} satrts</i></span><strong class="fb">{$r.subject}</strong></p>
+                      {if ($r.is_top==1 || $r.helpful_yes >0) && $key<=2}
+						<p><b style="color:#FF6600;">FEATURED REVIEW</b></p>
+                      {/if}
+					  {if $r.get_point gt 0}
+						<p class="dottedLine"><strong class="fb orang pr5">{$r.get_point} DM points</strong>gained for this post</p>
+					  {/if}
+                      <div class="comment_text clearfix p10">
+                          <!--评论正文部分begin-->
+                          <div class="comment_text_left fl">										
+                              <div class="pb10">
+                                  <strong>Pros:</strong>
+                                  <p>{$r.pros} </p>
+                              </div>
+                              
+								  <div class="pb10">
+									  <strong>Cons:</strong>
+									  <p>{$r.cons}</p>
+								  </div>
+								{if $r.other_thoughts != ''}
+								  <div class="pb10">
+									  <strong>Other Thoughts or Suggestions:</strong>
+									  <p>{$r.other_thoughts}</p>
+								  </div>
+								{/if}
+								{if $r.pic != ''}
+									<p class="rewpimg"><b>Photos related to this item:</b><br />
+										{foreach from=$r.pic item=pic}
+											<a target="_blank" href="/{$cur_lang_url}m-review_media-a-view_image-goods_id-{$r.goods_id}-mid-{$pic.id}.htm"> 
+												<img src="{$pic.thumb_paths}" width="80"  border="0" />
+											</a>
+										{/foreach} 
+									</p>
+								{/if}
+								{if $r.video != ''}
+								<p class="rewpimg"><b>Videos related to this item:</b><br />
+									{foreach from=$r.video item=video} 
+										<a target="_blank" href="/{$cur_lang_url}m-review_media-a-view_video-goods_id-{$r.goods_id}-mid-{$video.id}.htm">
+											<img src="http://www.{$shop_name}/m-review-a-show_video_pic-code-{$video.paths}.htm"  width="80" height="80" border="0" />
+										</a> 
+									{/foreach}
+								{/if}
+                          </div>
+                          <!--评论正文部分end-->
+                          <!--评论商品等级begin-->
+                          <dl class="comment_stars fr tr">
+                              <dt>Price:</dt>
+                              <dd><span class="start_{$r.rate_price}"><i>{$r.rate_price} satrts</i></span></dd>
+                              <dt>Ease of Use:</dt>
+                              <dd><span class="start_{$r.rate_easyuse}"><i>{$r.rate_easyuse} satrts</i></span></dd>
+                              <dt>Build Quality:</dt>
+                              <dd><span class="start_{$r.rate_quality}"><i>{$r.rate_quality} satrts</i></span></dd>
+                              <dt>Usefulness:</dt>
+                              <dd><span class="start_{$r.rate_usefulness}"><i>{$r.rate_usefulness} satrts</i></span></dd>
+                              <dt>Overall Rating:</dt>
+                              <dd><span class="start_{$r.rate_overall}"><i>{$r.rate_overall} satrts</i></span></dd>
+                          </dl>
+                          <!--评论商品等级end-->
+                          <!--评论回复区begin-->
+						 
+							  <div class="commentReplyBox">
+									{if $r.reply != ''}
+										{foreach from=$r.reply item=reply}
+											<p> 
+												<b style="color:#0033CC">{$reply.re_nickname}</b> Reply: <br />
+												{$reply.re_content} 
+											</p>
+										{/foreach}
+									{/if}
+								  <p>
+									  <a href="javascript:void(0)" class="replyBtn td_reply fr" rid="{$r.rid}">Reply</a>
+									  <strong class="fl">Was this review helpful? </strong>
+									  <a href="javascript:void(0)" class="yesBtn fl" onClick="review_helpful_num({$r.rid},0);">Yes<span id="review_helpful_yes_{$r.rid}">({$r.helpful_yes})</span></a>
+									  <a href="javascript:void(0)" class="noBtn fl" onClick="review_helpful_num({$r.rid},1);">No<span id="review_helpful_no_{$r.rid}">({$r.helpful_no})</span></a>
+									  <a  fbdesc="{$r.pros|escape:'html'}" fbname="{$r.goods_title|escape:'html'}" fbpicture="{$r.goods_thumb}" fblink2="http://www.dealsmachine.com/m-review-a-view_review-goods_id-{$r.goods_id}.htm" fblink="{$r.url_title}"  fbuser="{$r.nickname|escape:'html'}"  href="javascript:void(0)" title="Share to facebook" class="commentFaceBook fb fl fbComment">Share to facebook</a>
+									  <input type="hidden" id="hidden-goodsUrl" value="{$danqian_url}" />
+								  </p>
+								  
+							  </div><!--评论回复区end-->
+
+                      </div><!--end .commentText-->
+                  </div>
+                  <!--用户评论信息end-->
+              </dd>
+
+                            
+			</dl>
+        </div>
+    {/foreach}
+        <div class="seeall"><a href="javascript:void(0)" id="see_all_reviews">See all reviews</a>
+            <div class="clear"></div>
+         </div>
+          <a name="more"></a>
+          <div><img src="{$imgcache_url}images/demoimg/how.gif" border="0" alt="How to enter our competition"></div>
+          
+          <div class="rule">
+            <ul>
+              <li>
+                <h3>1. Activity time:</h3>
+                <p>The competition takes place twice each month. The dates are inclusive and all times shown are Eastern Standard Time EST (GMT -5):<br>
+                   A) 12:01AM on the 1st - 15th day of the month (midnight)<br>
+                   B) 12:01AM on the 16th - final day of the month (midnight)</p>
+              </li>
+              <li>
+                <h3>2. Eligibility:</h3>
+                <p>The product reviewed must have been purchased on www.dealsmachine.com. The review should be written during the competition period to be eligible. Reviews cannot be carried over.</p>
+              </li>
+              <li>
+                <h3>3. Winner</h3>
+                <p>The fortnightly winner will be the customer who has written the most helpful review (based on the highest number of yes votes). We will notify the lucky winner via email within 3 business days of the fortnightly competition ending.</p>
+              </li>
+              <li>
+                <h3>4. Other way to gain DM points:</h3>
+                <p>Each day you can click “yes” and mark a review as being helpful and gain 1 DM point, up to a maximum of 10 points each day.</p>
+              </li>
+              <li>
+                <h3>5. Conditions of entry:</h3>
+                <p>Customers who use multiple accounts to increase the yes vote for any review is strictly prohibited; they will be disqualified immediately and the review cancelled. We reserve the right to change the rules of the competition at any time and without any prior notice. All decisions from the competition judges will be final.</p>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="dm_ten1"><img src="{$imgcache_url}images/demoimg/you.gif?1" border="0" alt="You may also like"></div>
+          
+          <div class="topsale">
+            <div class="newprductw15">
+              <ul>
+                  {foreach from=$tuijian_goods item=goods key=key}          
+					<li>
+                      <p style="text-align:center">
+						<a title="{$goods.goods_name}" href="{$goods.url_title}" {if $cur_lang neq $default_lang}rel="nofollow"{/if}>
+							<img width="150" height="150" alt="{$goods.goods_name}" src="{$goods.goods_grid}">
+						</a>
+					  </p>
+                      <p class="nntxt">
+						<a title="{$goods.goods_name}" href="{$goods.url_title}" {if $cur_lang neq $default_lang}rel="nofollow"{/if}>{$goods.goods_name}</a>
+					  </p>
+                      <p class="p_price  fb red"><span class="bizhong fl">USD</span> <span class="my_shop_price fl pl5" orgp="{$goods.shop_price}">{$goods.shop_price}</span>
+					  <a href="{$goods.url_title}" {if $cur_lang neq $default_lang}rel="nofollow"{/if}><i class="fl addToCarTag js_new_addcart"  id="add_cart_msg{$goods.goods_id}" gid="{$goods.goods_id}">add to car</i></a></p>
+                    </li>
+                   {/foreach}
+               </ul>
+              <div class="clear"></div>
+            </div>
+          </div>
+ 
+ {elseif $act == 'all_list' || $act == 'top_list'}         
+          <div class="reviewlist">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+			    <td width="20" height="20" valign="middle"><img border="0" src="{$imgcache_url}ximages/back.gif"></td>
+			    <td class="back"><a href="/m-promotion-t-1-active-240.html">Back</a></td>
+			    <td align="right">
+			<form action="#" method="GET">
+				<input type="text" name="search_review" value="{$search_review}">
+				<input style="cursor:pointer;" type="submit" name="search_review_submit" value="Search">
+			</form>
+			</td>
+			  </tr>
+			</table>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size:11px; border-top:1px #CCCCCC solid; padding-bottom:0px; margin-top:10px;">
+			  <tr>
+			    <td height="20" colspan="4" align="left" valign="middle">
+			        <div class="page fr mt10">
+						<div class='page'>{$pagestr}</div>
+					</div></td>
+			    </tr>
+			</table>
+			
+			{foreach key=key from=$review_list item=r}
+			<div class="dm_reviews" {if $key != 0}style=""{/if}>
+			<div class="prol">Customer Reviews for <a href="{$r.url_title}">{$r.goods_title}</a></div>
+            <dl class="commentsList mb10">
+              <dd class="comments_box clearfix">
+                  <!--用户信息begin-->
+                  <div class="comments_userInfo fl">
+                      <p class="userImg"><img src="{$imgcache_url}images/demoimg/goldmedal.gif"/></p>
+                      <p class="userName pt10 pb10 fb">{$r.nickname}</p>
+                      <p class="userStatus"><span class="status_vb">verified Buyer</span></p>
+                      <p class="userTime">{$r.adddate}</p>
+                  </div>
+                  <!--用户信息end-->
+                  <!--用户评论信息begin-->
+                  <div class="comments_info fr">
+                      <p><span class="start_{$r.rate_overall}"><i>{$r.rate_overall} satrts</i></span><strong class="fb">{$r.subject}</strong></p>
+                      {if ($r.is_top==1 || $r.helpful_yes >0) && $key<=2}
+						<p><b style="color:#FF6600;">FEATURED REVIEW</b></p>
+                      {/if}
+					  {if $r.get_point gt 0}
+						<p class="dottedLine"><strong class="fb orang pr5">{$r.get_point} DM points</strong>gained for this post</p>
+					  {/if}
+                      <div class="comment_text clearfix p10">
+                          <!--评论正文部分begin-->
+                          <div class="comment_text_left fl">										
+                              <div class="pb10">
+                                  <strong>Pros:</strong>
+                                  <p>{$r.pros} </p>
+                              </div>
+                              
+								  <div class="pb10">
+									  <strong>Cons:</strong>
+									  <p>{$r.cons}</p>
+								  </div>
+								{if $r.other_thoughts != ''}
+								  <div class="pb10">
+									  <strong>Other Thoughts or Suggestions:</strong>
+									  <p>{$r.other_thoughts}</p>
+								  </div>
+								{/if}
+								{if $r.pic != ''}
+									<p class="rewpimg"><b>Photos related to this item:</b><br />
+										{foreach from=$r.pic item=pic}
+											<a target="_blank" href="/{$cur_lang_url}m-review_media-a-view_image-goods_id-{$r.goods_id}-mid-{$pic.id}.htm"> 
+												<img src="{$pic.thumb_paths}" width="80"  border="0" />
+											</a>
+										{/foreach} 
+									</p>
+								{/if}
+								{if $r.video != ''}
+								<p class="rewpimg"><b>Videos related to this item:</b><br />
+									{foreach from=$r.video item=video} 
+										<a target="_blank" href="/{$cur_lang_url}m-review_media-a-view_video-goods_id-{$r.goods_id}-mid-{$video.id}.htm">
+											<img src="http://www.{$shop_name}/m-review-a-show_video_pic-code-{$video.paths}.htm"  width="80" height="80" border="0" />
+										</a> 
+									{/foreach}
+								{/if}
+                          </div>
+                          <!--评论正文部分end-->
+                          <!--评论商品等级begin-->
+                          <dl class="comment_stars fr tr">
+                              <dt>Price:</dt>
+                              <dd><span class="start_{$r.rate_price}"><i>{$r.rate_price} satrts</i></span></dd>
+                              <dt>Ease of Use:</dt>
+                              <dd><span class="start_{$r.rate_easyuse}"><i>{$r.rate_easyuse} satrts</i></span></dd>
+                              <dt>Build Quality:</dt>
+                              <dd><span class="start_{$r.rate_quality}"><i>{$r.rate_quality} satrts</i></span></dd>
+                              <dt>Usefulness:</dt>
+                              <dd><span class="start_{$r.rate_usefulness}"><i>{$r.rate_usefulness} satrts</i></span></dd>
+                              <dt>Overall Rating:</dt>
+                              <dd><span class="start_{$r.rate_overall}"><i>{$r.rate_overall} satrts</i></span></dd>
+                          </dl>
+                          <!--评论商品等级end-->
+                          <!--评论回复区begin-->
+						 
+							  <div class="commentReplyBox">
+									{if $r.reply != ''}
+										{foreach from=$r.reply item=reply}
+											<p> 
+												<b style="color:#0033CC">{$reply.re_nickname}</b> Reply: <br />
+												{$reply.re_content} 
+											</p>
+										{/foreach}
+									{/if}
+								  <p>
+									  <a href="javascript:void(0)" class="replyBtn td_reply fr" rid="{$r.rid}">Reply</a>
+									  <strong class="fl">Was this review helpful? </strong>
+									  <a href="javascript:void(0)" class="yesBtn fl" onClick="review_helpful_num({$r.rid},0);">Yes<span id="review_helpful_yes_{$r.rid}">({$r.helpful_yes})</span></a>
+									  <a href="javascript:void(0)" class="noBtn fl" onClick="review_helpful_num({$r.rid},1);">No<span id="review_helpful_no_{$r.rid}">({$r.helpful_no})</span></a>
+									  <a  fbdesc="{$r.pros|escape:'html'}" fbname="{$r.goods_title|escape:'html'}" fbpicture="{$r.goods_thumb}" fblink2="http://www.dealsmachine.com/m-review-a-view_review-goods_id-{$r.goods_id}.htm" fblink="{$r.url_title}"  fbuser="{$r.nickname|escape:'html'}"  href="javascript:void(0)" title="Share to facebook" class="commentFaceBook fb fl fbComment">Share to facebook</a>
+									  <input type="hidden" id="hidden-goodsUrl" value="{$danqian_url}" />
+								  </p>
+								  
+							  </div><!--评论回复区end-->
+
+                      </div><!--end .commentText-->
+                  </div>
+                  <!--用户评论信息end-->
+              </dd>
+
+                            
+			</dl>
+        </div>
+        {/foreach}
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size:11px; border-top:1px #CCCCCC solid; padding-bottom:0px; margin-top:10px;">
+  <tr>
+    <td height="20" colspan="4" align="left" valign="middle">
+        <div class="page fr mt10">
+			<div class='page'>{$pagestr}</div>
+		</div></td>
+    </tr>
+</table>
+     </div><!--end .reviewlist-->
+{/if}
+
+     </div>
+
+</div><!--end #mainWarp-->
+
+    <script src="{$imgcache_url}minjs/reviews.min.js"></script>
+	<script type="text/javascript">
+		var win_str = '{$win_str}';
+		{literal}
+		$(document).ready(function(){
+			$("#see_all_reviews").click(function(){
+				$(".dm_reviews").show();
+				$("#see_all_reviews").hide();
+			});
+			
+			$("#see_all_win").click(function(){
+				var msg = win_str;
+				ymPrompt.win({message:msg,width:550,height:280,title:'Our lucky lottery winners'});
+			});
+			
+			GLOBAL.LoadJS("http://cloud4.faout.com/imagecache/ba/sysjs/facebook_review.js","shareToFaceBook");
+			
+			$(".yesBtn").hover(function(){
+				var msg = "Click it and you can get 1 point.<br/>Maximum 10 points everyday."
+				TipShow($(this), msg,31,0);
+			},function(){
+				$("body").find(".TipBOx").remove();	
+			});
+			/*yes 按钮信息提示函数*/
+			function TipShow(ele, msg, x, y, timer, callBack) {
+				var _timer = 1200;
+				var _x = 0;
+				var _y = 0;
+				if (typeof x == "number") {
+					_x = x
+				}
+				if (typeof y == "number") {
+					_y = y
+				}
+				if (typeof timer == "number") {
+					_timer = timer;
+				}
+				var TipBOx = $(".TipBOx");
+				var Left = ele.offset().left + parseInt(_y);
+				var Top = ele.offset().top + parseInt(_x);
+				var Css = {
+					left: Left,
+					top: Top,
+					display: "none"
+				};
+				TipBOx=$('<div class="TipBOx"> <span class="TipBOx_bot"></span> '+msg+'</div>');
+				$("body").append(TipBOx);
+				TipBOx.css(Css).stop().show();
+				if(typeof callBack =='function'){
+					callBack();	
+				}
+			}
+		});
+
+	</script>
+	{/literal}
+	<div id="footer">
+	{include file="foothelp.htm"}
+	{include file="foot.htm"}
+	</div>
+{include file="statistics_js.htm"}
+</body>
+</html>

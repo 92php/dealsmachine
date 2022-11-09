@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->>产品评论</td>
+          <td width="44%" align="right"><a href="review.php"> 产品评论列表</a></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+
+<form method="post" action="" name="listForm" onsubmit="return confirmSubmit(this)">
+<div id="list">
+<table width="99%" border="0" align="center" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="160" rowspan="4" align="left" valign="top"><a class="blue_link" target="_blank" href="{$goods.url_title}"><img src="{$goods.goods_grid}" width="150" height="150" style="border:1px #EBEBEB solid;"></a></td>
+    <td colspan="3" valign="top" style="font-size:14px;"><b>Customer Reviews for  <a href="{$goods.url_title}" target="_blank" class="blue_link">{$goods.goods_title}</a></b></td>
+  </tr>
+  <tr>
+    <td width="112" valign="middle">Average Rating:</td>
+    <td width="100" valign="middle">{if $review.avg_rate > 0}<img src="{$review.avg_rate_img}" alt="{$review.avg_rate} stars" border="0" />{/if} {$review.avg_rate}</td>
+    <td width="452" valign="middle">({$review.review_count} customer reviews)</td>
+    
+  </tr>
+  <tr><td colspan="2" align="left">SKU:<span style="color:#600">{$goods.goods_sn}</span></td></tr>
+  <tr>
+    <td colspan="3" valign="middle" style="font-size:16px; color:#CC0000"><b><span class="bizhong">USD</span> <span class="my_shop_price"  orgp="{$goods.shop_price}">{$goods.shop_price}</span> </b></td>
+  </tr>
+  <tr>
+    <td height="70" colspan="3" style="font-size:24px; color:red; font-weight:bold"  >
+    	{if $goods == ''}该产品已删除{/if}
+		{if $goods.is_delete == 1}该产品已删除{/if}
+        {if $goods.is_on_sale == 0}该产品已下架{/if}
+        {if $goods.is_along_sale == 1}该产品不单独销售{/if}
+    </td>
+  </tr>
+</table>
+{foreach key=key from=$review.review_list item=r name=r}
+<table width="99%" align="center" border="0" cellspacing="0" cellpadding="2" style="margin-top:2px; font-size:11px; border-bottom:1px #CCCCCC dashed;">
+  <tr>
+  	<td></td>
+  </tr>
+  <tr>
+    <td width="14%" rowspan="2" align="center" valign="top" ><br />
+      <img src="/temp/skin3/images/admin/62.gif" border="0" /><br /><br />
+<b>{$r.nickname}</b><br />
+<b>{$r.email}</b><br />
+<b>{$r.ips}</b><br />
+      通过审核的评论数<a href="review.php?column=u.user_id&keyword={$r.user_id}" class="blue_link">{$review.user_pass_review_count}/{$review.user_all_review_count}</a><br />
+	{$r.adddate}
+          <br />
+
+</td>
+    <td width="11%" height="30" align="left" valign="middle" style="border-left:1px #CCCCCC dashed;border-bottom:1px #CCCCCC dashed"><img src="/temp/skin3/images/stars/{$r.rate_overall}s.gif" border="0" /></td>
+    <td width="47%" style="border-bottom:1px #CCCCCC dashed" align="left"> <b>{$r.subject}</b></td>
+    <td width="28%" align="right" valign="middle" style="border-bottom:1px #CCCCCC dashed" >目前状态：{$r.status}<br/>
+      操作： {if $r.is_pass neq '1'}
+          <a class="blue"onClick="if(!confirm('通过审核，客人将收到相应的积分，确定通过？'))return false;" href="?act=pass_review&rid={$r.rid}&goods_id={$r.goods_id}">通过审核>></a>&nbsp;{/if}
+                                 {if $r.is_pass neq '2' }
+          <a class="blue" onClick="if(!confirm('设为不通过审核，前台将看不到该评论，你确定继续？'))return false;" href="?act=unpass_review&rid={$r.rid}">不通过审核>></a>
+        {/if}
+ {if $r.is_pass neq '3'}
+          <a class="blue" href="?act=disprocess&rid={$r.rid}&goods_id={$r.goods_id}">待处理>></a>&nbsp;{/if}        
+        </td>
+  </tr>
+  <tr>
+    <td colspan="3" align="left" valign="top" style="border-left:1px #CCCCCC dashed;"><table width="100%" border="0" cellspacing="0" cellpadding="5">
+            <tr>
+              <td width="83%" align="left" valign="top" class="rewp" style=" padding-bottom:10px;"><p><b>Pros:</b>　<br />
+                {$r.pros}</p>
+                <p><b>Cons:</b>　<br />
+                  {$r.cons}</p>
+                  {if $r.other_thoughts != ''}
+                <p><b>Other Thoughts or Suggestions:</b><br />{$r.other_thoughts}</p>
+                  {/if}
+                  {if $r.pic != ''}
+				    <p class="rewpimg"><b>Photos related to this item:</b><br />
+					<table cellspacing="0" cellpadding="10">
+						<tr>
+							{foreach from=$r.pic item=pic}
+							<td>
+							<a target="_blank" href="http://photo.dealsmachine.com/{$pic.paths}"> <img src="http://photo.dealsmachine.com/{$pic.paths}" width="80" height="80" border="1" /></a><br /><br />
+							<a href="?act=delete_media&type=img&id={$pic.id}" onclick="if(confirm('删除？'))return ture;else return false;">删除</a>
+							</td>
+							{/foreach} 
+						</tr>
+                    </table>
+                    </p>
+                  {/if}
+                   {if $r.video != ''}
+           	        <p class="rewpimg"><b>Videos related to this item:</b><br />
+                  {foreach from=$r.video item=video}      
+                  <a target="_blank" href="http://www.youtube.com/watch?v={$video.paths}"><img src="http://img.youtube.com/vi/{$video.paths}/default.jpg"  width="80" height="80" border="0" /></a><br />
+				  <a href="?act=delete_media&type=video&id={$video.id}" onclick="if(confirm('删除？'))return ture;else return false;">删除</a>
+                  {/foreach}
+                  {/if}
+            </p></td>
+               
+                        </p>
+                      
+              <td width="17%" align="right" valign="top" style="border-left:0px #CCCCCC dashed;">Price:<br />
+                <img src="/temp/skin3/images/stars/{$r.rate_price}s.gif" border="0" /><br />
+                Ease of Use:<br />
+                <img src="/temp/skin3/images/stars/{$r.rate_easyuse}s.gif" border="0" /><br />
+                Build Quality:<br />
+                <img src="/temp/skin3/images/stars/{$r.rate_quality}s.gif" border="0" /><br />
+                Usefulness:<br />
+                <img src="/temp/skin3/images/stars/{$r.rate_usefulness}s.gif" border="0" /><br />
+                Overall Rating:<br />
+                <img src="/temp/skin3/images/stars/{$r.rate_overall}s.gif" border="0" /><br /></td>
+            </tr>
+                        {if $r.reply != ''}
+            <tr>
+              <td colspan="2" align="left" valign="top" bgcolor="#F9F9F9" class="rewp" style=" padding:10px 5px 10px; color:#666666">{foreach from=$r.reply item=reply} 
+                <p> <b style="color:#0033CC">{$reply.re_nickname}</b> Reply: date:{$reply.adddate}&nbsp;IP:{$reply.ips}<span style="float:right">目前状态:{if $reply.is_pass eq 0 }<span style="color:#F93">未审核</span>{/if}{if $reply.is_pass eq 1}<span style="color:#096">显示</span>{/if}{if $reply.is_pass eq 2}<span style="color:red">不显示</span>{/if},操作：<a class="blue" onClick="if(!confirm('该删除操作无法恢复，你确定继续？'))return false;" href="?act=del_reply&yid={$reply.yid}">删除</a>&nbsp;
+           
+                {if $reply.is_pass neq 2}
+                <a class="blue" href="?act=hide_reply&yid={$reply.yid}">不显示</a>&nbsp;
+               {/if}
+                 {if $reply.is_pass == 0 or $reply.is_pass == 2}
+                <a class="blue" href="?act=show_reply&yid={$reply.yid}">显示</a>
+                  {/if}
+                </span><br />
+                  {$reply.re_content} </p>
+               {/foreach}</td>
+            </tr>
+            {/if}
+            
+            <tr>
+              <td colspan="2"  align="center" valign="top" class="rewp" style=" color:#666666">
+              	<input type="button" onClick="history.back();" value="  后 退  "/>
+              	<input type="button" onclick="window.location.href='review.php?act=edit&rid={$r.rid}&goods_id={$r.goods_id}';" value="  编 辑  "/>
+              	</td>
+            </tr>
+          </table></td>
+  </tr>
+</table>
+{/foreach}
+
+</div>
+</form>
+
+
+{include file="copyright.htm"}

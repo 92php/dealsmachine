@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+{include file="top.htm"}
+<link rel="stylesheet" href="{$imgcache_url}mincss/index_min.css?2013121801" />
+
+</head>
+
+<body>
+	<header id="header" class="clearfix xbanx_border">
+		<h2 class="logo fl"><a href="/{$cur_lang_url}" title="Best Deals Online"><img src="{$imgcache_url}ximages/ganenlogo.jpg" alt="Best Deals Online"></a></h2>
+		<script type="text/javascript" src="https://seal.verisign.com/getseal?host_name=www.dealsmachine.com&amp;size=XS&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script>
+	</header>
+	
+    <div id="xbanx_Wrap" class="clearfix ">
+		<section class="pageTitle linear_gray">
+			<h1>{$lang.Shopping_Cart}</h1>
+		</section><!--end .pageTitle-->
+		
+<!--		<p class="mt10 mb10 cardList"><img src="{$imgcache_url}images/domeimg/paypic.gif" width="975" height="52"/></p>
+-->		
+		<section class="messageBox tc mt30 mb50">
+        {if $payment.payment_type_code eq 'boleto'}
+			<h2>Thank you for shopping with us!</h2>
+            <h3>Your order <strong>{$order_sn}</strong>  has been received!</h3>
+       <p> <strong style="font-weight:bold;">Now you should:</strong></p>
+       <p style="height:48px; line-height:48px;"> <strong style="font-size:14px; font-weight: bold;">1.</strong>Click the button, and <a href="{$print_boleto_url}"  target="_blank"> <img src="{$imgcache_url}images/print.jpg" width="274" height="48" style="vertical-align:middle"></a></p>
+       <p> <strong style="font-size:14px; font-weight: bold;">2.</strong> Pay it in any bank, lottery shop or in your Internet Banking, you have 1-3 days to complete your payment.</p>
+       <p><strong style="font-weight:bold;">Notice:</strong></p>
+       <p>Your order status will change to “processing” within 1-2 working days after we verify your payment. Some orders may require additional time to verify. Please bear with us and be patient.</p>
+
+        <a href="http://user.dealsmachine.com/m-users.htm" style="color:#cc3333;">>>  Return to My Account </a>
+
+			<!--<div class="billOkMsg bd1 p10 mt20 f16">
+				<div></div>
+				<p class="lnkBoleto"><a href="{$print_boleto_url}" class="btn" style="	display:block;
+	line-height:63px;
+	background:url({$imgcache_url}ximages/bg-btn.png) repeat-x left top;
+	font-size:30px;
+	color:#fff;
+	text-decoration:none;
+	text-align:center;" target="_blank">PRINT THE BOLETO BANCARIO</a></p>
+                <h3>You can pay it in any bank, lottery shop or in your Internet Banking</h3>-->
+			</div>
+            {elseif $payment.status == 'CO'}
+				<h2>Thanks for buying from EBANX Demo Store</h2>
+				<h3 class="auth">Your payment was authorized</h3>
+			{else}
+
+					<h2>Your payment was not authorized</h2>
+					<h3 class="neg">Verify your account info</h3>
+                    
+            {/if}
+			
+		</section>
+    </div><!--end #mainWarp-->
+
+	<footer id="footer">{include file="foot.htm"}</footer><!--end #footer-->
+
+</body>
+</html>

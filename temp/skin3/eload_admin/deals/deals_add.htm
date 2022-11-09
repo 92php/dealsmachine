@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='{$imgcache_url}eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$jscache_url}sysjs/jquery-1.8.0.min.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="{$imgcache_url}eload_admin/js/admin_add.js"></script>
+<script type="text/javascript" src="/sysjs/calendar.php?lang="></script>
+
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> deals {$tag_msg}</td>
+          <td width="44%" align="right"><span class="navright"><a href="?">deals列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<div class="main-div">
+<form method="post" action="?act=save_deals" name="theForm"  onSubmit="return Validator.Validate(this,3)">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th colspan="2">deals {$tag_msg}</th>
+  </tr>
+
+
+  
+  <tr>
+    <td align="right" class="label">标题:</td>
+    <td><input name="title" type="text" dataType="Require" msg="请填标题！"  value="{$deals.title}" size="100"  /></td>
+  </tr>
+  <tr>
+    <td align="right" class="label">品牌:</td>
+    <td><input name="brand" type="text" value="{$deals.brand}" size="40" maxlength="60" /></td>
+  </tr> 
+   <tr>
+    <td align="right" class="label">产品编码:</td>
+    <td><input name="goods_sn" type="text" value="{$deals.goods_sn}" size="40" maxlength="60" />*不能为空</td>
+  </tr> 
+    <tr>
+    <td align="right" class="label">原价:</td>
+    <td><input name="cost_price" type="text" value="{$deals.cost_price}" size="40" maxlength="60" /></td>
+  </tr> 
+  <tr>
+    <td align="right" class="label">现价:</td>
+    <td><input name="current_price" type="text" value="{$deals.current_price}" size="40" maxlength="60" /></td>
+  </tr> 
+  <tr>
+    <td align="right" class="label">图片:</td>
+    <td><input name="img_url" type="text" value="{$deals.img_url}" size="40" /></td>
+  </tr>   <tr>
+    <td align="right" class="label">图片链接到:</td>
+    <td><input name="img_link_to" type="text" value="{$deals.img_link_to}" size="40" /></td>
+  </tr>
+     
+  <tr>
+    <td align="right" bgcolor="#FFFFFF"  class="label">赞:</td>
+    <td align="left" bgcolor="#FFFFFF"><input name="ups" dataType="Require" msg="请填写"  type="text" value="{$deals.ups}"/></td>
+  </tr>
+  <tr>
+                  <td width="33%" align="right" bgcolor="#FFFFFF"  class="label">过期时间:</td>
+                  <td width="67%" align="left" bgcolor="#FFFFFF"><input name="expried_time"  dataType="Require" msg="请填写！" value="{$deals.expried_time}" style="width:130px;" onclick="return showCalendar(this, '%Y-%m-%d %H:%M:%S', false, false, this);" /></td>
+      </tr>
+      <tr>
+                  <td width="33%" align="right" bgcolor="#FFFFFF"  class="label">描述:</td>
+                  <td width="67%" align="left" bgcolor="#FFFFFF"><textarea name="deals_desc"  dataType="Require" msg="请填写！" cols="40" rows="5">{$deals.deals_desc}</textarea>
+                  </td>
+                </tr>
+
+  <tr>
+    <td colspan="2" align="center">
+      <input type="submit" value="  保 存  " class="button" />
+            <input type="button" onclick="history.back()" value="  后 退  " class="button" />
+      <input type="hidden" name="id" value="{$deals.deals_id}" />    </td>
+  </tr>
+  
+  
+ </table>
+ <table> 
+ {if $deals.deals_id}
+ <tr>
+
+
+  {foreach from=$items item=item}
+  	 <td><a href='?act=item_add&item_id={$item.item_id}&deals_id={$item.deals_id}'><img width="100" src="{$item.img_url}" /></a><br/><div><a href="?act=del_item&item_id={$item.item_id}">del</a></div></td>&nbsp;
+  {/foreach}
+ 
+   <td> <a href='?act=item_add&deals_id={$deals.deals_id}'>增加item</a></td>
+</tr>
+{/if} 
+</table>
+
+</form>
+</div>
+{include file="./copyright.htm"}

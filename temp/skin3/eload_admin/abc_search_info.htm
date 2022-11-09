@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>abc搜索关键字信息设置</title>
+    <link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css" />
+    <link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/tree.css" />
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft">
+                            <a href="index.php?act=main">管理中心</a>
+                            &gt;&gt; abc搜索关键字信息设置
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <form method="post" action="abc_search_info.php?act=save&letter={$letter}" id="form">
+        <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+            <tr>
+                <th colspan="3">abc搜索关键字信息设置</th>
+            </tr>
+            <tr>
+                <td style="width: 10%;" class="text-right font-bold">字母：</td>
+                <td width="95%">
+                    {html_options options=$letter_arr name=index id=index}
+                    {if $smarty.session.WebUserInfo.said == 65}
+                    <label class="font-gray"><input type="checkbox" name="all" />所有字母都相同</label>
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <td class="text-right font-bold">网站标题:</td>
+                <td>
+                  <textarea name="web_title" id="web_title" class="font-12" rows="3" cols="120">{$data.web_title}</textarea>
+                  <br />
+                  <span class="font-gray"><span class="font-red">####</span>将被替换成搜索关键字</span>
+                </td>
+             </tr>
+            <tr>
+                <td class="text-right font-bold">meta关键字:</td>
+                <td>
+                  <textarea name="meta_keyword" id="meta_keyword" class="font-12" rows="3" cols="120">{$data.meta_keyword}</textarea>
+                  <br />
+                  <span class="font-gray"><span class="font-red">####</span>将被替换成搜索关键字</span>
+                </td>
+             </tr>
+            <tr>
+                <td class="text-right font-bold">meta描述:</td>
+                <td>
+                  <textarea name="meta_description" id="meta_description" class="font-12" rows="8" cols="120">{$data.meta_description}</textarea>
+                  <br />
+                  <span class="font-gray"><span class="font-red">####</span>将被替换成搜索关键字</span>
+                </td>
+             </tr>
+            <tr>
+                <td class="text-right font-bold">关键字描述:</td>
+                <td>
+                  <textarea name="description" id="description" class="font-12" rows="8" cols="120">{$data.description}</textarea>
+                  <br />
+                  <span class="font-gray"><span class="font-red">####</span>将被替换成搜索关键字</span>
+                  <a href="javascript: void(0);" id="a-rand">随机读取抓取的关键字描述</a>
+                </td>
+             </tr>
+            <tr>
+                <td class="text-right font-bold">Hot Searches:</td>
+                <td>
+                  <textarea name="hot" id="hot" class="font-12" rows="20" cols="120">{$data.hot}</textarea>
+                  <br />
+                  <span class="font-gray">
+                      一行一个，格式：关键字|关键字链接。如果不填链接，将自动生成。链接请不要输入|。
+                      链接以<span class="font-red">?</span>结束表示该关键字<strong>加粗</strong>显示
+                  </span>。
+                  <span class="font-red">填写多少个，前台将显示多少</span>
+                </td>
+             </tr>
+            <tr>
+                <td class="text-right font-bold">Related Tags:</td>
+                <td>
+                  <textarea name="related" id="related" class="font-12" rows="20" cols="120">{$data.related}</textarea>
+                  <br />
+                  <span class="font-gray">
+                      一行一个，格式：关键字|关键字链接。如果不填链接，将自动生成。链接请不要输入|。
+                      链接以<span class="font-red">?</span>结束表示该关键字<strong>加粗</strong>显示
+                  </span>。
+                  <span class="font-red">填写多少个，前台将显示多少</span>
+                </td>
+             </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" class="sub_but" value="提 交" /></td>
+            </tr>
+        </table>
+    </form>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+    <script type="text/javascript" src="{$imgcache_url}eload_admin/js/common.js"></script>
+    <script type="text/javascript" src="{$imgcache_url}eload_admin/js/abc_description_info.js"></script>
+    <script type="text/javascript" src="{$imgcache_url}eload_admin/js/abc_search_info.js"></script>
+{include file="copyright.htm"}

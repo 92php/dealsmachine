@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 地区运费设置  (单位：美元)</td>
+          <td width="44%" align="right"></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form>
+<div id="list">
+  <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="10%" align="left">国家</th>
+   <!-- <th width="7%" align="left">平邮起价(首重0.5kg)</th>
+    <th width="6%" align="left">平邮续重(每0.5kg)</th>-->
+    <th width="9%" align="left">标准运输起价<br/>(首重0.5kg)</th>
+    <th width="9%" align="left">标准运输续重<br/>(每0.5kg)</th>
+    <th width="7%" align="left">特快起价<br/>(首重0.5kg) </th>
+    <th width="7%" align="left">特快续重<br/>(每0.5kg)</th>
+    <th width="12%" align="left">免邮产品用Standard ship<br/>(一次性收)</th>
+    <th width="12%" align="left">免邮产品用Expedited ship<br/>(一次性收)</th>
+	<th width="5%" align="left">平邮运费<br/>（人民币）</th>
+	<th width="5%" align="left">挂号运费<br/>（人民币）</th>
+  </tr>
+{foreach from=$region_arr item=list name=area_name}
+<tr bgColor="{if $smarty.foreach.area_name.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.area_name.iteration is even}#f4f9fd{else}#e8f1fd{/if}';" >
+  <td align='left'><b>{$list.region_name}</b></td>
+<!--  <td align='left'  title="点击进行修改..."><span {literal}onclick="$(this).editable('shipping_fee.php?act=edit',{type:'text',event:'click',width:'30',indicator : 'Saving...',onblur: 'submit',tooltip: '点击进行修改...'});"{/literal} id='{$list.region_id}||org_fee' >{$list.fee.org_fee}</span></td>
+  <td align='left'  title="点击进行修改..."><span {literal}onclick="$(this).editable('shipping_fee.php?act=edit',{type:'text',event:'click',width:'30',indicator : 'Saving...',onblur: 'submit',tooltip: '点击进行修改...'});"{/literal} id='{$list.region_id}||org_xu_fee' >{$list.fee.org_xu_fee}</span></td> -->
+  <td align='left' title="点击进行修改..."><span {literal}onclick="$(this).editable('shipping_fee.php?act=edit',{type:'text',event:'click',width:'30',indicator : 'Saving...',onblur: 'submit',tooltip: '点击进行修改...'});"{/literal} id='{$list.region_id}||org_tran_fee' >{$list.fee.org_tran_fee}</span></td>
+  <td align='left' title="点击进行修改..."><span {literal}onclick="$(this).editable('shipping_fee.php?act=edit',{type:'text',event:'click',width:'30',indicator : 'Saving...',onblur: 'submit',tooltip: '点击进行修改...'});"{/literal} id='{$list.region_id}||org_tran_xu_fee' >{$list.fee.org_tran_xu_fee}</span></td>
+  <td align='left' title="点击进行修改..."><span {literal}onclick="$(this).editable('shipping_fee.php?act=edit',{type:'text',event:'click',width:'30',indicator : 'Saving...',onblur: 'submit',tooltip: '点击进行修改...'});"{/literal} id='{$list.region_id}||exp_fee' >{$list.fee.exp_fee}</span></td>
+  <td align='left' title="点击进行修改..."><span {literal}onclick="$(this).editable('shipping_fee.php?act=edit',{type:'text',event:'click',width:'30',indicator : 'Saving...',onblur: 'submit',tooltip: '点击进行修改...'});"{/literal} id='{$list.region_id}||exp_xu_fee' >{$list.fee.exp_xu_fee}</span></td>
+  <td align='left' title="点击进行修改..."><span {literal}onclick="$(this).editable('shipping_fee.php?act=edit',{type:'text',event:'click',width:'30',indicator : 'Saving...',onblur: 'submit',tooltip: '点击进行修改...'});"{/literal} id='{$list.region_id}||free_sta_fee' >{$list.fee.free_sta_fee}</span></td>
+  <td align='left' title="点击进行修改..."><span {literal}onclick="$(this).editable('shipping_fee.php?act=edit',{type:'text',event:'click',width:'30',indicator : 'Saving...',onblur: 'submit',tooltip: '点击进行修改...'});"{/literal} id='{$list.region_id}||free_exp_fee' >{$list.fee.free_exp_fee}</span></td>
+  <td align='left' title="点击进行修改..."><span {literal}onclick="$(this).editable('shipping_fee.php?act=edit',{type:'text',event:'click',width:'30',indicator : 'Saving...',onblur: 'submit',tooltip: '点击进行修改...'});"{/literal} id='{$list.region_id}||regular_mail' >{$list.fee.regular_mail}</span></td>
+  <td align='left' title="点击进行修改..."><span {literal}onclick="$(this).editable('shipping_fee.php?act=edit',{type:'text',event:'click',width:'30',indicator : 'Saving...',onblur: 'submit',tooltip: '点击进行修改...'});"{/literal} id='{$list.region_id}||registered_mail' >{$list.fee.registered_mail}</span></td>    
+</tr>
+{/foreach}
+<tr>
+  <td colspan="9" align="center">{$pagestr}</td>
+  </tr>
+  </table>
+</div>
+</form>
+{include file="copyright.htm"}

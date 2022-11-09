@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>搜索关键字过滤设置</title>
+    <link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css" />
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft">
+                            <a href="index.php?act=main">管理中心</a>
+                            &gt;&gt; 搜索关键字过滤设置
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <form method="post" action="?act=save" id="form">
+        <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+            <tr>
+                <th colspan="3">搜索关键字过滤设置</th>
+            </tr>
+            <tr>
+                <td valign="top" class="text-right font-bold">不参与搜索关键字:</td>
+                <td>
+                  <textarea name="not_search" class="font-12" rows="8" cols="120">{$data.not_search}</textarea>
+                  <span class="font-gray">
+                    <br />以<b>半角逗号</b>隔开，不支持词组，如<span class="font-red">cell phone</span>
+                  </span>
+                </td>
+             </tr>
+            <tr>
+				<td valign="top" class="text-right font-bold" style="word-break:break-all">如果以这些关键字开始的就不入库:</td>
+				<td>
+				  <textarea name="no_this_start" class="font-12" rows="8" cols="120">{$data.no_this_start}</textarea>
+				  <span class="font-gray">
+					<br />
+				  </span>
+				</td>
+			</tr>  
+			<tr>
+				<td valign="top" class="text-right font-bold" style="word-break:break-all">如果以这些关键字结束就不入库:</td>
+				<td>
+				  <textarea name="no_this_end" class="font-12" rows="8" cols="120">{$data.no_this_end}</textarea>
+				  <span class="font-gray">
+					<br />
+				  </span>
+				</td>
+			</tr>						            
+			<tr style="display: none">
+                <td valign="top" class="text-right font-bold">搜索排除对应关系:</td>
+                <td>
+                  <textarea name="exclude" class="font-12" rows="50" cols="120">{$data.exclude}</textarea>
+                  <span class="font-gray">
+                    <br />一行一个，格式：<b>关键字</b> => <span class="font-red">排除搜索关键字</span>。如phone=>iphone,speakerphone,headphone。不支持词组，如<span class="font-red">cell phone</span>
+                  </span>
+                </td>
+             </tr>
+            <tr>
+                <td valign="top" class="text-right font-bold">单复数&同义词处理:</td>
+                <td>
+                  <textarea name="dan_fu" class="font-12" rows="50" cols="120">{$data.dan_fu}</textarea>
+                  <span class="font-gray">
+                    <br />
+                  一行一组相近词，不同词用英文逗号分开，eg:  <b>'cell phone,cell phones,mobile,mobiles'  ,搜索 'mobile',相当于同时搜索
+                 <br> cell phone<br>
+                  cell phones<br>
+                  mobile<br>
+                  mobiles<br>
+                  这4个关键词的产品
+                   </b></span>
+                </td>
+             </tr>
+            <tr>
+                <td></td>
+                <td><input type="button" id="btn" class="sub_but" value="提 交" /></td>
+            </tr>
+        </table>
+    </form>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+    <script type="text/javascript" src="{$imgcache_url}eload_admin/js/common.js"></script>
+    {literal}
+    <script type="text/javascript">
+        $('#btn').click(function() {
+            setLoading();
+            $.post('filter_search_keywords.php?act=save', $('#form').serialize(), function(data) {
+                setLoading(false);
+
+                if (!data) {
+                    Alert('操作成功', true);
+                }
+            });
+        });
+    </script>
+    {/literal}
+{include file="copyright.htm"}

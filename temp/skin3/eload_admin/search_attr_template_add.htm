@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="{$imgcache_url}temp/skin3/eload_admin/js/admin_add.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 属性查找模板添加</td>
+          <td width="44%" align="right"><span class="navright"><a href="search_attr_template.php">属性查找模板列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<div class="main-div">
+  <form  method="post" name="theForm"  action="{$url}" onSubmit="return Validator.Validate(this,3)">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th colspan="3">属性查找模板添加</th>
+  </tr>
+      <tr>
+        <td width="22%" class="label">模板名称:</td>
+        <td width="78%"><input type="text" name="template_name" value="{$template_info.template_name|escape}" size="40"  dataType="Require" msg="请填写查找模板名称！"/>
+        * 
+       </td>
+      </tr>
+      
+      <tr>
+        <td width="22%" class="label">前台模板显示位置:</td>
+        <td width="78%">
+        <select name="template_site" >
+        	<!--<option value="1"{if $template_info.template_site == 1}selected{/if}>左侧菜单栏</option>-->
+        	<option value="2" {if $template_info.template_site == 2}selected{/if}>列表头部</option>
+        </select>
+        * 
+       </td>
+      </tr>
+     
+      <tr align="center">
+        <td align="center">&nbsp;</td>
+        <td align="left">
+        <input name="button" type="submit" class="sub_but" id="button" value="{$tag_msg}" /></td>
+      </tr>
+    </table>
+  </form>
+</div>
+{include file="copyright.htm"}

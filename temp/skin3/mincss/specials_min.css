@@ -1,0 +1,50 @@
+@charset "utf-8";
+
+/* .p_mg strong,.p_free,.p_Ship,.list_p_addToCart a{background:url(../images/styleimg/ahappydealtag.png) no-repeat 0 0;} */
+/*头部导航*/
+.special_TabNav{background:#f1f1f1;height:31px; border-bottom:1px solid #ddd; line-height:31px; position:relative;}
+.special_TabNav li{display:inline; float:left;width:168px; height:31px;}
+.special_TabNav li a{display:inline; float:left;padding-bottom:10px; width:168px; text-indent:-9999px; overflow:hidden; position:absolute;}
+.special_TabNav li .special_list_discount{ background-position:0 -50px;}
+.special_TabNav li .special_list_discount_on{ background-position:0 0;}
+.special_TabNav li .special_list_clearance{ background-position:0 -150px;}
+.special_TabNav li .special_list_clearance_on{ background-position:0 -100px;}
+.special_TabNav li .special_list_dollar{ background-position:0 -250px;}
+.special_TabNav li .special_list_dollar_on{ background-position:0 -200px;}
+.special_TabNav li .special_list_free{ background-position:0 -300px;}
+
+.special_proListBox{ padding-top:10px; font-size:12px; font-size:12px;}
+.special_proListBox ul{ overflow:hidden;}
+.special_proListBox a{ text-decoration:none; color:#333;}
+.special_proListBox a:hover{ text-decoration:underline;}
+/*discount center 商品列表*/
+.discount_proListBox li,.dollar_proListBox li{ display:inline; float:left;padding:15px 24px 0; margin:-1px 0 0; width:150px; height:290px; border-top:1px dashed #ccc;}
+.dollar_proListBox li{ height:235px;}
+.p_mg{ width:150px; height:150px;}
+.p_mg strong,.list_p_mg strong{display:block;position:absolute; right:-5px; top:-5px;background-position:-40px -560px;padding-top:5px;width:44px;height:39px; text-align:center; color:#fff; font-size:12px; }
+.p_mg span,.list_p_mg span{ font-size:14px; padding-right:2px;font-weight:bold;}
+.p_mg a,.list_p_mg a{ font-size:0;}
+
+.p_name{ height:46px; line-height:15px; overflow:hidden;}
+.p_name a:hover{ color:#333;}
+.p_price{height:20px; line-height:20px;}
+.p_price_cost{ text-decoration:line-through;}
+.p_free,.p_Ship{ display:block; width:110px; height:18px; text-indent:-9999px; overflow:hidden;}
+.p_free{ background-position:-120px -670px;}
+.p_Ship{background-position:0 -640px;}
+/*clearance sale商品列表*/
+.clearance_proListBox li{ padding:10px 0 0 180px; overflow:hidden;margin:-1px 0 0; border-top:1px dashed #ccc;}
+.clearance_proListBox a{ color:#333; text-decoration:none;}
+.clearance_proListBox a:hover{ color:#f00; text-decoration:underline;}
+
+.list_p_mg{ display:inline; float:left; margin-left:-170px; width:150px;height:160px;}
+.list_p_info{display:inline; float:left;width:435px; padding-right:20px;}
+.list_p_residue{background:#FF9200;float:left; padding:0 15px;margin:5px 0 0;height:24px; line-height:24px; text-align:center;}
+.list_p_residue strong{padding:0 5px; color:#fff; font-weight:bold;}
+.list_p_price{ line-height:20px;}
+.list_p_price i{font-style:normal; font-weight:normal; color:#333;}
+.list_p_price_cost span{ text-decoration:line-through; font-size:10px; color:#666;}
+.list_p_addToCart{padding-top:5px;}
+.list_p_addToCart a{background-position:-133px -1140px;display:block;width:122px;height:30px;text-indent:-9999px;overflow:hidden;}
+
+.list_p_attr{ width:135px;}

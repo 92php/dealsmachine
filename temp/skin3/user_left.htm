@@ -1,0 +1,90 @@
+<div class="l_box myAccountBox mb10">
+    <h3 class="l_title">{$lang.my_account}</h3>
+    <ul>  
+			<li><b class="fl"></b><a href="/{$cur_lang_url}m-users-a-index.htm">{$lang.my_account}</a></li>
+    		<li><b class="fl"></b><a href="/{$cur_lang_url}m-ucoupon-a-couponlist.htm">{$lang.My_cash_coupon}</a></li>
+			<li><b class="fl"></b><a href="/{$cur_lang_url}m-users-a-points_record.htm">{$lang.label_Point}</a></li>
+			<li><b class="fl"></b><a href="/{$cur_lang_url}password-recovery/">{$lang.label_profile}</a></li>
+			<li><b class="fl"></b><a href="/{$cur_lang_url}m-users-a-address_list.htm">{$lang.label_address}</a></li>
+			<li><b class="fl"></b><a href="/{$cur_lang_url}m-users-a-billing_address_list.htm">{$lang.label_billing_address}</a></li>
+    </ul>
+</div><!--end My Account-->
+
+<div class="l_box myAccountBox mb10">
+    <h3 class="l_title">{$lang.order_center}</h3>
+    <ul>
+    	<li><b class="fl"></b><a href="/{$cur_lang_url}order-history/">{$lang.label_order}</a></li>
+    	<li><b class="fl"></b><a href="/{$cur_lang_url}shopping-cart/">{$lang.label_cart}   (<cite class="cart_items">0</cite>)</a></li>
+    	<li><b class="fl"></b><a href="/{$cur_lang_url}my-favorites/">{$lang.label_collection}</a></li>
+    </ul>
+</div><!--end My Account-->
+
+<div class="l_box myAccountBox mb10">
+    <h3 class="l_title">{$lang.customer_service}</h3>
+    <ul>
+    	<li><b class="fl"></b><a href="http://support.dealsmachine.com/index.php?key={$smarty.session.email}&m=contactus&a=my_question">{$lang.label_message} (<cite><span id="new_msg" title="New Message"></span></cite>)</a></li>
+		<li><b class="fl"></b><a href="/{$cur_lang_url}m-users-a-rma_apply.htm">{$lang.rma_application}</a></li>
+		<li><b class="fl"></b><a href="/{$cur_lang_url}m-users-a-rma_list.htm">{$lang.rma_record}</a></li>
+		<li><b class="fl"></b><a href="/{$cur_lang_url}m-users-a-rma_msg.htm">{$lang.rma_message}(<span id="span-rma_msg_count" style="color: red;">0</span>)</a></li>
+		<li><b class="fl"></b><a href="{$DOMAIN}/{$cur_lang_url}m-article-id-109.html">{$lang.FAQ}</a></li>
+    </ul>
+</div>
+<!--end My Affiliate-->
+{if $is_affiliate eq 2}
+<div class="l_box myAccountBox">
+    <h3 class="l_title">{$lang.community}</h3>
+    <ul>
+    	<li><b class="fl"></b><a href="/{$cur_lang_url}m-webad-a-introduce.htm">{$lang.label_Affiliate}</a></li>  
+    </ul>
+</div><!--end My Account-->
+{/if}            
+<div class="l_box mt10 ordersearch">
+    <h3 class="l_title">{$lang.Order_Checks}</h3>
+    <form action="" method="post" id="fcorder" class="pt10 pb10">
+          <p><input type="text" value="{$lang.Enter_your_Order_Number}" onclick="this.value=''" class="order_input" id="orderid" name="orderid"></p>
+          <p class="pt10"><input type="submit" value="" class="ordersearchBtn js_ordersearchBtn"></p>
+  </form>
+</div><!--end My ordersearch-->
+
+<div class="l_box mt10 ordersearch">
+    <h3 class="l_title">{$lang.newsletter}</h3>
+    <div class="p10">
+          <p><input type="text" value="{$lang.your_email_address}" class="order_input js_footHelp_input js_txt-subscribe"  maxlength="90">
+          <input type="submit" value="Subscribe" class="subscribeBtn js_btn-subscribe" style="display:block; margin:10px auto 0;"></p>
+  </div>
+</div><!--end My ordersearch-->
+            
+            <!-- <div class="ad_pic mt10"><a href="http://www.dealsmachine.com/m-article-id-88-pid-.html"><img src="http://cloud4.faout.com/imagecache/A/ximages/vip.jpg" /></a></div> -->
+        {literal}   
+        <script type="text/javascript" >
+			$(document).ready(function(){
+				
+				var email='{$smarty.session.email}';
+				var _USER_EMAIL = '{$smarty.session.email}';
+				
+				showNewMsgNun();
+				showRMAmsgCount();
+				
+				$(".js_ordersearchBtn").click(function(){
+					order_check();
+				})
+				
+				function showNewMsgNun(){
+					var el = $('#new_msg');//http://support.dealsmachine.com/?email={$smarty.session.email}&a=get_question_count
+					el.length > 0 && $.getJSON('http://support.dealsmachine.com/?a=get_question_count&jsoncallback=?&email=' + email, function(data) {
+						el.text(data.msg);
+					});
+				};
+				function showRMAmsgCount(){
+					var element = $('#span-rma_msg_count');
+					element.length > 0 && element.load('/fun/?act=rma_msg_count&_c=' + Math.random());
+				};
+				function order_check(){//定义一个orderCheck函数
+					var oid=$("#orderid").val();
+					oid = oid.replace(/^\s+|\s+$/g,"");
+					$("#fcorder").attr("action","/{/literal}{$cur_lang_url}{literal}m-users-a-order_detail-order_id-"+oid+".htm");
+					$("#fcorder").submit();
+				};
+			});
+			</script>
+{/literal}

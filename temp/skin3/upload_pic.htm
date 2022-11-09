@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Upload pic</title>
+	<link rel="stylesheet" href="{$imgcache_url}mincss/base_min.css"/>
+        {literal}
+	<style type="text/css">
+		body{background: #fff;font: 12px/1.5 Verdana,Arial,Helvetica,sans-serif;}
+		#upImgBox{ width: 590px; margin: 0 auto; padding: 20px;}
+		.upImgTitle{  height: 50px; font-size: 24px; font-weight: bold; line-height: 50px; border-bottom: 1px solid #ddd; text-align: center; color: #666;}
+		.upImgInput{ margin-top: 50px; height: 32px; padding-left: 50px;}
+		
+		.textBox{ display: inline; float: left; height: 30px; line-height: 30px; width: 250px; border: 1px solid #ddd;  overflow: hidden; text-overflow:ellipsis;}
+		.upImgInput_btn{ position: relative; background: #f1f1f1; display: inline; float: left; margin:0 0 0 10px; height: 30px; padding: 0 10px; border: 1px solid #ddd; font-size: 12px; color: #333; text-decoration: none;  font-weight: bold; line-height: 30px; overflow: hidden;}
+
+		.imgInput{position: absolute; top:0; right: 0; width:230px; height: 32px; cursor: pointer; outline: none; opacity: 0; filter:alpha(opacity=0);}
+		.upImgBtton{ padding-left: 50px; margin: 20px 0 20px;}
+		.userRedBtn{ display: block; color: #fff; width: 150px; height: 30px; line-height: 30px; text-align: center; cursor: pointer; border: none; border-radius: 20px;
+			background: #ff6a03; /* Old browsers */
+			background: -moz-linear-gradient(top,  #ff9933 0%, #ff6a03 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff9933), color-stop(100%,#ff6a03)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(top,  #ff9933 0%,#ff6a03 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(top,  #ff9933 0%,#ff6a03 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(top,  #ff9933 0%,#ff6a03 100%); /* IE10+ */
+			background: linear-gradient(to bottom,  #ff9933 0%,#ff6a03 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff9933', endColorstr='#ff6a03',GradientType=0 ); /* IE6-9 */
+		}
+		.upImgTips{ font-size: 14px; padding:0 50px; line-height: 20px;}
+		.upImgTips strong{margin-right: 5px;font-weight: bold; color: #ff6a03;}
+
+		/*======裁剪图片样式======*/
+		.clipImgBox{ width: 630px; height: 410px; margin: 10px auto 0;}
+		#clipImg{ display: inline; float: left; width: 500px; height: 400px; padding: 4px; border: 1px solid #ddd;}
+		#clipImg table{ border: 0; border-spacing: 0; border-collapse: 0; width: 100%;}
+		#clipImg td{ width: 500px; height: 400px; overflow: hidden; text-align: center; vertical-align: middle;}
+		#clipImg img{ max-width: 500px; max-height: 400px;}
+
+		.clipBoxRight{ width: 100px; display: inline; float: left; margin-left: 20px;}
+		.clipBoxRight button{ width: 100px; margin: 20px 0 0;}
+		#clipImg_thumb{ width: 100px; height: 100px; background-color: #f1f1f1;}
+	</style>
+        {/literal}
+	<link rel="stylesheet" href="{$imgcache_url}mincss/imgareaselectcss/imgareaselect-default.css"/>
+	<script src="{$imgcache_url}minjs/jquery-1.8.0.min.js"></script>
+	<script src="{$imgcache_url}minjs/jquery.imgareaselect.pack.js"></script>
+</head>
+<body>
+{if $action eq 'upload_avatar'}
+    <!--第一步，选择图片上传-->
+	<form method="post" action="/m-users-a-upload_avatar.htm" id="upImgBox" enctype="multipart/form-data">
+		<div class="upImgTitle">
+			<label>{$lang.upload_your}</label>
+		</div>
+		<div class="upImgInput">
+			<span class="textBox" id="showImgSrc"></span>
+			<div class="upImgInput_btn" >
+				<span id="selectButton">{$lang.select_image}</span>
+				<input type="file" class="imgInput" id="selectImg" name="avatar" />
+			</div>
+			
+		</div>
+		<div class="upImgBtton">
+			<button class="userRedBtn fb" type="submit">{$lang.upload_img}</button>
+		</div>
+		<p class="upImgTips"><strong>{$lang.tips}:</strong>{$lang.your_upload}</p>
+		{literal}
+		<script type="text/javascript">
+			(function(){
+				document.getElementById("selectImg").onchange = function(){
+					var showSrc = document.getElementById("showImgSrc");
+					//var selectButton = document.getElementById("selectButton");
+
+					showSrc.innerHTML = this.value;
+				}
+			})()
+		</script>
+		{/literal}
+	</form><!--end #upImgBox-->
+{/if}
+{if $action eq 'save_avatar'}
+	<!--第二步，裁剪图片-->
+	<div class="clipImgBox">
+		<div id="clipImg">
+			<table><tr><td><img src="{$avatar}" id="clipBigImg" /></td></tr></table>
+		</div>
+		<div class="clipBoxRight">
+			<div  id="clipImg_thumb"></div>
+			<form action="/m-users-a-edit_avatar.htm" method="post" id="upSlipImgForm">
+				<input type="hidden" id="x1" name="x1" value="0" />
+				<input type="hidden" id="y1" name="y1" value="0" />
+				<input type="hidden" id="x2" name="x2" value="100" />
+				<input type="hidden" id="y2" name="y2" value="100" />
+                                <input type="hidden" name="w" value="100" id="w" />
+                                <input type="hidden" name="avatar" value="{$avatar}" />
+				<button class="userRedBtn fb" type="submit" id="upSlipImg">Ok</button>
+			</form>
+		</div>
+	</div>
+	{literal}
+        <script type="text/javascript">
+		(function(){
+			window.onload = function(){
+				ini();
+			}
+			function ini(){
+				setThumbImg();
+				selectImgArea();
+				upSlipImg();
+			}
+
+			/* 写入缩略图 */
+			function setThumbImg(){
+
+				$('<div><img src="'+$("#clipBigImg").attr("src")+'" style="position: relative;" /><div>')
+		        .css({
+		            float: 'left',
+		            position: 'relative',
+		            overflow: 'hidden',
+		            width: '100px',
+		            height: '100px'
+		        })
+		        .appendTo($('#clipImg_thumb'));
+			}
+
+			/* 随着控制柄的变化，改版缩略图的视角 */
+			function preview(img, selection) {
+
+			    var scaleX = 100 / (selection.width || 1);
+			    var scaleY = 100 / (selection.height || 1);
+			    var imgWidth = parseInt($('#clipBigImg').width(),10);
+			    var imgHeight =  parseInt($('#clipBigImg').height(),10);
+
+			    $('#clipImg_thumb').find("img").css({
+			        width: Math.round(scaleX * imgWidth) + 'px',
+			        height: Math.round(scaleY * imgHeight) + 'px',
+			        marginLeft: '-' + Math.round(scaleX * selection.x1) + 'px',
+			        marginTop: '-' + Math.round(scaleY * selection.y1) + 'px'
+			    });
+			}
+
+			/* 裁剪完成对四个角赋值 */
+			function getImgSelectPoint(img, selection){
+				$("#x1").val(selection.x1);
+				$("#y1").val(selection.y1);
+				$("#x2").val(selection.x2);
+				$("#y2").val(selection.y2);
+                                $("#w").val(selection.width);
+			}
+
+			/* 调用imgareaSelect插件进行裁剪 */
+			function selectImgArea(){
+				$('#clipBigImg').imgAreaSelect({
+			        handles: true,
+			        show: true,
+			        aspectRatio: "1:1",
+			        minHeight:100,
+			        minWidth: 100,
+			        x1: 0, y1:0, x2: 100, y2:100,
+			        onSelectChange: preview,
+			        onSelectEnd: getImgSelectPoint
+			    });
+			}
+
+			/* 提交裁剪数据 */
+			function upSlipImg(){
+				$("#upSlipImg").click(function(event) {
+					/* Act on the event */
+					
+					$.post($("#upSlipImgForm").attr("action"),$("#upSlipImgForm").serialize(), function(data) {
+						/*optional stuff to do after success */
+                                              
+						window.parent.location.reload();
+					});
+					event.preventDefault();
+					// var i = parent.layer.getFrameIndex(window.name);
+					// parent.layer.close(i);
+				});
+			}
+			
+		})()
+	</script>
+        {/literal}
+ {/if}
+</body>
+</html>

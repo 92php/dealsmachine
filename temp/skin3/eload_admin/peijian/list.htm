@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>配件管理</title>
+<link type="text/css" rel="stylesheet" href="/temp/skin3/eload_admin/images/admin_css.css" />
+<link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/tree.css" />
+<script language="javascript" src="/sysjs/eload13pack.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/jquery-1.7.2.min.js"></script>
+<script language="javascript" src="/sysjs/jlivequery.js"></script>
+<script type="text/javascript" src="/sysjs/jcookie.js"></script>
+<script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/common.js"></script>
+<script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/peijian.js?2013070101"></script>
+<script language="javascript" src="/sysjs/jjeditable.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_action.js?2014030401"></script>
+<script language="javascript" src="/sysjs/calendar.php?lang="></script>
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft">
+                            <a href="index.php?act=main">管理中心</a> &gt;&gt; 配件管理</td>
+                        <td width="44%" align="right">
+                            <span class="navright">
+                                <a href="peijian.php?act=add">添加配件</a>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <form action="?" method="get">
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <td>               
+                {html_options options=$column_arr name=column selected=$column|default:'c.goods_sn'}
+                <div style="display: inline-block;">
+					分类：{$cat_list}                     
+                </div>
+                 搜索：<input type="text" name="keywords" id="keywords" size="30" value="{$keywords}" />
+                <input type="submit" class="sub_but" value="搜 索" />
+                <span class="font-gray">多个商品编码之间用<strong>半角逗号</strong>隔开</span>
+            </td>
+        </tr>
+    </table>
+    </form>
+	
+	<form method="post" action="peijian.php?act=peijian_batch" name="listForm" onsubmit="return confirmSubmitPeijian(this)">
+	<span style="display:none">{$cat_list}<input type="text" name="keywords" id="keywords" size="30" value="{$keywords}" /></span>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;" cellpadding="4">
+        <tr>
+            <th style="width:80px;">
+			<input type="checkbox" onclick="checkAll(this, 'checkboxes[]');">
+			<a href="goods.php?sort_by=g.goods_id&sort_order={$filter.sort_order_goods_id}{$title_url}">主-配(ID)</a>{$sort_goods_id}			
+			</th>
+            <th style="width: 60px;">主商品图</th>
+            <th>主商品名称/编码</th>
+            <th style="width: 50px;">配件图</th>
+            <th style="width: 250px;">配件名称/编码</th>
+			<th style="width: 100px;">配件有效<br/>起/始时间</th>			
+            <th style="width: 150px;">配件价格/销售价</th>
+			<th style="width:80px">配件排序</th>
+            <th style="width: 100px;">操作</th>
+        </tr>
+		
+        {foreach from=$data item=item}
+        <tr style="background: #{cycle values='f4f9fd,e8f1fd' name=cycle1}" onmouseover="this.style.background='#FEF3D1'" onmouseout="this.style.background='#{cycle values='f4f9fd,e8f1fd' name=cycle2}'">
+            <td class="text-center">
+			<input type="checkbox" name="checkboxes[]" value="{$item.parent_id}_{$item.goods_id}" onclick="checkone('checkboxes[]')"/>{$item.parent_id}_{$item.goods_id}<br />
+			</td>
+            <td><a href="/best_{$item.parent_id}.html" target="_blank"><img src="{$item.main_goods_thumb}" style="width: 50px; height: 50px;" alt="" /></a></td>
+            <td><a href="goods.php?keywords={$item.main_goods_sn}">{$item.main_goods_title}/<span style="color: red;">{$item.main_goods_sn}</span></a></td>
+            <td><a href="/best_{$item.goods_id}.html" target="_blank"><img src="{$item.goods_thumb}" style="width: 50px; height: 50px;" alt="" /></a></td>
+            <td><a href="goods.php?keywords={$item.goods_sn}">{$item.goods_title}/<span style="color: red;">{$item.goods_sn}</span></a></td>
+			<td>{$item.start_date}-{$item.end_date}</td>			
+            <td>{$item.goods_price}/<span style="color: red;">{$item.shop_price}</span></td>			
+			<td align="right" title="双击进行修改">
+				<span {literal}onclick="$(this).editable('goods.php?act=editpeijian', {type: 'text',event: 'dblclick',width:'90%',indicator:'Saving...',onblur:'submit',tooltip: ''});"{/literal} id="{$item.parent_id}||{$item.goods_id}||sort_order">{$item.sort_order}</span>
+			</td>
+            <td class="operate">
+                <p>
+                    <a href="peijian.php?act=add&amp;parent_id={$item.parent_id}&amp;goods_id={$item.goods_id}" class="edit">编辑</a> |
+                    <a href="peijian.php" class="delete" id="s-{$item.parent_id}_{$item.goods_id}">删除</a>
+                </p>
+                <p class="display-none">
+                    <input type="text" size="5" />
+                    <a class="confirm" href="?" id="ss_{$item.parent_id}_{$item.goods_id}">确定</a>
+                    <a class="cancel" href="?">取消</a>
+                    <br />
+                    <label style="color: red;"><input type="checkbox" />修改此配件所有价格</label>
+                </p>
+            </td>
+        </tr>
+        {foreachelse}
+        <tr>
+            <td colspan="15" style="color: red;">{$no_records}</td>
+        </tr>
+        {/foreach}
+        <tr>
+			<td colspan="3" align="left">
+			<input type="checkbox" onclick="checkAll(this, 'checkboxes[]');"> 全选
+			<select name="type" id="selAction" onchange="changeActionPeijian()">
+				<option value="">请选择...</option>
+				<option value="del">删除当前页所选</option>
+				<option value="del_all">删除所有搜索结果</option>
+				<option value="order">排序</option>
+			</select>
+			<span id="peijian_order" style="display:none">
+			序号：<input type="text" name="order" value="" maxlength="5"/>
+			<input type="submit" value=" 确定 " id="btnSubmit" name="btnSubmit" class="button"/>
+			</span>
+			
+			</td>
+          	<td style="text-align: right;" colspan="11"><div id="pager">{$pagestr}</div></td>
+        </tr>
+    </table>
+	</form>
+    <script type="text/javascript">
+        var CATEGORY_PRIV = '{$smarty.session.WebUserInfo.category_priv}'.split(',');
+        PEIJIAN.list.bindEvents().init();
+    </script>
+    {include file="copyright.htm"}

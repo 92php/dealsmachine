@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>优化关键字，and关系查询有查询结果</title>
+    <link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css" />
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft">
+                            <a href="index.php?act=main">管理中心</a>
+                            &gt;&gt; 优化关键字，and关系查询有查询结果
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <form method="post" action="?act=query" id="form">
+        <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+            <tr>
+                <th colspan="3">优化关键字，and关系查询有查询结果</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="button" id="btn" class="sub_but" value="提 交" />
+                    <span id="result-span" class="display-none" style="cursor: pointer;">查询结果</span>
+                    <div id="result-div" style="width: 500px; height: 200px; padding: 5px; border: 1px solid #ccc; overflow: auto; display: none;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="text-right font-bold">查询关键字:</td>
+                <td>
+                  <textarea name="keywords" id="keyword" class="font-12" rows="20" cols="120"></textarea>
+                  <span class="font-gray">
+                    <br />一行一个，多个词以 <b>空格隔开</b>。
+                    建议每次查询不超过<span class="font-red">1000</span>个
+                  </span>
+                </td>
+             </tr>
+            <tr>
+                <td valign="top" class="text-right font-bold">不参与搜索关键字:</td>
+                <td>
+                  <textarea name="not_search" class="font-12" rows="5" cols="120">{$data.not_search}</textarea>
+                  <span class="font-gray">
+                    <br />以<b>半角逗号</b>隔开，不支持词组，如<span class="font-red">cell phone</span>。
+                    <b>留空取默认值</b>
+                  </span>
+                </td>
+             </tr>
+			<tr>
+                <td valign="top" class="text-right font-bold">如果以这些关键词开始就不入abc库:</td>
+                <td>
+                  <textarea name="no_this_start" class="font-12" rows="5" cols="120">{$data.no_this_start}</textarea>
+                  <span class="font-gray">
+                    <br />以<b>半角逗号</b>隔开，不支持词组，如<span class="font-red">cell phone</span>。
+                    <b>留空取默认值</b>
+                  </span>
+                </td>
+          </tr>
+		  <tr>
+                <td valign="top" class="text-right font-bold">如果以这些关键词结束就不入abc库:</td>
+                <td>
+                  <textarea name="no_this_start" class="font-12" rows="5" cols="120">{$data.no_this_end}</textarea>
+                  <span class="font-gray">
+                    <br />以<b>半角逗号</b>隔开，不支持词组，如<span class="font-red">cell phone</span>。
+                    <b>留空取默认值</b>
+                  </span>
+                </td>
+          </tr> 
+            <tr>
+                <td valign="top" class="text-right font-bold">搜索排除对应关系:</td>
+                <td>
+                  <textarea name="exclude" class="font-12" rows="10" cols="120">{$data.exclude}</textarea>
+                  <span class="font-gray">
+                    <br />一行一个，格式：<b>关键字</b> => <span class="font-red">排除搜索关键字</span>。如phone=>iphone,speakerphone,headphone。不支持词组，如<span class="font-red">cell phone</span>
+                    <b>留空取默认值</b>
+                  </span>
+                </td>
+             </tr>
+            <tr>
+                <td valign="top" class="text-right font-bold">单复数处理:</td>
+                <td>
+                  <textarea name="dan_fu" class="font-12" rows="10" cols="120">{$data.dan_fu}</textarea>
+                  <span class="font-gray">
+                    <br />一行一个，格式：<b>复数</b> => <span class="font-red">单数</span>，复数不支持词组，如<span class="font-red">cell phone</span>
+                    <b>留空取默认值</b>
+                  </span>
+                </td>
+             </tr>
+        </table>
+    </form>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+    <script type="text/javascript" src="{$imgcache_url}eload_admin/js/common.js"></script>
+    {literal}
+    <script type="text/javascript">
+        var div = $('#result-div'), input = $('#keyword'), span = $('#result-span').click(function() {
+            div.show();
+        });
+        $('#btn').click(function() {
+            
+            if (input.val().trim() == '') {
+                return;
+            }
+            
+            setLoading();
+            span.hide();
+            div.hide();
+
+            $.post('filter_search_result.php?act=query', $('#form').serialize(), function(data) {
+                setLoading(false);
+                var content = '';
+                
+                if (!data) {
+                    Alert('查询失败', true);
+                }
+                else if (data.msg) {                    
+                    alert(data.msg);
+                }
+                else if (data.yes) {
+                    content = data.content;
+                    var html = '';
+                    $.each(data.yes, function(index, item) {
+                        html += '<span style="color: #333;">{0}</span>: <span class="font-green">{1}</span><br />'.format(index, item);
+                    });
+                    $.each(data.no, function(index, item) {
+                        html += '<span style="color: #333;">'+index+'</span>: <span class="font-red">' + item + '</span><br />';
+                    });
+                    
+                    if (html) {
+                        div.html(html);
+                        span.show();
+                    }
+                }
+                
+                input.val(content);
+            });
+        });
+    </script>
+    {/literal}
+{include file="copyright.htm"}

@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/admin_css.css" />
+<link type="text/css" rel="stylesheet" href="{$imgcache_url}eload_admin/images/tree.css" />
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> ABC关键字列表</td>
+          <td width="44%" align="right">
+              <span class="navright">
+                  <a href="?act=in">导入ABC关键字</a>
+                  <a href="?act=out">导出ABC关键字</a>
+              </span>
+          </td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+ <tr>
+    <td>
+ <form action="" name="myf" method="get">
+     <div style="display:inline-block;">绑定分类: <input type="text" name="cat_name" readonly="readonly" class="txt-select" id="txt-select-category" title="{$cat_name}" value="{$cat_name}" />
+    <input type="hidden" name="cat_id" id="hidden-cat_id" value="{$cat_id}" />
+    <div class="display-none div-category">
+        <p style="text-align: right; margin: 8px;">
+             <a href="javascript: void(0)" id="a-confirm" />确定</a>
+             <a href="javascript: void(0)" id="a-clear" />清除</a>
+         </p>
+        <div id="div-category"></div>
+    </div></div>
+
+    关键字：
+    <input name="keyword" type="text" id="keyword" size="40" value="{$keyword}" />
+    {html_options options=$match_arr name=match_mode selected=$match_mode}
+    {html_options options=$preserve_arr name=is_preserve selected=$is_preserve}
+    <input type="submit" value="搜索" class="button" />
+    <input type="hidden" name="page_size" value="{$page_size}" />
+  </form>
+</td>
+  </tr>
+</table>
+
+<div id="list">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th style="width: 30px;"><input type="checkbox" onclick="checkAll(this)" /></th>
+    <th style="width: 80px;"><a href="new_abc_index_keyword.php?sort_by=keyword_id&sort_order={$filter.sort_order_keyword_id}{$filter_value}">关键字id</a>{$sort_keyword_id}</th>
+    <th>关键字</th>
+    <th>绑定分类</th>
+    <th><a href="new_abc_index_keyword.php?sort_by=goods_num&sort_order={$filter.sort_order_goods_num}{$filter_value}">商品数</a>{$sort_goods_num}</th>
+    <th>无条件保留</th>
+    <th>操作</th>
+  </tr>
+  {foreach from=$abc_list item=list name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+    <td class="text-center"><input class="checkbox" type="checkbox" value="{$list.keyword_id}" /></td>
+    <td class="text-center">{$list.keyword_id}</td>
+    <td><a href="{$list.keyword|get_search_url}" target="_blank">{$list.keyword}</a></td>
+    <td>{if $list.cat_id}<a href="category.php?act=add&id={$list.cat_id}" title="修改">{$cat_arr[$list.cat_id].cat_name}</a>{else}--{/if}</td>
+    <td class="text-center">{$list.goods_num}</td>
+       <td class="text-center"><img style="cursor: default;" src="{$imgcache_url}images/{$img_arr[$list.is_preserve]}.gif" alt="" /></td>
+    <td align="center"><span><a href="?act=edit&keyword_id={$list.keyword_id}"><img src="{$jscache_url}temp/skin3/eload_admin/images/icon_edit.gif" border="0" height="16" width="16" alt="" /></a></td>
+   </tr>
+   {foreachelse}
+    <tr><td colspan="4" align="center" class="no-records">暂无记录 </td></tr>
+  {/foreach}
+  <tr>
+    <td colspan="3">
+        <input type="checkbox" onclick="checkAll(this)">
+        <input type="button" class="button" id="btn-delete" value="删 除" />
+        <input type="button" class="button" id="btn-edit" value="批量编辑" />
+        <input type="button" class="button" id="btn-export" value="批量导出" />
+    </td>
+    <td align="right" nowrap="true" colspan="3"><div id="pager">{$pagestr}</div></td>
+  </tr>
+</table>
+</div>
+
+<p style="margin: 10px;color: gray;">
+    <strong>提示</strong>
+    <br />
+    商品数以前台搜索结果为准
+</p>
+<script type="text/javascript" src="{$jscache_url}sysjs/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/tree.js"></script>
+<script type="text/javascript" src="{$imgcache_url}eload_admin/js/common.js"></script>
+<script type="text/javascript" src="{$imgcache_url}eload_admin/js/peijian.js"></script>
+<script type="text/javascript" src="/eload_admin/all_categories_js.php"></script>
+<script type="text/javascript">
+    PEIJIAN.list.init();
+    {literal}
+    $('#btn-delete').click(function() {//删除按钮 by mashanling on 2012-08-23 14:45:37
+        var ids = getCheckedAll();
+
+        if (ids && confirm('您确定要删除选中关键字？')) {
+            setLoading();
+
+            $.post('?act=delete', 'keyword_id=' + ids, function(data) {
+                C.callback(data, location.href, L.del + L.success);
+            });
+        }
+    });
+
+    $('#btn-edit').click(function() {//批量编辑 by mashanling on 2013-01-08 14:44:53
+        var ids = getCheckedAll();
+        ids && redirect('new_abc_index_keyword.php?act=edit&keyword_id=' + ids);
+    });
+    
+    $('#btn-export').click(function() {//批量编辑 by xyl on 2013-08-26 10:44:53
+        var ids = getCheckedAll();
+        ids && redirect('new_abc_index_keyword.php?act=exportselect&keyword_id=' + ids);
+    });
+
+    $('#pageSize').width(50).attr('title', '最大200，按回车键即可').keydown(function(e) {
+        if (e.keyCode == 13 && intval(this.value)) {
+            this.value = this.value > 200 ? 200 : this.value;
+            var search = location.search;
+
+            if (search.indexOf('page_size') > -1) {
+                search = search.replace(/page_size=(\d+)/, 'page_size=' + this.value);
+            }
+            else {
+                search += search ? '&' : '?';
+                search += 'page_size=' + this.value;
+            }
+
+            location.href = 'new_abc_index_keyword.php' + search;
+        }
+    });
+    {/literal}
+</script>
+{include file="copyright.htm"}

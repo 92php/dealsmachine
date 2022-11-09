@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link type="text/css" rel="stylesheet" href="{$jscache_url}sysjs/calendar/calendar.css" />
+<script type="text/javascript" src="/sysjs/calendar.php"></script>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js">
+</script>
+</head>
+<body>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%"  id="navleft"><a href="index.php?act=main">管理中心</a> ->> 购物车列表</td>
+          <td width="44%" align="right">&nbsp;</td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form action="?" method="get">
+    <table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <td>
+                时间段： 从 
+                <input autocomplete="off" name="start_date" value="{$start_date}" style="width:130px;" ondblclick="return showCalendar(this, '%Y-%m-%d %H:%M:%S', false, false, this);" />
+                &nbsp;&nbsp;到 &nbsp;&nbsp; 
+                <input autocomplete="off" name="end_date" value="{$end_date}" style="width:130px;" ondblclick="return showCalendar(this, '%Y-%m-%d %H:%M:%S', false, false, this);"/>
+                商品编码：<input type="text" value="{$goods_sn}" name="goods_sn" />
+                <input type="submit" value="搜 索" />
+                <span style="color: grey;">多个编码用半角逗号隔开</span>
+            </td>
+        </tr>
+    </table>
+</form>
+{literal}
+<form method="POST" action="cart_manage.php?act=batch_remove" name="listForm" onsubmit="if(confirm('确认要删除这些记录?')){return true}else{return false;}">
+<div id="list">
+{/literal}
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th width="6%"> <input type="checkbox" onclick="checkAll(this, 'checkboxes[]');">
+编号</th>
+    <th width="11%">用户</th>
+    <th width="12%">产品编号</th>
+    <th width="30%">名称</th>
+    <th width="6%">价格</th>
+
+    <th width="6%" nowrap="nowrap">数量</th>
+    <th width="12%" nowrap="nowrap">加入时间</th>
+    <th width="9%" nowrap="nowrap" align="center">操作</th>
+  </tr>
+  {foreach from=$cart_list item=list name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';">
+   <td><input type="checkbox" name="checkboxes[]" value="{$list.rec_id}" onclick="checkone('checkboxes[]')"/>{$list.rec_id}</td>
+	<td height="10">{$list.session_id}</td>
+    <td>{$list.goods_sn}</td>  
+    <td>{$list.goods_name} {$list.goods_attr}</td>
+    <td>{$list.goods_price}</td>
+
+    <td>{$list.goods_number}</td>
+    <td>{$list.addtime}</td>
+    <td align="center" nowrap="nowrap">
+    <a href="javascript:;" delatr="?act=remove&id={$list.rec_id}" onclick="del_acttion(this);" title="删除" delmsg="你确定要删除该条记录吗？">删除</a></td>
+  </tr>
+  {/foreach}
+  <tr>
+  <td colspan="3"><input type="checkbox" onclick="checkAll(this, 'checkboxes[]');"> 全选 <input type="submit" class="button"  id="btnSubmit" value="删除所选" disabled="true" /> <input type="hidden" id="selAction" /></td>
+  <td colspan="5"><div id="pager">{$pagestr}</div></td>
+  </tr>
+</table>
+</div>
+</form>
+{include file="copyright.htm"}
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css?2013080503' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="/sysjs/eload13pack.js"></script>
+<script language="javascript" src="/sysjs/jlivequery.js"></script>
+<script language="javascript" src="/sysjs/jcookie.js"></script>
+<script language="javascript" src="/sysjs/validator.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 商品分类{$tag_msg}</td>
+          <td width="44%" align="right"><span class="navright"><a href="category.php">商品分类列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+  <td>
+	<div id="tabbar-div">
+      <p>
+        <span class="tab-front" id="general-tab" atr = '0'>原始语言</span>
+		{foreach from=$lang_arr name=lang_arr item=c}
+		<span class="tab-back" id="detail-tab"  atr = '{$smarty.foreach.lang_arr.iteration}'>{$c.title}</span>
+		{/foreach}
+        </p>
+	</div>
+  </td>
+</tr>
+</table>
+<div id="tabbody-div">
+<form name="regform" method="post" action="{$url}"  enctype="multipart/form-data"  onSubmit="return Validator.Validate(this,3)">
+<table width="100%" id="showtab0" align="center" cellspacing="1"  bgcolor="#FFFFFF">
+  <tr>
+    <th colspan="2">商品分类{$tag_msg}</th>
+  </tr>
+ <tr>
+      <tr>
+        <td width="10%" class="label">分类名称:</td>
+        <td width="90%">
+          <input type='text' name='cat_name' maxlength="300" value="{$cat_info.cat_name}" size='70%'  dataType="Require" msg="请请输入分类名称！" class="input_style" /> <font color="red">*</font>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">所属分类:</td>
+        <td>
+         {$cat_select}
+        </td>
+      </tr>
+
+	<tr><td class="label">页面标题</td>
+    <td><input type='text' name='cat_title' maxlength="300" value="{$cat_info.cat_title}" size='70%'   msg="请请输入分类名称！" class="input_style" />
+    
+    </td></tr>
+      <tr id="measure_unit">
+        <td class="label">分类单位:</td>
+        <td>
+          <input type="text" name='measure_unit' value='{$cat_info.measure_unit}' size="12" />
+        </td>
+      </tr>
+      <tr style="display:none;">
+        <td class="label">个数及折扣:</td>
+        <td><input type="text" name='grade' value='{if $cat_info.grade == ""}1|2 ---- 9|10 ---- 49|50 ----- max{else}{ $cat_info.grade}{/if}' size="40" />
+        个数&nbsp;&nbsp;&nbsp;
+         <br />
+         <input type="text" name='zhekou' value='{if $cat_info.zhekou == ""}1.29|1.26|1.25|1.24{else}{ $cat_info.zhekou}{/if}' size="40" /> 
+         折扣</td>
+      </tr>
+      <tr>
+        <td class="label">分类排序:</td>
+        <td>
+          <input type="text" name='sort_order' {if $cat_info.sort_order}value='{$cat_info.sort_order}'{else} value="0"{/if} size="15"  class="input_style"   datatype="Integer" msg="请填写数字！"  />
+        </td>
+      </tr>
+            <tr>
+        <td class="label">前台不显示时可访问:</td>
+        <td>
+          <label class="font-gray">
+              <input type="checkbox" name="is_show_seo" value="1" {if $cat_info.is_show_seo} checked="checked"{/if} />
+              勾选后，可通过输入url直接访问，<span class="font-red">语言屏蔽、前台是否显示</span>将失效。
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">关键词前后缀:</td>
+        <td><p>
+          <textarea name="add_word" cols="100" rows="6">{$cat_info.add_word}</textarea>
+        </p>
+       格式：<br>1.加前缀 填入： China<br>2.加后缀 填入： ;Wholesale<br>3.加前后缀 填入： Buy;From China
+     </td>
+      </tr>  
+      <tr>
+        <td class="label">是否显示:</td>
+        <td>
+          <input type="radio" name="is_show" value="1" {if $cat_info.is_show neq 0} checked="true"{/if}/> 前台显示
+          <input type="radio" name="is_show" value="0" {if $cat_info.is_show eq 0} checked="true"{/if} /> 不显示
+        </td>
+      </tr>
+     <!--pbegin-->
+     <tr>
+        <td class="label">屏蔽的浏览器语言选择:</td>
+     <td>
+   {foreach from=$langcfg key=k item=v}
+   <input type="checkbox" name="langs[]" value= "{$k}" {php} 
+      if (strpos( $this->_tpl_vars['cat_info']['clang'],$this->_tpl_vars['k']) !== false) echo 'checked="checked"';
+  {/php} 
+    >{$v}&nbsp;&nbsp;&nbsp;&nbsp;
+   {/foreach} 
+   </td>
+      </tr>
+     <!--pend-->
+
+           
+      <tr>
+        <td class="label">属性查找模板:</td>
+        <td>
+          <select name="template_id">
+          	<option value="">请选择...</option>
+          	{foreach from=$template_info_arr item=template_info key=key}
+          		<option value="{$template_info.template_id}" {if $template_info.template_id eq $cat_info.template_id} selected {/if}>{$template_info.template_name}</option>
+          	{/foreach}
+          </select>
+        </td>
+      </tr>
+      
+      <tr>
+        <td class="label">推荐:</td>
+        <td>
+          <input type="checkbox" name="is_home" value="1" {if $cat_info.is_home eq '1'} checked="true"{/if}/> 
+          首页推荐(只限顶级类) 
+          <input type="checkbox" name="is_dalei" value="1" {if $cat_info.is_dalei eq '1'} checked="checked"{/if}/>
+二类推荐 
+<input type="checkbox" name="is_home_under" value="1" {if $cat_info.is_home_under eq '1'} checked="checked"{/if}/>
+首页左边推荐</td>
+      </tr>
+      <tr>
+          <td class="label">配送方式：</td>
+          <td id="td-shipping-method"></td>
+		  <script language="javascript">
+            var shippingMethod = {$shipping_method};            
+            var shipping = '', cat_id = '{$cat_info.cat_id}', shipping_id = '{$cat_info.shipping_method}';
+			is_add ={if $smarty.get.id ==''}true {else}false{/if};
+            {literal}
+            $.each(shippingMethod, function(index, item) {
+                shipping += '<label><input type="checkbox" name="shipping_method[]" value="' + index + '"';
+				
+                if (shipping_id.indexOf(item.id)>=0 ||is_add) {
+					
+                    shipping += ' checked="checked"';
+                }
+                //index != 1 && (shipping += ' disabled="disabled"');
+                shipping += ' />' + item.ship_name + '</label> '
+                $('#td-shipping-method').html(shipping);
+            });
+            {/literal}
+		 </script> 		  
+      </tr>     
+      <tr>
+        <td class="label">样式表文件：</td>
+        <td>
+          <input type="text" name="template_file" value="{$cat_info.template_file}" size="40" /> <br />
+         
+        您可以为每一个商品分类指定一个样式表文件，一般不填。路径 temp/skin/下</td>
+      </tr>
+      <tr {if $cat_info.url_title == '' } style="display:none" {/if}>
+        <td class="label">生成静态页面文件名称：</td>
+        <td><input type="text" name="url_title" value='{$cat_info.url_title}' readonly="readonly" size='70%' /></td>
+      </tr>
+      
+      <tr>
+        <td class="label">代表图片地址：</td>
+        <td>
+              <input type="text" name="cat_pic" size="80" value="{$cat_info.cat_pic}" maxlength="200"/>
+              {if $cat_info.cat_pic}
+                <a href="goods.php?act=show_image&img_url={$cat_info.cat_pic}" target="_blank"><img src="/temp/skin3/images/admin/yes.gif" border="0" /></a>
+              {else}
+                <img src="/temp/skin3/images/admin/no.gif" />
+              {/if}
+           尺寸：首页150 X 120 px，  内页160 X 180 px  </td>
+      </tr>
+      
+      <tr>
+        <td class="label">首页左边图片地址：</td>
+        <td>
+              <input type="text" name="cat_pic_small" size="80" value="{$cat_info.cat_pic_small}" maxlength="200"/>
+              {if $cat_info.cat_pic_small}
+                <a href="goods.php?act=show_image&img_url={$cat_info.cat_pic_small}" target="_blank"><img src="/temp/skin3/images/admin/yes.gif" border="0" /></a>
+              {else}
+                <img src="/temp/skin3/images/admin/no.gif" />
+              {/if}尺寸：70 X 70 px
+           </td>
+      </tr>
+      
+      <tr>
+        <td class="label">热门搜索:</td>
+        <td>
+          <textarea name='hot_search' rows="5" cols="100">{$cat_info.hot_search}</textarea><br>
+          不同关键字分行输入，可以直接要跳转的网址如:<br> dropship;http://www.ahappdeal.com/m-article-id-105-pid.html
+        </td>
+      </tr>
+
+      <tr>
+        <td class="label">关键字(SEO):</td>
+        <td><input type="text" name="keywords" value='{$cat_info.keywords}' size="50">不同关键字以逗号隔开
+        </td>
+      </tr>
+
+      <tr>
+        <td class="label">首页左边推荐描述:</td>
+        <td>
+          <textarea name='cat_desc' rows="3" cols="100">{$cat_info.cat_desc}</textarea>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">推荐介绍：</td>
+        <td>
+   	    <span class="sbutton" onclick="controlDiv('msgDiv',1,'cat_cont_en')">预览</span><br>
+		<textarea name="cat_cont" id="cat_cont_en" cols="100" rows="6">{$cat_info.cat_cont}</textarea>
+		</td>
+      </tr>
+	  {if $default_lang eq '1'}
+      <tr>
+        <td class="label">&nbsp;</td>
+        <td><span class="button-div">
+          <input type="submit" value="{$tag_msg}" class="sub_but" onclick="DoProcess();"/>
+        </span></td>
+      </tr>
+	  {/if}
+	</table>    
+</form>
+  
+{foreach from=$lang_arr name=lang_arr item=c key=key}
+<form action="?" method="post">
+<table width="100%" id="showtab{$smarty.foreach.lang_arr.iteration}" align="center" style="display:none">
+	<tr>
+		<td>
+		<input type="hidden" name="act" value="mutil_lang_save" />
+		<input type="hidden" name="lang" value="{$c.title_e}" />
+		<input type="hidden" name="cat_id" value="{$cat_info.cat_id}" />
+		</td>
+	</tr>
+	<tr>
+		<td class="label">分类名称:</td>
+		<td width="90%">
+		  <input type='text' name='cat_name' maxlength="300" value="{$muti_lang_info[$c.title_e].0.cat_name}" size='70%'  dataType="Require" msg="请请输入分类名称！" class="input_style" /> <font color="red">*</font>
+		</td>
+	</tr>
+	<tr>
+		<td class="label">页面标题</td>
+		<td><input type='text' name='cat_title' maxlength="300" value="{$muti_lang_info[$c.title_e].0.cat_title}" size='70%'   msg="请请输入分类名称！" class="input_style" />
+		</td>
+	</tr>             
+	<tr>
+		<td class="label">热门搜索:-</td>
+		<td>
+		  <textarea name='hot_search' rows="3" cols="100">{$muti_lang_info[$c.title_e].0.hot_search}</textarea><br>
+		  不同关键字分行输入，可以直接要跳转的网址如:<br> dropship;http://www.ahappdeal.com/m-article-id-105-pid.html
+		</td>
+	</tr>      
+	<tr>
+		<td class="label">关键字(SEO):</td>
+		<td><input type="text" name="keywords" value='{$muti_lang_info[$c.title_e].0.keywords}' size="50">不同关键字以逗号隔开
+		</td>
+	</tr>
+	<tr>
+		<td class="label">首页左边推荐描述:</td>
+		<td>
+		  <textarea name='cat_desc' rows="5" cols="100">{$muti_lang_info[$c.title_e].0.cat_desc}</textarea>
+		</td>
+	</tr> 
+	<tr>
+		<td class="label">推荐介绍：</td>
+		<td>
+		<span class="sbutton" onclick="controlDiv('msgDiv',1,'cat_cont_{$key}')">预览</span><br>
+		<textarea name="cat_cont" id="cat_cont_{$key}" cols="100" rows="5">{$muti_lang_info[$c.title_e].0.cat_cont}</textarea>
+		</td>
+	</tr>	     
+	<tr>
+	  <td>&nbsp;</td>
+	</tr>
+	<tr>
+	  <td colspan="2" align="center">
+	  <input type="submit" value="确定" onclick="DoProcess();" class="sub_but"/></td>
+	</tr>                
+</table>
+</form>
+{/foreach}  
+</div>
+
+<div id="msgDiv">
+<h1><span><a href="#" onclick="controlDiv('msgDiv',0,'')">close</a>&nbsp;</span></h1>
+    <div align="center" id="show_content"></div>
+</div>
+{literal}
+<script>
+function controlDiv(DivID,divCase,ContentID){
+	var divs    = document.getElementById(DivID); 
+	if(divCase == 0) {
+		divs.style.display="none";
+	} else {
+		var content = document.getElementById(ContentID).value;		
+		var v_left  = (document.body.clientWidth-900)/2 + document.body.scrollLeft;  	
+		var v_top   = (document.body.clientHeight-500)/2 + document.body.scrollTop;
+		divs.style.left = v_left+'px';
+		divs.style.top  = v_top+'px';
+		$('#show_content').html(content);
+		$('#msgDiv').show();
+	}
+}
+</script>
+{/literal}
+
+{include file="copyright.htm"}
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站销售分析</title>
+    <link type="text/css" rel="stylesheet" href="/temp/skin3/eload_admin/images/admin_css.css" />
+    <link type="text/css" rel="stylesheet" href="{$jscache_url}sysjs/calendar/calendar.css" />
+    <script type="text/javascript" src="{$jscache_url}sysjs/calendar.php"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>     
+    {literal}
+    <script type="text/javascript">
+        /*$(function() {
+            $('.tr-list').each(function(index, item) {
+                var td = $(this).find('td:first'), text = td.text();
+                var prevText = $(this).prev().find('td:first').text();
+                if (text != prevText) {
+                    td.attr('style', 'color: red; font-weight: bold;');
+                }
+            });
+        });*/
+    </script>
+    <style type="text/css">
+        .font-red { color: red; }
+        .text-left { text-align: left; }
+        .font-green { color: green; }
+    </style>
+    {/literal}
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> &gt;&gt; 订单国家统计</td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <form action="" method="get">
+        <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+            <tr>
+                <td>
+                <input type="hidden" name="act" value="country" />  
+                    时间 <input name="start_date" value="{$start_date}" style="width:130px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);"/>
+                     到<input name="end_date" value="{$end_date}" style="width:130px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);"/>
+                     <span style="color: gray">包含，留空只获取开始时间数据</span>					
+                    <input type="submit" value="搜 索" />
+
+                </td>
+            </tr>
+        </table>
+    </form>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb" style="text-align: center;">
+        <tr>
+            <th>时间</th>
+            <th>国家</th>
+            <th>国家代码</th>
+            <th><div align="center">订单数量</div></th>
+            <th>订单金额</th>
+            <th><div align="center">上周同一天订单金额</div></th>
+     
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+        </tr>
+        {foreach from=$data item=item name=loop}
+        <tr class="tr-list" bgColor="{cycle values='#f4f9fd,e8f1fd' name=cycle1}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{cycle values='#f4f9fd,e8f1fd' name=cycle2}'">
+            <td><span style="color: red; font-weight: bold;">{$item.unixtime|date_format:'%Y-%m-%d'}</span></td>
+            <td class="text-left">{$item.country_cn}</td>
+                      <td class="text-left">{$item.country_code}</td>
+            <td><span style="color:red">{$item.paid_order_count}</span>/{$item.all_order_count}</td>
+            <td><span style="color:red">{$item.paid_order_sum}</span>/{$item.all_order_sum}</td>
+            <td><span style="color:red">{$item.paid_order_sum_aweek_ago}</span>/{$item.all_order_sum_aweek_ago}</td>
+
+        </tr>
+        {foreachelse}
+        <tr>
+            <td colspan="15" class="no-records">{$no_records}</td>
+        </tr>
+        {/foreach}
+        <tr>
+          <td align="right" nowrap="true" colspan="11"><div id="pager">{$pagestr}</div></td>
+        </tr>
+    </table>
+    <div style="color: grey; margin-left: 10px;">
+        <p style="color: red; font-weight: bold;">&nbsp;</p>
+</div>
+    <script type="text/javascript"></script>
+    {include file="copyright.htm"}

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/validator.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/admin_add.js"></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+{literal}
+<style type="text/css">
+    ul { margin: 0; padding: 0; }
+    li { width: 200px; float: left; list-style: none; }
+</style>
+
+
+{/literal}
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 管理员{$tag_msg}</td>
+          <td width="44%" align="right"><span class="navright"><a href="protect.php?act=menulist">管理员列表</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<form action="?act=save_admin_cat_priv" method="post">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th colspan="2">后台分类管理权限设置</th>
+  </tr>
+
+  <tr>
+    <td width="21%" colspan="2" >管理员:<strong>{$admin_info.real_name}</strong></td>
+
+  </tr>
+<tr><td colspan="2">
+    <p>允许管理的分类权<input type="checkbox" onclick="checkAll(this, 'cat_id[]')" />> 全选 </p>
+      
+
+</td></tr>
+</table>
+<table width="99%"align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr align="left">
+
+    <td width="99%" >
+    <ul>
+    {foreach key=key from=$big_cat item=c name=outer}
+    <li><input type="checkbox" name="cat_id[]" value="{$c.cat_id}"
+    {php}
+    if(in_array($this->_tpl_vars['c']['cat_id'],explode(',',$this->_tpl_vars['admin_info']['cat_priv']))) echo'checked';
+    {/php}
+    
+     />{$c.cat_name}
+</li>
+    {/foreach}
+    </ul>
+    <input type="hidden" name="admin_id" value="{$admin_id}" />
+    </td>
+  </tr>
+  <tr>
+
+    <td align="center">&nbsp;<input name="" type="submit" class="sub_but" id="button" value="保存" />&nbsp;&nbsp;<input name="" type="reset" class="sub_but" id="button" value="重置" /></td>
+  </tr>
+  <tr>
+    <td >&nbsp;</td>
+    <td width="79%" ></td>
+  </tr>
+
+</table>
+  </form>
+{include file="copyright.htm"}
+</body>
+</html>

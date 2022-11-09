@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	{include file="top.htm"}
+    <link rel="stylesheet" href="{$imgcache_url}mincss/otherpage_min.css?2014051701" />
+</head>
+<body>
+	<div id="mainWarp">
+    
+      <div class="no_top clearfix">
+          <h1 class="fl no_logo"><a href="/">{$lang.ahhapydeal_com}</a></h1>
+          <ul class="no_nav fl">
+              <li><a href="http://www.dealsmachine.com/new-arrivals/">{$lang.new_arrival}</a></li>
+              <li><a href="http://www.dealsmachine.com/popular-products/">{$lang.hot_products}</a></li>
+              <li><a href="http://www.dealsmachine.com/daily-deals/">{$lang.group_deals}</a></li>
+              <li><a href="http://www.dealsmachine.com/dollar-zone/">{$lang.specials}</a></li>
+              <li><a href="http://user.dealsmachine.com/m-users.htm" rel="nofollow">{$lang.my_account}</a></li>
+          </ul>
+      </div><!--end .no_top-->
+      
+      <div class="no_tipsShow m_box p10 mt10 mb10">
+        <div class="no_tips">{$lang.sorry_page_not_found}</div>
+        <p class="pb10 tc">{$lang.return_to_the} <a href="/" class="no_blue">{$lang.home_page}</a></p>
+        <p><a href="/" class="no_button">{$lang.Continue_Shopping}</a></p>
+      </div><!--end no_tipsShow-->
+      
+      {include file="cart/recommend_product.htm"}
+      
+    </div><!--#mainWarp-->
+	<div id="footer">
+	{include file="foothelp.htm"}
+	{include file="foot.htm"}
+	</div>
+{include file="statistics_js.htm"}
+</body>
+</html>

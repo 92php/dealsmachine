@@ -1,0 +1,548 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	{include file="top.htm"}
+	<link rel="stylesheet" href="{$imgcache_url}mincss/users_inc_min.css" />
+</head>
+<body>
+{include file="public_top.htm"}
+	<div class="curPath mt10"><a href="/{$cur_lang_url}" title="web home" class="fl">{$lang.home}</a> <h1 class="fl fb"> &raquo; {$nav}</h1></div>
+    <div id="af_mainBox" class="mt10 pb20">
+    	 <ul class="af_subNav">
+            <li><a {if $smarty.get.a eq 'recommend_link'}class="cur"{/if} href="/{$cur_lang_url}m-webad-a-recommend_link.htm">{$lang.affiliate_homepage}</a></li><li class="affll">|</li>
+            <li><a {if $smarty.get.a eq 'links_list'}class="cur"{/if} href="/{$cur_lang_url}m-webad-a-links_list.htm">{$lang.get_affiliate_links}</a></li><li class="affll">|</li>
+            <li><a {if $smarty.get.a eq 'order_list'}class="cur"{/if} href="/{$cur_lang_url}m-webad-a-order_list.htm">{$lang.order_report}</a></li><li class="affll">|</li>
+            <li><a {if $smarty.get.a eq 'source_stat'}class="cur"{/if} href="/{$cur_lang_url}m-webad-a-source_stat.html">{$lang.traffic_sources}</a></li><li class="affll">|</li>
+            <li><a {if $smarty.get.a eq 'commission'}class="cur"{/if} href="/{$cur_lang_url}m-webad-a-commission.htm">{$lang.commission}</a></li><li class="affll">|</li>
+            <li><a {if $smarty.get.a eq 'contact'}class="cur"{/if} href="/{$cur_lang_url}m-webad-a-contact.htm">{$lang.contact}</a></li><li class="affll">|</li>
+            <li><a {if $smarty.get.a eq 'how2use'}class="cur"{/if} href="/{$cur_lang_url}m-webad-a-how2use.htm">{$lang.how_to_use}</a></li>
+        </ul>
+{if $act eq 'recommend_link'}        
+        <!--Affiliate Homepage begin-->
+		{if $re_link}
+    	<div class="mt10">
+        	<h3 class="af_title">{$lang.the_latest_promotion}</h3>
+			
+            <table cellspacing="1" cellpadding="6" border="0" bgcolor="#cccccc" width="100%" class="mt10">
+              <tbody>
+                <tr>
+                  <td height="30" bgcolor="#f1f1f1" colspan="4" class="tableTitle"><h4 >{$lang.promotion} </h4></td></tr>
+                <tr>
+                  <td bgcolor="#F6F6F6" align="center" width="26%"><strong class="fb">{$lang.title}</strong></td>
+                  <td bgcolor="#F6F6F6" align="center" width="39%"><strong class="fb">{$lang.description}</strong></td>
+                  <td bgcolor="#F6F6F6" align="center" width="21%"><strong class="fb">{$lang.banner}</strong></td>
+                  <td bgcolor="#F6F6F6" align="center" width="14%"><strong class="fb">{$lang.get_code} </strong></td>
+                </tr>
+              <!--{foreach from=$re_link name=link item=link}--> 
+              <form action="/{$cur_lang_url}m-webad-a-add_link.htm" target="_blank" method="post" name="form{$smarty.foreach.link.index}">
+              <tr>
+                <td bgcolor="#FFFFFF" align="left">{$link.link_name}</td>
+                <td bgcolor="#FFFFFF" align="left">{$link.des}</td>
+                <td bgcolor="#FFFFFF" align="center"><img width="100" src="{$link.img}"></td>
+                <td bgcolor="#FFFFFF" align="center"><input type="hidden" value="{$link.link_name}" name="link_name">
+                  <input type="hidden" value="{$link.link_name}" name="link_text">
+                  <input type="hidden" value="{$link.img}" name="img">
+                  <input type="hidden" value="{$link.url}" name="link_url">
+                  <a style="color:#0033CC; text-decoration:underline" onClick="form{$smarty.foreach.link.index}.submit();" href="javascript:void(0)">{$lang.click_here}</a></td>
+              </tr>
+              </form>
+			 <!--{/foreach}-->			              
+              </tbody>
+            </table>
+        </div>
+        {/if}
+        <div class="mt10">
+        	<h3 class="af_title">{$lang.quick_stats}</h3>
+        	<table cellspacing="1" cellpadding="5" border="0" bgcolor="#cccccc" width="100%" class="mt10">
+              <tbody>
+                <tr>
+                  <td bgcolor="#F6F6F6"  align="center" height="30"><strong class="fb">{$lang.time}</strong></td>
+                  <td bgcolor="#F6F6F6" align="center"><strong class="fb">{$lang.clicks}</strong></td>
+                  <td bgcolor="#F6F6F6"  align="center"><strong class="fb">{$lang.sales}</strong></td>
+                  <td bgcolor="#F6F6F6" align="center"><strong class="fb">{$lang.gross_sale}</strong></td>
+                  <td bgcolor="#F6F6F6"  align="center"><strong class="fb">{$lang.commission}</strong></td>
+                </tr>
+                <tr>
+                  <td bgcolor="#Fafafa" align="center">{$lang.today}</td>
+                  <td bgcolor="#FFFFFF" align="center">{$ip_stat.today_ip}</td>
+                  <td bgcolor="#FFFFFF" align="center">{$order_stat.today.order_count}</td>
+                  <td bgcolor="#FFFFFF" align="center">{$order_stat.today.order_amount}</td>
+                  <td bgcolor="#FFFFFF" align="center">{$order_stat.today.commission|string_format:"%.2f"}</td>
+                </tr>
+                <tr>
+                  <td bgcolor="#Fafafa" align="center">{$lang.this_week}</td>
+                  <td bgcolor="#FFFFFF" align="center">{$ip_stat.this_week_ip}</td>
+                  <td bgcolor="#FFFFFF" align="center">{$order_stat.this_week.order_count}</td>
+                  <td bgcolor="#FFFFFF" align="center">{$order_stat.this_week.order_amount}</td>
+                  <td bgcolor="#FFFFFF" align="center">{$order_stat.this_week.commission|string_format:"%.2f"}</td>
+                </tr>
+                <tr>
+                  <td bgcolor="#Fafafa" align="center">{$lang.this_month}</td>
+                  <td bgcolor="#FFFFFF" align="center">{$ip_stat.this_month_ip}</td>
+                  <td bgcolor="#FFFFFF" align="center">{$order_stat.this_month.order_count}</td>
+                  <td bgcolor="#FFFFFF" align="center">{$order_stat.this_month.order_amount}</td>
+                  <td bgcolor="#FFFFFF" align="center">{$order_stat.this_month.commission|string_format:"%.2f"}</td>
+                </tr>
+                <tr>
+                  <td bgcolor="#Fafafa" align="center">{$lang.last_month}</td>
+                  <td bgcolor="#FFFFFF" align="center">{$ip_stat.last_month_ip}</td>
+                  <td bgcolor="#FFFFFF" align="center">{$order_stat.last_month.order_count}</td>
+                  <td bgcolor="#FFFFFF" align="center">{$order_stat.last_month.order_amount}</td>
+                  <td bgcolor="#FFFFFF" align="center">{$order_stat.last_month.commission|string_format:"%.2f"}</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+       <!--Affiliate Homepage end-->
+{/if}
+
+{if $act == 'add_link'}
+{dynamic}
+       <!--Get Affiliate Links begin-->
+       <div class="mt10 ge_taffBox">
+       		<form id="link_form" action="" method="post">
+            	<input type="hidden" value="" name="act">
+                <input type="hidden" value="" name="linkid">
+                <input type="hidden" value="" name="pid">
+                <table cellspacing="1" cellpadding="5" border="0" bgcolor="#CCCCCC" align="center" width="100%">
+                  <tbody>
+                    <tr>
+                      <td bgcolor="#FFFFFF" align="left" width="121" nowrap="">{$lang.link_name}:<font color="red">*</font></td>
+                      <td bgcolor="#FFFFFF"><input type="text" name="link_name" value="{$link.link_name}" maxlength="200" size="50"></td>
+                    </tr>
+                    <tr>
+                      <td bgcolor="#FFFFFF">{$lang.link_image}:</td>
+                      <td bgcolor="#FFFFFF">{if $link.img}<img width="100" height="100" src="{$link.img}"><br/>{/if}<input type="text" value="{$link.img}" name="img" size="80"></td>
+                    </tr>
+                    <tr>
+                      <td bgcolor="#FFFFFF" align="left" width="121" nowrap="">{$lang.link_text}: <font color="red">*</font></td>
+                      <td bgcolor="#FFFFFF"><textarea name="link_text" type="text" rows="5" cols="60" maxlength="150">{$link.link_text}</textarea>
+                       <p  style="font-size:11px; color:#999"><span style="font-size:11px; color:#999">{$lang.webad_des_1}</span></p></td>
+                    </tr>
+                    <tr style="display:none">
+                      <td bgcolor="#FFFFFF" align="left" width="121" nowrap="">{$lang.link_description}: </td>
+                      <td bgcolor="#FFFFFF" width="891"><textarea name="link_desc" type="text" rows="5" cols="60" maxlength="200">{$link.link_desc}</textarea></td>
+                    </tr>
+                    <tr>
+                      <td bgcolor="#FFFFFF" align="left" width="121" nowrap="">{$lang.link_url}: <font color="red">*</font></td>
+                      <td bgcolor="#FFFFFF"><input type="text" value="{$link.link_url}" name="link_url" maxlength="200" size="80"></td>
+                    </tr>
+                    <tr>
+                      <td bgcolor="#FFFFFF" align="center" nowrap="" colspan="2"><input type="submit" value="  save  ">
+                        &nbsp;&nbsp;
+                        <input type="button" value="  cancel  " onclick="window.close()"></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </form>
+       </div>
+  {/dynamic}
+{/if}
+{if $act == 'links_list'}
+{dynamic}
+       <div class="mt10 ge_taffLink m_box">
+       		<p>{$lang.your_unique_affiliate} <strong class="fb">{$unique_id}</strong></p>
+            <div class="mt10">
+                <p><strong class="fb">{$lang.method} 1:</strong> {$lang.simply_add}  <strong class="fb">?lkid={$unique_id}</strong>  {$lang.to_to_any}:</p>
+                <dl>
+                    <dt><strong class="fb">{$lang.example} 1: </strong>{$lang.link_to_our_homepage}:</dt>
+                    <dd><input type="text" value="{$DOMAIN}/#lkid={$unique_id}" onclick="this.select()" size="80"/></dd>
+                    <dt><strong class="fb">{$lang.example} 2: </strong>{$lang.link_to_our}:</dt>
+                    <dd><input type="text" value="{$DOMAIN}/pt-hot.html#lkid={$unique_id}" onclick="this.select()" size="80"/></dd>
+                    <dt><strong class="fb">{$lang.example} 3: </strong>{$lang.link_to_iPhone_accessories}:</dt>
+                    <dd><input type="text" value="{$DOMAIN}/iphone-ipad-ipod-c-93.html#lkid={$unique_id}" onclick="this.select()" size="80"/></dd>
+                </dl>
+            </div>
+            <div c lang="mt10">
+            	<p><strong class="fb">{$lang.method} 2:</strong></p>
+            	<P><img src="../images/styleimg/recomm.gif" alt="Affilate link 8% off" title="Affilate link 8% off"/></P>
+                <p>{$lang.method_des_2}</p>
+            </div>
+            <div class="mt10">
+            	<p><strong class="fb">{$lang.method} 3:</strong></p>
+                <p class="clearfix addNewLikWarp"><span class="fl">{$lang.method_des_3}</p>
+            </div>
+       </div>
+       
+       <div class="ge_tafftable mt10">
+       		<form method="post" action="/{$cur_lang_url}m-webad-a-del_link.htm">
+              <table cellspacing="1" cellpadding="5" border="0" bgcolor="#cccccc" width="100%" style="font-size:12px;">
+                <tbody>
+                  <tr>
+                    <th width="12%"  rowspan="2" class="tableTitle">{$lang.link_name}</th>
+                    <th width="" nowrap="" rowspan="2" class="tableTitle">{$lang.link_id}</th>
+                    <th width=""  rowspan="2" class="tableTitle">{$lang.image}</th>
+                    <th width=""  rowspan="2" class="tableTitle">{$lang.script}</th>
+                    <th width="" nowrap="nowrap"  rowspan="2" class="tableTitle">{$lang.unique_ip}</th>
+                    <th width="" rowspan="2" class="tableTitle">{$lang.registration_number}</th>
+                    <th width="" colspan="2" class="tableTitle">{$lang.orders}</th>
+                    <th width=""  colspan="3" class="tableTitle">{$lang.orders_value}</th>
+                    <th rowspan="2" class="tableTitle"></th>
+                  </tr>
+                  <tr>
+                    <td bgcolor="#ffffff" align="center">{$lang.total}</td>
+                    <td bgcolor="#ffffff" align="center">{$lang.os.1}</td>
+                    <td bgcolor="#ffffff" align="center">{$lang.last_month}</td>
+                    <td bgcolor="#ffffff" align="center">{$lang.current_month}</td>
+                    <td bgcolor="#ffffff" align="center">{$lang.non}-<br>
+                      Paid </td>
+                  </tr>
+
+                  <tr>
+                    <td colspan="8"></td>
+                    <td bgcolor="#ffffff" align="center"><span class="price">{$all_last_complete_order}</span></td>
+                    <td bgcolor="#ffffff" align="center"><span class="price">{$this_complete_order}</span></td>
+                    <td bgcolor="#ffffff" align="center">{$non_paid_order}</td>
+                    <td bgcolor="#ffffff" align="center">&nbsp;</td>
+                  </tr>
+                  <!--{foreach from=$Arr_links item=link}-->
+                  <tr>
+                    <td bgcolor="#FFFFFF" align="center" width="100" style="word-break:break-all"><p>{$link.link_name}</p>
+                      <p>{$link.adddate}</p>
+                      <p><span onclick="javascript:window.open('http://a.everbuying.net/{$cur_lang_url}m-webad-a-add_link-linkid-{$link.id}.htm')" style="cursor:pointer; color:#0033CC">{$lang.edit}</span></p></td>
+                    <td bgcolor="#FFFFFF" align="center">{$link.id}</td>
+                    <td bgcolor="#FFFFFF">{if $link.img neq ''}<img width="70" src="{$link.img}">{/if}</td>
+                    <td bgcolor="#FFFFFF" align="left"> {$lang.affiliate_url}:<br>
+                      <textarea rows="3" cols="25" onclick="this.select()" name="textarea" style="padding:0; margin:0;font-size:12px;">{$link.link_url_jump}</textarea>
+                      <br>
+                      {$lang.text_link}:<br>
+                      <textarea rows="3" cols="25" onclick="this.select()" name="textarea" style="padding:0; margin:0;font-size:12px;"><a  target="_blank" href="{$link.link_url_jump}">{$link.link_text}</a></textarea>
+                      <br>
+					  {if $link.img != ''}
+                      {$lang.image_link}:
+                      <textarea onclick="this.select()" cols="25" rows="4" style="padding:0; margin:0;font-size:12px;"><a target="_blank" href="{$link.link_url_jump}"><img alt="{$link.link_name}" src="{$link.img}" border="0"/><span style="width:100px; display:block; font-size:11px">{$link.link_text}</span></a></textarea>
+					  {/if}
+					</td>
+                    <td bgcolor="#FFFFFF" align="center">{$link.ip_count}{if $link.ip_count}<br><a  href="/{$cur_lang_url}m-webad-a-ip_list-x-1.htm?linkid={$link.id}" style="color:#0033CC">{$lang.detail}</a>{/if}</td>
+                    <td bgcolor="#FFFFFF" align="center">{$link.reg_count}</td>
+                    <td bgcolor="#FFFFFF" align="center">{$link.order_count}{if $link.order_count}<br><a  href="/{$cur_lang_url}m-webad-a-order_list-x-1.htm?linkid={$link.id}" style="color:#0033CC">{$lang.detail}</a>{/if}</td>
+                    <td bgcolor="#FFFFFF" align="center">{$link.order_finish}{if $link.order_finish}<br><a href="/{$cur_lang_url}m-webad-a-order_list-x-1.htm?linkid={$link.id}&status=1" style="color:#0033CC">{$lang.detail}</a>{/if}</td>
+                    <td bgcolor="#FFFFFF" align="center">${$link.last_complete_issue}</td>
+                    <td bgcolor="#FFFFFF" align="center">${$link.this_complete_issue}</td>
+                    <td bgcolor="#FFFFFF" align="center">${$link.this_pending_issue} </td>
+                    <td bgcolor="#FFFFFF" align="center">{if $link.id neq $unique_id}<input type="checkbox" name="linkid[]" value="{$link.id}"/>{/if}</td>
+                  </tr>
+                   <!--{/foreach}-->
+                </tbody>
+              </table>
+              <div class="mt10 tr">
+                <input type="button" value="Add new link" onclick="window.open('/{$cur_lang_url}m-webad-a-add_link.htm')" class="pr15">
+                <input type="button" value="Delete selected link(s)" onclick="if(confirm('you are going to delete selected links,click ok to continue'))this.form.submit()">
+              </div>
+            </form>
+            
+            <div class="mt10 p10 m_box">
+            	<p>{$lang.last_month_complete_commission} :<span class="price">{$all_last_complete_commission}</span></p>
+                <p>{$lang.current_month_complete_commission} :<span class="price">{$all_current_complete_commission}</span></p>
+                <p>{$lang.pending_commission} :<span class="price">{$all_Pending_commission}</span></p>
+                <p>{$lang.commsission_remaining}: {$lang.cur_list.0.keyd} <span class="price">{$all_Commsission_remaining}</span></p>
+            </div>
+            
+            <!--分页 Begin-->
+            <div class="pageBox mt10">
+				<div class="pages" >{$pagestr}</div>
+            </div><!--.pages--> 
+       </div>
+       <!--Get Affiliate Links end-->
+{/dynamic}
+{/if}
+
+{if $act == 'order_list'}
+{dynamic}       
+       <!--Order Report begin-->
+       <div class="order_report mt10">
+           <form action="" method="get">
+            <table width="100%" bgcolor="#CCCCCC" cellpadding="5" cellspacing="1">
+              <tbody>
+                <tr>
+                  <td width="39%" align="right" bgcolor="#FFFFFF">{$lang.link_id}:</td>
+                  <td width="61%" bgcolor="#FFFFFF"><input value="{$smarty.get.linkid}" name="linkid" type="text"></td>
+                </tr>
+                <tr>
+                  <td nowrap="" align="right" bgcolor="#FFFFFF">{$lang.source_url}:</td>
+                  <td bgcolor="#FFFFFF"><input size="50" value="{$smarty.get.referer}" name="referer" type="text"></td>
+                </tr>
+                <tr>
+                  <td align="right" bgcolor="#FFFFFF"> {$lang.order_date_from}: </td>
+                  <td align="left" bgcolor="#FFFFFF"><input value="{$smarty.get.start_time}" name="start_time" onclick="this.value='';new Calendar(null, null, 1).show(this);" type="text">
+                    to
+                    <input value="" name="end_time" onclick="this.value='';new Calendar(null, null, 1).show(this);" type="text"></td>
+                </tr>
+                <tr>
+                  <td width="39%" align="right" bgcolor="#FFFFFF">{$lang.order_status}:</td>
+                  <td width="61%" bgcolor="#FFFFFF"><input name="status" value="0" type="radio" {if $smarty.get.status neq '1'}checked{/if}>
+                    {$lang.all}  &nbsp;&nbsp;
+                    <input name="status" value="1" type="radio" {if $smarty.get.status == '1'}checked{/if}>
+                    {$lang.os.1}  &nbsp;&nbsp; </td>
+                </tr>
+                <tr>
+                  <td colspan="2" align="center" bgcolor="#FFFFFF"><input value="Submit" type="submit"></td>
+                </tr>
+              </tbody>
+            </table>
+            </form>
+        </div>
+        
+        <div class="mt10 order_report">
+        	<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
+                <tr>
+                  <th width="12%" height="40" class="tableTitle">{$lang.order_no}.</th>
+                  <th class="tableTitle">{$lang.link_id}</th>
+                  <th class="tableTitle">{$lang.order_date}</th>
+                  <th class="tableTitle">{$lang.order_status}</th>
+                  <th class="tableTitle">{$lang.order_total}</th>
+                  <th class="tableTitle">{$lang.commission}</th>
+                  <th class="tableTitle">{$lang.commssion_status}</th>
+                  <th class="tableTitle" width="60">{$lang.detail}</th>
+                </tr>
+				<!--{foreach name=order from=$order_list  item=order}-->
+                <tr >
+                  <td height="35" align="center" bgcolor="#FFFFFF">{$order.order_sn|truncate:13:"":true}**** </td>
+                  <td align="center" bgcolor="#FFFFFF"><a href="/{$cur_lang_url}m-webad-a-add_link-linkid-{$order.wj_linkid}.htm" target="_blank">{$order.wj_linkid}</a></td>
+                  <td align="center" bgcolor="#FFFFFF">{$order.add_time}</td>
+                  <td bgcolor="#FFFFFF" width="20%">{$order.order_status_str}</td>
+                  <td align="center" bgcolor="#FFFFFF">{$order.order_amount} </td>
+                  <td align="center" bgcolor="#FFFFFF">{$order.commission}</td>
+                  <td align="center" bgcolor="#FFFFFF">{$order.commission_state}</td>
+                  <td align="center" bgcolor="#FFFFFF"><span class="detailBtn" onClick="$('.detail_{$smarty.foreach.order.index}).toggle();$(this).parents('tr:first').toggleClass('curTr')"></span></td>
+                </tr>
+				{if $order.wj_referer}
+                <tr class="none detail_{$smarty.foreach.order.index}">
+                  <td colspan="9" height="25"   style="word-wrap:break-word; padding:5px 10px; " bgcolor="#EAEAEA"><strong class="fb">{$lang.source_url}</strong>:<a href="{$order.wj_referer}" class="color_blue no_unl" target="_blank">{$order.wj_referer}</a></td>
+                </tr>
+				{/if}
+                <tr bgcolor="#FFFFFF" class="none detail_{$smarty.foreach.order.index}">
+                  <td colspan="9" >
+                  
+                  	<table align="center" cellpadding="3" width="95%" bgcolor="#ccc"  cellspacing="1">
+                      <tr>
+                        <th width="37%" height="25" align="center" bgcolor="#EAEAEA" >{$lang.goods_title}</th>
+                        <th width="15%" align="center" bgcolor="#EAEAEA" >{$lang.rma_sku}</th>
+                        <th width="16%" align="center" bgcolor="#EAEAEA" >{$lang.goods_price}</th>
+                        <th width="18%" align="center" bgcolor="#EAEAEA" >{$lang.number}</th>
+                        <th width="14%" align="center" bgcolor="#EAEAEA" >{$lang.ws_subtotal}</th>
+                      </tr>
+                      <!-- {foreach from=$order.goods_list item=goods} -->
+                      <tr>
+                        <td  bgcolor="#fff">
+							<!-- {if $goods.goods_id gt 0 && $goods.extension_code neq 'package_buy'} 商品 --> 
+								<a href="{$goods.url_title}" target="_blank" class="f6">{$goods.goods_name}</a> 
+							<!-- {elseif $goods.goods_id gt 0 && $goods.extension_code eq 'package_buy'} --> 
+								<a href="javascript:void(0)" onClick="setSuitShow({$goods.goods_id})" class="f6">{$goods.goods_name}</a>
+								<div id="suit_{$goods.goods_id}" style="display:none"> </div>             
+							<!-- {/if} -->
+						</td>
+                        <td align="center" bgcolor="#fff">{$goods.goods_sn}</td>
+                        <td align="center" bgcolor="#fff"> {$goods.goods_price} $</td>
+                        <td align="center" bgcolor="#fff">{$goods.goods_number}</td>
+                        <td align="center" bgcolor="#fff">{$goods.subtotal} $</td>
+                      </tr>
+					  <!--{/foreach}-->
+                    </table>
+                    
+                  </td>
+				 
+                </tr>
+				<!--{/foreach}--> 
+              </table>
+              <!--分页 Begin-->
+                <div class="pageBox mt10">
+                  <div class="pages" >{$pagestr}</div>
+                </div><!--.pages--> 
+        </div>
+       <!--Order Report end-->
+ {/dynamic}
+{/if}
+
+
+{if $act == 'ip_list'}
+{dynamic}
+<!--BOF:ip列表-->
+
+
+<div class="clear"></div>
+<div id="classmaina">
+  <table width="100%" cellpadding="5" cellspacing="1" bgcolor="#CCCCCC">
+    <form action="" method="get">
+      <tr>
+        <td width="39%" align="right" bgcolor="#FFFFFF">{$lang.link_id}:</td>
+        <td width="61%" bgcolor="#FFFFFF"><input type="text" value="{$smarty.get.linkid}" name="linkid"/></td>
+      </tr>
+      <tr>
+        <td align="right" nowrap bgcolor="#FFFFFF">{$lang.source_url}:</td>
+        <td bgcolor="#FFFFFF"><input size="50" type="text" value="{$smarty.get.referer}" name="referer"/></td>
+      </tr>
+      <tr>
+        <td align="right" bgcolor="#FFFFFF"> {$lang.access_time_from}: </td>
+        <td align="left" bgcolor="#FFFFFF"><input value="{$smarty.get.start_time}" type="text" name="start_time" onClick="this.value='';new Calendar(null, null, 1).show(this);" />
+			{$lang.to}<input value="{$smarty.get.end_time}" type="text" name="end_time" onClick="this.value='';new Calendar(null, null, 1).show(this);" />
+		</td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center" bgcolor="#FFFFFF"><input value="Submit" type="submit"/></td>
+      </tr>
+    </form>
+  </table>
+
+
+  </div>
+  <div class="clear"></div>
+  <div id="classmaina">
+  <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#CCCCCC">
+    <tr>
+      <th bgcolor="#F2F2F2" width="12%"   rowspan="2" style="text-align:center" >{$lang.ip}</th>
+      <th bgcolor="#F2F2F2"  rowspan="2" nowrap style="text-align:center" width="">{$lang.access_time_from}</th>
+      <th bgcolor="#F2F2F2"  rowspan="2" nowrap style="text-align:center" width="">{$lang.from_link_id}</th>
+      <th bgcolor="#F2F2F2"  rowspan="2" style="text-align:center" width="">{$lang.source_url}</th>
+    </tr>
+    <!--{foreach from=$ip_list  item=r}-->
+    
+    <tr></tr>
+    <tr>
+      <td align="center" width="15%" nowrap bgcolor="#FFFFFF">{$r.ips}<br>
+        <br></td>
+      <td  width="15%" nowrap align="center" bgcolor="#FFFFFF">{$r.adddate}</td>
+      <td bgcolor="#FFFFFF" width="5%"><a href="/{$cur_lang_url}m-webad-a-add_link-linkid-{$r.from_linkid}.htm" target="_blank">{$r.from_linkid}</a></td>
+      <td align="left" width="40%" style="" bgcolor="#FFFFFF">{$r.HTTP_REFERER} </td>
+    </tr>
+    
+    <!--{/foreach}-->
+  </table>
+	<div class="clear"></div>  
+ <div class="xbpage" style="width:100%">
+		<div class="xbpage1"></div>
+		<div class="xbpage2" style="width:98%; overflow:hidden">
+      <div class="bottompage" style="width:100%">
+      <div class="pages" ><p class="ppxx">{$lang.return} {$record_count} {$lang.results},</p>{$pagestr}</div>
+      </div>
+	  </div>
+	  <div class="xbpage3"></div>
+	  </div> 
+
+</div>
+
+{/dynamic}
+
+<!--EOF:ip列表-->
+{/if}
+
+{if $act == 'source_stat'}
+       <!--Traffic Sources begin-->
+       	<div class="TrafficSource mt10">
+            <form action="" method="get">
+              <table width="100%" bgcolor="#CCCCCC" cellpadding="5" cellspacing="1">
+                <tbody>
+                  <tr>
+                    <td nowrap="" width="39%" align="right" bgcolor="#FFFFFF">{$lang.source_url}:</td>
+                    <td width="61%" bgcolor="#FFFFFF"><input size="50" value="{$smarty.get.referer}" name="referer" type="text"></td>
+                  </tr>
+                  <tr>
+                    <td align="right" bgcolor="#FFFFFF"> {$lang.date_from}: </td>
+                    <td align="left" bgcolor="#FFFFFF"><input value="{$smarty.get.start_time}" name="start_time" onclick="this.value='';new Calendar(null, null, 1).show(this);" type="text">
+                      {$lang.to}
+                      <input value="{$smarty.get.end_time}" name="end_time" onclick="this.value='';new Calendar(null, null, 1).show(this);" type="text"></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" align="center" bgcolor="#FFFFFF"><input value="Submit" type="submit"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </form>
+            
+            <table width="997" border="0" cellpadding="5" cellspacing="1" bgcolor="#CCCCCC" class="mt10">
+              <tr>
+                <th width="29%" class="tc tableTitle">{$lang.source_medium}</th>
+                <th width="22%" nowrap="nowrap"  class="tc tableTitle">{$lang.unique_ip}</th>
+                <th width="25%" align="center" class="tc tableTitle">{$lang.orders} </th>
+                <th width="24%" align="center" class="tc tableTitle">{$lang.order_value}</th>
+              </tr>
+			  <!--{foreach from=$source_list item=l}-->
+              <tr>
+                <td width="29%" align="center" bgcolor="#FFFFFF">{if $l.HTTP_REFERER}<a href="{$l.HTTP_REFERER}" target="_blank" class="color_blue no_unl">{$l.HTTP_REFERER}</a>{else}{$lang.others}{/if}</td>
+                <td align="center" bgcolor="#FFFFFF"><a  href="/{$cur_lang_url}m-webad-a-ip_list-x-1.htm?referer={$l.HTTP_REFERER_encode}"  class="color_blue no_unl">{$l.ip_count}</a></td>
+                <td align="center" bgcolor="#FFFFFF"><a  href="/{$cur_lang_url}m-webad-a-order_list.html?status=1&referer={$l.HTTP_REFERER_encode}"  class="color_blue no_unl">{$l.order_count}</a></td>
+                <td align="center" bgcolor="#FFFFFF">{$l.order_sum}</td>
+              </tr>
+			  <!--{/foreach}-->
+            </table>
+			
+             <!--分页 Begin-->
+            <div class="pageBox mt10">
+              <div class="pages" >{$pagestr}</div>
+            </div><!--.pages--> 
+            
+            <div class="mt10">
+            	<p>{$lang.unique_ip_total}:<strong class="fb">{$all_ip_count}</strong></p>
+                <p>{$lang.orders}:<strong class="fb">{$all_order_count}</strong></p>
+                <p>{$lang.orders_value}:<strong class="fb">{$all_order_sum}</strong></p>
+            </div>
+            
+        </div>
+       <!--Traffic Sources end-->
+ {/if}
+
+{if $act == 'commission'}
+       <!--Commission begin-->
+       <div class="ge_tafftable mt10">
+       		<h3 class="af_title">{$lang.history_of_your_commission}</h3>
+            <table width="100%" bgcolor="#cccccc" border="0" cellpadding="5" cellspacing="1"  class="mt10">
+              <tbody>
+                <tr>
+                  <td  height="30" align="center" bgcolor="#f1f1f1" class="tableTitle"><strong class="fb">{$lang.pay_date}</strong></td>
+                  <td  align="center" bgcolor="#f1f1f1" class="tableTitle"><strong class="fb">{$lang.commission}</strong></td>
+                </tr>
+				<!--{foreach from=$com_arr item=com}-->   
+                <tr>
+                  <td align="center" bgcolor="#FFFFFF">{$com.com_fa_date}</td>
+                  <td align="center" bgcolor="#FFFFFF">{$com.commission}</td>
+                </tr>
+				<!--{/foreach}--> 
+				<tr>
+					<td align="center" bgcolor="#FFFFFF">&nbsp;</td>
+					<td align="center" bgcolor="#FFFFFF">&nbsp;</td>
+				</tr>
+              </tbody>
+            </table>
+			<p class="mt10 p7 m_box"><strong class="fb">{$lang.pending_commission} : </strong>{$pending_comission.commission}</p>
+       </div>
+       
+        <div class="ge_tafftable mt10">
+       		<h3 class="af_title">{$lang.get_commission}</h3>
+            <div class="mt10"><img src="../images/styleimg/commission.jpg" width="997" height="503"/></div>
+       </div>
+       <!--Commission end-->
+ {/if}
+ 
+ {if $act eq 'contact'}
+       <!--Contact begin-->
+       	<div class="af_contact   mt10 m_box">
+              {$lang.content_des}
+         </div>  
+         <!--Contact end-->
+ {/if}
+ {if $act eq 'how2use'}
+         <!--How to Use begin-->
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="mt10">
+          <tr>
+            <td><img src="{$imgcache_url}images/styleimg/af_howtouse.jpg" width="997" height="501"/></td>
+          </tr>
+        </table>
+      <!--ow to Use end-->
+{/if}
+
+    </div>
+	<div id="footer">
+		{include file="foothelp.htm"}
+		{include file="foot.htm"}
+	</div>
+	{if $cur_lang eq $default_lang}
+	<script src="../minjs/jquery.validate.min.js"></script>
+	{else}
+	<script src="../minjs/{$cur_lang}-jquery.validate.min.js"></script>
+	{/if}	
+    <script src="../minjs/calendar.min.js"></script>
+    <script src="../minjs/webad.min.js"></script>
+	{include file="statistics_js.htm"}
+</body>
+</html>

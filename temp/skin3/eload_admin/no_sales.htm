@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<link href="{$jscache_url}sysjs/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jjeditable.js"></script>
+<script type="text/javascript" src="{$jscache_url}sysjs/calendar.php?lang="></script>
+<script language="javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 未卖出产品统计</td>
+          <td width="44%" align="right"><span class="navright"><a href="{$action_link.href}">{$action_link.text}</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <form name="timetnterval" style="margin:0px" method="get" class="thisfrm">
+  <tr>
+    <td><table width="100%" border="0" cellpadding="3" cellspacing="0">
+      <tr>
+        <td width="37%" align="right" bgcolor="#FFFFFF"><strong>上架时间：</strong></td>
+
+          <td width="63%"  bgcolor="#FFFFFF"><select name="pro_adddate">
+            <option value="30" {if $pro_adddate eq '30'}selected{/if}>1个月前</option>
+            <option value="60" {if $pro_adddate eq '60'}selected{/if}>2个月前</option>
+            <option value="90" {if $pro_adddate eq '90'}selected{/if}>3个月前</option>
+            <option value="180" {if $pro_adddate eq '180' or $pro_adddate eq ''}selected{/if}>半年前</option>
+            <option value="365" {if $pro_adddate eq '365'}selected{/if}>一年前</option>
+            <option value="548" {if $pro_adddate eq '548'}selected{/if}>一年半前</option>
+            <option value="730" {if $pro_adddate eq '730'}selected{/if}>两年前</option>
+          </select></td>  
+      </tr>
+      <tr>
+          <td  align="right" bgcolor="#FFFFFF"><strong>未卖出时间：</strong></td>
+          <td  bgcolor="#FFFFFF">从 <input name="start_date" value="{$start_date}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />&nbsp;&nbsp;到 &nbsp; <input name="end_date" value="{$end_date}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" /></td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF"><strong>分类：</strong></td>
+          <td bgcolor="#FFFFFF"><select name="cat_id" id="cat_id">
+            <option value="0">所有分类</option>
+            
+            
+        {$cat_list}
+      
+          
+          </select></td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF"><strong>开发人员：</strong></td>
+          <td bgcolor="#FFFFFF"><select name="add_user" id="add_user">
+            <option value="">所有人员</option>
+            
+            
+        {foreach from=$users item=list}
+        
+            
+            <option value="{$list.add_user}" {if $list.add_user eq $smarty.get.add_user}selected{/if}>{$list.add_user}</option>
+            
+            
+        {/foreach}
+      
+          
+          </select></td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">产品编码：</td>
+          <td bgcolor="#FFFFFF"><input name="goods_sn" value="{$goods_sn}" /> 
+            （查单个产品用）</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF"><strong>属性：</strong></td>
+          <td bgcolor="#FFFFFF">
+          <label for="shuxing1">
+            <input type="checkbox" name="shuxing1" id="shuxing1" value="is_on_sale"  {if $shuxing1 eq 'is_on_sale'}checked="checked"{/if}/>上架产品</label>
+            
+          <label for="shuxing2">
+            <input type="checkbox" name="shuxing2" id="shuxing2" value="is_best"/ {if $shuxing2 eq 'is_best'}checked="checked"{/if}>推荐产品</label>
+            
+            </td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#FFFFFF">&nbsp;</td>
+          <td bgcolor="#FFFFFF"><input type="submit" name="submit" value="开始查询" class="button" /></td>
+        </tr>
+      </table></td>
+  </tr>
+ 
+  </form>
+</table>
+
+
+
+
+
+<form method="post" action="goods.php?act=batch" name="listForm" onsubmit="return confirmSubmit(this)">
+  <div class="list-div" id="listDiv">
+
+  <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+     <tr>
+      <th width="2%" height="21"><input type="checkbox" onclick="checkAll(this, 'checkboxes[]');" title="全选"></th>
+      <th width="3%">排名</th>
+      <th width="5%">图片</th>
+      <th width="19%">产品名称</th>
+      <th width="6%">产品编号</th>
+      <th width="12%"><a href="?sort_by=cat_id&sort_order={$filter.sort_order_cat_id}{$search_url}">产品类别</a>{$sort_cat_id}
+</th>
+      <th width="7%"><a href="?sort_by=add_time&sort_order={$filter.sort_order_add_time}{$search_url}">上架时间</a>{$sort_add_time}</th><th width="6%"><a href="?sort_by=add_user&sort_order={$filter.sort_order_add_user}{$search_url}">开发人员</a>
+      {$sort_add_user}
+      </th>
+      <th width="5%"><a href="?sort_by=click_count&sort_order={$filter.sort_order_click_count}{$search_url}">浏览量</a>{$sort_click_count}</th>
+      <th width="5%">产品状态</th>
+      <th width="6%"><a href="?sort_by=goods_number&sort_order={$filter.sort_order_goods_number}{$search_url}">库存</a>{$sort_goods_number}</th>
+      </tr>
+     
+
+     
+     
+  {foreach from=$goods_order_data item=list name=val}
+<tr bgColor="{if $smarty.foreach.val.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.val.iteration is even}#f4f9fd{else}#e8f1fd{/if}'";>
+      <td align="center"><input type="checkbox" name="checkboxes[]" value="{$list.goods_id}" onclick="checkone('checkboxes[]')"/></td>
+      <td align="center">{$smarty.foreach.val.iteration}</td>
+      <td><img src="/{$list.goods_thumb}" height="50" width="50" /></td>
+      <td align="left"><a href="/m-goods-id-{$list.goods_id}.htm" target="_blank">{$list.goods_name}</a></td>
+      <td align="center">{$list.goods_sn}</td>
+      <td>{$list.cat_id}</td>
+      <td align="center">{$list.add_time}</td>
+      <td align="left">{$list.add_user}</td>
+      <td align="right">{$list.click_count}</td>
+      <td align="center">{$list.is_on_sale}</td>
+      <td align="right">{$list.goods_number}</td>
+      </tr>
+  {foreachelse}
+    <tr><td colspan="11" align="center" class="no-records">暂无记录</td></tr>
+  {/foreach}
+  
+     <tr>
+    <td colspan="4" valign="top" ><label for="sllll"><input type="checkbox" onclick="checkAll(this, 'checkboxes[]');" id="sllll"> 全选 </label>
+  <select name="type" id="selAction" onchange="changeAction()" disabled="true">
+    <option value="">请选择...</option>
+    <option value="trash">回收站</option>
+    <option value="on_sale">上架</option>
+    <option value="not_on_sale">下架</option>
+  </select> 
+    <select name="target_cat" style="display:none">
+  <option value="0">请选择分类</option>{$cat_list}
+  </select> <select name="other_cat[]"  multiple="multiple"  style="height:140px;width:320px;display:none;" title="按住“Ctrl”或“Shift”键可以多选，按住“Ctrl”可取消选择">
+  <option value="0">请选择分类</option>{$cat_list}
+  </select>
+    <input type="submit" value=" 确定 " id="btnSubmit" name="btnSubmit" class="button" disabled="true" /></td>
+    <td colspan="7" align="right"><div id="pager">{$pagestr}</div></td>
+    </tr>
+
+  
+  </table>
+ 
+</div>
+</form>
+{include file="copyright.htm"}

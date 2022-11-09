@@ -1,0 +1,64 @@
+ <form action="goods.php" name="searchform" method="get">
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+ <tr>
+    <th align="left"> <input type="hidden" value="{$smarty.get.act}" name="act" />
+ <img src="/temp/skin3/images/admin/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+      <input type="hidden"  value="{$smarty.get.act}" id="actx"/>
+     
+     {$cat_list}
+      
+     {if $smarty.get.act neq "trash"}  <!--  <select name="intro_type"><option value="0">全部</option>{html_options options=$intro_list selected=$smarty.get.intro_type}</select>-->
+      <select style="width:150px"  name="activity" id="activity">
+            <option value="">--请选择活动--</option>
+            <optgroup label="普通">
+            {foreach from=$activity_putong item=activity1}
+            <option value="{$activity1.id}" {if $smarty.get.activity eq $activity1.id}selected{/if}>{$activity1.name}</option>
+            {/foreach} 
+            <optgroup label="固定"> 
+            {foreach from=$activity_guding item=activity2}
+            <option value="{$activity2.id}" {if $smarty.get.activity eq $activity2.id}selected{/if}>{$activity2.name}</option>
+            {/foreach}
+          </select><select name="intro_type" id="intro_type">
+        <option value="0">全部</option>
+        <option value="on_sale" {if $smarty.get.intro_type eq 'on_sale'}selected{/if}>上架</option>
+        <option value="is_free_shipping" {if $smarty.get.intro_type eq 'is_free_shipping'}selected{/if}>免邮</option>
+        <option value="not_on_sale" {if $smarty.get.intro_type eq 'not_on_sale'}selected{/if}>下架</option>
+        <option value="is_best" {if $smarty.get.intro_type eq 'is_best'}selected{/if}>特价</option>
+        <option value="is_new" {if $smarty.get.intro_type eq 'is_new'}selected{/if}>新品</option>
+        <option value="is_hot" {if $smarty.get.intro_type eq 'is_hot'}selected{/if}>热卖</option>
+        <option value="is_promote" {if $smarty.get.intro_type eq 'is_promote'}selected{/if}>促销</option>
+        <option value="all_type" {if $smarty.get.intro_type eq 'all_type'}selected{/if}>全部推荐</option>
+        <option value="is_groupbuy" {if $smarty.get.intro_type eq 'is_groupbuy'}selected{/if}>团购</option>
+        <option value="is_pre_sale" {if $smarty.get.intro_type eq 'is_pre_sale'}selected{/if}>预售</option> 
+        <option value="is_gifts" {if $smarty.get.intro_type eq 'is_gifts'}selected{/if}>赠品</option>  
+		<option value="is_superstar" {if $smarty.get.intro_type eq 'is_superstar'}selected{/if}>ERP同步明星产品</option>        
+      </select>  
+      24小时发货<input type="checkbox" {if $is_24h_ship}checked{/if} value="1" name="is_24h_ship">
+      {php}
+      $this->_tpl_vars['goods_grade_arr'] = read_static_cache('goods_grade_arr', 1);
+      {/php}
+	  {html_options name=goods_grade options=$goods_grade_arr selected=$goods_grade}	  
+      {/if}
+	  <br />
+	  <select name="date_type">
+			<option value="0" {if $filter.date_type eq 0}selected="selected"{/if}>添加时间</option>
+			<option value="1" {if $filter.date_type eq 1}selected="selected"{/if}>上架时间</option>
+		</select>
+       日期：<input name="start_date" value="{$start_date}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />&nbsp;&nbsp;到 &nbsp; <input name="end_date" value="{$end_date}" style="width:80px;" onclick="return showCalendar(this, '%Y-%m-%d', false, false, this);" />
+	  	
+      关键字
+      <input type="text" name="keyword" id="keyword" size="45" value="{$smarty.get.keyword}"/>
+      <input type="submit" value="搜 索" class="sub_but" />  
+    </th>
+  </tr>
+  {if $filter.kuozhan_count}
+  <tr>
+     <td style="padding-left:27px;">
+         本分类产品数：{$filter.record_count}个，
+         
+         其中主分类产品数{$filter.zhucat_count}个，扩展类产品数{$filter.kuozhan_count} 个。
+     </td>
+  </tr>
+  {/if}
+</table>
+  </form>

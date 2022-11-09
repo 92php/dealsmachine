@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{$nav}</title>
+    <link type="text/css" rel="stylesheet" href="/temp/skin3/eload_admin/images/admin_css.css" />
+    <script type="text/javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+    <script type="text/javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+    <script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/admin_action.js"></script>
+    <script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/vote.js"></script>
+    <script type="text/javascript" src="{$jscache_url}temp/skin3/eload_admin/js/jquery.selection.js"></script>
+    {literal}
+    <style type="text/css">
+        .font-red { color: red; }
+        .font-green { color: green; }
+        .font-grey { color: grey; }
+        .font-bold { font-weight: bold; }
+    {/literal}
+    </style>
+</head>
+<body>
+    <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline">
+        <tr>
+            <th>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> &gt;&gt; <a href="vote.php">投票管理</a> &gt;&gt; {$nav}</td>
+                        <!--<td width="44%" align="right"><span class="navright"><a href="vote.php?act=subject_add">添加题组</a></span></td>-->
+                    </tr>
+                </table>
+            </th>
+        </tr>
+    </table>
+    <form method="post" action="vote.php?act=title_update" id="form-title">{assign var=data value=$data[0]}
+        <table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+            <tr>
+                <th colspan="3">{$nav}</th>
+            </tr>
+            <tr>
+                <td width="22%" class="label">标题：</td>
+                <td width="78%">
+                    <input type="text" name="title" id="txt-title" value="{$data.title}" size="80" />
+                    <span class="font-red">*</span>
+                    <a href="javascript:void(0)" title="在光标处插入换行符" id="a-insert-br">插入换行符</a>
+                    <a href="javascript:void(0)" title="清空换行符" id="a-remove-br">清空换行符</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">所属题组：</td>
+                <td>
+                    <select name="subject_id" id="select-subjectId">
+                        {foreach from=$subjects item=item}
+                        <option value="{$item.subject_id}"{if $subject_id == $item.subject_id} selected="selected"{/if}>{$item.subject}</option>
+                        {/foreach}
+                    </select>
+                    <span class="font-red">*</span>
+                    <a href="vote.php">题组管理</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">排序：</td>
+                <td>
+                    <input type="text" name="order" size="4" value="{$data.s_order|default:0}" />
+                    <span class="font-grey">值越小越靠前</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">类型：</td>
+                <td>{html_options options=$type_arr name=type selected=$data.s_type|default:0}</td>
+            </tr>
+            <tr>
+                <td class="label">状态：</td>
+                <td>{html_options options=$enable_arr name=enable selected=$data.enable|default:1}</td>
+            </tr>
+            <tr>
+                <td class="label">必答：</td>
+                <td>{html_options options=$needed_arr name=needed selected=$data.needed|default:1}</td>
+            </tr>
+            <tr>
+                <td class="label">"其它"选项 ：</td>
+                <td id="td-other">
+                    {html_options options=$needed_arr name=other selected=$data.other|default:0}
+                    <span class="font-grey">是否在所有选项后添加“其它”选项，仅对“单选”和“多选”有效</span>
+                </td>
+            </tr>
+            <tr class="tr-other"{if $data.other|default:1}{else} style="display: none"{/if}>
+                <td width="22%" class="label">“其它”文字：</td>
+                <td width="78%">
+                    <input type="text" name="other_text" value="{$data.other_text}" size="60" />
+                    <span class="font-grey">默认other</span>
+                </td>
+            </tr>
+            <tr class="tr-other"{if $data.other|default:1}{else} style="display: none"{/if}>
+                <td class="label">"其它"选项设置 ：</td>
+                <td>
+                    <select name="other_type">
+                    {html_options options=$other_arr selected=$data.other_type}
+                    <option value="2"{if $data.other_type|default:2 == 2} selected="selected"{/if}>不带输入框</option>
+                    </select>
+                    <label class="font-grey"><input type="checkbox" name="other_needed" value="1"{if $data.other_needed|default:0 == 1} checked="checked"{/if} />必填</label>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;<input type="hidden" name="title_id" value="{$data.title_id}" /></td>
+                <td align="left"><input type="submit" class="sub_but" id="btn-submit" value="提 交" /></td>
+            </tr>
+        </table>
+    </form>
+    <script type="text/javascript">
+        var titleId = '{$data.title_id}', subjectId = '{$subject_id}';
+        VOTE.title.add();
+    </script>
+    {include file="copyright.htm"}

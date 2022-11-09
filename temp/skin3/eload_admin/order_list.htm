@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jlivequery.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="{$imgcache_url}eload_admin/js/admin_action.js"></script>
+<link href='{$imgcache_url}eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+</head>
+<body>
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+  <tr>
+    <th><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="56%" id="navleft"><a href="index.php?act=main">管理中心</a> ->> 订单列表</td>
+          <td width="44%" align="right"><span class="navright"><a href="order.php?act=query">订单查询</a></span></td>
+        </tr>
+    </table></th>
+  </tr>
+</table>
+<!-- 订单搜索 -->
+<table width="99%" align="center" cellspacing="1"  bgcolor="#FFFFFF" class="borderline">
+    <form action="order.php" name="myform" method="get">
+  <tr>
+    <th>
+    <input type="hidden" value="list" name="act" />
+    <img src="{$imgcache_url}images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    {$lang.order_sn}<input name="order_sn" value="{$smarty.get.order_sn}" type="text" id="order_sn" size="15">
+    &nbsp;{$lang.consignee|escape}<input name="consignee" type="text" id="consignee" size="15" value="{$smarty.get.consignee}">
+    &nbsp;{$lang.all_status}
+    <select name="order_status" id="order_status">
+      <option value="-1">请选择...</option>
+      {foreach from=$lang.os item=list key=key}
+      <option value="{$key}" {if $smarty.get.order_status==$key}selected{/if}>{$list}</option>
+      {/foreach}
+    </select>
+    &nbsp;语言
+	  <select name="lang" id="lang" onchange="select_lang(this.value);">
+		<option value="">请选择...</option>
+		<option value="en">原始语言</option>
+		{foreach from=$lang_arr item=item key=key}
+		<option value="{$item.title_e}" {if $cur_lang eq $item.title_e}selected="selected"{/if}>{$item.title}</option>
+		{/foreach}
+	  </select>	
+    <input type="submit" value="搜索" class="button" id="order_seach_btn"/>
+
+</th>
+  </tr></form>
+</table>
+
+<!-- 订单列表 -->
+<form method="post" action="order.php?act=operate" name="listForm" onsubmit="return check()">
+<div  id="list">
+<table width="99%" align="center" cellspacing="1" bgcolor="#FFFFFF" class="borderline" id="stripe_tb">
+  <tr>
+    <th>
+              <input name="all_select[]"  type="checkbox" id="all_select[]" class="cls">
+<a href="?sort_by=order_sn&sort_order={$filter.sort_order_order_sn}{$filter_value}">{$lang.order_sn}</a>{$sort_order_sn}
+    </th>
+    
+    <th nowrap="nowrap">下单时间</th>
+    <th><a href="?sort_by=consignee&sort_order={$filter.sort_order_consignee}{$filter_value}">{$lang.consignee}</a>{$sort_consignee}</th>
+    <th>优惠码/优惠率</th>
+    <th><a href="?sort_by=total_fee&sort_order={$filter.sort_order_total_fee}{$filter_value}">{$lang.total_fee}</a>{$sort_total_fee}</th>
+    <th><a href="?sort_by=order_amount&sort_order={$filter.sort_order_order_amount}{$filter_value}{$search_url}">{$lang.order_amount}</a>{$sort_order_amount}</th>
+    <th>{$lang.all_status}</th>
+    <th><strong>处理订单</strong></th>
+    <th>查看</th>
+  <tr>
+  {foreach from=$order_list item=order name=loopname}
+<tr bgColor="{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}" onMouseOver="this.bgColor = '#FEF3D1';" onMouseOut="this.bgColor='{if $smarty.foreach.loopname.iteration is even}#f4f9fd{else}#e8f1fd{/if}';"> 
+    <td valign="top" nowrap="nowrap">
+    <input type="checkbox" name="checkboxes[]" value="{$order.order_sn}" onclick="checkone('checkboxes[]')"/>    
+    <a href="order.php?act=info&order_id={$order.order_id}" id="order_{$okey}">{$order.order_sn}</a><br/>{$order.order_id}</td>
+
+    <td>{$order.short_order_time}</td>
+    <td align="left" valign="top">{$order.consignee|escape}<br />{$order.address|escape}</td>
+    <td style="text-align: center;">{if $order.promotion_code}{$order.promotion_code}/{$order.promotion_code_youhuilv}{else}--{/if}</td>
+    <td align="right" nowrap="nowrap">{$order.formated_total_fee}</td>
+    <td align="right" nowrap="nowrap">{$order.formated_order_amount}{if $order.realpay > 0}<br>{if $order.realpay neq $order.order_amount}<span style="color:red">{/if}PP实收:{$order.realpay}{/if}</td>
+    <td align="center" nowrap="nowrap">{$lang.os[$order.order_status]}</td>
+    <td align="right" nowrap="nowrap">
+{if $order.order_status <2 || $order.order_status ==6} 
+        <input type="submit" name="button" class="change_order_status" value="设为已到款" order_id = "{$order.order_id}" order_status = "2" />
+    {elseif $order.order_status ==2}
+    <select id=track{$order.order_id}>
+        <option value='EMS'>EMS</option>
+        <option value='UPS'>UPS</option>
+        <option value='DHL'>DHL</option>
+        <option value='FEDEX'>FEDEX</option>
+        <option value='Hongkong Post'>Hongkong Post</option>
+    </select>
+    NO.<input type="text" size="15" id="shipmentNO{$order.order_id}"><input type="submit" name="Submit" value="发货"  class="change_order_status" order_id = "{$order.order_id}" order_status = "3" >
+    {elseif $order.order_status ==3}
+    {$order.shipping_method} Tracking NO:{$order.Tracking_NO} <input type="submit" name="Submit" value="货已到" class="change_order_status" order_id = "{$order.order_id}" order_status = "4">
+    {elseif $order.order_status ==4}
+    客户已收到货
+    {/if}
+    </td>
+    <td align="center"  nowrap="nowrap">
+      <a href="users.php?user_id={$order.user_id}">用户信息</a>
+      {if $order.can_remove}
+      <br /><a href="javascript:;" onclick="listTable.remove({$order.order_id}, remove_confirm, 'remove_order')">{$lang.remove}</a>
+      {/if}
+    </td>
+  </tr>
+  {/foreach}
+  <tr>
+    <td  colspan="3" >
+        <input name="all_select[]"  type="checkbox" id="all_select[]" class="cls">
+全选
+
+    
+    <input name="remove" type="submit" id="btnSubmit" value="删除" class="button" disabled="true" onclick="return confirm('你确认要删除所选的订单吗？\n\n一旦删除将无法恢复，确定吗？');"/>
+    <input name="enter_order_sys" type="submit" id="btnSubmit8" value="放入订单系统" class="button" disabled="true"  style="display:none" />
+    <input type="hidden"  id="selAction" />
+    <input name="batch" type="hidden" value="1" />
+    <input name="order_id" type="hidden" value="" /></td>
+ 
+    <td align="right" nowrap="true"  colspan="5" >
+   <div id="pager">{$pagestr}</div>
+   
+    </td>
+  </tr>
+</table>
+</div>
+</form>
+{include file="copyright.htm"}

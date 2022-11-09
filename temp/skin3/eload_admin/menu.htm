@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>菜单</title>
+<link href='/temp/skin3/eload_admin/images/admin_css.css' rel='stylesheet' type='text/css'/>
+<script language="javascript" src="{$jscache_url}sysjs/eload13pack.js"></script>
+<script language="javascript" src="{$jscache_url}sysjs/jcookie.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/ddaccordion.js"></script>
+<script language="javascript" src="/temp/skin3/eload_admin/js/menu.js"></script>
+{literal}
+<script>
+$(document).ready(function(){
+	$('.categoryitems').click(function(){
+	$.cookie('page_url', null, {expires: 7, path: '/'});});
+});
+</script>
+<style type="text/css">
+
+.arrowlistmenu{
+width: 179px; /*width of accordion menu*/ 
+margin:1px 0px 1px 0px;
+}
+
+.arrowlistmenu .menuheader{ /*CSS class for menu headers in general (expanding or not!  )*/
+	font: bold 14px "宋体";
+	color: white;
+	background: url(/temp/skin3/eload_admin/images/titlebar.png) repeat-x center left;
+	text-transform: uppercase;
+	padding: 4px 0 4px 10px; /*header text is indented 10px*/
+	cursor: pointer;
+	margin:1px 0px 1px 0px;
+}
+
+.arrowlistmenu .openheader{ /*CSS class to apply to expandable header when it's expanded*/
+	background-image: url(/temp/skin3/eload_admin/images/titlebar-active.png);
+	width:169px;
+	margin:1px 0px 1px 0px;
+}
+
+.arrowlistmenu ul{ /*CSS for UL of each sub menu*/
+list-style-type: none;
+margin: 0;
+padding: 0;
+margin-bottom: 8px; /*bottom spacing between each UL and rest of content*/
+}
+
+.arrowlistmenu ul li{
+padding-bottom: 2px; /*bottom spacing between menu items*/
+}
+
+.arrowlistmenu ul li a{
+	color: #077AC7;
+	background: url(/temp/skin3/eload_admin/images/arrowbullet.png) no-repeat center left; /*custom bullet list image*/
+	display: block;
+	padding: 2px 0;
+	padding-left: 19px; /*link text is indented 19px*/
+	text-decoration: none;
+	font-weight: bold;
+	border-bottom: 1px solid #dadada;
+	font-size: 12px;
+	height:16px;
+	line-height:16px;
+}
+
+.arrowlistmenu ul li a:visited{
+color: #077AC7;
+}
+
+.arrowlistmenu ul li a:hover{ /*hover state CSS*/
+color: #ff9d00;
+background-color: #eeeeee;
+}
+</style>
+{/literal}
+</head>
+<body style="">
+<div class="arrowlistmenu">
+  {foreach from=$menuArr item=list}
+  <h3 class="menuheader expandable" title="点击展开{$list.action_name}">{$list.action_name}</h3>
+<ul class="categoryitems">
+    { foreach from=$list._child item=slist }
+    <li><a href="{$slist.action_url}" target="main-frame" title="{$slist.action_name}" >{$slist.action_name}</a></li>
+    {/foreach}
+</ul>
+{/foreach}
+
+<div> &nbsp;&nbsp;Power By dealsmachine</div>
+</div>
+</body>
+</html>
